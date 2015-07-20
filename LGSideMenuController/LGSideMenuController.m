@@ -1129,7 +1129,7 @@
 {
     if (animated)
     {
-        [LGSideMenuController animateStandartWithDuration:0.5//*(1.f-percentage)
+        [LGSideMenuController animateStandardWithDuration:0.5//*(1.f-percentage)
                                    animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:1.f];
@@ -1182,7 +1182,7 @@
     
     if (animated)
     {
-        [LGSideMenuController animateStandartWithDuration:0.5//*percentage
+        [LGSideMenuController animateStandardWithDuration:0.5//*percentage
                                    animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:0.f];
@@ -1283,7 +1283,7 @@
 {
     if (animated)
     {
-        [LGSideMenuController animateStandartWithDuration:0.5//*(1.f-percentage)
+        [LGSideMenuController animateStandardWithDuration:0.5//*(1.f-percentage)
                                    animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:1.f];
@@ -1336,7 +1336,7 @@
     
     if (animated)
     {
-        [LGSideMenuController animateStandartWithDuration:0.5//*percentage
+        [LGSideMenuController animateStandardWithDuration:0.5//*percentage
                                    animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:0.f];
@@ -1521,7 +1521,7 @@
 
 #pragma mark - Support
 
-+ (void)animateStandartWithDuration:(NSTimeInterval)duration animations:(void(^)())animations completion:(void(^)(BOOL finished))completion
++ (void)animateStandardWithDuration:(NSTimeInterval)duration animations:(void(^)())animations completion:(void(^)(BOOL finished))completion
 {
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0)
     {
