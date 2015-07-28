@@ -118,7 +118,7 @@
 
 @property (assign, nonatomic) CGSize savedSize;
 
-@property (assign, nonatomic) UIViewController *rootVC;
+@property (strong, nonatomic) UIViewController *rootVC;
 @property (strong, nonatomic) LGSideMenuView *leftView;
 @property (strong, nonatomic) LGSideMenuView *rightView;
 
@@ -222,8 +222,11 @@
     _rootViewStyleView.layer.shouldRasterize = YES;
     [self.view addSubview:_rootViewStyleView];
     
-    [self addChildViewController:_rootVC];
-    [self.view addSubview:_rootVC.view];
+    if (_rootVC)
+    {
+        [self addChildViewController:_rootVC];
+        [self.view addSubview:_rootVC.view];
+    }
     
     // -----
     
@@ -298,6 +301,33 @@
         
         [self addChildViewController:_rootVC];
         [self.view addSubview:_rootVC.view];
+        
+        if (_leftView)
+        {
+            [_leftView removeFromSuperview];
+            [_rootViewCoverViewForLeftView removeFromSuperview];
+            
+            [self.view addSubview:_rootViewCoverViewForLeftView];
+            
+            if (_leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove)
+                [self.view addSubview:_leftView];
+            else
+                [self.view insertSubview:_leftView belowSubview:_rootVC.view];
+
+        }
+        
+        if (_rightView)
+        {
+            [_rightView removeFromSuperview];
+            [_rootViewCoverViewForRightView removeFromSuperview];
+            
+            [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
+            
+            if (_rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove)
+                [self.view addSubview:_rightView];
+            else
+                [self.view insertSubview:_rightView belowSubview:_rootVC.view];
+        }
         
         // -----
         
@@ -858,10 +888,13 @@
     {
         _rootViewCoverViewForLeftView = [UIView new];
         _rootViewCoverViewForLeftView.hidden = YES;
-        if (_rootViewCoverViewForRightView)
-            [self.view insertSubview:_rootViewCoverViewForLeftView aboveSubview:_rootViewCoverViewForRightView];
-        else
-            [self.view addSubview:_rootViewCoverViewForLeftView];
+        if (_rootVC)
+        {
+            if (_rootViewCoverViewForRightView)
+                [self.view insertSubview:_rootViewCoverViewForLeftView aboveSubview:_rootViewCoverViewForRightView];
+            else
+                [self.view addSubview:_rootViewCoverViewForLeftView];
+        }
         
         // -----
         
@@ -885,10 +918,13 @@
                      }];
         _leftView.backgroundColor = [UIColor clearColor];
         _leftView.hidden = YES;
-        if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
-            [self.view addSubview:_leftView];
-        else
-            [self.view insertSubview:_leftView belowSubview:_rootVC.view];
+        if (_rootVC)
+        {
+            if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+                [self.view addSubview:_leftView];
+            else
+                [self.view insertSubview:_leftView belowSubview:_rootVC.view];
+        }
         
         // -----
         
@@ -972,10 +1008,13 @@
     {
         _rootViewCoverViewForRightView = [UIView new];
         _rootViewCoverViewForRightView.hidden = YES;
-        if (_rootViewCoverViewForLeftView)
-            [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
-        else
-            [self.view addSubview:_rootViewCoverViewForRightView];
+        if (_rootVC)
+        {
+            if (_rootViewCoverViewForLeftView)
+                [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
+            else
+                [self.view addSubview:_rootViewCoverViewForRightView];
+        }
         
         // -----
         
@@ -999,10 +1038,13 @@
                       }];
         _rightView.backgroundColor = [UIColor clearColor];
         _rightView.hidden = YES;
-        if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
-            [self.view addSubview:_rightView];
-        else
-            [self.view insertSubview:_rightView belowSubview:_rootVC.view];
+        if (_rootVC)
+        {
+            if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+                [self.view addSubview:_rightView];
+            else
+                [self.view insertSubview:_rightView belowSubview:_rootVC.view];
+        }
         
         // -----
         

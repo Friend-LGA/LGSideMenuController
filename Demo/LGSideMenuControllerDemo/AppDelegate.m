@@ -18,9 +18,9 @@
     
     ViewController *viewController = [ViewController new];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
-    self.mainViewController = [[MainViewController alloc] initWithRootViewController:self.navigationController];
+    self.mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.mainViewController;

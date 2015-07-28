@@ -11,9 +11,6 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UIButton *button;
-
 @end
 
 @implementation ViewController

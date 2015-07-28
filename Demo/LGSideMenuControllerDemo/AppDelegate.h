@@ -14,12 +14,11 @@
 #define TYPE 3
 
 #define kMainViewController [(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController]
-#define kNavigationController [(AppDelegate *)[[UIApplication sharedApplication] delegate] navigationController]
+#define kNavigationController (UINavigationController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] rootViewController]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MainViewController *mainViewController;
-@property (strong, nonatomic) UINavigationController *navigationController;
 
 @end
