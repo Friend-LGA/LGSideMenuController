@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MainViewController.h"
 #import "AppDelegate.h"
 
 @interface ViewController ()
@@ -18,34 +19,29 @@
 
 @implementation ViewController
 
-- (id)init
+- (void)awakeFromNib
 {
-    self = [super init];
-    if (self)
-    {
-        self.title = @"LGSideMenuController";
-        
-        self.view.backgroundColor = [UIColor whiteColor];
-        
-        // -----
-        
-        _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
-        [self.view addSubview:_imageView];
-        
-        _button = [UIButton new];
-        _button.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.5];
-        [_button setTitle:@"Push View Controller" forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] forState:UIControlStateHighlighted];
-        [_button addTarget:self action:@selector(pushViewControllerAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_button];
-        
-        // -----
-        
-        [self checkNavItemButtonsWithInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
-    }
-    return self;
+    self.title = @"LGSideMenuController";
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    // -----
+    
+    _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
+    _imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:_imageView];
+    
+    _button = [UIButton new];
+    _button.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.5];
+    [_button setTitle:@"Push View Controller" forState:UIControlStateNormal];
+    [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_button setTitleColor:[UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] forState:UIControlStateHighlighted];
+    [_button addTarget:self action:@selector(pushViewControllerAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_button];
+    
+    // -----
+    
+    [self checkNavItemButtonsWithInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
 }
 
 - (void)viewWillLayoutSubviews
@@ -110,10 +106,9 @@
 
 - (void)pushViewControllerAction
 {
-    UIViewController *viewController = [UIViewController new];
-    viewController.view.backgroundColor = [UIColor whiteColor];
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
     viewController.title = @"Test";
-    [self.navigationController pushViewController:viewController animated:YES];
+    [kNavigationController pushViewController:viewController animated:YES];
 }
 
 @end

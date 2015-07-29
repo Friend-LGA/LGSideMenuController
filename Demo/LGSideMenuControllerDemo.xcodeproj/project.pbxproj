@@ -19,7 +19,7 @@
 		4A5888E31AE94907004AFC57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5888E11AE94907004AFC57 /* ViewController.m */; };
 		4A645CDE1B02797300FFBDF6 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A645CDD1B02797300FFBDF6 /* image3.png */; };
 		4A66FCA01AEBC443005B8B0A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A66FC9F1AEBC443005B8B0A /* MainViewController.m */; };
-		4A6FE4F51AFBDBD2003887C9 /* Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE4F41AFBDBD2003887C9 /* Image.png */; };
+		4A6FE4F51AFBDBD2003887C9 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE4F41AFBDBD2003887C9 /* image.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,7 @@
 		4A645CDD1B02797300FFBDF6 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
 		4A66FC9E1AEBC443005B8B0A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4A66FC9F1AEBC443005B8B0A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		4A6FE4F41AFBDBD2003887C9 /* Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image.png; sourceTree = "<group>"; };
+		4A6FE4F41AFBDBD2003887C9 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		5361F993C972042479CAE21E /* Pods-LGSideMenuControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
 		78C2B1655760BC5BF67D9AD0 /* Pods-LGSideMenuControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		F8C0B3D6B7FC45F42B6E52E2 /* libPods-LGSideMenuControllerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LGSideMenuControllerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +133,7 @@
 			children = (
 				4A645CDD1B02797300FFBDF6 /* image3.png */,
 				4A339C421AFD3D6600F75B99 /* image2.png */,
-				4A6FE4F41AFBDBD2003887C9 /* Image.png */,
+				4A6FE4F41AFBDBD2003887C9 /* image.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A5888C61AE9489E004AFC57 /* Images.xcassets in Resources */,
-				4A6FE4F51AFBDBD2003887C9 /* Image.png in Resources */,
+				4A6FE4F51AFBDBD2003887C9 /* image.png in Resources */,
 				4A339C431AFD3D6600F75B99 /* image2.png in Resources */,
 				4A645CDE1B02797300FFBDF6 /* image3.png in Resources */,
 			);

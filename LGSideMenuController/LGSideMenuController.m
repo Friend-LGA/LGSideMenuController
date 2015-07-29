@@ -151,6 +151,7 @@
     self = [super init];
     if (self)
     {
+        [self setupDefaultProperties];
         [self setupDefaults];
     }
     return self;
@@ -163,9 +164,48 @@
     {
         _rootVC = rootViewController;
         
+        [self setupDefaultProperties];
         [self setupDefaults];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self setupDefaultProperties];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self setupDefaults];
+}
+
+- (void)setupDefaultProperties
+{
+    _leftViewHidesOnTouch = YES;
+    _rightViewHidesOnTouch = YES;
+    
+    _leftViewSwipeGestureEnabled = YES;
+    _rightViewSwipeGestureEnabled = YES;
+    
+    _rootViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
+    _rootViewLayerShadowRadius = 5.f;
+    
+    _leftViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
+    _leftViewLayerShadowRadius = 5.f;
+    
+    _rightViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
+    _rightViewLayerShadowRadius = 5.f;
+    
+    _leftViewCoverColor = kLGSideMenuCoverColor;
+    _rightViewCoverColor = kLGSideMenuCoverColor;
 }
 
 - (void)setupDefaults
@@ -174,42 +214,11 @@
     
     // -----
     
-    _leftViewGestureEnabled = YES;
-    _rightViewGestureEnabled = YES;
-    
-    // -----
-    
     _backgroundImageView = [UIImageView new];
     _backgroundImageView.hidden = YES;
     _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     _backgroundImageView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundImageView];
-    
-    // -----
-    
-    _leftViewHidesOnTouch = YES;
-    _rightViewHidesOnTouch = YES;
-    
-    _leftViewSwipeGestureEnabled = YES;
-    _rightViewSwipeGestureEnabled = YES;
-    
-    _rootViewLayerBorderColor = nil;
-    _rootViewLayerBorderWidth = 0.f;
-    _rootViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
-    _rootViewLayerShadowRadius = 5.f;
-    
-    _leftViewLayerBorderColor = nil;
-    _leftViewLayerBorderWidth = 0.f;
-    _leftViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
-    _leftViewLayerShadowRadius = 5.f;
-    
-    _rightViewLayerBorderColor = nil;
-    _rightViewLayerBorderWidth = 0.f;
-    _rightViewLayerShadowColor = [UIColor colorWithWhite:0.f alpha:0.5];
-    _rightViewLayerShadowRadius = 5.f;
-    
-    _leftViewCoverColor = kLGSideMenuCoverColor;
-    _rightViewCoverColor = kLGSideMenuCoverColor;
     
     // -----
     
@@ -270,10 +279,10 @@
         
         // -----
         
+        [self colorsInvalidate];
         [self rootViewLayoutInvalidateWithPercentage:(self.isLeftViewShowing || self.isRightViewShowing ? 1.f : 0.f)];
         [self leftViewLayoutInvalidateWithPercentage:(self.isLeftViewShowing ? 1.f : 0.f)];
         [self rightViewLayoutInvalidateWithPercentage:(self.isRightViewShowing ? 1.f : 0.f)];
-        [self colorsInvalidate];
         [self hiddensInvalidateWithDelay:(appeared ? 0.25 : 0.0)];
     }
 }
@@ -313,7 +322,7 @@
                 [self.view addSubview:_leftView];
             else
                 [self.view insertSubview:_leftView belowSubview:_rootVC.view];
-
+            
         }
         
         if (_rightView)
@@ -1172,12 +1181,12 @@
     if (animated)
     {
         [LGSideMenuController animateStandardWithDuration:0.5//*(1.f-percentage)
-                                   animations:^(void)
+                                               animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:1.f];
              [self leftViewLayoutInvalidateWithPercentage:1.f];
          }
-                                   completion:^(BOOL finished)
+                                               completion:^(BOOL finished)
          {
              if (finished)
                  [self hiddensInvalidate];
@@ -1225,12 +1234,12 @@
     if (animated)
     {
         [LGSideMenuController animateStandardWithDuration:0.5//*percentage
-                                   animations:^(void)
+                                               animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:0.f];
              [self leftViewLayoutInvalidateWithPercentage:0.f];
          }
-                                   completion:^(BOOL finished)
+                                               completion:^(BOOL finished)
          {
              _leftViewShowing = NO;
              
@@ -1326,12 +1335,12 @@
     if (animated)
     {
         [LGSideMenuController animateStandardWithDuration:0.5//*(1.f-percentage)
-                                   animations:^(void)
+                                               animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:1.f];
              [self rightViewLayoutInvalidateWithPercentage:1.f];
          }
-                                   completion:^(BOOL finished)
+                                               completion:^(BOOL finished)
          {
              if (finished)
                  [self hiddensInvalidate];
@@ -1379,12 +1388,12 @@
     if (animated)
     {
         [LGSideMenuController animateStandardWithDuration:0.5//*percentage
-                                   animations:^(void)
+                                               animations:^(void)
          {
              [self rootViewLayoutInvalidateWithPercentage:0.f];
              [self rightViewLayoutInvalidateWithPercentage:0.f];
          }
-                                   completion:^(BOOL finished)
+                                               completion:^(BOOL finished)
          {
              _rightViewShowing = NO;
              
@@ -1457,7 +1466,7 @@
     
     // -----
     
-    if (_leftView && self.isLeftViewGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing)
+    if (_leftView && self.isLeftViewSwipeGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing)
     {
         if (!_leftViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {
@@ -1507,7 +1516,7 @@
     
     // -----
     
-    if (_rightView && self.isRightViewGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing)
+    if (_rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing)
     {
         if (!_rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {

@@ -27,6 +27,9 @@
     if (self)
     {
         self.view.backgroundColor = [UIColor whiteColor];
+        
+        _leftViewController = [LeftViewController new];
+        _rightViewController = [RightViewController new];
 
         // -----
         
@@ -36,7 +39,7 @@
                             presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                          alwaysVisibleOptions:0];
             
-            self.leftViewBackgroundImage = [UIImage imageNamed:@"Image"];
+            self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
             
             // -----
             
@@ -44,24 +47,20 @@
                              presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                           alwaysVisibleOptions:0];
             
-            self.rightViewBackgroundImage = [UIImage imageNamed:@"Image2"];
+            self.rightViewBackgroundImage = [UIImage imageNamed:@"image2"];
             
             // -----
             
-            _leftViewController = [LeftViewController new];
             _leftViewController.tableView.backgroundColor = [UIColor clearColor];
             _leftViewController.tintColor = [UIColor whiteColor];
             [_leftViewController.tableView reloadData];
-            
             [self.leftView addSubview:_leftViewController.tableView];
             
             // -----
             
-            _rightViewController = [RightViewController new];
             _rightViewController.tableView.backgroundColor = [UIColor clearColor];
             _rightViewController.tintColor = [UIColor whiteColor];
             [_rightViewController.tableView reloadData];
-            
             [self.rightView addSubview:_rightViewController.tableView];
         }
         else if (TYPE == 2)
@@ -82,20 +81,16 @@
             
             // -----
             
-            _leftViewController = [LeftViewController new];
             _leftViewController.tableView.backgroundColor = [UIColor clearColor];
             _leftViewController.tintColor = [UIColor blackColor];
             [_leftViewController.tableView reloadData];
-            
             [self.leftView addSubview:_leftViewController.tableView];
             
             // -----
             
-            _rightViewController = [RightViewController new];
             _rightViewController.tableView.backgroundColor = [UIColor clearColor];
             _rightViewController.tintColor = [UIColor blackColor];
             [_rightViewController.tableView reloadData];
-            
             [self.rightView addSubview:_rightViewController.tableView];
         }
         else if (TYPE == 3)
@@ -104,7 +99,7 @@
                             presentationStyle:LGSideMenuPresentationStyleSlideBelow
                          alwaysVisibleOptions:0];
             
-            self.leftViewBackgroundImage = [UIImage imageNamed:@"Image"];
+            self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
             
             // -----
             
@@ -112,24 +107,20 @@
                              presentationStyle:LGSideMenuPresentationStyleSlideBelow
                           alwaysVisibleOptions:0];
             
-            self.rightViewBackgroundImage = [UIImage imageNamed:@"Image2"];
+            self.rightViewBackgroundImage = [UIImage imageNamed:@"image2"];
             
             // -----
             
-            _leftViewController = [LeftViewController new];
             _leftViewController.tableView.backgroundColor = [UIColor clearColor];
             _leftViewController.tintColor = [UIColor whiteColor];
             [_leftViewController.tableView reloadData];
-            
             [self.leftView addSubview:_leftViewController.tableView];
             
             // -----
             
-            _rightViewController = [RightViewController new];
             _rightViewController.tableView.backgroundColor = [UIColor clearColor];
             _rightViewController.tintColor = [UIColor whiteColor];
             [_rightViewController.tableView reloadData];
-            
             [self.rightView addSubview:_rightViewController.tableView];
         }
         else if (TYPE == 4)
@@ -138,7 +129,7 @@
                             presentationStyle:LGSideMenuPresentationStyleScaleFromLittle
                          alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape];
             
-            self.leftViewBackgroundImage = [UIImage imageNamed:@"Image"];
+            self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
             self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
             
             // -----
@@ -152,20 +143,16 @@
             
             // -----
             
-            _leftViewController = [LeftViewController new];
             _leftViewController.tableView.backgroundColor = [UIColor clearColor];
             _leftViewController.tintColor = [UIColor whiteColor];
             [_leftViewController.tableView reloadData];
-            
             [self.leftView addSubview:_leftViewController.tableView];
             
             // -----
             
-            _rightViewController = [RightViewController new];
             _rightViewController.tableView.backgroundColor = [UIColor clearColor];
             _rightViewController.tintColor = [UIColor blackColor];
             [_rightViewController.tableView reloadData];
-            
             [self.rightView addSubview:_rightViewController.tableView];
         }
         else if (TYPE == 5)
@@ -174,7 +161,7 @@
                             presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                          alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape];
             
-            self.leftViewBackgroundImage = [UIImage imageNamed:@"Image"];
+            self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
             self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
             self.leftViewBackgroundImageInitialScale = 1.5;
             self.leftViewInititialOffsetX = -200.f;
@@ -202,20 +189,16 @@
             
             // -----
             
-            _leftViewController = [LeftViewController new];
             _leftViewController.tableView.backgroundColor = [UIColor clearColor];
             _leftViewController.tintColor = [UIColor whiteColor];
             [_leftViewController.tableView reloadData];
-            
             [self.leftView addSubview:_leftViewController.tableView];
             
             // -----
             
-            _rightViewController = [RightViewController new];
             _rightViewController.tableView.backgroundColor = [UIColor clearColor];
             _rightViewController.tintColor = [UIColor blackColor];
             [_rightViewController.tableView reloadData];
-            
             [self.rightView addSubview:_rightViewController.tableView];
         }
     }

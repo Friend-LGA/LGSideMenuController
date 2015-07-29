@@ -79,32 +79,32 @@ LGSideMenuPresentationStyle;
 @property (assign, nonatomic, readonly) LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
 @property (assign, nonatomic, readonly) LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
 
-@property (assign, nonatomic) LGSideMenuStatusBarVisibleOptions leftViewStatusBarVisibleOptions;
-@property (assign, nonatomic) LGSideMenuStatusBarVisibleOptions rightViewStatusBarVisibleOptions;
+@property (assign, nonatomic) IBInspectable LGSideMenuStatusBarVisibleOptions leftViewStatusBarVisibleOptions;
+@property (assign, nonatomic) IBInspectable LGSideMenuStatusBarVisibleOptions rightViewStatusBarVisibleOptions;
 
 @property (assign, nonatomic, getter=isLeftViewShowing)  BOOL leftViewShowing;
 @property (assign, nonatomic, getter=isRightViewShowing) BOOL rightViewShowing;
 
 /** Default is YES */
-@property (assign, nonatomic, getter=isLeftViewHidesOnTouch)  BOOL leftViewHidesOnTouch;
+@property (assign, nonatomic, getter=isLeftViewHidesOnTouch)  IBInspectable BOOL leftViewHidesOnTouch;
 /** Default is YES */
-@property (assign, nonatomic, getter=isRightViewHidesOnTouch) BOOL rightViewHidesOnTouch;
+@property (assign, nonatomic, getter=isRightViewHidesOnTouch) IBInspectable BOOL rightViewHidesOnTouch;
 
 /** Default is YES */
-@property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  BOOL leftViewSwipeGestureEnabled;
+@property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  IBInspectable BOOL leftViewSwipeGestureEnabled;
 /** Default is YES */
-@property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) BOOL rightViewSwipeGestureEnabled;
+@property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) IBInspectable BOOL rightViewSwipeGestureEnabled;
 
-/** 
- Color that hides root view, when left view is showing 
+/**
+ Color that hides root view, when left view is showing
  For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.f alpha:0.5]
  */
-@property (strong, nonatomic) UIColor *rootViewCoverColorForLeftView;
+@property (strong, nonatomic) IBInspectable UIColor *rootViewCoverColorForLeftView;
 /**
  Color that hides root view, when right view is showing
  For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.f alpha:0.5]
  */
-@property (strong, nonatomic) UIColor *rootViewCoverColorForRightView;
+@property (strong, nonatomic) IBInspectable UIColor *rootViewCoverColorForRightView;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
@@ -112,45 +112,45 @@ LGSideMenuPresentationStyle;
  For LGSideMenuPresentationStyleScaleFromBig default is 0.8.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
  */
-@property (assign, nonatomic) CGFloat rootViewScaleForLeftView;
+@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForLeftView;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
  For LGSideMenuPresentationStyleSlideBelow default is 1.
  For LGSideMenuPresentationStyleScaleFromBig default is 0.8.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
  */
-@property (assign, nonatomic) CGFloat rootViewScaleForRightView;
+@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForRightView;
 
 /**
  Color that hides left view, when if is not showing.
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default is [UIColor colorWithWhite:0.f alpha:0.5]
  */
-@property (strong, nonatomic) UIColor *leftViewCoverColor;
+@property (strong, nonatomic) IBInspectable UIColor *leftViewCoverColor;
 /**
  Color that hides right view, when if is not showing.
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
  Default is [UIColor colorWithWhite:0.f alpha:0.5]
  */
-@property (strong, nonatomic) UIColor *rightViewCoverColor;
+@property (strong, nonatomic)IBInspectable  UIColor *rightViewCoverColor;
 
 /** Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) */
-@property (strong, nonatomic) UIImage *leftViewBackgroundImage;
+@property (strong, nonatomic) IBInspectable UIImage *leftViewBackgroundImage;
 /** Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) */
-@property (strong, nonatomic) UIImage *rightViewBackgroundImage;
+@property (strong, nonatomic) IBInspectable UIImage *rightViewBackgroundImage;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
  For LGSideMenuPresentationStyleSlideBelow default is 1.
  For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4.
  */
-@property (assign, nonatomic) CGFloat leftViewBackgroundImageInitialScale;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
  For LGSideMenuPresentationStyleSlideBelow default is 1.
  For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4.
  */
-@property (assign, nonatomic) CGFloat rightViewBackgroundImageInitialScale;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
@@ -158,14 +158,14 @@ LGSideMenuPresentationStyle;
  For LGSideMenuPresentationStyleScaleFromBig default is 1.2.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
  */
-@property (assign, nonatomic) CGFloat leftViewInititialScale;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
  For LGSideMenuPresentationStyleSlideBelow default is 1.
  For LGSideMenuPresentationStyleScaleFromBig default is 1.2.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
  */
-@property (assign, nonatomic) CGFloat rightViewInititialScale;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialScale;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
@@ -173,42 +173,37 @@ LGSideMenuPresentationStyle;
  For LGSideMenuPresentationStyleScaleFromBig default is 0.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.
  */
-@property (assign, nonatomic) CGFloat leftViewInititialOffsetX;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialOffsetX;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
  For LGSideMenuPresentationStyleSlideBelow default is width/2.
  For LGSideMenuPresentationStyleScaleFromBig default is 0.
  For LGSideMenuPresentationStyleScaleFromLittle default is 0.
  */
-@property (assign, nonatomic) CGFloat rightViewInititialOffsetX;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialOffsetX;
 
-@property (strong, nonatomic) UIColor *rootViewLayerBorderColor;
-@property (assign, nonatomic) CGFloat rootViewLayerBorderWidth;
+@property (strong, nonatomic) IBInspectable UIColor *rootViewLayerBorderColor;
+@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerBorderWidth;
 /** For (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) default is [UIColor colorWithWhite:0.f alpha:0.5] */
-@property (strong, nonatomic) UIColor *rootViewLayerShadowColor;
+@property (strong, nonatomic) IBInspectable UIColor *rootViewLayerShadowColor;
 /** For (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) default is 5.f */
-@property (assign, nonatomic) CGFloat rootViewLayerShadowRadius;
+@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerShadowRadius;
 
-@property (strong, nonatomic) UIColor *leftViewBackgroundColor;
-@property (strong, nonatomic) UIColor *leftViewLayerBorderColor;
-@property (assign, nonatomic) CGFloat leftViewLayerBorderWidth;
+@property (strong, nonatomic) IBInspectable UIColor *leftViewBackgroundColor;
+@property (strong, nonatomic) IBInspectable UIColor *leftViewLayerBorderColor;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerBorderWidth;
 /** For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.f alpha:0.5] */
-@property (strong, nonatomic) UIColor *leftViewLayerShadowColor;
+@property (strong, nonatomic) IBInspectable UIColor *leftViewLayerShadowColor;
 /** For LGSideMenuPresentationStyleSlideAbove default is 5.f */
-@property (assign, nonatomic) CGFloat leftViewLayerShadowRadius;
+@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerShadowRadius;
 
-@property (strong, nonatomic) UIColor *rightViewBackgroundColor;
-@property (strong, nonatomic) UIColor *rightViewLayerBorderColor;
-@property (assign, nonatomic) CGFloat rightViewLayerBorderWidth;
+@property (strong, nonatomic) IBInspectable UIColor *rightViewBackgroundColor;
+@property (strong, nonatomic) IBInspectable UIColor *rightViewLayerBorderColor;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerBorderWidth;
 /** For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.f alpha:0.5] */
-@property (strong, nonatomic) UIColor *rightViewLayerShadowColor;
+@property (strong, nonatomic) IBInspectable UIColor *rightViewLayerShadowColor;
 /** For LGSideMenuPresentationStyleSlideAbove default is 5.f */
-@property (assign, nonatomic) CGFloat rightViewLayerShadowRadius;
-
-/** Default is YES */
-@property (assign, nonatomic, getter=isLeftViewGestureEnabled) BOOL leftViewGestureEnabled;
-/** Default is YES */
-@property (assign, nonatomic, getter=isRightViewGestureEnabled) BOOL rightViewGestureEnabled;
+@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerShadowRadius;
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
 

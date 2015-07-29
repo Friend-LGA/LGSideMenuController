@@ -11,7 +11,7 @@
 
 #warning CHOOSE TYPE 1 .. 5
 
-#define TYPE 3
+#define TYPE 1
 
 #define kMainViewController [(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController]
 #define kNavigationController (UINavigationController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] rootViewController]
