@@ -10,7 +10,7 @@
 
 #warning CHOOSE TYPE 1 .. 5
 
-#define TYPE 1
+#define TYPE 4
 
 #define kMainViewController (MainViewController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] window] rootViewController]
 #define kNavigationController (UINavigationController *)[(MainViewController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] window] rootViewController] rootViewController]

@@ -135,6 +135,7 @@
 @property (strong, nonatomic) UIView *rightViewStyleView;
 
 @property (assign, nonatomic) BOOL savedStatusBarHidden;
+@property (assign, nonatomic) BOOL hideStatusBar;
 
 @property (strong, nonatomic) NSNumber *leftViewGestireStartX;
 @property (strong, nonatomic) NSNumber *rightViewGestireStartX;
@@ -285,6 +286,10 @@
         [self rightViewLayoutInvalidateWithPercentage:(self.isRightViewShowing ? 1.f : 0.f)];
         [self hiddensInvalidateWithDelay:(appeared ? 0.25 : 0.0)];
     }
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.hideStatusBar;
 }
 
 #pragma mark -
@@ -1150,7 +1155,12 @@
         {
             [_rootVC removeFromParentViewController];
             
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+            if (kLGSideMenuSystemVersion >= 8.0){
+                self.hideStatusBar = YES;
+                [self setNeedsStatusBarAppearanceUpdate];
+            }else{
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+            }
         }
     }
     
@@ -1215,7 +1225,12 @@
     {
         [self addChildViewController:_rootVC];
         
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+        if (kLGSideMenuSystemVersion >= 8.0){
+            self.hideStatusBar = NO;
+            [self setNeedsStatusBarAppearanceUpdate];
+        }else{
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+        }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGSideMenuControllerWillDismissLeftViewNotification object:self userInfo:nil];
@@ -1303,8 +1318,13 @@
         if (!kLGSideMenuStatusBarHidden && !kLGSideMenuIsRightViewStatusBarVisible)
         {
             [_rootVC removeFromParentViewController];
-            
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
+            if (kLGSideMenuSystemVersion >= 8.0){
+                self.hideStatusBar = YES;
+                [self setNeedsStatusBarAppearanceUpdate];
+            }else{
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+            }
         }
     }
     
@@ -1368,8 +1388,13 @@
     if (kLGSideMenuSystemVersion >= 7.0 && !_savedStatusBarHidden && kLGSideMenuStatusBarHidden && !self.isLeftViewShowing)
     {
         [self addChildViewController:_rootVC];
-        
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+
+        if (kLGSideMenuSystemVersion >= 8.0){
+            self.hideStatusBar = NO;
+            [self setNeedsStatusBarAppearanceUpdate];
+        }else{
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+        }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGSideMenuControllerWillDismissRightViewNotification object:self userInfo:nil];

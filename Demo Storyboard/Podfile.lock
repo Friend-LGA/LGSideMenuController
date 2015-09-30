@@ -1,5 +1,5 @@
 PODS:
-  - LGSideMenuController (1.0.2)
+  - LGSideMenuController (1.0.3)
 
 DEPENDENCIES:
   - LGSideMenuController (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  LGSideMenuController: e3105c0fe8ef68475fd4d8695913c0bcb8759630
+  LGSideMenuController: 565ca94043437552cda5a88384e0a481169c3f32
 
 COCOAPODS: 0.38.2
