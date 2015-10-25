@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		4A4243A11B6808E4008432A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A01B6808E4008432A9 /* main.m */; };
 		4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A31B6808E4008432A9 /* AppDelegate.m */; };
 		4A4243A71B6808E4008432A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* ViewController.m */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		1D786D515F2DB6D9D388116A /* Pods-LGSideMenuControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A42439B1B6808E4008432A9 /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A42439F1B6808E4008432A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A4243A01B6808E4008432A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				4ADAFC311B6903F200B33211 /* Resources */,
 				4A4243AB1B6808E4008432A9 /* Images.xcassets */,
 				4A42439E1B6808E4008432A9 /* Supporting Files */,
+				4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */,
 			);
 			path = LGSideMenuControllerDemo;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				4A4243981B6808E4008432A9 /* Frameworks */,
 				4A4243991B6808E4008432A9 /* Resources */,
 				E2536D4655B09414CE15F03D /* Copy Pods Resources */,
+				05E49D3D96BA1FA76A650757 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,6 +224,7 @@
 				4ADAFC351B6903FF00B33211 /* image.png in Resources */,
 				4ADAFC371B6903FF00B33211 /* image3.png in Resources */,
 				4A4243AA1B6808E4008432A9 /* Main.storyboard in Resources */,
+				4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */,
 				4ADAFC361B6903FF00B33211 /* image2.png in Resources */,
 				4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */,
 			);
@@ -228,6 +233,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05E49D3D96BA1FA76A650757 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AEB5C6C3E6EE848EBB20B6C4 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

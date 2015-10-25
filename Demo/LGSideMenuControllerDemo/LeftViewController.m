@@ -32,7 +32,7 @@
                          @"Articles",
                          @"Video",
                          @"Music"];
-        
+
         [self.tableView registerClass:[LeftViewCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.contentInset = UIEdgeInsetsMake(20.f, 0.f, 20.f, 0.f);
@@ -70,13 +70,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+
     cell.textLabel.text = _titlesArray[indexPath.row];
     cell.separatorView.hidden = !(indexPath.row != _titlesArray.count-1 && indexPath.row != 1 && indexPath.row != 2);
     cell.userInteractionEnabled = (indexPath.row != 2);
-    
+
     cell.tintColor = _tintColor;
-    
+
     return cell;
 }
 
@@ -91,13 +91,13 @@
     if (indexPath.row == 0)
     {
         ViewController *viewController = [ViewController new];
-        
+
         UIViewController *viewController2 = [UIViewController new];
         viewController2.view.backgroundColor = [UIColor whiteColor];
         viewController2.title = @"Test";
 
         [kNavigationController setViewControllers:@[viewController, viewController2]];
-        
+
         [kMainViewController hideLeftViewAnimated:YES completionHandler:nil];
     }
     else if (indexPath.row == 1)
@@ -117,7 +117,7 @@
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = _titlesArray[indexPath.row];
         [kNavigationController pushViewController:viewController animated:YES];
-        
+
         [kMainViewController hideLeftViewAnimated:YES completionHandler:nil];
     }
 }

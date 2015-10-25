@@ -15,18 +15,18 @@
 {
     if ([UIDevice currentDevice].systemVersion.floatValue < 7.0)
         application.statusBarStyle = UIStatusBarStyleBlackOpaque;
-    
+
     ViewController *viewController = [ViewController new];
-    
+
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
+
     self.mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.mainViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 

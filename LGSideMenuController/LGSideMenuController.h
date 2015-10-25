@@ -94,6 +94,8 @@ LGSideMenuPresentationStyle;
 @property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  IBInspectable BOOL leftViewSwipeGestureEnabled;
 /** Default is YES */
 @property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) IBInspectable BOOL rightViewSwipeGestureEnabled;
+/** Default is YES */
+@property (assign, nonatomic, getter=isGesturesCancelsTouchesInView) IBInspectable BOOL gesturesCancelsTouchesInView;
 
 /**
  Color that hides root view, when left view is showing

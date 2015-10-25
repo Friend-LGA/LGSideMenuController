@@ -24,40 +24,40 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
+
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     self.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
     _leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
     _rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
-    
+
     // -----
-    
+
     if (TYPE == 1)
     {
         [self setLeftViewEnabledWithWidth:250.f
                         presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                      alwaysVisibleOptions:0];
-        
+
         self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
-        
+
         // -----
-        
+
         [self setRightViewEnabledWithWidth:100.f
                          presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                       alwaysVisibleOptions:0];
-        
+
         self.rightViewBackgroundImage = [UIImage imageNamed:@"image2"];
-        
+
         // -----
-        
+
         _leftViewController.tableView.backgroundColor = [UIColor clearColor];
         _leftViewController.tintColor = [UIColor whiteColor];
         [_leftViewController.tableView reloadData];
         [self.leftView addSubview:_leftViewController.tableView];
-        
+
         // -----
-        
+
         _rightViewController.tableView.backgroundColor = [UIColor clearColor];
         _rightViewController.tintColor = [UIColor whiteColor];
         [_rightViewController.tableView reloadData];
@@ -68,26 +68,26 @@
         [self setLeftViewEnabledWithWidth:250.f
                         presentationStyle:LGSideMenuPresentationStyleSlideAbove
                      alwaysVisibleOptions:0];
-        
+
         self.leftViewBackgroundColor = [UIColor colorWithWhite:1.f alpha:0.9];
-        
+
         // -----
-        
+
         [self setRightViewEnabledWithWidth:100.f
                          presentationStyle:LGSideMenuPresentationStyleSlideAbove
                       alwaysVisibleOptions:0];
-        
+
         self.rightViewBackgroundColor = [UIColor colorWithWhite:1.f alpha:0.9];
-        
+
         // -----
-        
+
         _leftViewController.tableView.backgroundColor = [UIColor clearColor];
         _leftViewController.tintColor = [UIColor blackColor];
         [_leftViewController.tableView reloadData];
         [self.leftView addSubview:_leftViewController.tableView];
-        
+
         // -----
-        
+
         _rightViewController.tableView.backgroundColor = [UIColor clearColor];
         _rightViewController.tintColor = [UIColor blackColor];
         [_rightViewController.tableView reloadData];
@@ -98,26 +98,26 @@
         [self setLeftViewEnabledWithWidth:250.f
                         presentationStyle:LGSideMenuPresentationStyleSlideBelow
                      alwaysVisibleOptions:0];
-        
+
         self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
-        
+
         // -----
-        
+
         [self setRightViewEnabledWithWidth:100.f
                          presentationStyle:LGSideMenuPresentationStyleSlideBelow
                       alwaysVisibleOptions:0];
-        
+
         self.rightViewBackgroundImage = [UIImage imageNamed:@"image2"];
-        
+
         // -----
-        
+
         _leftViewController.tableView.backgroundColor = [UIColor clearColor];
         _leftViewController.tintColor = [UIColor whiteColor];
         [_leftViewController.tableView reloadData];
         [self.leftView addSubview:_leftViewController.tableView];
-        
+
         // -----
-        
+
         _rightViewController.tableView.backgroundColor = [UIColor clearColor];
         _rightViewController.tintColor = [UIColor whiteColor];
         [_rightViewController.tableView reloadData];
@@ -128,28 +128,28 @@
         [self setLeftViewEnabledWithWidth:200.f
                         presentationStyle:LGSideMenuPresentationStyleScaleFromLittle
                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape];
-        
+
         self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
         self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
-        
+
         // -----
-        
+
         [self setRightViewEnabledWithWidth:100.f
                          presentationStyle:LGSideMenuPresentationStyleSlideAbove
                       alwaysVisibleOptions:0];
-        
+
         self.rightViewBackgroundColor = [UIColor colorWithWhite:1.f alpha:0.9];
         self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
-        
+
         // -----
-        
+
         _leftViewController.tableView.backgroundColor = [UIColor clearColor];
         _leftViewController.tintColor = [UIColor whiteColor];
         [_leftViewController.tableView reloadData];
         [self.leftView addSubview:_leftViewController.tableView];
-        
+
         // -----
-        
+
         _rightViewController.tableView.backgroundColor = [UIColor clearColor];
         _rightViewController.tintColor = [UIColor blackColor];
         [_rightViewController.tableView reloadData];
@@ -160,42 +160,42 @@
         [self setLeftViewEnabledWithWidth:200.f
                         presentationStyle:LGSideMenuPresentationStyleScaleFromBig
                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape];
-        
+
         self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
         self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
         self.leftViewBackgroundImageInitialScale = 1.5;
         self.leftViewInititialOffsetX = -200.f;
         self.leftViewInititialScale = 1.5;
-        
+
         self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.f green:1.f blue:0.5 alpha:0.3];
         self.rootViewScaleForLeftView = 0.6;
         self.rootViewLayerBorderWidth = 3.f;
         self.rootViewLayerBorderColor = [UIColor whiteColor];
         self.rootViewLayerShadowRadius = 10.f;
-        
+
         // -----
-        
+
         [self setRightViewEnabledWithWidth:100.f
                          presentationStyle:LGSideMenuPresentationStyleSlideAbove
                       alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape];
-        
+
         self.rightViewBackgroundColor = [UIColor colorWithWhite:1.f alpha:0.7];
         self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
         self.rightViewLayerBorderWidth = 3.f;
         self.rightViewLayerBorderColor = [UIColor blackColor];
         self.rightViewLayerShadowRadius = 10.f;
-        
+
         self.rootViewCoverColorForRightView = [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:0.3];
-        
+
         // -----
-        
+
         _leftViewController.tableView.backgroundColor = [UIColor clearColor];
         _leftViewController.tintColor = [UIColor whiteColor];
         [_leftViewController.tableView reloadData];
         [self.leftView addSubview:_leftViewController.tableView];
-        
+
         // -----
-        
+
         _rightViewController.tableView.backgroundColor = [UIColor clearColor];
         _rightViewController.tintColor = [UIColor blackColor];
         [_rightViewController.tableView reloadData];
@@ -206,7 +206,7 @@
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size
 {
     [super leftViewWillLayoutSubviewsWithSize:size];
-    
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && (TYPE == 4 || TYPE == 5))
     {
         if (self.isLeftViewAlwaysVisible)
@@ -226,7 +226,7 @@
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size
 {
     [super rightViewWillLayoutSubviewsWithSize:size];
-    
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && (TYPE == 4 || TYPE == 5))
     {
         if (self.isLeftViewAlwaysVisible)

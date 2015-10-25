@@ -18,7 +18,7 @@
 {
     if ([UIDevice currentDevice].systemVersion.floatValue < 7.0)
         application.statusBarStyle = UIStatusBarStyleBlackOpaque;
-    
+
     return YES;
 }
 

@@ -37,7 +37,7 @@
                          @"8",
                          @"9",
                          @"10"];
-        
+
         [self.tableView registerClass:[RightViewCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         self.tableView.showsVerticalScrollIndicator = NO;
@@ -74,7 +74,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RightViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+
     cell.textLabel.text = _titlesArray[indexPath.row];
     if (indexPath.row < 3)
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.f];
@@ -82,9 +82,9 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:30.f];
     cell.separatorView.hidden = !(indexPath.row != _titlesArray.count-1 && indexPath.row != 1 && indexPath.row != 2);
     cell.userInteractionEnabled = (indexPath.row != 2);
-    
+
     cell.tintColor = _tintColor;
-    
+
     return cell;
 }
 
@@ -99,13 +99,13 @@
     if (indexPath.row == 0)
     {
         ViewController *viewController = [ViewController new];
-        
+
         UIViewController *viewController2 = [UIViewController new];
         viewController2.view.backgroundColor = [UIColor whiteColor];
         viewController2.title = @"Test";
-        
+
         [kNavigationController setViewControllers:@[viewController, viewController2]];
-        
+
         [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
     else if (indexPath.row == 1)
@@ -125,7 +125,7 @@
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = [NSString stringWithFormat:@"Test %@", _titlesArray[indexPath.row]];
         [kNavigationController pushViewController:viewController animated:YES];
-        
+
         [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
 }

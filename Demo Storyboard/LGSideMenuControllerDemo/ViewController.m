@@ -22,15 +22,15 @@
 - (void)awakeFromNib
 {
     self.title = @"LGSideMenuController";
-    
+
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     // -----
-    
+
     _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
     _imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:_imageView];
-    
+
     _button = [UIButton new];
     _button.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.5];
     [_button setTitle:@"Push View Controller" forState:UIControlStateNormal];
@@ -38,18 +38,18 @@
     [_button setTitleColor:[UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] forState:UIControlStateHighlighted];
     [_button addTarget:self action:@selector(pushViewControllerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_button];
-    
+
     // -----
-    
+
     [self checkNavItemButtonsWithInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+
     _imageView.frame = CGRectMake(0.f, 0.f, self.view.frame.size.width, self.view.frame.size.height);
-    
+
     _button.frame = CGRectMake(0.f, self.view.frame.size.height-44.f, self.view.frame.size.width, 44.f);
 }
 
@@ -58,16 +58,16 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
+
     UIInterfaceOrientation interfaceOrientation = (size.width < size.height ? UIInterfaceOrientationPortrait : UIInterfaceOrientationLandscapeLeft);
-    
+
     [self checkNavItemButtonsWithInterfaceOrientation:interfaceOrientation];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
+
     [self checkNavItemButtonsWithInterfaceOrientation:toInterfaceOrientation];
 }
 
@@ -79,7 +79,7 @@
             self.navigationItem.leftBarButtonItem = nil;
         else
             self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(openLeftView)];
-        
+
         if ([kMainViewController isRightViewAlwaysVisibleForInterfaceOrientation:interfaceOrientation])
             self.navigationItem.rightBarButtonItem = nil;
         else

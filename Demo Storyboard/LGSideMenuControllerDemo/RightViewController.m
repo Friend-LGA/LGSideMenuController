@@ -23,7 +23,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
+
     _titlesArray = @[@"Set VC",
                      @"Open Left View",
                      @"",
@@ -37,7 +37,7 @@
                      @"8",
                      @"9",
                      @"10"];
-    
+
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
 }
@@ -71,7 +71,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RightViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+
     cell.textLabel.text = _titlesArray[indexPath.row];
     if (indexPath.row < 3)
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.f];
@@ -79,9 +79,9 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:30.f];
     cell.separatorView.hidden = !(indexPath.row != _titlesArray.count-1 && indexPath.row != 1 && indexPath.row != 2);
     cell.userInteractionEnabled = (indexPath.row != 2);
-    
+
     cell.tintColor = _tintColor;
-    
+
     return cell;
 }
 
@@ -96,12 +96,12 @@
     if (indexPath.row == 0)
     {
         ViewController *viewController = [kNavigationController viewControllers].firstObject;
-        
+
         UIViewController *viewController2 = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         viewController2.title = @"Test";
-        
+
         [kNavigationController setViewControllers:@[viewController, viewController2]];
-        
+
         [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
     else if (indexPath.row == 1)
@@ -120,7 +120,7 @@
         UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         viewController.title = [NSString stringWithFormat:@"Test %@", _titlesArray[indexPath.row]];
         [kNavigationController pushViewController:viewController animated:YES];
-        
+
         [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
 }
