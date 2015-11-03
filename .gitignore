@@ -29,3 +29,5 @@ Pods/
 ._*
 
 .hgignore
+
+.DS_Store
