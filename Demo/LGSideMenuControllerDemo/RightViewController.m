@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "RightViewCell.h"
 #import "ViewController.h"
+#import "MainViewController.h"
+#import "NavigationController.h"
 
 @interface RightViewController ()
 
@@ -24,8 +26,7 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
-        _titlesArray = @[@"Set VC",
-                         @"Open Left View",
+        _titlesArray = @[@"Open Left View",
                          @"",
                          @"1",
                          @"2",
@@ -40,21 +41,10 @@
 
         [self.tableView registerClass:[RightViewCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        self.tableView.contentInset = UIEdgeInsetsMake(44.f, 0.f, 44.f, 0.f);
         self.tableView.showsVerticalScrollIndicator = NO;
     }
     return self;
-}
-
-#pragma mark -
-
-- (void)openLeftView
-{
-    [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
-}
-
-- (void)openRightView
-{
-    [kMainViewController showRightViewAnimated:YES completionHandler:nil];
 }
 
 #pragma mark - UITableView DataSource
@@ -76,12 +66,12 @@
     RightViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
     cell.textLabel.text = _titlesArray[indexPath.row];
-    if (indexPath.row < 3)
+    if (indexPath.row == 0)
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.f];
     else
         cell.textLabel.font = [UIFont boldSystemFontOfSize:30.f];
-    cell.separatorView.hidden = !(indexPath.row != _titlesArray.count-1 && indexPath.row != 1 && indexPath.row != 2);
-    cell.userInteractionEnabled = (indexPath.row != 2);
+    cell.separatorView.hidden = !(indexPath.row != 0 && indexPath.row != 1 && indexPath.row != _titlesArray.count-1);
+    cell.userInteractionEnabled = (indexPath.row != 1);
 
     cell.tintColor = _tintColor;
 
@@ -90,7 +80,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 2) return 50.f;
+    if (indexPath.row == 1) return 50.f;
     else return 100.f;
 }
 
@@ -98,19 +88,7 @@
 {
     if (indexPath.row == 0)
     {
-        ViewController *viewController = [ViewController new];
-
-        UIViewController *viewController2 = [UIViewController new];
-        viewController2.view.backgroundColor = [UIColor whiteColor];
-        viewController2.title = @"Test";
-
-        [kNavigationController setViewControllers:@[viewController, viewController2]];
-
-        [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
-    }
-    else if (indexPath.row == 1)
-    {
-        if (!kMainViewController.isRightViewAlwaysVisible)
+        if (![kMainViewController isRightViewAlwaysVisible])
         {
             [kMainViewController hideRightViewAnimated:YES completionHandler:^(void)
              {

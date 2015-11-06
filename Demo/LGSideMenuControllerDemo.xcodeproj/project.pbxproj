@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1B02B5B256CAF8274A9895C1 /* libPods-LGSideMenuControllerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C0B3D6B7FC45F42B6E52E2 /* libPods-LGSideMenuControllerDemo.a */; };
 		4A339C431AFD3D6600F75B99 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A339C421AFD3D6600F75B99 /* image2.png */; };
+		4A371ED81BEBA53000FB3DA4 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A371ED71BEBA53000FB3DA4 /* NavigationController.m */; };
+		4A371EDB1BEBA97D00FB3DA4 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A371EDA1BEBA97D00FB3DA4 /* TableViewController.m */; };
+		4A371EE31BEBB20D00FB3DA4 /* ChooseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A371EE21BEBB20D00FB3DA4 /* ChooseNavigationController.m */; };
 		4A4319171AECF95D0088EFD7 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4319161AECF95D0088EFD7 /* LeftViewController.m */; };
 		4A43191A1AECFECB0088EFD7 /* LeftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4319191AECFECB0088EFD7 /* LeftViewCell.m */; };
 		4A4319201AED009D0088EFD7 /* RightViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A43191D1AED009D0088EFD7 /* RightViewCell.m */; };
@@ -20,11 +23,17 @@
 		4A645CDE1B02797300FFBDF6 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A645CDD1B02797300FFBDF6 /* image3.png */; };
 		4A66FCA01AEBC443005B8B0A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A66FC9F1AEBC443005B8B0A /* MainViewController.m */; };
 		4A6FE4F51AFBDBD2003887C9 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE4F41AFBDBD2003887C9 /* image.png */; };
-		4A8221CD1BDD321C00195454 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A8221CC1BDD321C00195454 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		4A8221CD1BDD321C00195454 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A8221CC1BDD321C00195454 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A339C421AFD3D6600F75B99 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
+		4A371ED61BEBA53000FB3DA4 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		4A371ED71BEBA53000FB3DA4 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		4A371ED91BEBA97C00FB3DA4 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		4A371EDA1BEBA97D00FB3DA4 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		4A371EE11BEBB20D00FB3DA4 /* ChooseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseNavigationController.h; sourceTree = "<group>"; };
+		4A371EE21BEBB20D00FB3DA4 /* ChooseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseNavigationController.m; sourceTree = "<group>"; };
 		4A4319151AECF95D0088EFD7 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		4A4319161AECF95D0088EFD7 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		4A4319181AECFECB0088EFD7 /* LeftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewCell.h; sourceTree = "<group>"; };
@@ -63,6 +72,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A371EDF1BEBB19500FB3DA4 /* Choose View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A371EE11BEBB20D00FB3DA4 /* ChooseNavigationController.h */,
+				4A371EE21BEBB20D00FB3DA4 /* ChooseNavigationController.m */,
+				4A371ED91BEBA97C00FB3DA4 /* TableViewController.h */,
+				4A371EDA1BEBA97D00FB3DA4 /* TableViewController.m */,
+			);
+			name = "Choose View Controller";
+			sourceTree = "<group>";
+		};
+		4A371EE01BEBB1A400FB3DA4 /* Side Menu Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A43191B1AED007A0088EFD7 /* Right View Controller */,
+				4A4319141AECF93A0088EFD7 /* Left View Controller */,
+				4A371ED61BEBA53000FB3DA4 /* NavigationController.h */,
+				4A371ED71BEBA53000FB3DA4 /* NavigationController.m */,
+				4A66FC9E1AEBC443005B8B0A /* MainViewController.h */,
+				4A66FC9F1AEBC443005B8B0A /* MainViewController.m */,
+				4A5888E01AE94907004AFC57 /* ViewController.h */,
+				4A5888E11AE94907004AFC57 /* ViewController.m */,
+			);
+			name = "Side Menu Controller";
+			sourceTree = "<group>";
+		};
 		4A4319141AECF93A0088EFD7 /* Left View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,14 +141,10 @@
 		4A5888B71AE9489E004AFC57 /* LGSideMenuControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				4A43191B1AED007A0088EFD7 /* Right View Controller */,
-				4A4319141AECF93A0088EFD7 /* Left View Controller */,
 				4A5888BC1AE9489E004AFC57 /* AppDelegate.h */,
 				4A5888BD1AE9489E004AFC57 /* AppDelegate.m */,
-				4A66FC9E1AEBC443005B8B0A /* MainViewController.h */,
-				4A66FC9F1AEBC443005B8B0A /* MainViewController.m */,
-				4A5888E01AE94907004AFC57 /* ViewController.h */,
-				4A5888E11AE94907004AFC57 /* ViewController.m */,
+				4A371EDF1BEBB19500FB3DA4 /* Choose View Controller */,
+				4A371EE01BEBB1A400FB3DA4 /* Side Menu Controller */,
 				4A6FE4F31AFBDBC4003887C9 /* Resources */,
 				4A5888C51AE9489E004AFC57 /* Images.xcassets */,
 				4A5888B81AE9489E004AFC57 /* Supporting Files */,
@@ -187,7 +218,7 @@
 		4A5888AD1AE9489E004AFC57 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Grigory Lutkov";
 				TargetAttributes = {
 					4A5888B41AE9489E004AFC57 = {
@@ -281,12 +312,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A371EDB1BEBA97D00FB3DA4 /* TableViewController.m in Sources */,
 				4A5888BE1AE9489E004AFC57 /* AppDelegate.m in Sources */,
 				4A43191A1AECFECB0088EFD7 /* LeftViewCell.m in Sources */,
 				4A4319171AECF95D0088EFD7 /* LeftViewController.m in Sources */,
+				4A371EE31BEBB20D00FB3DA4 /* ChooseNavigationController.m in Sources */,
 				4A5888BB1AE9489E004AFC57 /* main.m in Sources */,
 				4A4319201AED009D0088EFD7 /* RightViewCell.m in Sources */,
 				4A4319211AED009D0088EFD7 /* RightViewController.m in Sources */,
+				4A371ED81BEBA53000FB3DA4 /* NavigationController.m in Sources */,
 				4A66FCA01AEBC443005B8B0A /* MainViewController.m in Sources */,
 				4A5888E31AE94907004AFC57 /* ViewController.m in Sources */,
 			);
@@ -316,6 +350,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -386,6 +421,7 @@
 				INFOPLIST_FILE = LGSideMenuControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -399,6 +435,7 @@
 				INFOPLIST_FILE = LGSideMenuControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.$(PRODUCT_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

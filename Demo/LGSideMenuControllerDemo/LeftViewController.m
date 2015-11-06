@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "LeftViewCell.h"
 #import "ViewController.h"
+#import "MainViewController.h"
+#import "NavigationController.h"
 
 @interface LeftViewController ()
 
@@ -24,8 +26,7 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
-        _titlesArray = @[@"Set View Controllers",
-                         @"Open Right View",
+        _titlesArray = @[@"Open Right View",
                          @"",
                          @"Profile",
                          @"News",
@@ -35,22 +36,10 @@
 
         [self.tableView registerClass:[LeftViewCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.tableView.contentInset = UIEdgeInsetsMake(20.f, 0.f, 20.f, 0.f);
+        self.tableView.contentInset = UIEdgeInsetsMake(44.f, 0.f, 44.f, 0.f);
         self.tableView.showsVerticalScrollIndicator = NO;
     }
     return self;
-}
-
-#pragma mark -
-
-- (void)openLeftView
-{
-    [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
-}
-
-- (void)openRightView
-{
-    [kMainViewController showRightViewAnimated:YES completionHandler:nil];
 }
 
 #pragma mark - UITableView DataSource
@@ -72,8 +61,8 @@
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
     cell.textLabel.text = _titlesArray[indexPath.row];
-    cell.separatorView.hidden = !(indexPath.row != _titlesArray.count-1 && indexPath.row != 1 && indexPath.row != 2);
-    cell.userInteractionEnabled = (indexPath.row != 2);
+    cell.separatorView.hidden = !(indexPath.row != 0 && indexPath.row != 1 && indexPath.row != _titlesArray.count-1);
+    cell.userInteractionEnabled = (indexPath.row != 1);
 
     cell.tintColor = _tintColor;
 
@@ -82,7 +71,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 2) return 22.f;
+    if (indexPath.row == 1) return 22.f;
     else return 44.f;
 }
 
@@ -90,19 +79,7 @@
 {
     if (indexPath.row == 0)
     {
-        ViewController *viewController = [ViewController new];
-
-        UIViewController *viewController2 = [UIViewController new];
-        viewController2.view.backgroundColor = [UIColor whiteColor];
-        viewController2.title = @"Test";
-
-        [kNavigationController setViewControllers:@[viewController, viewController2]];
-
-        [kMainViewController hideLeftViewAnimated:YES completionHandler:nil];
-    }
-    else if (indexPath.row == 1)
-    {
-        if (!kMainViewController.isLeftViewAlwaysVisible)
+        if (![kMainViewController isLeftViewAlwaysVisible])
         {
             [kMainViewController hideLeftViewAnimated:YES completionHandler:^(void)
              {

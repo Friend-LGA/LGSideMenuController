@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import "ChooseNavigationController.h"
+#import "TableViewController.h"
+#import "MainViewController.h"
 
 @interface ViewController ()
 
@@ -35,15 +38,16 @@
 
         _button = [UIButton new];
         _button.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.5];
-        [_button setTitle:@"Push View Controller" forState:UIControlStateNormal];
+        [_button setTitle:@"Show Choose Controller" forState:UIControlStateNormal];
         [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_button setTitleColor:[UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] forState:UIControlStateHighlighted];
-        [_button addTarget:self action:@selector(pushViewControllerAction) forControlEvents:UIControlEventTouchUpInside];
+        [_button addTarget:self action:@selector(showChooseController) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_button];
 
         // -----
 
-        [self checkNavItemButtonsWithInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(openLeftView)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(openRightView)];
     }
     return self;
 }
@@ -59,45 +63,6 @@
 
 #pragma mark -
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-
-    UIInterfaceOrientation interfaceOrientation = (size.width < size.height ? UIInterfaceOrientationPortrait : UIInterfaceOrientationLandscapeLeft);
-
-    [self checkNavItemButtonsWithInterfaceOrientation:interfaceOrientation];
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
-    [self checkNavItemButtonsWithInterfaceOrientation:toInterfaceOrientation];
-}
-
-- (void)checkNavItemButtonsWithInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if (TYPE == 4 || TYPE == 5)
-    {
-        if ([kMainViewController isLeftViewAlwaysVisibleForInterfaceOrientation:interfaceOrientation])
-            self.navigationItem.leftBarButtonItem = nil;
-        else
-            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(openLeftView)];
-
-        if ([kMainViewController isRightViewAlwaysVisibleForInterfaceOrientation:interfaceOrientation])
-            self.navigationItem.rightBarButtonItem = nil;
-        else
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(openRightView)];
-    }
-    else
-    {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(openLeftView)];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(openRightView)];
-    }
-}
-
-#pragma mark -
-
 - (void)openLeftView
 {
     [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
@@ -108,12 +73,20 @@
     [kMainViewController showRightViewAnimated:YES completionHandler:nil];
 }
 
-- (void)pushViewControllerAction
+- (void)showChooseController
 {
-    UIViewController *viewController = [UIViewController new];
-    viewController.view.backgroundColor = [UIColor whiteColor];
-    viewController.title = @"Test";
-    [self.navigationController pushViewController:viewController animated:YES];
+    TableViewController *viewController = [TableViewController new];
+    ChooseNavigationController *navigationController = [[ChooseNavigationController alloc] initWithRootViewController:viewController];
+
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+
+    window.rootViewController = navigationController;
+
+    [UIView transitionWithView:window
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:nil
+                    completion:nil];
 }
 
 @end

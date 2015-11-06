@@ -7,18 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
 
-#warning CHOOSE TYPE 1 .. 5
-
-#define TYPE 1
-
-#define kMainViewController [(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController]
-#define kNavigationController (UINavigationController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] mainViewController] rootViewController]
+#define kMainViewController                            (MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController
+#define kNavigationController (NavigationController *)[(MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController rootViewController]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) MainViewController *mainViewController;
 
 @end

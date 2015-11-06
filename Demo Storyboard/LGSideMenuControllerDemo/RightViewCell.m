@@ -18,18 +18,13 @@
 {
     [super awakeFromNib];
 
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    // -----
 
     self.backgroundColor = [UIColor clearColor];
 
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.numberOfLines = 0;
     self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-
-    // -----
-
-    _separatorView = [UIView new];
-    [self addSubview:_separatorView];
 }
 
 - (void)layoutSubviews
@@ -38,10 +33,6 @@
 
     self.textLabel.textColor = _tintColor;
     _separatorView.backgroundColor = [_tintColor colorWithAlphaComponent:0.4];
-
-    CGFloat height = ([UIScreen mainScreen].scale == 1.f ? 1.f : 0.5);
-
-    _separatorView.frame = CGRectMake(self.frame.size.width*0.1, self.frame.size.height-height, self.frame.size.width*0.9, height);
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated

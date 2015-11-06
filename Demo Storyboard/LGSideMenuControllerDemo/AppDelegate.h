@@ -8,16 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#warning CHOOSE TYPE 1 .. 5
-
-#define TYPE 1
-
-#define kMainViewController (MainViewController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] window] rootViewController]
-#define kNavigationController (UINavigationController *)[(MainViewController *)[[(AppDelegate *)[[UIApplication sharedApplication] delegate] window] rootViewController] rootViewController]
+#define kMainViewController                            (MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController
+#define kNavigationController (NavigationController *)[(MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController rootViewController]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @end
-

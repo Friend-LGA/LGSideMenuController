@@ -10,7 +10,7 @@
 
 @interface LeftViewCell : UITableViewCell
 
-@property (strong, nonatomic) UIView *separatorView;
+@property (assign, nonatomic) IBOutlet UIView *separatorView;
 @property (strong, nonatomic) UIColor *tintColor;
 
 @end

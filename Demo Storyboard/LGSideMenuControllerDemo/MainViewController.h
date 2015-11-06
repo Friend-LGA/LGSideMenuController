@@ -10,4 +10,7 @@
 
 @interface MainViewController : LGSideMenuController
 
+- (void)setupWithPresentationStyle:(LGSideMenuPresentationStyle)style
+                              type:(NSUInteger)type;
+
 @end

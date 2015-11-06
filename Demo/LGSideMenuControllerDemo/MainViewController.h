@@ -10,4 +10,8 @@
 
 @interface MainViewController : LGSideMenuController
 
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+                         presentationStyle:(LGSideMenuPresentationStyle)style
+                                      type:(NSUInteger)type;
+
 @end

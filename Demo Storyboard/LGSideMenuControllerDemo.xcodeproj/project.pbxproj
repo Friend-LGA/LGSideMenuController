@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA551BECFE610072427E /* ChooseNavigationController.m */; };
+		4A19DA591BECFE610072427E /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA571BECFE610072427E /* TableViewController.m */; };
+		4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA5B1BECFE900072427E /* NavigationController.m */; };
+		4A19DA5E1BECFEAF0072427E /* Choose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A19DA5D1BECFEAF0072427E /* Choose.storyboard */; };
+		4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */; };
 		4A4243A11B6808E4008432A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A01B6808E4008432A9 /* main.m */; };
 		4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A31B6808E4008432A9 /* AppDelegate.m */; };
 		4A4243A71B6808E4008432A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* ViewController.m */; };
@@ -26,6 +30,13 @@
 
 /* Begin PBXFileReference section */
 		1D786D515F2DB6D9D388116A /* Pods-LGSideMenuControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		4A19DA541BECFE610072427E /* ChooseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseNavigationController.h; sourceTree = "<group>"; };
+		4A19DA551BECFE610072427E /* ChooseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseNavigationController.m; sourceTree = "<group>"; };
+		4A19DA561BECFE610072427E /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		4A19DA571BECFE610072427E /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		4A19DA5A1BECFE900072427E /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		4A19DA5B1BECFE900072427E /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		4A19DA5D1BECFEAF0072427E /* Choose.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Choose.storyboard; sourceTree = "<group>"; };
 		4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A42439B1B6808E4008432A9 /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A42439F1B6808E4008432A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +85,34 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4A19DA521BECFE2A0072427E /* Choose View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A19DA541BECFE610072427E /* ChooseNavigationController.h */,
+				4A19DA551BECFE610072427E /* ChooseNavigationController.m */,
+				4A19DA561BECFE610072427E /* TableViewController.h */,
+				4A19DA571BECFE610072427E /* TableViewController.m */,
+				4A19DA5D1BECFEAF0072427E /* Choose.storyboard */,
+			);
+			name = "Choose View Controller";
+			sourceTree = "<group>";
+		};
+		4A19DA531BECFE360072427E /* Side Menu Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4ADAFC471B691E0F00B33211 /* Right View Controller */,
+				4ADAFC481B691E1300B33211 /* Left View Controller */,
+				4A19DA5A1BECFE900072427E /* NavigationController.h */,
+				4A19DA5B1BECFE900072427E /* NavigationController.m */,
+				4ADAFC381B69190900B33211 /* MainViewController.h */,
+				4ADAFC391B69190900B33211 /* MainViewController.m */,
+				4A4243A51B6808E4008432A9 /* ViewController.h */,
+				4A4243A61B6808E4008432A9 /* ViewController.m */,
+				4A4243A81B6808E4008432A9 /* Main.storyboard */,
+			);
+			name = "Side Menu Controller";
+			sourceTree = "<group>";
+		};
 		4A4243921B6808E4008432A9 = {
 			isa = PBXGroup;
 			children = (
@@ -95,15 +134,10 @@
 		4A42439D1B6808E4008432A9 /* LGSideMenuControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				4ADAFC471B691E0F00B33211 /* Right View Controller */,
-				4ADAFC481B691E1300B33211 /* Left View Controller */,
 				4A4243A21B6808E4008432A9 /* AppDelegate.h */,
 				4A4243A31B6808E4008432A9 /* AppDelegate.m */,
-				4A4243A51B6808E4008432A9 /* ViewController.h */,
-				4A4243A61B6808E4008432A9 /* ViewController.m */,
-				4ADAFC381B69190900B33211 /* MainViewController.h */,
-				4ADAFC391B69190900B33211 /* MainViewController.m */,
-				4A4243A81B6808E4008432A9 /* Main.storyboard */,
+				4A19DA521BECFE2A0072427E /* Choose View Controller */,
+				4A19DA531BECFE360072427E /* Side Menu Controller */,
 				4ADAFC311B6903F200B33211 /* Resources */,
 				4A4243AB1B6808E4008432A9 /* Images.xcassets */,
 				4A42439E1B6808E4008432A9 /* Supporting Files */,
@@ -190,7 +224,7 @@
 		4A4243931B6808E4008432A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Grigory Lutkov";
 				TargetAttributes = {
 					4A42439A1B6808E4008432A9 = {
@@ -224,6 +258,7 @@
 				4ADAFC351B6903FF00B33211 /* image.png in Resources */,
 				4ADAFC371B6903FF00B33211 /* image3.png in Resources */,
 				4A4243AA1B6808E4008432A9 /* Main.storyboard in Resources */,
+				4A19DA5E1BECFEAF0072427E /* Choose.storyboard in Resources */,
 				4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */,
 				4ADAFC361B6903FF00B33211 /* image2.png in Resources */,
 				4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */,
@@ -288,9 +323,12 @@
 				4A4243A71B6808E4008432A9 /* ViewController.m in Sources */,
 				4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */,
 				4A4243A11B6808E4008432A9 /* main.m in Sources */,
+				4A19DA591BECFE610072427E /* TableViewController.m in Sources */,
 				4ADAFC441B691DA500B33211 /* LeftViewController.m in Sources */,
+				4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */,
 				4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */,
 				4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */,
+				4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */,
 				4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */,
 				4ADAFC3A1B69190900B33211 /* MainViewController.m in Sources */,
 			);
@@ -331,6 +369,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -400,6 +439,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = LGSideMenuControllerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -412,6 +452,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = LGSideMenuControllerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.test.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
