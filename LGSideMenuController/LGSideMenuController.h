@@ -41,7 +41,7 @@ static NSString *const kLGSideMenuControllerDidDismissRightViewNotification  = @
 
 @interface LGSideMenuController : UIViewController
 
-typedef enum
+typedef NS_OPTIONS(NSUInteger, LGSideMenuAlwaysVisibleOptions)
 {
     LGSideMenuAlwaysVisibleOnNone           = 0,
     LGSideMenuAlwaysVisibleOnPadLandscape   = 1 << 0,
@@ -49,10 +49,9 @@ typedef enum
     LGSideMenuAlwaysVisibleOnPhoneLandscape = 1 << 2,
     LGSideMenuAlwaysVisibleOnPhonePortrait  = 1 << 3,
     LGSideMenuAlwaysVisibleOnAll            = 1 << 4
-}
-LGSideMenuAlwaysVisibleOptions;
+};
 
-typedef enum
+typedef NS_OPTIONS(NSUInteger, LGSideMenuStatusBarVisibleOptions)
 {
     LGSideMenuStatusBarVisibleOnNone           = 0,
     LGSideMenuStatusBarVisibleOnPadLandscape   = 1 << 0,
@@ -60,24 +59,21 @@ typedef enum
     LGSideMenuStatusBarVisibleOnPhoneLandscape = 1 << 2,
     LGSideMenuStatusBarVisibleOnPhonePortrait  = 1 << 3,
     LGSideMenuStatusBarVisibleOnAll            = 1 << 4
-}
-LGSideMenuStatusBarVisibleOptions;
+};
 
-typedef enum
+typedef NS_ENUM(NSUInteger, LGSideMenuPresentationStyle)
 {
     LGSideMenuPresentationStyleSlideAbove      = 0,
     LGSideMenuPresentationStyleSlideBelow      = 1,
     LGSideMenuPresentationStyleScaleFromBig    = 2,
     LGSideMenuPresentationStyleScaleFromLittle = 3
-}
-LGSideMenuPresentationStyle;
+};
 
-typedef enum
+typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea)
 {
     LGSideMenuSwipeGestureAreaBorders   = 0,
     LGSideMenuSwipeGestureAreaFull      = 1
-}
-LGSideMenuSwipeGestureArea;
+};
 
 @property (assign, nonatomic) IBOutlet UIViewController *rootViewController;
 
