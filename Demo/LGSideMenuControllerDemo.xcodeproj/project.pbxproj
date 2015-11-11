@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B02B5B256CAF8274A9895C1 /* libPods-LGSideMenuControllerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C0B3D6B7FC45F42B6E52E2 /* libPods-LGSideMenuControllerDemo.a */; };
 		4A339C431AFD3D6600F75B99 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A339C421AFD3D6600F75B99 /* image2.png */; };
 		4A371ED81BEBA53000FB3DA4 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A371ED71BEBA53000FB3DA4 /* NavigationController.m */; };
 		4A371EDB1BEBA97D00FB3DA4 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A371EDA1BEBA97D00FB3DA4 /* TableViewController.m */; };
@@ -24,6 +23,7 @@
 		4A66FCA01AEBC443005B8B0A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A66FC9F1AEBC443005B8B0A /* MainViewController.m */; };
 		4A6FE4F51AFBDBD2003887C9 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE4F41AFBDBD2003887C9 /* image.png */; };
 		4A8221CD1BDD321C00195454 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A8221CC1BDD321C00195454 /* LaunchScreen.storyboard */; };
+		4AF13A0E1BF3950C0037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A0D1BF3950C0037B073 /* LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,9 +55,8 @@
 		4A66FC9F1AEBC443005B8B0A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4A6FE4F41AFBDBD2003887C9 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		4A8221CC1BDD321C00195454 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5361F993C972042479CAE21E /* Pods-LGSideMenuControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
-		78C2B1655760BC5BF67D9AD0 /* Pods-LGSideMenuControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGSideMenuControllerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		F8C0B3D6B7FC45F42B6E52E2 /* libPods-LGSideMenuControllerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LGSideMenuControllerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AF13A0C1BF3950C0037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
+		4AF13A0D1BF3950C0037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B02B5B256CAF8274A9895C1 /* libPods-LGSideMenuControllerDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,9 +121,9 @@
 		4A5888AC1AE9489E004AFC57 = {
 			isa = PBXGroup;
 			children = (
+				4AF13A0B1BF3950C0037B073 /* LGSideMenuController */,
 				4A5888B71AE9489E004AFC57 /* LGSideMenuControllerDemo */,
 				4A5888B61AE9489E004AFC57 /* Products */,
-				BAA1898F62B34AF1602FD9C4 /* Pods */,
 				688C563E2B074D1265CC4691 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -172,21 +170,21 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		4AF13A0B1BF3950C0037B073 /* LGSideMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				4AF13A0C1BF3950C0037B073 /* LGSideMenuController.h */,
+				4AF13A0D1BF3950C0037B073 /* LGSideMenuController.m */,
+			);
+			name = LGSideMenuController;
+			path = ../LGSideMenuController;
+			sourceTree = "<group>";
+		};
 		688C563E2B074D1265CC4691 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F8C0B3D6B7FC45F42B6E52E2 /* libPods-LGSideMenuControllerDemo.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BAA1898F62B34AF1602FD9C4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				78C2B1655760BC5BF67D9AD0 /* Pods-LGSideMenuControllerDemo.debug.xcconfig */,
-				5361F993C972042479CAE21E /* Pods-LGSideMenuControllerDemo.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,12 +194,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A5888D81AE9489E004AFC57 /* Build configuration list for PBXNativeTarget "LGSideMenuControllerDemo" */;
 			buildPhases = (
-				10AFEFB3FEE2F928A23BB6E7 /* Check Pods Manifest.lock */,
 				4A5888B11AE9489E004AFC57 /* Sources */,
 				4A5888B21AE9489E004AFC57 /* Frameworks */,
 				4A5888B31AE9489E004AFC57 /* Resources */,
-				31FDD3E0C3E68DEA010949B9 /* Copy Pods Resources */,
-				C9F354DBBD00BE5D6336A0A0 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,54 +254,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		10AFEFB3FEE2F928A23BB6E7 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		31FDD3E0C3E68DEA010949B9 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9F354DBBD00BE5D6336A0A0 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LGSideMenuControllerDemo/Pods-LGSideMenuControllerDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		4A5888B11AE9489E004AFC57 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -314,6 +261,7 @@
 			files = (
 				4A371EDB1BEBA97D00FB3DA4 /* TableViewController.m in Sources */,
 				4A5888BE1AE9489E004AFC57 /* AppDelegate.m in Sources */,
+				4AF13A0E1BF3950C0037B073 /* LGSideMenuController.m in Sources */,
 				4A43191A1AECFECB0088EFD7 /* LeftViewCell.m in Sources */,
 				4A4319171AECF95D0088EFD7 /* LeftViewController.m in Sources */,
 				4A371EE31BEBB20D00FB3DA4 /* ChooseNavigationController.m in Sources */,
@@ -414,7 +362,6 @@
 		};
 		4A5888D91AE9489E004AFC57 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78C2B1655760BC5BF67D9AD0 /* Pods-LGSideMenuControllerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -428,7 +375,6 @@
 		};
 		4A5888DA1AE9489E004AFC57 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5361F993C972042479CAE21E /* Pods-LGSideMenuControllerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
