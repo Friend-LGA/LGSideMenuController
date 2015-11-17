@@ -1050,7 +1050,7 @@
                                  size = CGSizeMake(MAX(size.width, size.height), MIN(size.width, size.height));
                          }
 
-                         [self leftViewWillLayoutSubviewsWithSize:CGSizeMake(_leftViewWidth, size.height)];
+                         [self leftViewWillLayoutSubviewsWithSize:CGSizeMake(self.leftViewWidth, size.height)];
                      }
                  }];
     _leftView.backgroundColor = [UIColor clearColor];
@@ -1181,7 +1181,7 @@
                                   size = CGSizeMake(MAX(size.width, size.height), MIN(size.width, size.height));
                           }
 
-                          [self rightViewWillLayoutSubviewsWithSize:CGSizeMake(_rightViewWidth, size.height)];
+                          [self rightViewWillLayoutSubviewsWithSize:CGSizeMake(self.rightViewWidth, size.height)];
                       }
                   }];
     _rightView.backgroundColor = [UIColor clearColor];
