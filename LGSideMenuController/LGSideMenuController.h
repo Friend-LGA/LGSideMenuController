@@ -257,6 +257,9 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea)
 - (void)hideRightViewAnimated:(BOOL)animated completionHandler:(void(^)())completionHandler;
 - (void)showHideRightViewAnimated:(BOOL)animated completionHandler:(void(^)())completionHandler;
 
+- (BOOL)shouldShowLeftView;
+- (BOOL)shouldShowRightView;
+
 /** Unavailable, select it on your rootViewController */
 - (BOOL)shouldAutorotate __attribute__((unavailable("select it on your rootViewController")));
 /** Unavailable, select it on your rootViewController */
