@@ -540,6 +540,14 @@
     _panGesture.cancelsTouchesInView = gesturesCancelsTouchesInView;
 }
 
+- (BOOL)shouldShowLeftView {
+    return YES;
+}
+
+- (BOOL)shouldShowRightView {
+    return YES;
+}
+
 #pragma mark - Layout Subviews
 
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size
@@ -1624,7 +1632,7 @@
 
     // -----
 
-    if (_leftView && self.isLeftViewSwipeGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing)
+    if (_leftView && self.isLeftViewSwipeGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing && [self shouldShowLeftView])
     {
         if (!_leftViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {
@@ -1677,7 +1685,7 @@
 
     // -----
 
-    if (_rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing)
+    if (_rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing && [self shouldShowRightView])
     {
         if (!_rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {
