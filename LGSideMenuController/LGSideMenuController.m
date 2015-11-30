@@ -243,6 +243,11 @@
 
     // -----
 
+    _shouldShowLeftView = YES;
+    _shouldShowRightView = YES;
+
+    // -----
+
     _backgroundImageViewForLeftView = [UIImageView new];
     _backgroundImageViewForLeftView.hidden = YES;
     _backgroundImageViewForLeftView.contentMode = UIViewContentModeScaleAspectFill;
@@ -538,14 +543,6 @@
     _gesturesCancelsTouchesInView = gesturesCancelsTouchesInView;
 
     _panGesture.cancelsTouchesInView = gesturesCancelsTouchesInView;
-}
-
-- (BOOL)shouldShowLeftView {
-    return YES;
-}
-
-- (BOOL)shouldShowRightView {
-    return YES;
 }
 
 #pragma mark - Layout Subviews
@@ -1323,7 +1320,7 @@
 
 - (void)showLeftViewAnimated:(BOOL)animated completionHandler:(void(^)())completionHandler
 {
-    if (!kLGSideMenuIsLeftViewAlwaysVisible && !self.isLeftViewShowing &&
+    if (!kLGSideMenuIsLeftViewAlwaysVisible && !self.isLeftViewShowing && self.shouldShowLeftView &&
         !(kLGSideMenuIsRightViewAlwaysVisible && _leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove))
     {
         [self showLeftViewPrepare];
@@ -1481,7 +1478,7 @@
 
 - (void)showRightViewAnimated:(BOOL)animated completionHandler:(void(^)())completionHandler
 {
-    if (!kLGSideMenuIsRightViewAlwaysVisible && !self.isRightViewShowing &&
+    if (!kLGSideMenuIsRightViewAlwaysVisible && !self.isRightViewShowing && self.shouldShowRightView &&
         !(kLGSideMenuIsLeftViewAlwaysVisible && _rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove))
     {
         [self showRightViewPrepare];
@@ -1632,7 +1629,7 @@
 
     // -----
 
-    if (_leftView && self.isLeftViewSwipeGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing && [self shouldShowLeftView])
+    if (_leftView && self.isLeftViewSwipeGestureEnabled && !kLGSideMenuIsLeftViewAlwaysVisible && !_rightViewGestireStartX && !self.isRightViewShowing && self.shouldShowLeftView)
     {
         if (!_leftViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {
@@ -1685,7 +1682,7 @@
 
     // -----
 
-    if (_rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing && [self shouldShowRightView])
+    if (_rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !_leftViewGestireStartX && !self.isLeftViewShowing && self.shouldShowRightView)
     {
         if (!_rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged))
         {
