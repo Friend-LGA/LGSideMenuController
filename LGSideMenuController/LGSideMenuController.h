@@ -112,6 +112,8 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea)
 
 /** Default is LGSideMenuSwipeGestureAreaBorders */
 @property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureArea swipeGestureArea;
+@property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureArea leftSwipeGestureArea;
+@property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureArea rightSwipeGestureArea;
 
 /**
  Color that hides root view, when left view is showing
