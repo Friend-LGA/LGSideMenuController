@@ -93,6 +93,8 @@
 ((kLGSideMenuStatusBarOrientationIsPortrait && (self.rightViewStatusBarVisibleOptions & LGSideMenuStatusBarVisibleOnPadPortrait)) || \
 (kLGSideMenuStatusBarOrientationIsLandscape && (self.rightViewStatusBarVisibleOptions & LGSideMenuStatusBarVisibleOnPadLandscape))))))
 
+#pragma mark -
+
 @interface LGSideMenuView : UIView
 
 @property (strong, nonatomic) void (^layoutSubviewsHandler)();
@@ -171,6 +173,7 @@
 @property (assign, nonatomic, getter=isRightViewShowingBeforeGesture) BOOL rightViewShowingBeforeGesture;
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+@property (strong, nonatomic) NSMutableSet *touchForwardingClasses;
 
 @property (assign, nonatomic, getter=isUserRootViewScaleForLeftView) BOOL userRootViewScaleForLeftView;
 @property (assign, nonatomic, getter=isUserRootViewCoverColorForLeftView) BOOL userRootViewCoverColorForLeftView;
@@ -296,10 +299,14 @@
 
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
     self.panGesture.delegate = self;
+    self.panGesture.delaysTouchesBegan = YES;
+    self.panGesture.delaysTouchesEnded = YES;
     self.panGesture.minimumNumberOfTouches = 1;
     self.panGesture.maximumNumberOfTouches = 1;
     self.panGesture.cancelsTouchesInView = YES;
     [self.view addGestureRecognizer:self.panGesture];
+
+    self.touchForwardingClasses = [NSMutableSet setWithArray:@[[UIControl class]]];
 }
 
 #pragma mark - Appearing
@@ -1731,15 +1738,37 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        return YES;
+        __block BOOL shouldReceiveTouch = YES;
+        UIView *view = touch.view;
+
+        // Enumerate the view's superviews, checking for a touch-forwarding class
+        do {
+            // If the touch was in a touch forwarding view, don't handle the gesture
+            [self.touchForwardingClasses enumerateObjectsUsingBlock:^(Class touchForwardingClass, BOOL *stop) {
+                if ([view isKindOfClass:touchForwardingClass]) {
+                    shouldReceiveTouch = NO;
+                    *stop = YES;
+                }
+            }];
+
+            view = view.superview;
+        }
+        while (shouldReceiveTouch && view.superview != nil);
+
+        return shouldReceiveTouch;
     }
     else {
-        return ([touch.view isEqual:_rootViewCoverViewForLeftView] || [touch.view isEqual:_rootViewCoverViewForRightView]);
+        return ([touch.view isEqual:self.rootViewCoverViewForLeftView] || [touch.view isEqual:self.rootViewCoverViewForRightView]);
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (([[otherGestureRecognizer.view nextResponder] isKindOfClass:[UITableViewCell class]] && [otherGestureRecognizer.view isKindOfClass:[UIScrollView class]]) ||
+       ([[otherGestureRecognizer.view nextResponder] isKindOfClass:[UITableView class]] && [NSStringFromClass([otherGestureRecognizer.view class]) isEqualToString:@"UITableViewWrapperView"])) {
+        return YES;
+    }
+
+    return NO;
 }
 
 #pragma mark - Helpers
