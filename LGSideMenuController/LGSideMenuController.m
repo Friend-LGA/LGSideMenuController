@@ -295,6 +295,7 @@
     [self.view addGestureRecognizer:tapGesture];
 
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+    self.panGesture.delegate = self;
     self.panGesture.minimumNumberOfTouches = 1;
     self.panGesture.maximumNumberOfTouches = 1;
     self.panGesture.cancelsTouchesInView = YES;
@@ -1726,8 +1727,19 @@
     }
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return ([touch.view isEqual:self.rootViewCoverViewForLeftView] || [touch.view isEqual:self.rootViewCoverViewForRightView]);
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        return YES;
+    }
+    else {
+        return ([touch.view isEqual:_rootViewCoverViewForLeftView] || [touch.view isEqual:_rootViewCoverViewForRightView]);
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
 }
 
 #pragma mark - Helpers
