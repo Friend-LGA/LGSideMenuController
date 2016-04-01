@@ -29,17 +29,7 @@
 
 #import <UIKit/UIKit.h>
 
-static NSString *const kLGSideMenuControllerWillShowLeftViewNotification    = @"kLGSideMenuControllerWillShowLeftViewNotification";
-static NSString *const kLGSideMenuControllerWillDismissLeftViewNotification = @"kLGSideMenuControllerWillDismissLeftViewNotification";
-static NSString *const kLGSideMenuControllerDidShowLeftViewNotification     = @"kLGSideMenuControllerDidShowLeftViewNotification";
-static NSString *const kLGSideMenuControllerDidDismissLeftViewNotification  = @"kLGSideMenuControllerDidDismissLeftViewNotification";
-
-static NSString *const kLGSideMenuControllerWillShowRightViewNotification    = @"kLGSideMenuControllerWillShowRightViewNotification";
-static NSString *const kLGSideMenuControllerWillDismissRightViewNotification = @"kLGSideMenuControllerWillDismissRightViewNotification";
-static NSString *const kLGSideMenuControllerDidShowRightViewNotification     = @"kLGSideMenuControllerDidShowRightViewNotification";
-static NSString *const kLGSideMenuControllerDidDismissRightViewNotification  = @"kLGSideMenuControllerDidDismissRightViewNotification";
-
-@interface LGSideMenuController : UIViewController
+@class LGSideMenuController
 
 typedef NS_OPTIONS(NSUInteger, LGSideMenuAlwaysVisibleOptions)
 {
@@ -74,6 +64,18 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea)
     LGSideMenuSwipeGestureAreaBorders   = 0,
     LGSideMenuSwipeGestureAreaFull      = 1
 };
+
+static NSString *const kLGSideMenuControllerWillShowLeftViewNotification    = @"kLGSideMenuControllerWillShowLeftViewNotification";
+static NSString *const kLGSideMenuControllerWillDismissLeftViewNotification = @"kLGSideMenuControllerWillDismissLeftViewNotification";
+static NSString *const kLGSideMenuControllerDidShowLeftViewNotification     = @"kLGSideMenuControllerDidShowLeftViewNotification";
+static NSString *const kLGSideMenuControllerDidDismissLeftViewNotification  = @"kLGSideMenuControllerDidDismissLeftViewNotification";
+
+static NSString *const kLGSideMenuControllerWillShowRightViewNotification    = @"kLGSideMenuControllerWillShowRightViewNotification";
+static NSString *const kLGSideMenuControllerWillDismissRightViewNotification = @"kLGSideMenuControllerWillDismissRightViewNotification";
+static NSString *const kLGSideMenuControllerDidShowRightViewNotification     = @"kLGSideMenuControllerDidShowRightViewNotification";
+static NSString *const kLGSideMenuControllerDidDismissRightViewNotification  = @"kLGSideMenuControllerDidDismissRightViewNotification";
+
+@interface LGSideMenuController : UIViewController
 
 @property (assign, nonatomic) IBOutlet UIViewController *rootViewController;
 
