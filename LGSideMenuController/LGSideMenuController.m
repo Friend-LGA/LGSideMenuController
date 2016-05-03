@@ -143,8 +143,6 @@
 @property (assign, nonatomic, getter=isLeftViewShowingBeforeGesture) BOOL leftViewShowingBeforeGesture;
 @property (assign, nonatomic, getter=isRightViewShowingBeforeGesture) BOOL rightViewShowingBeforeGesture;
 
-@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
-
 @end
 
 @implementation LGSideMenuController
