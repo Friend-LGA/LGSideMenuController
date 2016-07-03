@@ -486,9 +486,6 @@
 
         if (_leftView)
         {
-            [_leftView removeFromSuperview];
-            [_rootViewCoverViewForLeftView removeFromSuperview];
-
             [self.view addSubview:_rootViewCoverViewForLeftView];
 
             if (_leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
@@ -502,9 +499,6 @@
 
         if (_rightView)
         {
-            [_rightView removeFromSuperview];
-            [_rootViewCoverViewForRightView removeFromSuperview];
-
             [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
 
             if (_rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
@@ -1116,7 +1110,6 @@
 
     // -----
 
-    [_rootViewStyleView removeFromSuperview];
     [self.view insertSubview:_rootViewStyleView belowSubview:_rootVC.view];
 
     // -----
@@ -1252,7 +1245,6 @@
 
     // -----
 
-    [_rootViewStyleView removeFromSuperview];
     [self.view insertSubview:_rootViewStyleView belowSubview:_rootVC.view];
 
     // -----
