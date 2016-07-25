@@ -10,6 +10,8 @@
 		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
+		EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */; };
+		EDE795431D45DB60002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AF13A141BF395900037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
 		4AF13A151BF395900037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
+		EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			children = (
 				4AF13A141BF395900037B073 /* LGSideMenuController.h */,
 				4AF13A151BF395900037B073 /* LGSideMenuController.m */,
+				EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */,
+				EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */,
 			);
 			name = LGSideMenuController;
 			path = ../LGSideMenuController;
@@ -76,6 +82,7 @@
 			files = (
 				4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */,
 				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
+				EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */,
+				EDE795431D45DB60002930CA /* UIViewController+LGSideMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
