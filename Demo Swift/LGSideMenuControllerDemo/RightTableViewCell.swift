@@ -21,6 +21,8 @@ class RightTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = .clearColor()
+        
         textLabel?.textAlignment = .Center
         textLabel?.numberOfLines = 0
         textLabel?.lineBreakMode = .ByWordWrapping

@@ -69,7 +69,6 @@
                                         <constraint firstItem="B53-jt-ldX" firstAttribute="leading" secondItem="5Gu-tZ-BKX" secondAttribute="leading" id="yEW-e5-NzC"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="B53-jt-ldX" id="jHI-Bt-Lep"/>
                                 </connections>
@@ -183,7 +182,6 @@
                                         <constraint firstAttribute="trailing" secondItem="sGw-ZT-lux" secondAttribute="trailing" constant="24" id="mhk-lu-ltN"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="sGw-ZT-lux" id="Tij-ld-la7"/>
                                 </connections>

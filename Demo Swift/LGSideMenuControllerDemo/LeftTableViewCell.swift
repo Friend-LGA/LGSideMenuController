@@ -21,6 +21,8 @@ class LeftTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = .clearColor()
+        
         textLabel?.font = UIFont.boldSystemFontOfSize(16)
     }
     
