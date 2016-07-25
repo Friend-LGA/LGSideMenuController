@@ -486,29 +486,28 @@
 
         if (_leftView)
         {
-            [_leftView removeFromSuperview];
-            [_rootViewCoverViewForLeftView removeFromSuperview];
-
             [self.view addSubview:_rootViewCoverViewForLeftView];
 
-            if (_leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove)
+            if (_leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
                 [self.view addSubview:_leftView];
-            else
+                [self.view insertSubview:_leftViewStyleView belowSubview:_leftView];
+            } else {
                 [self.view insertSubview:_leftView belowSubview:_rootVC.view];
-
+                [self.view insertSubview:_leftViewCoverView aboveSubview:_leftView];
+            }
         }
 
         if (_rightView)
         {
-            [_rightView removeFromSuperview];
-            [_rootViewCoverViewForRightView removeFromSuperview];
-
             [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
 
-            if (_rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove)
+            if (_rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
                 [self.view addSubview:_rightView];
-            else
+                [self.view insertSubview:_rightViewStyleView belowSubview:_rightView];
+            } else {
                 [self.view insertSubview:_rightView belowSubview:_rootVC.view];
+                [self.view insertSubview:_rightViewCoverView aboveSubview:_rightView];
+            }
         }
 
         // -----
@@ -1111,7 +1110,6 @@
 
     // -----
 
-    [_rootViewStyleView removeFromSuperview];
     [self.view insertSubview:_rootViewStyleView belowSubview:_rootVC.view];
 
     // -----
@@ -1247,7 +1245,6 @@
 
     // -----
 
-    [_rootViewStyleView removeFromSuperview];
     [self.view insertSubview:_rootViewStyleView belowSubview:_rootVC.view];
 
     // -----
