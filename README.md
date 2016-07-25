@@ -105,7 +105,7 @@ TableViewController *leftViewController = [TableViewController new];
 ```
 
 #### Swift
-```
+```swift
 let viewController = UIViewController()
         
 let navigationController = UINavigationController(rootViewController: viewController)
