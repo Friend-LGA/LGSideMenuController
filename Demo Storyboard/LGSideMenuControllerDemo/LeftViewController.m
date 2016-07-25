@@ -21,8 +21,7 @@
 
 @implementation LeftViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     // -----
@@ -40,54 +39,37 @@
     self.tableView.contentInset = UIEdgeInsetsMake(44.f, 0.f, 44.f, 0.f);
 }
 
-#pragma mark - UITableView DataSource
+#pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _titlesArray.count;
 }
 
 #pragma mark - UITableView Delegate
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-
     cell.textLabel.text = _titlesArray[indexPath.row];
-    cell.separatorView.hidden = !(indexPath.row != 0 && indexPath.row != 1 && indexPath.row != _titlesArray.count-1);
-    cell.userInteractionEnabled = (indexPath.row != 1);
-
+    cell.separatorView.hidden = indexPath.row <= 1 || indexPath.row == _titlesArray.count - 1;
+    cell.userInteractionEnabled = indexPath.row != 1;
     cell.tintColor = _tintColor;
-
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 1) return 22.f;
-    else return 44.f;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.row == 1 ? 22.f : 44.f;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0)
-    {
-        if (![kMainViewController isLeftViewAlwaysVisible])
-        {
-            [kMainViewController hideLeftViewAnimated:YES completionHandler:^(void)
-             {
-                 [kMainViewController showRightViewAnimated:YES completionHandler:nil];
-             }];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        if (![kMainViewController isLeftViewAlwaysVisible]) {
+            [kMainViewController hideLeftViewAnimated:YES completionHandler:^(void) {
+                [kMainViewController showRightViewAnimated:YES completionHandler:nil];
+            }];
+        } else {
+            [kMainViewController showRightViewAnimated:YES completionHandler:nil];
         }
-        else [kMainViewController showRightViewAnimated:YES completionHandler:nil];
-    }
-    else
-    {
+    } else {
         UIViewController *viewController = [UIViewController new];
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = _titlesArray[indexPath.row];

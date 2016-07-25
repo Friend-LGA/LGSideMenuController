@@ -11,6 +11,5 @@
 @interface RightViewCell : UITableViewCell
 
 @property (assign, nonatomic) IBOutlet UIView *separatorView;
-@property (strong, nonatomic) UIColor *tintColor;
 
 @end

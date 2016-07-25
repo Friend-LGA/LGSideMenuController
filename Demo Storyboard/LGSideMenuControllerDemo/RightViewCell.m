@@ -8,14 +8,9 @@
 
 #import "RightViewCell.h"
 
-@interface RightViewCell ()
-
-@end
-
 @implementation RightViewCell
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
 
     // -----
@@ -27,20 +22,15 @@
     self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
 
-    self.textLabel.textColor = _tintColor;
-    _separatorView.backgroundColor = [_tintColor colorWithAlphaComponent:0.4];
+    self.textLabel.textColor = self.tintColor;
+    _separatorView.backgroundColor = [self.tintColor colorWithAlphaComponent:0.4];
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
-{
-    if (highlighted)
-        self.textLabel.textColor = [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f];
-    else
-        self.textLabel.textColor = _tintColor;
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    self.textLabel.textColor = highlighted ? [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f] : self.tintColor;
 }
 
 @end

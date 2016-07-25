@@ -12,31 +12,11 @@
 #import "TableViewController.h"
 #import "MainViewController.h"
 
-@interface ViewController ()
-
-@end
-
 @implementation ViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
+#pragma mark - IBActions
 
-#pragma mark -
-
-- (IBAction)openLeftView:(id)sender
-{
-    [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
-}
-
-- (IBAction)openRightView:(id)sender
-{
-    [kMainViewController showRightViewAnimated:YES completionHandler:nil];
-}
-
-- (IBAction)showChooseController:(id)sender
-{
+- (IBAction)showChooseController:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Choose" bundle:[NSBundle mainBundle]];
 
     ChooseNavigationController *navigationController = [storyboard instantiateInitialViewController];

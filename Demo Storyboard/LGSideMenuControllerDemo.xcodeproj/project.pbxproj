@@ -17,15 +17,13 @@
 		4A4243A71B6808E4008432A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* ViewController.m */; };
 		4A4243AA1B6808E4008432A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A4243A81B6808E4008432A9 /* Main.storyboard */; };
 		4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A4243AB1B6808E4008432A9 /* Images.xcassets */; };
-		4ADAFC351B6903FF00B33211 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADAFC321B6903FF00B33211 /* image.png */; };
-		4ADAFC361B6903FF00B33211 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADAFC331B6903FF00B33211 /* image2.png */; };
-		4ADAFC371B6903FF00B33211 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADAFC341B6903FF00B33211 /* image3.png */; };
 		4ADAFC3A1B69190900B33211 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC391B69190900B33211 /* MainViewController.m */; };
 		4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */; };
 		4ADAFC441B691DA500B33211 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3E1B691DA500B33211 /* LeftViewController.m */; };
 		4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC401B691DA500B33211 /* RightViewCell.m */; };
 		4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC421B691DA500B33211 /* RightViewController.m */; };
 		4AF13A121BF395510037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A111BF395510037B073 /* LGSideMenuController.m */; };
+		EDE795461D45DCB8002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,9 +44,6 @@
 		4A4243A61B6808E4008432A9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4A4243A91B6808E4008432A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A4243AB1B6808E4008432A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4ADAFC321B6903FF00B33211 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
-		4ADAFC331B6903FF00B33211 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
-		4ADAFC341B6903FF00B33211 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
 		4ADAFC381B69190900B33211 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4ADAFC391B69190900B33211 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4ADAFC3B1B691DA500B33211 /* LeftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewCell.h; sourceTree = "<group>"; };
@@ -61,6 +56,8 @@
 		4ADAFC421B691DA500B33211 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		4AF13A101BF395510037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
 		4AF13A111BF395510037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
+		EDE795441D45DCB8002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +124,6 @@
 				4A4243A31B6808E4008432A9 /* AppDelegate.m */,
 				4A19DA521BECFE2A0072427E /* Choose View Controller */,
 				4A19DA531BECFE360072427E /* Side Menu Controller */,
-				4ADAFC311B6903F200B33211 /* Resources */,
 				4A4243AB1B6808E4008432A9 /* Images.xcassets */,
 				4A42439E1B6808E4008432A9 /* Supporting Files */,
 				4A1CCB741BDBF74500709E2A /* LaunchScreen.storyboard */,
@@ -142,16 +138,6 @@
 				4A4243A01B6808E4008432A9 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4ADAFC311B6903F200B33211 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4ADAFC321B6903FF00B33211 /* image.png */,
-				4ADAFC331B6903FF00B33211 /* image2.png */,
-				4ADAFC341B6903FF00B33211 /* image3.png */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		4ADAFC471B691E0F00B33211 /* Right View Controller */ = {
@@ -181,6 +167,8 @@
 			children = (
 				4AF13A101BF395510037B073 /* LGSideMenuController.h */,
 				4AF13A111BF395510037B073 /* LGSideMenuController.m */,
+				EDE795441D45DCB8002930CA /* UIViewController+LGSideMenuController.h */,
+				EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */,
 			);
 			name = LGSideMenuController;
 			path = ../LGSideMenuController;
@@ -250,12 +238,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ADAFC351B6903FF00B33211 /* image.png in Resources */,
-				4ADAFC371B6903FF00B33211 /* image3.png in Resources */,
 				4A4243AA1B6808E4008432A9 /* Main.storyboard in Resources */,
 				4A19DA5E1BECFEAF0072427E /* Choose.storyboard in Resources */,
 				4A1CCB751BDBF74500709E2A /* LaunchScreen.storyboard in Resources */,
-				4ADAFC361B6903FF00B33211 /* image2.png in Resources */,
 				4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +261,7 @@
 				4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */,
 				4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */,
 				4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */,
+				EDE795461D45DCB8002930CA /* UIViewController+LGSideMenuController.m in Sources */,
 				4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */,
 				4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */,
 				4ADAFC3A1B69190900B33211 /* MainViewController.m in Sources */,

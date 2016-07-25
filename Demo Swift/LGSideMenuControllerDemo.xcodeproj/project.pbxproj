@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
-		EDE795121D45B7A1002930CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795111D45B7A1002930CA /* ViewController.swift */; };
 		EDE795151D45B7A1002930CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE795131D45B7A1002930CA /* Main.storyboard */; };
 		EDE795171D45B7A1002930CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE795161D45B7A1002930CA /* Assets.xcassets */; };
 		EDE7951A1D45B7A1002930CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE795181D45B7A1002930CA /* LaunchScreen.storyboard */; };
@@ -22,12 +21,12 @@
 		EDE7953A1D45BACB002930CA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795391D45BACB002930CA /* NavigationController.swift */; };
 		EDE7953C1D45BAD9002930CA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7953B1D45BAD9002930CA /* MainViewController.swift */; };
 		EDE7953F1D45CFED002930CA /* ChooseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */; };
+		EDE7954C1D45DF0E002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE7954B1D45DF0E002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EDE7950C1D45B7A1002930CA /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE7950F1D45B7A1002930CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EDE795111D45B7A1002930CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EDE795141D45B7A1002930CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDE795161D45B7A1002930CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDE795191D45B7A1002930CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -44,6 +43,8 @@
 		EDE7953B1D45BAD9002930CA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EDE7953D1D45BB49002930CA /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseNavigationController.swift; sourceTree = "<group>"; };
+		EDE7954A1D45DF0E002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		EDE7954B1D45DF0E002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +94,8 @@
 			children = (
 				EDE795221D45B7D4002930CA /* LGSideMenuController.h */,
 				EDE795231D45B7D4002930CA /* LGSideMenuController.m */,
+				EDE7954A1D45DF0E002930CA /* UIViewController+LGSideMenuController.h */,
+				EDE7954B1D45DF0E002930CA /* UIViewController+LGSideMenuController.m */,
 			);
 			name = LGSideMenuController;
 			path = ../LGSideMenuController;
@@ -115,7 +118,6 @@
 				EDE7952E1D45BA70002930CA /* Left View Controller */,
 				EDE795391D45BACB002930CA /* NavigationController.swift */,
 				EDE7953B1D45BAD9002930CA /* MainViewController.swift */,
-				EDE795111D45B7A1002930CA /* ViewController.swift */,
 				EDE795131D45B7A1002930CA /* Main.storyboard */,
 			);
 			name = "Side Menu Controller";
@@ -215,13 +217,13 @@
 				EDE7953C1D45BAD9002930CA /* MainViewController.swift in Sources */,
 				EDE795321D45BA9B002930CA /* RightViewController.swift in Sources */,
 				EDE795341D45BAA7002930CA /* RightTableViewCell.swift in Sources */,
-				EDE795121D45B7A1002930CA /* ViewController.swift in Sources */,
 				EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */,
 				EDE7953F1D45CFED002930CA /* ChooseNavigationController.swift in Sources */,
 				EDE795291D45B879002930CA /* TableViewController.swift in Sources */,
 				EDE7953A1D45BACB002930CA /* NavigationController.swift in Sources */,
 				EDE795381D45BAB4002930CA /* LeftViewController.swift in Sources */,
 				EDE795241D45B7D4002930CA /* LGSideMenuController.m in Sources */,
+				EDE7954C1D45DF0E002930CA /* UIViewController+LGSideMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
