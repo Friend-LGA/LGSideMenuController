@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; };
+		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
 /* End PBXBuildFile section */
