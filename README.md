@@ -49,14 +49,21 @@ In the source files where you need to use the library, import the header file:
 
 ### Initialization
 
+#### Objective-C
 ```objective-c
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
+```
+
+#### Swift
+```swift
+public init!(rootViewController: UIViewController!)
 ```
 
 ### Setup
 
 To enable left or right or both views call:
 
+#### Objective-C
 ```objective-c
 - (void)setLeftViewEnabledWithWidth:(CGFloat)width
                   presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
@@ -67,8 +74,20 @@ To enable left or right or both views call:
                 alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;  // for example you can make view always visible on ipad landscape orientation
 ```
 
+#### Swift
+```swift
+public func setLeftViewEnabledWithWidth(width: CGFloat, 
+                            presentationStyle: LGSideMenuPresentationStyle, 
+                         alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+    
+public func setRightViewEnabledWithWidth(width: CGFloat, 
+                             presentationStyle: LGSideMenuPresentationStyle, 
+                          alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+```
+
 ### Quick Example
 
+#### Objective-C
 ```objective-c
 ViewController *viewController = [ViewController new];
 
@@ -85,20 +104,35 @@ TableViewController *leftViewController = [TableViewController new];
 [sideMenuController.leftView addSubview:leftViewController.tableView];
 ```
 
+#### Swift
+```
+let viewController = UIViewController()
+        
+let navigationController = UINavigationController(rootViewController: viewController)
+        
+let sideMenuController = LGSideMenuController(rootViewController: navigationController)
+        
+sideMenuController.setLeftViewEnabledWithWidth(250, presentationStyle: .ScaleFromBig, alwaysVisibleOptions: .OnNone)
+        
+let leftViewController = UITableViewController()
+        
+sideMenuController.leftView().addSubview(leftViewController.tableView)
+```
+
 #### Notifications
 
 Here is also some notifications, that you can add to NSNotificationsCenter:
 
 ```objective-c
-kLGSideMenuControllerWillShowLeftViewNotification;
-kLGSideMenuControllerWillDismissLeftViewNotification;
-kLGSideMenuControllerDidShowLeftViewNotification;
-kLGSideMenuControllerDidDismissLeftViewNotification;
+kLGSideMenuControllerWillShowLeftViewNotification
+kLGSideMenuControllerWillDismissLeftViewNotification
+kLGSideMenuControllerDidShowLeftViewNotification
+kLGSideMenuControllerDidDismissLeftViewNotification
 
-kLGSideMenuControllerWillShowRightViewNotification;
-kLGSideMenuControllerWillDismissRightViewNotification;
-kLGSideMenuControllerDidShowRightViewNotification;
-kLGSideMenuControllerDidDismissRightViewNotification;
+kLGSideMenuControllerWillShowRightViewNotification
+kLGSideMenuControllerWillDismissRightViewNotification
+kLGSideMenuControllerDidShowRightViewNotification
+kLGSideMenuControllerDidDismissRightViewNotification
 ```
 
 ### More
