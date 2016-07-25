@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "MainViewController.h"
 #import "NavigationController.h"
+#import "UIViewController+LGSideMenuController.h"
 
 @interface RightViewController ()
 
@@ -68,20 +69,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        if (![kMainViewController isRightViewAlwaysVisible]) {
-            [kMainViewController hideRightViewAnimated:YES completionHandler:^(void) {
-                [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
+        if (![[self sideMenuController] isRightViewAlwaysVisible]) {
+            [[self sideMenuController] hideRightViewAnimated:YES completionHandler:^(void) {
+                [[self sideMenuController] showLeftViewAnimated:YES completionHandler:nil];
             }];
         } else {
-            [kMainViewController showLeftViewAnimated:YES completionHandler:nil];
+            [[self sideMenuController] showLeftViewAnimated:YES completionHandler:nil];
         }
     } else {
         UIViewController *viewController = [UIViewController new];
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = [NSString stringWithFormat:@"Test %@", _titlesArray[indexPath.row]];
-        [kNavigationController pushViewController:viewController animated:YES];
+        [(UINavigationController *)[self sideMenuController].rootViewController pushViewController:viewController animated:YES];
 
-        [kMainViewController hideRightViewAnimated:YES completionHandler:nil];
+        [[self sideMenuController] hideRightViewAnimated:YES completionHandler:nil];
     }
 }
 

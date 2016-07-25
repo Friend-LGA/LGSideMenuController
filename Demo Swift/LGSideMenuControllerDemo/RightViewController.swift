@@ -60,8 +60,10 @@ class RightViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let mainViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as! MainViewController
-        let navigationController = mainViewController.rootViewController as! UINavigationController
+        guard let mainViewController = sideMenuController() as? MainViewController,
+            navigationController = mainViewController.rootViewController as? UINavigationController else {
+            return
+        }
         
         if indexPath.row == 0 {
             if !mainViewController.isRightViewAlwaysVisible() {

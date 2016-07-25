@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "MainViewController.h"
 #import "NavigationController.h"
+#import "UIViewController+LGSideMenuController.h"
 
 @interface LeftViewController ()
 
@@ -62,20 +63,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        if (![kMainViewController isLeftViewAlwaysVisible]) {
-            [kMainViewController hideLeftViewAnimated:YES completionHandler:^(void) {
-                [kMainViewController showRightViewAnimated:YES completionHandler:nil];
+        if (![[self sideMenuController] isLeftViewAlwaysVisible]) {
+            [[self sideMenuController] hideLeftViewAnimated:YES completionHandler:^(void) {
+                [[self sideMenuController] showRightViewAnimated:YES completionHandler:nil];
             }];
         } else {
-            [kMainViewController showRightViewAnimated:YES completionHandler:nil];
+            [[self sideMenuController] showRightViewAnimated:YES completionHandler:nil];
         }
     } else {
         UIViewController *viewController = [UIViewController new];
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = _titlesArray[indexPath.row];
-        [kNavigationController pushViewController:viewController animated:YES];
+        [(UINavigationController *)[self sideMenuController].rootViewController pushViewController:viewController animated:YES];
 
-        [kMainViewController hideLeftViewAnimated:YES completionHandler:nil];
+        [[self sideMenuController] hideLeftViewAnimated:YES completionHandler:nil];
     }
 }
 
