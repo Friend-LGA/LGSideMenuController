@@ -499,8 +499,8 @@
 
         if (_rightView)
         {
-            [self.view insertSubview:_rootViewCoverViewForRightView aboveSubview:_rootViewCoverViewForLeftView];
-
+            [self.view addSubview:_rootViewCoverViewForRightView];
+            
             if (_rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
                 [self.view addSubview:_rightView];
                 [self.view insertSubview:_rightViewStyleView belowSubview:_rightView];
