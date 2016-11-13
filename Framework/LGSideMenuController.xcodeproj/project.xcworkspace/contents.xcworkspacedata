@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:LGSideMenuControllerFramework.xcodeproj">
+      location = "self:/Users/craig/projects/LGSideMenuController/Framework/LGSideMenuController.xcodeproj">
    </FileRef>
 </Workspace>
