@@ -5,7 +5,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Cole Dunsby <coledunsby@gmail.com>
+//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>
 //  (https://github.com/Friend-LGA/LGSideMenuController)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,19 +31,98 @@
 
 @implementation UIViewController (LGSideMenuController)
 
-- (LGSideMenuController * _Nullable)sideMenuController {
-    if ([[UIApplication sharedApplication].delegate.window.rootViewController isKindOfClass:[LGSideMenuController class]]) {
-        return (LGSideMenuController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+- (nullable LGSideMenuController *)sideMenuController {
+    if ([self isKindOfClass:[LGSideMenuController class]]) {
+        return (LGSideMenuController *)self;
     }
+
+    if (self.parentViewController.sideMenuController) {
+        return self.parentViewController.sideMenuController;
+    }
+
+    if (self.navigationController.sideMenuController) {
+        return self.navigationController.sideMenuController;
+    }
+
+    if (self.presentingViewController.sideMenuController) {
+        return self.presentingViewController.sideMenuController;
+    }
+
+    if (self.splitViewController.sideMenuController) {
+        return self.splitViewController.sideMenuController;
+    }
+
     return nil;
 }
 
-- (IBAction)openLeftView:(id _Nullable)sender {
-    [[self sideMenuController] showLeftViewAnimated:true completionHandler:nil];
+#pragma mark - Show/Hide left view
+
+- (IBAction)showLeftView:(nullable id)sender {
+    [[self sideMenuController] showLeftView:sender];
 }
 
-- (IBAction)openRightView:(id _Nullable)sender {
-    [[self sideMenuController] showRightViewAnimated:true completionHandler:nil];
+- (IBAction)hideLeftView:(nullable id)sender {
+    [[self sideMenuController] hideLeftView:sender];
+}
+
+- (IBAction)toggleLeftView:(nullable id)sender {
+    [[self sideMenuController] toggleLeftView:sender];
+}
+
+#pragma mark
+
+- (IBAction)showLeftViewAnimated:(nullable id)sender {
+    [[self sideMenuController] showLeftViewAnimated:sender];
+}
+
+- (IBAction)hideLeftViewAnimated:(nullable id)sender {
+    [[self sideMenuController] hideLeftViewAnimated:sender];
+}
+
+- (IBAction)toggleLeftViewAnimated:(nullable id)sender {
+    [[self sideMenuController] toggleLeftViewAnimated:sender];
+}
+
+#pragma mark - Show/Hide right view
+
+- (IBAction)showRightView:(nullable id)sender {
+    [[self sideMenuController] showRightView:sender];
+}
+
+- (IBAction)hideRightView:(nullable id)sender {
+    [[self sideMenuController] hideRightView:sender];
+}
+
+- (IBAction)toggleRightView:(nullable id)sender {
+    [[self sideMenuController] toggleRightView:sender];
+}
+
+#pragma mark
+
+- (IBAction)showRightViewAnimated:(nullable id)sender {
+    [[self sideMenuController] showRightViewAnimated:sender];
+}
+
+- (IBAction)hideRightViewAnimated:(nullable id)sender {
+    [[self sideMenuController] hideRightViewAnimated:sender];
+}
+
+- (IBAction)toggleRightViewAnimated:(nullable id)sender {
+    [[self sideMenuController] toggleRightViewAnimated:sender];
+}
+
+@end
+
+# pragma mark - Deprecated
+
+@implementation UIViewController (LGSideMenuControllerDeprecated)
+
+- (IBAction)openLeftView:(nullable id)sender {
+    [self showLeftViewAnimated:sender];
+}
+
+- (IBAction)openRightView:(nullable id)sender {
+    [self showRightViewAnimated:sender];
 }
 
 @end

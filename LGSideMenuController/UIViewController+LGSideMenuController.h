@@ -5,7 +5,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Cole Dunsby <coledunsby@gmail.com>
+//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>
 //  (https://github.com/Friend-LGA/LGSideMenuController)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,9 +32,32 @@
 
 @interface UIViewController (LGSideMenuController)
 
-- (LGSideMenuController * _Nullable)sideMenuController;
+/** If this view controller has been pushed onto a side menu controller, return it. */
+- (nullable LGSideMenuController *)sideMenuController;
 
-- (IBAction)openLeftView:(id _Nullable)sender;
-- (IBAction)openRightView:(id _Nullable)sender;
+- (IBAction)showLeftView:(nullable id)sender;
+- (IBAction)hideLeftView:(nullable id)sender;
+- (IBAction)toggleLeftView:(nullable id)sender;
+
+- (IBAction)showLeftViewAnimated:(nullable id)sender;
+- (IBAction)hideLeftViewAnimated:(nullable id)sender;
+- (IBAction)toggleLeftViewAnimated:(nullable id)sender;
+
+- (IBAction)showRightView:(nullable id)sender;
+- (IBAction)hideRightView:(nullable id)sender;
+- (IBAction)toggleRightView:(nullable id)sender;
+
+- (IBAction)showRightViewAnimated:(nullable id)sender;
+- (IBAction)hideRightViewAnimated:(nullable id)sender;
+- (IBAction)toggleRightViewAnimated:(nullable id)sender;
+
+@end
+
+# pragma mark - Deprecated
+
+@interface UIViewController (LGSideMenuControllerDeprecated)
+
+- (IBAction)openLeftView:(nullable id)sender DEPRECATED_ATTRIBUTE;
+- (IBAction)openRightView:(nullable id)sender DEPRECATED_ATTRIBUTE;
 
 @end
