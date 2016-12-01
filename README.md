@@ -51,12 +51,12 @@ In the source files where you need to use the library, import the header file:
 
 #### Objective-C
 ```objective-c
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
+- (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
 ```
 
 #### Swift
 ```swift
-public init!(rootViewController: UIViewController!)
+init!(rootViewController: UIViewController?)
 ```
 
 ### Setup
@@ -67,22 +67,22 @@ To enable left or right or both views call:
 ```objective-c
 - (void)setLeftViewEnabledWithWidth:(CGFloat)width
                   presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-               alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;   // for example you can make view always visible on ipad landscape orientation
+               alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
 
 - (void)setRightViewEnabledWithWidth:(CGFloat)width
                    presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-                alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;  // for example you can make view always visible on ipad landscape orientation
+                alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
 ```
 
 #### Swift
 ```swift
-public func setLeftViewEnabledWithWidth(width: CGFloat, 
-                            presentationStyle: LGSideMenuPresentationStyle, 
-                         alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
-    
-public func setRightViewEnabledWithWidth(width: CGFloat, 
-                             presentationStyle: LGSideMenuPresentationStyle, 
-                          alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+func setLeftViewEnabledWithWidth(width: CGFloat,
+                     presentationStyle: LGSideMenuPresentationStyle,
+                  alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+
+func setRightViewEnabledWithWidth(width: CGFloat,
+                      presentationStyle: LGSideMenuPresentationStyle,
+                   alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
 ```
 
 ### Quick Example
@@ -95,9 +95,9 @@ UINavigationController *navigationController = [[UINavigationController alloc] i
 
 LGSideMenuController *sideMenuController = [[LGSideMenuController alloc] initWithRootViewController:navigationController];
 
-[sideMenuController setLeftViewEnabledWithWidth:250.f
+[sideMenuController setLeftViewEnabledWithWidth:250.0
                               presentationStyle:LGSideMenuPresentationStyleScaleFromBig
-                           alwaysVisibleOptions:0];
+                           alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
 
 TableViewController *leftViewController = [TableViewController new];
 
@@ -112,7 +112,7 @@ let navigationController = UINavigationController(rootViewController: viewContro
         
 let sideMenuController = LGSideMenuController(rootViewController: navigationController)
         
-sideMenuController.setLeftViewEnabledWithWidth(250, presentationStyle: .ScaleFromBig, alwaysVisibleOptions: .OnNone)
+sideMenuController.setLeftViewEnabledWithWidth(250.0, presentationStyle: .scaleFromBig, alwaysVisibleOptions: [])
         
 let leftViewController = UITableViewController()
         
