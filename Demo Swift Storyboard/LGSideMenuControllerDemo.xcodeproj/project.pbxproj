@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4A5EB34C1DEF402A005D1DF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */; };
+		4AA2958F1DF0AA0D009E2172 /* Choose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AA2958D1DF0AA0D009E2172 /* Choose.storyboard */; };
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
+		EDE795151D45B7A1002930CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE795131D45B7A1002930CA /* Main.storyboard */; };
 		EDE795171D45B7A1002930CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE795161D45B7A1002930CA /* Assets.xcassets */; };
 		EDE7951A1D45B7A1002930CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE795181D45B7A1002930CA /* LaunchScreen.storyboard */; };
 		EDE795241D45B7D4002930CA /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795231D45B7D4002930CA /* LGSideMenuController.m */; };
@@ -25,22 +27,24 @@
 
 /* Begin PBXFileReference section */
 		4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4AA2958E1DF0AA0D009E2172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Choose.storyboard; sourceTree = "<group>"; };
 		EDE7950C1D45B7A1002930CA /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE7950F1D45B7A1002930CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EDE795141D45B7A1002930CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDE795161D45B7A1002930CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDE795191D45B7A1002930CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDE7951B1D45B7A1002930CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDE795221D45B7D4002930CA /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDE795231D45B7D4002930CA /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		EDE795281D45B879002930CA /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		EDE795311D45BA9B002930CA /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RightViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EDE795281D45B879002930CA /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		EDE795311D45BA9B002930CA /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		EDE795331D45BAA7002930CA /* RightViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewCell.swift; sourceTree = "<group>"; };
 		EDE795351D45BAAD002930CA /* LeftViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewCell.swift; sourceTree = "<group>"; };
-		EDE795371D45BAB4002930CA /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LeftViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EDE795371D45BAB4002930CA /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		EDE795391D45BACB002930CA /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		EDE7953B1D45BAD9002930CA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EDE7953B1D45BAD9002930CA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EDE7953D1D45BB49002930CA /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChooseNavigationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseNavigationController.swift; sourceTree = "<group>"; };
 		EDE7954A1D45DF0E002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EDE7954B1D45DF0E002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
@@ -104,6 +108,7 @@
 			children = (
 				EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */,
 				EDE795281D45B879002930CA /* TableViewController.swift */,
+				4AA2958D1DF0AA0D009E2172 /* Choose.storyboard */,
 			);
 			name = "Choose View Controller";
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 				EDE795391D45BACB002930CA /* NavigationController.swift */,
 				EDE7953B1D45BAD9002930CA /* MainViewController.swift */,
 				4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */,
+				EDE795131D45B7A1002930CA /* Main.storyboard */,
 			);
 			name = "Side Menu Controller";
 			sourceTree = "<group>";
@@ -198,7 +204,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE7951A1D45B7A1002930CA /* LaunchScreen.storyboard in Resources */,
+				4AA2958F1DF0AA0D009E2172 /* Choose.storyboard in Resources */,
 				EDE795171D45B7A1002930CA /* Assets.xcassets in Resources */,
+				EDE795151D45B7A1002930CA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +235,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4AA2958D1DF0AA0D009E2172 /* Choose.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4AA2958E1DF0AA0D009E2172 /* Base */,
+			);
+			name = Choose.storyboard;
+			sourceTree = "<group>";
+		};
+		EDE795131D45B7A1002930CA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDE795141D45B7A1002930CA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		EDE795181D45B7A1002930CA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

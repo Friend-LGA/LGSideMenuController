@@ -2,8 +2,8 @@
 //  LeftViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Cole Dunsby on 2016-07-24.
-//  Copyright © 2016 Cole Dunsby. All rights reserved.
+//  Created by Grigory Lutkov on 18.02.15.
+//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
 //
 
 import UIKit
@@ -12,68 +12,76 @@ class LeftViewController: UITableViewController {
 
     var tintColor: UIColor?
     
-    let titlesArray = [
-        "Open Right View",
-        "",
-        "Profile",
-        "News",
-        "Articles",
-        "Video",
-        "Music"
-    ]
+    private let titlesArray = ["Open Right View",
+                               "",
+                               "Profile",
+                               "News",
+                               "Articles",
+                               "Video",
+                               "Music"]
     
-    // MARK: - View Lifecycle
+    init() {
+        super.init(style: .plain)
+
+        tableView.register(LeftViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
+        tableView.showsVerticalScrollIndicator = false
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 44, right: 0)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     // MARK: - UITableViewDataSource
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titlesArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! LeftTableViewCell
-        cell.textLabel?.text = titlesArray[indexPath.row]
-        cell.separatorView.hidden = indexPath.row <= 1 || indexPath.row == titlesArray.count - 1
-        cell.userInteractionEnabled = indexPath.row != 1
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeftViewCell
+
+        cell.textLabel!.text = titlesArray[indexPath.row]
+        cell.separatorView.isHidden = (indexPath.row <= 1 || indexPath.row == titlesArray.count - 1)
+        cell.isUserInteractionEnabled = (indexPath.row != 1)
         cell.tintColor = tintColor
+
         return cell
     }
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.row == 1 ? 22 : 44
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.row == 1 ? 22.0 : 44.0
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        guard let mainViewController = sideMenuController() as? MainViewController,
-            navigationController = mainViewController.rootViewController as? UINavigationController else {
-            return
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mainViewController = UIApplication.shared.delegate!.window!!.rootViewController! as! MainViewController
         
         if indexPath.row == 0 {
-            if !mainViewController.isLeftViewAlwaysVisible() {
-                mainViewController.hideLeftViewAnimated(true, completionHandler: {
-                    mainViewController.showRightViewAnimated(true, completionHandler: nil)
-                })
-            } else {
-                mainViewController.showRightViewAnimated(true, completionHandler: nil)
+            if mainViewController.isLeftViewAlwaysVisible() {
+                mainViewController.showRightView(animated: true, completionHandler: nil)
             }
-        } else {
+            else {
+                mainViewController.hideLeftView(animated: true, completionHandler: {
+                    mainViewController.showRightView(animated: true, completionHandler: nil)
+                })
+            }
+        }
+        else {
             let viewController = UIViewController()
-            viewController.view.backgroundColor = .whiteColor()
+            viewController.view.backgroundColor = .white
             viewController.title = "Test \(titlesArray[indexPath.row])"
+
+            let navigationController = mainViewController.rootViewController as! NavigationController
             navigationController.pushViewController(viewController, animated: true)
             
-            mainViewController.hideLeftViewAnimated(true, completionHandler: nil)
+            mainViewController.hideLeftView(animated: true, completionHandler: nil)
         }
     }
     

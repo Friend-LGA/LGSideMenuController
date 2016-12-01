@@ -1,19 +1,14 @@
 //
-//  NavigationController.swift
+//  ChooseNavigationController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 06.11.15.
+//  Created by Grigory Lutkov on 05.11.15.
 //  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
 //
 
 import UIKit
 
-class NavigationController: UINavigationController {
-
-    override func viewDidLoad() {
-        navigationBar.isTranslucent = true
-        navigationBar.barTintColor = .white
-    }
+class ChooseNavigationController: UINavigationController {
 
     override var shouldAutorotate : Bool {
         return true
@@ -24,7 +19,7 @@ class NavigationController: UINavigationController {
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .default
+        return .lightContent
     }
     
     override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {

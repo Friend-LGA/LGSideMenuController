@@ -24,25 +24,16 @@ class RightViewController: UITableViewController {
                                "8",
                                "9",
                                "10"]
-
-    init() {
-        super.init(style: .plain)
-
-        tableView.register(RightViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
+    
+    // MARK: - View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
-        tableView.showsVerticalScrollIndicator = false
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     // MARK: - UITableViewDataSource
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titlesArray.count

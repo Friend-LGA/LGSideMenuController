@@ -10,11 +10,6 @@ import UIKit
 
 class NavigationController: UINavigationController {
 
-    override func viewDidLoad() {
-        navigationBar.isTranslucent = true
-        navigationBar.barTintColor = .white
-    }
-
     override var shouldAutorotate : Bool {
         return true
     }
