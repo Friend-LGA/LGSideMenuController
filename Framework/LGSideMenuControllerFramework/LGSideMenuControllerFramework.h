@@ -16,5 +16,5 @@ FOUNDATION_EXPORT const unsigned char LGSideMenuControllerFrameworkVersionString
 
 #pragma mark -
 
-#import <LGSideMenuControllerFramework/LGSideMenuController.h>
-#import <LGSideMenuControllerFramework/UIViewController+LGSideMenuController.h>
+#import <LGSideMenuController/LGSideMenuController.h>
+#import <LGSideMenuController/UIViewController+LGSideMenuController.h>

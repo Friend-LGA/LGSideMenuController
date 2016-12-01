@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4AF139BF1BF384DA0037B073"
-               BuildableName = "LGSideMenuControllerFramework.framework"
-               BlueprintName = "LGSideMenuControllerFramework"
+               BuildableName = "LGSideMenuController.framework"
+               BlueprintName = "LGSideMenuController"
                ReferencedContainer = "container:LGSideMenuControllerFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4AF139BF1BF384DA0037B073"
-            BuildableName = "LGSideMenuControllerFramework.framework"
-            BlueprintName = "LGSideMenuControllerFramework"
+            BuildableName = "LGSideMenuController.framework"
+            BlueprintName = "LGSideMenuController"
             ReferencedContainer = "container:LGSideMenuControllerFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4AF139BF1BF384DA0037B073"
-            BuildableName = "LGSideMenuControllerFramework.framework"
-            BlueprintName = "LGSideMenuControllerFramework"
+            BuildableName = "LGSideMenuController.framework"
+            BlueprintName = "LGSideMenuController"
             ReferencedContainer = "container:LGSideMenuControllerFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

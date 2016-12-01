@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
-		EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */; };
+		EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDE795431D45DB60002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4AF139C01BF384DA0037B073 /* LGSideMenuControllerFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuControllerFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerFramework.h; sourceTree = "<group>"; };
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AF13A141BF395900037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LGSideMenuController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -47,7 +47,7 @@
 		4AF139C11BF384DA0037B073 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4AF139C01BF384DA0037B073 /* LGSideMenuControllerFramework.framework */,
+				4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,17 +81,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */,
-				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
 				EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */,
+				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4AF139BF1BF384DA0037B073 /* LGSideMenuControllerFramework */ = {
+		4AF139BF1BF384DA0037B073 /* LGSideMenuController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4AF139C81BF384DA0037B073 /* Build configuration list for PBXNativeTarget "LGSideMenuControllerFramework" */;
+			buildConfigurationList = 4AF139C81BF384DA0037B073 /* Build configuration list for PBXNativeTarget "LGSideMenuController" */;
 			buildPhases = (
 				4AF139BB1BF384DA0037B073 /* Sources */,
 				4AF139BC1BF384DA0037B073 /* Frameworks */,
@@ -102,9 +102,9 @@
 			);
 			dependencies = (
 			);
-			name = LGSideMenuControllerFramework;
+			name = LGSideMenuController;
 			productName = LGSideMenuControllerFramework;
-			productReference = 4AF139C01BF384DA0037B073 /* LGSideMenuControllerFramework.framework */;
+			productReference = 4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -133,7 +133,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4AF139BF1BF384DA0037B073 /* LGSideMenuControllerFramework */,
+				4AF139BF1BF384DA0037B073 /* LGSideMenuController */,
 			);
 		};
 /* End PBXProject section */
@@ -303,7 +303,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4AF139C81BF384DA0037B073 /* Build configuration list for PBXNativeTarget "LGSideMenuControllerFramework" */ = {
+		4AF139C81BF384DA0037B073 /* Build configuration list for PBXNativeTarget "LGSideMenuController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4AF139C91BF384DA0037B073 /* Debug */,
