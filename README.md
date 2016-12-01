@@ -124,20 +124,32 @@ sideMenuController.leftView().addSubview(leftViewController.tableView)
 Here is also some notifications, that you can add to NSNotificationsCenter:
 
 ```objective-c
-kLGSideMenuControllerWillShowLeftViewNotification
-kLGSideMenuControllerWillDismissLeftViewNotification
-kLGSideMenuControllerDidShowLeftViewNotification
-kLGSideMenuControllerDidDismissLeftViewNotification
+LGSideMenuControllerWillShowLeftViewNotification
+LGSideMenuControllerWillDismissLeftViewNotification
+LGSideMenuControllerDidShowLeftViewNotification
+LGSideMenuControllerDidDismissLeftViewNotification
 
-kLGSideMenuControllerWillShowRightViewNotification
-kLGSideMenuControllerWillDismissRightViewNotification
-kLGSideMenuControllerDidShowRightViewNotification
-kLGSideMenuControllerDidDismissRightViewNotification
+LGSideMenuControllerWillShowRightViewNotification
+LGSideMenuControllerWillDismissRightViewNotification
+LGSideMenuControllerDidShowRightViewNotification
+LGSideMenuControllerDidDismissRightViewNotification
 ```
 
 ### More
 
-For more details try Xcode [Demo project](https://github.com/Friend-LGA/LGSideMenuController/blob/master/Demo) and see [LGSideMenuController.h](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/LGSideMenuController.h)
+For more details see [LGSideMenuController.h](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/LGSideMenuController.h) and try Xcode demo projects: 
+* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Objective-C)
+* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Objective-C%20Storyboard)
+* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift)
+* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift%20Storyboard)
+
+## Projects
+
+If you like LGSideMenuController, check out my other useful libraries:
+* [LGAlertView](https://github.com/Friend-LGA/LGAlertView)
+  Customizable implementation of UIAlertViewController, UIAlertView and UIActionSheet. All in one. You can customize every detail. Make AlertView of your dream! :)
+* [LGPlusButtonsView](https://github.com/Friend-LGA/LGPlusButtonsView)
+  Customizable iOS implementation of Floating Action Button (Google Plus Button, fab).
 
 ## License
 
