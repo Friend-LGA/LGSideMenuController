@@ -143,7 +143,7 @@ For more details see [LGSideMenuController.h](https://github.com/Friend-LGA/LGSi
 * [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift)
 * [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift%20Storyboard)
 
-## Projects
+## Frameworks
 
 If you like LGSideMenuController, check out my other useful libraries:
 * [LGAlertView](https://github.com/Friend-LGA/LGAlertView)
