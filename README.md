@@ -144,10 +144,10 @@ LGSideMenuControllerDidDismissRightViewNotification
 ### More
 
 For more details see [LGSideMenuController.h](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/LGSideMenuController.h) and try Xcode demo projects: 
-* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Objective-C)
-* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Objective-C%20Storyboard)
-* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift)
-* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo%20Swift%20Storyboard)
+* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C)
+* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C_Storyboard)
+* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift)
+* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift_Storyboard)
 
 ## Frameworks
 
