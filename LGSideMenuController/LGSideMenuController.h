@@ -81,6 +81,8 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea) {
 
 @property (weak, nonatomic, nullable) IBOutlet UIViewController *rootViewController;
 
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+
 @property (assign, nonatomic, readonly) CGFloat leftViewWidth;
 @property (assign, nonatomic, readonly) CGFloat rightViewWidth;
 
