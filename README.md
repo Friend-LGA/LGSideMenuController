@@ -27,7 +27,7 @@ CocoaPods is a dependency manager for Objective-C, which automates and simplifie
 #### Podfile
 ```ruby
 platform :ios, '8.0'
-pod 'LGSideMenuController', '~> 1.0.0'
+pod 'LGSideMenuController'
 ```
 
 ### With Carthage
@@ -36,15 +36,21 @@ Carthage is a lightweight dependency manager for Swift and Objective-C. It lever
 
 #### Cartfile
 ```
-github "Friend-LGA/LGSideMenuController" ~> 1.0.0
+github "Friend-LGA/LGSideMenuController"
 ```
 
 ## Usage
 
 In the source files where you need to use the library, import the header file:
 
+#### Objective-C
 ```objective-c
 #import "LGSideMenuController.h"
+```
+
+#### Swift
+```swift
+import LGSideMenuController
 ```
 
 ### Initialization
@@ -56,7 +62,7 @@ In the source files where you need to use the library, import the header file:
 
 #### Swift
 ```swift
-init!(rootViewController: UIViewController?)
+public init(rootViewController: UIViewController?)
 ```
 
 ### Setup
@@ -76,13 +82,13 @@ To enable left or right or both views call:
 
 #### Swift
 ```swift
-func setLeftViewEnabledWithWidth(width: CGFloat,
-                     presentationStyle: LGSideMenuPresentationStyle,
-                  alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+open func setLeftViewEnabledWithWidth(_ width: CGFloat,
+                            presentationStyle: LGSideMenuPresentationStyle,
+                         alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
 
-func setRightViewEnabledWithWidth(width: CGFloat,
-                      presentationStyle: LGSideMenuPresentationStyle,
-                   alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+open func setRightViewEnabledWithWidth(_ width: CGFloat,
+                             presentationStyle: LGSideMenuPresentationStyle,
+                          alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
 ```
 
 ### Quick Example
@@ -123,7 +129,7 @@ sideMenuController.leftView().addSubview(leftViewController.tableView)
 
 Here is also some notifications, that you can add to NSNotificationsCenter:
 
-```objective-c
+```
 LGSideMenuControllerWillShowLeftViewNotification
 LGSideMenuControllerWillDismissLeftViewNotification
 LGSideMenuControllerDidShowLeftViewNotification
