@@ -32,7 +32,7 @@ Then import header files where you need to use the library
 
 For swift you need to create [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
 
-```swift
+```objective-c
 // BridgingHeader.h
 #import "LGSideMenuController.h"
 #import "UIViewController+LGSideMenuController.h"
