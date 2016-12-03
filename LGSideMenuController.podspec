@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
     s.name = 'LGSideMenuController'
     s.version = '1.0.10'
-    s.platform = :ios, '6.0'
+    s.platform = :ios, '8.0'
     s.license = 'MIT'
     s.homepage = 'https://github.com/Friend-LGA/LGSideMenuController'
     s.author = { 'Grigory Lutkov' => 'Friend.LGA@gmail.com' }
