@@ -32,8 +32,8 @@
 
 @interface UIViewController (LGSideMenuController)
 
-/** If this view controller has been pushed onto a side menu controller, return it. */
-- (nullable LGSideMenuController *)sideMenuController;
+/** If this view controller is root view controller of side menu controller or one of children of root view controller, return it. */
+@property(nullable, nonatomic, readonly, weak) LGSideMenuController *sideMenuController;
 
 - (IBAction)showLeftView:(nullable id)sender;
 - (IBAction)hideLeftView:(nullable id)sender;
