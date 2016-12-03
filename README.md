@@ -20,6 +20,24 @@ iOS view controller shows left and right views on top of everything by pressing 
 
 [Download repository](https://github.com/Friend-LGA/LGSideMenuController/archive/master.zip), then add [LGSideMenuController directory](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/) to your project.
 
+Then import header files where you need to use the library
+
+#### Objective-C
+```objective-c
+#import "LGSideMenuController.h"
+#import "UIViewController+LGSideMenuController.h"
+```
+
+#### Swift
+
+For swift you need to create [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
+
+```swift
+// BridgingHeader.h
+#import "LGSideMenuController.h"
+#import "UIViewController+LGSideMenuController.h"
+```
+
 ### With CocoaPods
 
 CocoaPods is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries in your projects. To install with cocoaPods, follow the "Get Started" section on [CocoaPods](https://cocoapods.org/).
@@ -27,7 +45,30 @@ CocoaPods is a dependency manager for Objective-C, which automates and simplifie
 #### Podfile
 ```ruby
 platform :ios, '8.0'
+use_frameworks!
 pod 'LGSideMenuController'
+```
+
+Then import framework where you need to use the library
+
+#### Objective-C
+```objective-c
+#import <LGSideMenuController/LGSideMenuController.h>
+#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
+// OR
+@import LGSideMenuController;
+// OR
+@import LGSideMenuController.LGSideMenuController;
+@import LGSideMenuController.UIViewController_LGSideMenuController;
+```
+
+#### Swift
+
+```swift
+import LGSideMenuController
+// OR
+import LGSideMenuController.LGSideMenuController
+import LGSideMenuController.UIViewController_LGSideMenuController
 ```
 
 ### With Carthage
@@ -35,23 +76,33 @@ pod 'LGSideMenuController'
 Carthage is a lightweight dependency manager for Swift and Objective-C. It leverages CocoaTouch modules and is less invasive than CocoaPods. To install with carthage, follow the instruction on [Carthage](https://github.com/Carthage/Carthage/).
 
 #### Cartfile
-```
+```ruby
 github "Friend-LGA/LGSideMenuController"
 ```
 
-## Usage
-
-In the source files where you need to use the library, import the header file:
+Then import framework where you need to use the library
 
 #### Objective-C
 ```objective-c
-#import "LGSideMenuController.h"
+#import <LGSideMenuController/LGSideMenuController.h>
+#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
+// OR
+@import LGSideMenuController;
+// OR
+@import LGSideMenuController.LGSideMenuController;
+@import LGSideMenuController.UIViewController_LGSideMenuController;
 ```
 
 #### Swift
+
 ```swift
 import LGSideMenuController
+// OR
+import LGSideMenuController.LGSideMenuController
+import LGSideMenuController.UIViewController_LGSideMenuController
 ```
+
+## Usage
 
 ### Initialization
 
@@ -143,7 +194,7 @@ LGSideMenuControllerDidDismissRightViewNotification
 
 ### More
 
-For more details see [LGSideMenuController.h](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/LGSideMenuController.h) and try Xcode demo projects: 
+For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode demo projects: 
 * [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C)
 * [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C_Storyboard)
 * [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift)
