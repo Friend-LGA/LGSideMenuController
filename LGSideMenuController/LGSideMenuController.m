@@ -550,9 +550,10 @@
 
     // -----
 
-    CGSize size = self.view.frame.size;
+    CGFloat frameWidth = CGRectGetWidth(self.view.frame);
+    CGFloat frameHeight = CGRectGetHeight(self.view.frame);
 
-    CGRect rootViewViewFrame = CGRectMake(0.0, 0.0, size.width, size.height);
+    CGRect rootViewViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
     CGAffineTransform transform = CGAffineTransformIdentity;
 
     BOOL leftViewAlwaysVisible = NO;
@@ -577,9 +578,9 @@
 
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
-            CGFloat shift = size.width*(1.0-rootViewScale)/2;
+            CGFloat shift = frameWidth*(1.0-rootViewScale)/2;
 
-            rootViewViewFrame = CGRectMake((self.leftViewWidth-shift)*percentage, 0.0, size.width, size.height);
+            rootViewViewFrame = CGRectMake((self.leftViewWidth-shift)*percentage, 0.0, frameWidth, frameHeight);
             if ([UIScreen mainScreen].scale == 1.0)
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
         }
@@ -588,9 +589,9 @@
 
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
-            CGFloat shift = size.width*(1.0-rootViewScale)/2;
+            CGFloat shift = frameWidth*(1.0-rootViewScale)/2;
 
-            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shift)*percentage, 0.0, size.width, size.height);
+            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shift)*percentage, 0.0, frameWidth, frameHeight);
             if ([UIScreen mainScreen].scale == 1.0)
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
         }
@@ -602,10 +603,10 @@
     // -----
 
     CGFloat borderWidth = self.rootViewStyleView.layer.borderWidth;
-    self.rootViewStyleView.frame = CGRectMake(rootViewViewFrame.origin.x-borderWidth,
-                                              rootViewViewFrame.origin.y-borderWidth,
-                                              rootViewViewFrame.size.width+borderWidth*2,
-                                              rootViewViewFrame.size.height+borderWidth*2);
+    self.rootViewStyleView.frame = CGRectMake(CGRectGetMinX(rootViewViewFrame)-borderWidth,
+                                              CGRectGetMinY(rootViewViewFrame)-borderWidth,
+                                              CGRectGetWidth(rootViewViewFrame)+borderWidth*2,
+                                              CGRectGetHeight(rootViewViewFrame)+borderWidth*2);
     self.rootViewStyleView.transform = transform;
 
     // -----
@@ -626,7 +627,8 @@
 
     // -----
 
-    CGSize size = self.view.frame.size;
+    CGFloat frameWidth = CGRectGetWidth(self.view.frame);
+    CGFloat frameHeight = CGRectGetHeight(self.view.frame);
 
     // -----
 
@@ -660,7 +662,7 @@
 
     // -----
 
-    CGRect leftViewFrame = CGRectMake(originX, 0.0, self.leftViewWidth, size.height);
+    CGRect leftViewFrame = CGRectMake(originX, 0.0, self.leftViewWidth, frameHeight);
 
     if ([UIScreen mainScreen].scale == 1.0) {
         leftViewFrame = CGRectIntegral(leftViewFrame);
@@ -673,12 +675,12 @@
     // -----
 
     if (self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
-        CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, size.width, size.height);
+        CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
         if (kLGSideMenuIsLeftViewAlwaysVisible && kLGSideMenuIsRightViewAlwaysVisible) {
             CGFloat multiplier = self.rightViewWidth/self.leftViewWidth;
 
-            backgroundViewFrame.size.width = (size.width/(multiplier+1.0));
+            backgroundViewFrame.size.width = (frameWidth/(multiplier+1.0));
         }
 
         if ([UIScreen mainScreen].scale == 1.0) {
@@ -692,7 +694,7 @@
         // -----
 
         if (self.leftViewCoverView) {
-            CGRect leftViewCoverViewFrame = CGRectMake(0.0, 0.0, size.width, size.height);
+            CGRect leftViewCoverViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
             if ([UIScreen mainScreen].scale == 1.0) {
                 leftViewCoverViewFrame = CGRectIntegral(leftViewCoverViewFrame);
@@ -703,10 +705,10 @@
     }
     else {
         CGFloat borderWidth = self.leftViewStyleView.layer.borderWidth;
-        self.leftViewStyleView.frame = CGRectMake(leftViewFrame.origin.x-borderWidth,
-                                                  leftViewFrame.origin.y-borderWidth,
-                                                  leftViewFrame.size.width+borderWidth*2,
-                                                  leftViewFrame.size.height+borderWidth*2);
+        self.leftViewStyleView.frame = CGRectMake(CGRectGetMinX(leftViewFrame)-borderWidth,
+                                                  CGRectGetMinY(leftViewFrame)-borderWidth,
+                                                  CGRectGetWidth(leftViewFrame)+borderWidth*2,
+                                                  CGRectGetHeight(leftViewFrame)+borderWidth*2);
         self.leftViewStyleView.transform = leftViewTransform;
     }
 }
@@ -716,7 +718,8 @@
 
     // -----
 
-    CGSize size = self.view.frame.size;
+    CGFloat frameWidth = CGRectGetWidth(self.view.frame);
+    CGFloat frameHeight = CGRectGetHeight(self.view.frame);
 
     // -----
 
@@ -726,7 +729,7 @@
 
     // -----
 
-    CGFloat originX = size.width-self.rightViewWidth;
+    CGFloat originX = frameWidth-self.rightViewWidth;
     CGAffineTransform rightViewTransform = CGAffineTransformIdentity;
     CGAffineTransform backgroundViewTransform = CGAffineTransformIdentity;
 
@@ -735,7 +738,7 @@
         self.rightViewCoverView.alpha = 1.0-percentage;
 
         if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
-            originX = size.width-self.rightViewWidth+(self.rightViewWidth+self.rightViewStyleView.layer.shadowRadius*2)*(1.0-percentage);
+            originX = frameWidth-self.rightViewWidth+(self.rightViewWidth+self.rightViewStyleView.layer.shadowRadius*2)*(1.0-percentage);
         }
         else {
             CGFloat rightViewScale = 1.0+(self.rightViewInititialScale-1.0)*(1.0-percentage);
@@ -744,13 +747,13 @@
             rightViewTransform = CGAffineTransformMakeScale(rightViewScale, rightViewScale);
             backgroundViewTransform = CGAffineTransformMakeScale(backgroundViewScale, backgroundViewScale);
 
-            originX = size.width-self.rightViewWidth+((self.rightViewWidth*(1.0-rightViewScale)/2)+(self.rightViewInititialOffsetX*rightViewScale))*(1.0-percentage);
+            originX = frameWidth-self.rightViewWidth+((self.rightViewWidth*(1.0-rightViewScale)/2)+(self.rightViewInititialOffsetX*rightViewScale))*(1.0-percentage);
         }
     }
 
     // -----
 
-    CGRect rightViewFrame = CGRectMake(originX, 0.0, self.rightViewWidth, size.height);
+    CGRect rightViewFrame = CGRectMake(originX, 0.0, self.rightViewWidth, frameHeight);
 
     if ([UIScreen mainScreen].scale == 1.0) {
         rightViewFrame = CGRectIntegral(rightViewFrame);
@@ -763,13 +766,13 @@
     // -----
 
     if (self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
-        CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, size.width, size.height);
+        CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
         if (kLGSideMenuIsLeftViewAlwaysVisible && kLGSideMenuIsRightViewAlwaysVisible) {
             CGFloat multiplier = self.leftViewWidth/self.rightViewWidth;
 
-            backgroundViewFrame.size.width = (size.width/(multiplier+1.0));
-            backgroundViewFrame.origin.x = size.width - backgroundViewFrame.size.width;
+            backgroundViewFrame.size.width = (frameWidth/(multiplier+1.0));
+            backgroundViewFrame.origin.x = frameWidth - CGRectGetWidth(backgroundViewFrame);
         }
 
         if ([UIScreen mainScreen].scale == 1.0) {
@@ -783,7 +786,7 @@
         // -----
 
         if (self.rightViewCoverView) {
-            CGRect rightViewCoverViewFrame = CGRectMake(0.0, 0.0, size.width, size.height);
+            CGRect rightViewCoverViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
             if ([UIScreen mainScreen].scale == 1.0) {
                 rightViewCoverViewFrame = CGRectIntegral(rightViewCoverViewFrame);
@@ -794,10 +797,10 @@
     }
     else {
         CGFloat borderWidth = self.rightViewStyleView.layer.borderWidth;
-        self.rightViewStyleView.frame = CGRectMake(rightViewFrame.origin.x-borderWidth,
-                                                   rightViewFrame.origin.y-borderWidth,
-                                                   rightViewFrame.size.width+borderWidth*2,
-                                                   rightViewFrame.size.height+borderWidth*2);
+        self.rightViewStyleView.frame = CGRectMake(CGRectGetMinX(rightViewFrame)-borderWidth,
+                                                   CGRectGetMinY(rightViewFrame)-borderWidth,
+                                                   CGRectGetWidth(rightViewFrame)+borderWidth*2,
+                                                   CGRectGetHeight(rightViewFrame)+borderWidth*2);
         self.rightViewStyleView.transform = rightViewTransform;
     }
 }
@@ -1118,7 +1121,7 @@
 
         __strong typeof(wself) sself = wself;
 
-        [sself rightViewWillLayoutSubviewsWithSize:CGSizeMake(sself.rightViewWidth, CGRectGetHeight(self.view.frame))];
+        [sself rightViewWillLayoutSubviewsWithSize:CGSizeMake(sself.rightViewWidth, CGRectGetHeight(sself.view.frame))];
     }];
 
     self.rightView.backgroundColor = [UIColor clearColor];
@@ -1584,7 +1587,7 @@
 
     // -----
 
-    CGSize size = self.view.frame.size;
+    CGFloat frameWidth = CGRectGetWidth(self.view.frame);
 
     // -----
 
@@ -1600,7 +1603,7 @@
                 shiftRight = self.isLeftViewShowing ? 22.0 : 44.0;
             }
             else {
-                shiftRight = self.rootVC.view.bounds.size.width;
+                shiftRight = CGRectGetWidth(self.rootVC.view.frame);
             }
 
             if (velocityDone && location.x >= interactiveX+shiftLeft && location.x <= interactiveX+shiftRight) {
@@ -1658,7 +1661,7 @@
 
     if (self.rightView && self.isRightViewSwipeGestureEnabled && !kLGSideMenuIsRightViewAlwaysVisible && !self.leftViewGestireStartX && !self.isLeftViewShowing && self.shouldShowRightView) {
         if (!self.rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged)) {
-            CGFloat interactiveX = self.isRightViewShowing ? size.width-self.rightViewWidth : size.width;
+            CGFloat interactiveX = self.isRightViewShowing ? frameWidth-self.rightViewWidth : frameWidth;
             BOOL velocityDone = self.isRightViewShowing ? velocity.x > 0.0 : velocity.x < 0.0;
 
             CGFloat shiftLeft = 0.0;
@@ -1668,7 +1671,7 @@
                 shiftLeft = self.isRightViewShowing ? 22.0 : 44.0;
             }
             else {
-                shiftLeft = self.rootVC.view.bounds.size.width;
+                shiftLeft = CGRectGetWidth(self.rootVC.view.frame);
             }
 
             if (velocityDone && location.x >= interactiveX-shiftLeft && location.x <= interactiveX+shiftRight) {
@@ -1684,10 +1687,10 @@
             CGFloat firstVar = 0.0;
 
             if (self.isRightViewShowingBeforeGesture) {
-                firstVar = (location.x-(size.width-self.rightViewWidth))-(self.rightViewWidth-(size.width-self.rightViewGestireStartX.floatValue));
+                firstVar = (location.x-(frameWidth-self.rightViewWidth))-(self.rightViewWidth-(frameWidth-self.rightViewGestireStartX.floatValue));
             }
             else {
-                firstVar = (location.x-(size.width-self.rightViewWidth))+(size.width-self.rightViewGestireStartX.floatValue);
+                firstVar = (location.x-(frameWidth-self.rightViewWidth))+(frameWidth-self.rightViewGestireStartX.floatValue);
             }
 
             CGFloat percentage = 1.0-firstVar/self.rightViewWidth;
