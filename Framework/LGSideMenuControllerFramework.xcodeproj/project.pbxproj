@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; };
+		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
 		EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A92310A1DF31E1A00EFA4C9 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerFramework.h; sourceTree = "<group>"; };
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 			children = (
 				4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */,
 				4AF139C51BF384DA0037B073 /* Info.plist */,
+				4A92310A1DF31E1A00EFA4C9 /* module.modulemap */,
 			);
 			path = LGSideMenuControllerFramework;
 			sourceTree = "<group>";
@@ -266,6 +268,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = LGSideMenuControllerFramework/module.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Friend-LGA.LGSideMenuControllerFramework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -285,6 +288,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = LGSideMenuControllerFramework/module.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Friend-LGA.LGSideMenuControllerFramework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

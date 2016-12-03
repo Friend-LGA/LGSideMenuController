@@ -30,12 +30,10 @@
 #import <UIKit/UIKit.h>
 
 //! Project version number for LGSideMenuControllerFramework.
-FOUNDATION_EXPORT double LGSideMenuControllerFrameworkVersionNumber;
+FOUNDATION_EXPORT double LGSideMenuControllerVersionNumber;
 
 //! Project version string for LGSideMenuControllerFramework.
-FOUNDATION_EXPORT const unsigned char LGSideMenuControllerFrameworkVersionString[];
-
-#pragma mark -
+FOUNDATION_EXPORT const unsigned char LGSideMenuControllerVersionString[];
 
 #import <LGSideMenuController/LGSideMenuController.h>
 #import <LGSideMenuController/UIViewController+LGSideMenuController.h>
