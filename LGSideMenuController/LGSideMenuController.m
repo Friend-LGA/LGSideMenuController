@@ -213,6 +213,10 @@
     return self;
 }
 
++ (nonnull instancetype)sideMenuControllerWithRootViewController:(nullable UIViewController *)rootViewController {
+    return [[self alloc] initWithRootViewController:rootViewController];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

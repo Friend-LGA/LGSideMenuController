@@ -237,6 +237,7 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea) {
 # pragma mark - Methods
 
 - (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
++ (nonnull instancetype)sideMenuControllerWithRootViewController:(nullable UIViewController *)rootViewController;
 
 - (nullable UIView *)leftView;
 - (nullable UIView *)rightView;
