@@ -23,8 +23,18 @@
 @implementation MainViewController
 
 - (void)setupWithPresentationStyle:(LGSideMenuPresentationStyle)style type:(NSUInteger)type {
-    self.leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
-    self.rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+    self.type = type;
+
+    // -----
+
+    if (self.storyboard) {
+        self.leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+        self.rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+    }
+    else {
+        self.leftViewController = [LeftViewController new];
+        self.rightViewController = [RightViewController new];
+    }
 
     // -----
 
@@ -56,7 +66,7 @@
                 self.rightViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
                 self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
                 self.rightViewController.tintColor = [UIColor blackColor];
-                
+
                 break;
             }
             case LGSideMenuPresentationStyleScaleFromBig:
@@ -217,7 +227,7 @@
 
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super rightViewWillLayoutSubviewsWithSize:size];
-    
+
     if (![UIApplication sharedApplication].isStatusBarHidden && (self.type == 2 || self.type == 3)) {
         self.rightViewController.tableView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
     }

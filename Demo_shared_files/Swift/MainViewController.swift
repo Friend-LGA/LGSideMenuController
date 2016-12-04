@@ -11,16 +11,16 @@ import UIKit
 class MainViewController: LGSideMenuController {
 
     private lazy var leftViewController: LeftViewController = {
-        return self.storyboard!.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
+        return (self.storyboard?.instantiateViewController(withIdentifier: "LeftViewController") as? LeftViewController) ?? LeftViewController()
     }()
-    
+
     private lazy var rightViewController: RightViewController = {
-        return self.storyboard!.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
+        return (self.storyboard?.instantiateViewController(withIdentifier: "RightViewController") as? RightViewController) ?? RightViewController()
     }()
     
-    private var type: Int?
+    private var type: UInt?
     
-    func setup(presentationStyle style: LGSideMenuPresentationStyle, type: Int) {
+    func setup(presentationStyle style: LGSideMenuPresentationStyle, type: UInt) {
         self.type = type
         
         if type == 0 {
@@ -60,7 +60,8 @@ class MainViewController: LGSideMenuController {
                 
                 break
             }
-        } else if type == 1 {
+        }
+        else if type == 1 {
             setLeftViewEnabledWithWidth(250.0, presentationStyle: style, alwaysVisibleOptions: [.onPhoneLandscape, .onPadLandscape])
             
             leftViewStatusBarStyle = .default
@@ -80,7 +81,8 @@ class MainViewController: LGSideMenuController {
             
             rightViewController.tableView.backgroundColor = .clear
             rightViewController.tintColor = .black
-        } else if type == 2 {
+        }
+        else if type == 2 {
             setLeftViewEnabledWithWidth(250.0, presentationStyle: style, alwaysVisibleOptions: [])
             
             leftViewStatusBarStyle = .default
@@ -100,7 +102,8 @@ class MainViewController: LGSideMenuController {
             
             rightViewController.tableView.backgroundColor = .clear
             rightViewController.tintColor = .black
-        } else if type == 3 {
+        }
+        else if type == 3 {
             setLeftViewEnabledWithWidth(250.0, presentationStyle: style, alwaysVisibleOptions: [])
             
             leftViewStatusBarStyle = .lightContent
@@ -120,7 +123,8 @@ class MainViewController: LGSideMenuController {
             
             rightViewController.tableView.backgroundColor = .clear
             rightViewController.tintColor = .white
-        } else if type == 4 {
+        }
+        else if type == 4 {
             swipeGestureArea = .full
             rootViewCoverColorForLeftView = UIColor(red: 0.0, green: 1.0, blue: 0.5, alpha: 0.3)
             rootViewScaleForLeftView = 0.6
@@ -170,7 +174,7 @@ class MainViewController: LGSideMenuController {
         rightViewController.tableView.reloadData()
         rightView()!.addSubview(rightViewController.tableView)
     }
-    
+
     override func leftViewWillLayoutSubviews(with size: CGSize) {
         super.leftViewWillLayoutSubviews(with: size)
         

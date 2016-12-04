@@ -61,11 +61,11 @@ class ViewController : UIViewController {
     // MARK: -
 
     func showLeftView(sender: AnyObject?) {
-        sideMenuController()?.showLeftView(animated: true, completionHandler: nil)
+        sideMenuController?.showLeftView(animated: true, completionHandler: nil)
     }
 
     func showRightView(sender: AnyObject?) {
-        sideMenuController()?.showRightView(animated: true, completionHandler: nil)
+        sideMenuController?.showRightView(animated: true, completionHandler: nil)
     }
 
     func showChooseController() {

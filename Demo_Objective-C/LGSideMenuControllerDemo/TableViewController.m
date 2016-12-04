@@ -70,48 +70,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ViewController *viewController = [ViewController new];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-    MainViewController *mainViewController = nil;
+    MainViewController *mainViewController = [MainViewController new];
+    mainViewController.rootViewController = navigationController;
 
     switch (indexPath.row) {
         case 0:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleScaleFromBig
-                                                                                   type:0];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromBig type:0];
             break;
         case 1:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                                                                                   type:0];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:0];
             break;
         case 2:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleSlideBelow
-                                                                                   type:0];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideBelow type:0];
             break;
         case 3:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleScaleFromLittle
-                                                                                   type:0];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromLittle type:0];
             break;
         case 4:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleScaleFromBig
-                                                                                   type:1];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromBig type:1];
             break;
         case 5:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                                                                                   type:2];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:2];
             break;
         case 6:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                                                                                   type:3];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:3];
             break;
         case 7:
-            mainViewController = [[MainViewController alloc] initWithRootViewController:navigationController
-                                                                      presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                                                                                   type:4];
+            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:4];
             break;
     }
 

@@ -62,35 +62,35 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = ViewController()
         let navigationController = NavigationController(rootViewController:viewController)
-        let mainViewController: MainViewController?
+        let mainViewController = MainViewController()
+        mainViewController.rootViewController = navigationController
 
         switch indexPath.row {
         case 0:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .scaleFromBig, type: 0)
+            mainViewController.setup(presentationStyle: .scaleFromBig, type: 0)
             break
         case 1:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .slideAbove, type: 0)
+            mainViewController.setup(presentationStyle: .slideAbove, type: 0)
             break
         case 2:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .slideBelow, type: 0)
+            mainViewController.setup(presentationStyle: .slideBelow, type: 0)
             break
         case 3:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .scaleFromLittle, type: 0)
+            mainViewController.setup(presentationStyle: .scaleFromLittle, type: 0)
             break
         case 4:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .scaleFromBig, type: 1)
+            mainViewController.setup(presentationStyle: .scaleFromBig, type: 1)
             break
         case 5:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .slideAbove, type: 2)
+            mainViewController.setup(presentationStyle: .slideAbove, type: 2)
             break
         case 6:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .slideAbove, type: 3)
+            mainViewController.setup(presentationStyle: .slideAbove, type: 3)
             break
         case 7:
-            mainViewController = MainViewController(rootViewController: navigationController, presentationStyle: .slideAbove, type: 4)
+            mainViewController.setup(presentationStyle: .slideAbove, type: 4)
             break
         default:
-            mainViewController = nil
             break
         }
 
