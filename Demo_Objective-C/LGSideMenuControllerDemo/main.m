@@ -2,9 +2,6 @@
 //  main.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 23.04.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"

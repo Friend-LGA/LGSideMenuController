@@ -2,15 +2,8 @@
 //  RightViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class RightViewController: UITableViewController {
-
-    var tintColor: UIColor?
     
     private let titlesArray = ["Open Left View",
                                "",
@@ -28,14 +21,29 @@ class RightViewController: UITableViewController {
     init() {
         super.init(style: .plain)
 
+        view.backgroundColor = .clear
+
         tableView.register(RightViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
     }
 
     // MARK: - UITableViewDataSource
@@ -55,7 +63,6 @@ class RightViewController: UITableViewController {
         cell.textLabel!.font = UIFont.boldSystemFont(ofSize: indexPath.row == 0 ? 15.0 : 30.0)
         cell.separatorView.isHidden = (indexPath.row <= 1 || indexPath.row == titlesArray.count - 1)
         cell.isUserInteractionEnabled = (indexPath.row != 1)
-        cell.tintColor = tintColor
         
         return cell
     }
@@ -67,10 +74,10 @@ class RightViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = UIApplication.shared.delegate!.window!!.rootViewController! as! MainViewController
+        let mainViewController = sideMenuController!
 
         if indexPath.row == 0 {
-            if mainViewController.isRightViewAlwaysVisible() {
+            if mainViewController.isRightViewAlwaysVisibleForCurrentOrientation {
                 mainViewController.showLeftView(animated: true, completionHandler: nil)
             }
             else {

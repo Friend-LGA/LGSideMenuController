@@ -2,17 +2,12 @@
 //  LeftViewController.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "LeftViewController.h"
-#import "AppDelegate.h"
 #import "LeftViewCell.h"
-#import "ViewController.h"
 #import "MainViewController.h"
-#import "NavigationController.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "ViewController.h"
 
 @interface LeftViewController ()
 
@@ -29,6 +24,8 @@
 
     self.titlesArray = @[@"Open Right View",
                          @"",
+                         @"Change Root VC",
+                         @"",
                          @"Profile",
                          @"News",
                          @"Articles",
@@ -38,6 +35,18 @@
     // -----
 
     self.tableView.contentInset = UIEdgeInsetsMake(44.0, 0.0, 44.0, 0.0);
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
 }
 
 #pragma mark - UITableViewDataSource
@@ -52,22 +61,21 @@
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
     cell.textLabel.text = self.titlesArray[indexPath.row];
-    cell.separatorView.hidden = (indexPath.row <= 1 || indexPath.row == self.titlesArray.count - 1);
-    cell.userInteractionEnabled = (indexPath.row != 1);
-    cell.tintColor = self.tintColor;
+    cell.separatorView.hidden = (indexPath.row <= 3 || indexPath.row == self.titlesArray.count-1);
+    cell.userInteractionEnabled = (indexPath.row != 1 && indexPath.row != 3);
 
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.row == 1 ? 22.0 : 44.0;
+    return (indexPath.row == 1 || indexPath.row == 3) ? 22.0 : 44.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainViewController *mainViewController = (MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
 
     if (indexPath.row == 0) {
-        if ([mainViewController isLeftViewAlwaysVisible]) {
+        if (mainViewController.isLeftViewAlwaysVisibleForCurrentOrientation) {
             [mainViewController showRightViewAnimated:YES completionHandler:nil];
         }
         else {
@@ -76,12 +84,27 @@
             }];
         }
     }
+    else if (indexPath.row == 2) {
+        UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
+        UIViewController *viewController;
+
+        if ([navigationController.viewControllers.firstObject isKindOfClass:[ViewController class]]) {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OtherViewController"];
+        }
+        else {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+        }
+
+        [navigationController setViewControllers:@[viewController]];
+
+        [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
+    }
     else {
         UIViewController *viewController = [UIViewController new];
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = self.titlesArray[indexPath.row];
 
-        NavigationController *navigationController = (NavigationController *)mainViewController.rootViewController;
+        UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
         [navigationController pushViewController:viewController animated:YES];
 
         [mainViewController hideLeftViewAnimated:YES completionHandler:nil];

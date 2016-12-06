@@ -2,11 +2,6 @@
 //  LeftViewCell.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 26.04.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class LeftViewCell: UITableViewCell {
 
@@ -20,10 +15,12 @@ class LeftViewCell: UITableViewCell {
         backgroundColor = .clear
 
         textLabel!.font = UIFont.boldSystemFont(ofSize: 16.0)
+        textLabel!.textColor = .white
 
         // -----
 
         separatorView = UIView()
+        separatorView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         addSubview(separatorView)
     }
 
@@ -33,9 +30,9 @@ class LeftViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        textLabel!.textColor = tintColor
-        separatorView.backgroundColor = tintColor.withAlphaComponent(0.4)
+
+        textLabel!.frame.origin.x = 8.0
+        textLabel!.frame.size.width = self.frame.width - 16.0
 
         let height = UIScreen.main.scale == 1.0 ? 1.0 : 0.5 as CGFloat
 
@@ -43,7 +40,7 @@ class LeftViewCell: UITableViewCell {
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        textLabel!.textColor = highlighted ? UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0) : tintColor
+        textLabel!.alpha = highlighted ? 0.5 : 1.0
     }
 
 }

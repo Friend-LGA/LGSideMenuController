@@ -2,21 +2,20 @@
 //  TableViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 05.11.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class TableViewController: UITableViewController {
 
-    private let titlesArray = ["Style Scale From Big",
-                               "Style Slide Above",
-                               "Style Slide Below",
-                               "Style Scale From Little",
+    private let titlesArray = ["Style \"Scale From Big\"",
+                               "Style \"Slide Above\"",
+                               "Style \"Slide Below\"",
+                               "Style \"Scale From Little\"",
+                               "Blurred root view cover",
+                               "Blurred side views covers",
+                               "Blurred side views backgrounds",
                                "Landscape always visible",
                                "Status bar always visible",
-                               "Status bar light content",
+                               "Gesture area full screen",
+                               "Editable table view",
                                "Custom style"]
 
     // MARK: - UITableViewDataSource
@@ -38,39 +37,18 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
         let navigationController = storyboard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
+
+        if (indexPath.row == self.titlesArray.count - 2) {
+            navigationController.setViewControllers([storyboard.instantiateViewController(withIdentifier: "OtherViewController")], animated: false)
+        }
+        else {
+            navigationController.setViewControllers([storyboard.instantiateViewController(withIdentifier: "ViewController")], animated: false)
+        }
+        
         let mainViewController = storyboard.instantiateInitialViewController() as! MainViewController
         mainViewController.rootViewController = navigationController
-
-        switch indexPath.row {
-        case 0:
-            mainViewController.setup(presentationStyle: .scaleFromBig, type: 0)
-            break
-        case 1:
-            mainViewController.setup(presentationStyle: .slideAbove, type: 0)
-            break
-        case 2:
-            mainViewController.setup(presentationStyle: .slideBelow, type: 0)
-            break
-        case 3:
-            mainViewController.setup(presentationStyle: .scaleFromLittle, type: 0)
-            break
-        case 4:
-            mainViewController.setup(presentationStyle: .scaleFromBig, type: 1)
-            break
-        case 5:
-            mainViewController.setup(presentationStyle: .slideAbove, type: 2)
-            break
-        case 6:
-            mainViewController.setup(presentationStyle: .slideAbove, type: 3)
-            break
-        case 7:
-            mainViewController.setup(presentationStyle: .slideAbove, type: 4)
-            break
-        default:
-            break
-        }
+        mainViewController.setup(type: UInt(indexPath.row))
 
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = mainViewController

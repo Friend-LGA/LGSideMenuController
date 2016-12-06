@@ -2,16 +2,13 @@
 //  LeftViewController.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "LeftViewController.h"
-#import "AppDelegate.h"
 #import "LeftViewCell.h"
-#import "ViewController.h"
 #import "MainViewController.h"
-#import "NavigationController.h"
+#import "UIViewController+LGSideMenuController.h"
+#import "ViewController.h"
+#import "OtherViewController.h"
 
 @interface LeftViewController ()
 
@@ -26,18 +23,35 @@
     if (self) {
         self.titlesArray = @[@"Open Right View",
                              @"",
+                             @"Change Root VC",
+                             @"",
                              @"Profile",
                              @"News",
                              @"Articles",
                              @"Video",
                              @"Music"];
 
+        self.view.backgroundColor = [UIColor clearColor];
+
         [self.tableView registerClass:[LeftViewCell class] forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.contentInset = UIEdgeInsetsMake(44.0, 0.0, 44.0, 0.0);
         self.tableView.showsVerticalScrollIndicator = NO;
+        self.tableView.backgroundColor = [UIColor clearColor];
     }
     return self;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
 }
 
 #pragma mark - UITableViewDataSource
@@ -54,9 +68,8 @@
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
     cell.textLabel.text = self.titlesArray[indexPath.row];
-    cell.separatorView.hidden = !(indexPath.row != 0 && indexPath.row != 1 && indexPath.row != self.titlesArray.count-1);
-    cell.userInteractionEnabled = (indexPath.row != 1);
-    cell.tintColor = self.tintColor;
+    cell.separatorView.hidden = (indexPath.row <= 3 || indexPath.row == self.titlesArray.count-1);
+    cell.userInteractionEnabled = (indexPath.row != 1 && indexPath.row != 3);
 
     return cell;
 }
@@ -64,14 +77,14 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.row == 1 ? 22.0 : 44.0;
+    return (indexPath.row == 1 || indexPath.row == 3) ? 22.0 : 44.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainViewController *mainViewController = (MainViewController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
     
     if (indexPath.row == 0) {
-        if ([mainViewController isLeftViewAlwaysVisible]) {
+        if ([mainViewController isLeftViewAlwaysVisibleForCurrentOrientation]) {
             [mainViewController showRightViewAnimated:YES completionHandler:nil];
         }
         else {
@@ -80,12 +93,27 @@
             }];
         }
     }
+    else if (indexPath.row == 2) {
+        UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
+        UIViewController *viewController;
+
+        if ([navigationController.viewControllers.firstObject isKindOfClass:[ViewController class]]) {
+            viewController = [OtherViewController new];
+        }
+        else {
+            viewController = [ViewController new];
+        }
+
+        [navigationController setViewControllers:@[viewController]];
+
+        [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
+    }
     else {
         UIViewController *viewController = [UIViewController new];
         viewController.view.backgroundColor = [UIColor whiteColor];
         viewController.title = self.titlesArray[indexPath.row];
 
-        NavigationController *navigationController = (NavigationController *)mainViewController.rootViewController;
+        UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
         [navigationController pushViewController:viewController animated:YES];
 
         [mainViewController hideLeftViewAnimated:YES completionHandler:nil];

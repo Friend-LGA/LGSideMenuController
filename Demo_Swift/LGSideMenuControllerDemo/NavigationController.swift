@@ -2,15 +2,12 @@
 //  NavigationController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 06.11.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class NavigationController: UINavigationController {
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         navigationBar.isTranslucent = true
         navigationBar.barTintColor = .white
     }
@@ -28,7 +25,7 @@ class NavigationController: UINavigationController {
     }
     
     override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
-        return .none
+        return sideMenuController!.isRightViewVisible ? .slide : .fade
     }
 
 }

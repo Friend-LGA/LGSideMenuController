@@ -1,5 +1,5 @@
 //
-//  UIViewController+LGSideMenuController.h
+//  LGSideMenuControllerGesturesHandler.h
 //  LGSideMenuController
 //
 //
@@ -30,34 +30,23 @@
 #import <UIKit/UIKit.h>
 #import "LGSideMenuController.h"
 
-@interface UIViewController (LGSideMenuController)
+@interface LGSideMenuControllerGesturesHandler : NSObject <UIGestureRecognizerDelegate>
 
-/** If this view controller is root view controller of side menu controller or one of children of root view controller, return it. */
-@property(nullable, nonatomic, readonly, weak) LGSideMenuController *sideMenuController;
+@property (assign, nonatomic, nonnull) LGSideMenuController *sideMenuController;
 
-- (IBAction)showLeftView:(nullable id)sender;
-- (IBAction)hideLeftView:(nullable id)sender;
-- (IBAction)toggleLeftView:(nullable id)sender;
+@property (assign, nonatomic) LGSideMenuSwipeGestureArea swipeGestureArea;
 
-- (IBAction)showLeftViewAnimated:(nullable id)sender;
-- (IBAction)hideLeftViewAnimated:(nullable id)sender;
-- (IBAction)toggleLeftViewAnimated:(nullable id)sender;
+@property (assign, nonatomic) LGSideMenuSwipeGestureRange leftViewSwipeGestureRange;
+@property (assign, nonatomic) LGSideMenuSwipeGestureRange rightViewSwipeGestureRange;
 
-- (IBAction)showRightView:(nullable id)sender;
-- (IBAction)hideRightView:(nullable id)sender;
-- (IBAction)toggleRightView:(nullable id)sender;
+@property (weak, nonatomic, nullable) UIView *rootViewContainer;
+@property (weak, nonatomic, nullable) UIView *leftViewContainer;
+@property (weak, nonatomic, nullable) UIView *rightViewContainer;
 
-- (IBAction)showRightViewAnimated:(nullable id)sender;
-- (IBAction)hideRightViewAnimated:(nullable id)sender;
-- (IBAction)toggleRightViewAnimated:(nullable id)sender;
+@property (weak, nonatomic, nullable) UIView *rootViewCoverView;
 
-@end
+@property (assign, nonatomic, getter=isAnimating) BOOL animating;
 
-#pragma mark - Deprecated
-
-@interface UIViewController (LGSideMenuControllerDeprecated)
-
-- (IBAction)openLeftView:(nullable id)sender DEPRECATED_ATTRIBUTE;
-- (IBAction)openRightView:(nullable id)sender DEPRECATED_ATTRIBUTE;
+- (nonnull instancetype)initWithSideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 
 @end

@@ -2,15 +2,10 @@
 //  ViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class ViewController : UIViewController {
 
-    @IBAction func showChooseController(sender: UIButton) {
+    @IBAction func showChooseController(sender: Any) {
         let storyboard = UIStoryboard(name: "Choose", bundle: nil)
 
         let navigationController = storyboard.instantiateInitialViewController() as! ChooseNavigationController

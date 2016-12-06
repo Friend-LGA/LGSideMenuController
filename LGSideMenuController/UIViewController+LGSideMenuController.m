@@ -27,6 +27,8 @@
 //  SOFTWARE.
 //
 
+#import <objc/runtime.h>
+
 #import "UIViewController+LGSideMenuController.h"
 
 @implementation UIViewController (LGSideMenuController)
@@ -36,21 +38,22 @@
         return (LGSideMenuController *)self;
     }
 
-    if (self.parentViewController.sideMenuController) {
-        return self.parentViewController.sideMenuController;
-    }
+    LGSideMenuController *result;
 
-    if (self.navigationController.sideMenuController) {
-        return self.navigationController.sideMenuController;
-    }
+    result = objc_getAssociatedObject(self, @"sideMenuController");
+    if (result) return result;
 
-    if (self.presentingViewController.sideMenuController) {
-        return self.presentingViewController.sideMenuController;
-    }
+    result = self.parentViewController.sideMenuController;
+    if (result) return result;
 
-    if (self.splitViewController.sideMenuController) {
-        return self.splitViewController.sideMenuController;
-    }
+    result = self.navigationController.sideMenuController;
+    if (result) return result;
+
+    result = self.presentingViewController.sideMenuController;
+    if (result) return result;
+
+    result = self.splitViewController.sideMenuController;
+    if (result) return result;
 
     return nil;
 }
@@ -113,7 +116,7 @@
 
 @end
 
-# pragma mark - Deprecated
+#pragma mark - Deprecated
 
 @implementation UIViewController (LGSideMenuControllerDeprecated)
 

@@ -2,16 +2,11 @@
 //  ViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class ViewController : UIViewController {
 
     private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "image3"))
+        let imageView = UIImageView(image: UIImage(named: "imageRoot"))
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -28,8 +23,6 @@ class ViewController : UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-
-        // -----
 
         title = "LGSideMenuController"
 

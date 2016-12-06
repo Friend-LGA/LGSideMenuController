@@ -2,238 +2,252 @@
 //  MainViewController.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 25.04.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "MainViewController.h"
 #import "ViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
-#import "AppDelegate.h"
 
 @interface MainViewController ()
 
-@property (strong, nonatomic) LeftViewController *leftViewController;
-@property (strong, nonatomic) RightViewController *rightViewController;
 @property (assign, nonatomic) NSUInteger type;
 
 @end
 
 @implementation MainViewController
 
-- (void)setupWithPresentationStyle:(LGSideMenuPresentationStyle)style type:(NSUInteger)type {
+- (void)setupWithType:(NSUInteger)type {
     self.type = type;
 
     // -----
 
+    LeftViewController *leftViewController;
+    RightViewController *rightViewController;
+
     if (self.storyboard) {
-        self.leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
-        self.rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+        leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+        rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+
+        // Sizes and styles is set in storybord
+        // You can also find there all other parameters
+        // LGSideMenuController fully customizable from storyboard
     }
     else {
-        self.leftViewController = [LeftViewController new];
-        self.rightViewController = [RightViewController new];
+        leftViewController = [LeftViewController new];
+        rightViewController = [RightViewController new];
+
+        self.leftViewWidth = 250.0;
+        self.leftViewBackgroundImage = [UIImage imageNamed:@"imageLeft"];
+        self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.6 blue:0.5 alpha:0.9];
+        self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
+
+        self.rightViewWidth = 100.0;
+        self.rightViewBackgroundImage = [UIImage imageNamed:@"imageRight"];
+        self.rightViewBackgroundColor = [UIColor colorWithRed:0.6 green:0.5 blue:0.6 alpha:0.9];
+        self.rootViewCoverColorForRightView = [UIColor colorWithRed:1.0 green:0.0 blue:1.0 alpha:0.05];
     }
 
     // -----
 
-    if (type == 0) {
-        [self setLeftViewEnabledWithWidth:250.0
-                        presentationStyle:style
-                     alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
+    UIColor *greenCoverColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.0 alpha:0.3];
+    UIColor *purpleCoverColor = [UIColor colorWithRed:0.1 green:0.0 blue:0.1 alpha:0.3];
+    UIBlurEffectStyle regularStyle;
 
-        self.leftViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnNone;
+    if (UIDevice.currentDevice.systemVersion.floatValue >= 10.0) {
+        regularStyle = UIBlurEffectStyleRegular;
+    }
+    else {
+        regularStyle = UIBlurEffectStyleLight;
+    }
 
-        // -----
+    // -----
 
-        [self setRightViewEnabledWithWidth:100.0
-                         presentationStyle:style
-                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
+    switch (type) {
+        case 0: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
 
-        self.rightViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnNone;
+            break;
+        }
+        case 1: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.rootViewCoverColorForLeftView = greenCoverColor;
 
-        // -----
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.rootViewCoverColorForRightView = purpleCoverColor;
 
-        switch (style) {
-            case LGSideMenuPresentationStyleSlideAbove: {
-                self.leftViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-                self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-                self.leftViewController.tintColor = [UIColor blackColor];
+            break;
+        }
+        case 2: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
 
-                self.rightViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-                self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-                self.rightViewController.tintColor = [UIColor blackColor];
+            break;
+        }
+        case 3: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromLittle;
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromLittle;
 
-                break;
-            }
-            case LGSideMenuPresentationStyleScaleFromBig:
-            case LGSideMenuPresentationStyleSlideBelow:
-            case LGSideMenuPresentationStyleScaleFromLittle: {
-                self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
-                self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-                self.leftViewController.tintColor = [UIColor whiteColor];
+            break;
+        }
+        case 4: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rootViewCoverBlurEffectForLeftView = [UIBlurEffect effectWithStyle:regularStyle];
+            self.rootViewCoverAlphaForLeftView = 0.8;
 
-                self.rightViewBackgroundImage = [UIImage imageNamed:@"image2"];
-                self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-                self.rightViewController.tintColor = [UIColor whiteColor];
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rootViewCoverBlurEffectForRightView = [UIBlurEffect effectWithStyle:regularStyle];
+            self.rootViewCoverAlphaForRightView = 0.8;
 
-                break;
-            }
+            break;
+        }
+        case 5: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.leftViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+            self.leftViewCoverColor = nil;
+
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rightViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+            self.rightViewCoverColor = nil;
+
+            break;
+        }
+        case 6: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:regularStyle];
+            self.leftViewBackgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
+            self.rootViewCoverColorForLeftView = greenCoverColor;
+
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.rightViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:regularStyle];
+            self.rightViewBackgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:1.0 alpha:0.05];
+            self.rootViewCoverColorForRightView = purpleCoverColor;
+
+            break;
+        }
+        case 7: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.rootViewCoverColorForLeftView = greenCoverColor;
+
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
+            self.rightViewAlwaysVisibleOptions = LGSideMenuAlwaysVisibleOnPhoneLandscape|LGSideMenuAlwaysVisibleOnPadLandscape;
+
+            break;
+        }
+        case 8: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
+
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rightViewStatusBarStyle = UIStatusBarStyleLightContent;
+            
+            break;
+        }
+        case 9: {
+            self.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
+
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+
+            break;
+        }
+        case 10: {
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+
+            break;
+        }
+        case 11: {
+            self.rootViewLayerBorderWidth = 5.0;
+            self.rootViewLayerBorderColor = [UIColor whiteColor];
+            self.rootViewLayerShadowRadius = 10.0;
+
+            self.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(0.0, 88.0);
+            self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
+            self.leftViewAnimationSpeed = 1.0;
+            self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.75 blue:0.5 alpha:1.0];
+            self.leftViewBackgroundImageInitialScale = 1.5;
+            self.leftViewInititialOffsetX = -200.0;
+            self.leftViewInititialScale = 1.5;
+            self.leftViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+            self.leftViewBackgroundImage = nil;
+
+            self.rootViewScaleForLeftView = 0.6;
+            self.rootViewCoverColorForLeftView = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:0.3];
+            self.rootViewCoverBlurEffectForLeftView = [UIBlurEffect effectWithStyle:regularStyle];
+            self.rootViewCoverAlphaForLeftView = 0.9;
+
+            self.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 0.0);
+            self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
+            self.rightViewAnimationSpeed = 0.25;
+            self.rightViewBackgroundColor = [UIColor colorWithRed:0.75 green:0.5 blue:0.75 alpha:1.0];
+            self.rightViewLayerBorderWidth = 3.0;
+            self.rightViewLayerBorderColor = [UIColor blackColor];
+            self.rightViewLayerShadowRadius = 10.0;
+
+            self.rootViewCoverColorForRightView = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.3];
+            self.rootViewCoverBlurEffectForRightView = [UIBlurEffect effectWithStyle:regularStyle];
+            self.rootViewCoverAlphaForRightView = 0.9;
+
+            break;
         }
     }
-    else if (type == 1) {
-        [self setLeftViewEnabledWithWidth:250.0
-                        presentationStyle:style
-                     alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnPhoneLandscape|LGSideMenuAlwaysVisibleOnPadLandscape];
-
-        self.leftViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.leftViewStatusBarVisibleOptions = LGSideMenuAlwaysVisibleOnPadLandscape;
-        self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
-
-        self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.leftViewController.tintColor = [UIColor whiteColor];
-
-        // -----
-
-        [self setRightViewEnabledWithWidth:100.0
-                         presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.rightViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.rightViewStatusBarVisibleOptions = LGSideMenuAlwaysVisibleOnPadLandscape;
-        self.rightViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-
-        self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.rightViewController.tintColor = [UIColor blackColor];
-    }
-    else if (type == 2) {
-        [self setLeftViewEnabledWithWidth:250.0
-                        presentationStyle:style
-                     alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.leftViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnAll;
-        self.leftViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-
-        self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.leftViewController.tintColor = [UIColor blackColor];
-
-        // -----
-
-        [self setRightViewEnabledWithWidth:100.0
-                         presentationStyle:style
-                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.rightViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnAll;
-        self.rightViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.9];
-
-        self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.rightViewController.tintColor = [UIColor blackColor];
-    }
-    else if (type == 3) {
-        [self setLeftViewEnabledWithWidth:250.0
-                        presentationStyle:style
-                     alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
-        self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnAll;
-        self.leftViewBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-
-        self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.leftViewController.tintColor = [UIColor whiteColor];
-
-        // -----
-
-        [self setRightViewEnabledWithWidth:100.0
-                         presentationStyle:style
-                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.rightViewStatusBarStyle = UIStatusBarStyleLightContent;
-        self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnAll;
-        self.rightViewBackgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-
-        self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.rightViewController.tintColor = [UIColor whiteColor];
-    }
-    else if (type == 4) {
-        self.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
-        self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.0 green:1.0 blue:0.5 alpha:0.3];
-        self.rootViewScaleForLeftView = 0.6;
-        self.rootViewLayerBorderWidth = 3.0;
-        self.rootViewLayerBorderColor = [UIColor whiteColor];
-        self.rootViewLayerShadowRadius = 10.0;
-        self.rootViewCoverColorForRightView = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.3];
-
-        // -----
-
-        [self setLeftViewEnabledWithWidth:250.0
-                        presentationStyle:LGSideMenuPresentationStyleScaleFromBig
-                     alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.leftViewAnimationSpeed = 0.4;
-        self.leftViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnNone;
-        self.leftViewBackgroundImage = [UIImage imageNamed:@"image"];
-        self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
-        self.leftViewBackgroundImageInitialScale = 1.5;
-        self.leftViewInititialOffsetX = -200.0;
-        self.leftViewInititialScale = 1.5;
-
-        self.leftViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.leftViewController.tintColor = [UIColor whiteColor];
-
-        // -----
-
-        [self setRightViewEnabledWithWidth:100.0
-                         presentationStyle:LGSideMenuPresentationStyleSlideAbove
-                      alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-
-        self.rightViewAnimationSpeed = 0.3;
-        self.rightViewStatusBarStyle = UIStatusBarStyleDefault;
-        self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnNone;
-        self.rightViewBackgroundColor = [UIColor colorWithWhite:1.0 alpha:0.7];
-        self.rightViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOnPadLandscape;
-        self.rightViewLayerBorderWidth = 3.0;
-        self.rightViewLayerBorderColor = [UIColor blackColor];
-        self.rightViewLayerShadowRadius = 10.0;
-
-        self.rightViewController.tableView.backgroundColor = [UIColor clearColor];
-        self.rightViewController.tintColor = [UIColor blackColor];
-    }
 
     // -----
 
-    [self.leftViewController.tableView reloadData];
-    [self.leftView addSubview:self.leftViewController.tableView];
+    self.leftViewController = leftViewController;
+    self.rightViewController = rightViewController;
+}
 
-    [self.rightViewController.tableView reloadData];
-    [self.rightView addSubview:self.rightViewController.tableView];
+- (void)rootViewWillLayoutSubviewsWithSize:(CGSize)size {
+    [super rootViewWillLayoutSubviewsWithSize:size];
+
+    self.rootView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
 }
 
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super leftViewWillLayoutSubviewsWithSize:size];
 
-    if (![UIApplication sharedApplication].isStatusBarHidden && (self.type == 2 || self.type == 3)) {
-        self.leftViewController.tableView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
+    if (self.isLeftViewStatusBarHidden) {
+        self.leftView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
     }
     else {
-        self.leftViewController.tableView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
+        self.leftView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
     }
 }
 
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super rightViewWillLayoutSubviewsWithSize:size];
 
-    if (![UIApplication sharedApplication].isStatusBarHidden && (self.type == 2 || self.type == 3)) {
-        self.rightViewController.tableView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
+    if (!self.isRightViewStatusBarHidden ||
+        (self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadLandscape &&
+         UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&
+         UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation))) {
+        self.rightView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
     }
     else {
-        self.rightViewController.tableView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
+        self.rightView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
     }
+}
+
+- (BOOL)isLeftViewStatusBarHidden {
+    if (self.type == 8) {
+        return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+    }
+
+    return super.isLeftViewStatusBarHidden;
+}
+
+- (BOOL)isRightViewStatusBarHidden {
+    if (self.type == 8) {
+        return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+    }
+    
+    return super.isRightViewStatusBarHidden;
+}
+
+- (void)dealloc {
+    NSLog(@"MainViewController deallocated");
 }
 
 @end

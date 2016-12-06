@@ -2,14 +2,12 @@
 //  TableViewController.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 05.11.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "TableViewController.h"
 #import "MainViewController.h"
 #import "NavigationController.h"
 #import "ViewController.h"
+#import "OtherViewController.h"
 
 @interface TableViewController ()
 
@@ -21,22 +19,23 @@
 
 - (id)init {
     self = [super initWithStyle:UITableViewStylePlain];
-    if (self)
-    {
+    if (self) {
         self.title = @"LGSideMenuController";
 
-        self.titlesArray = @[@"Style Scale From Big",
-                             @"Style Slide Above",
-                             @"Style Slide Below",
-                             @"Style Scale From Little",
+        self.titlesArray = @[@"Style \"Scale From Big\"",
+                             @"Style \"Slide Above\"",
+                             @"Style \"Slide Below\"",
+                             @"Style \"Scale From Little\"",
+                             @"Blurred root view cover",
+                             @"Blurred side views covers",
+                             @"Blurred side views backgrounds",
                              @"Landscape always visible",
                              @"Status bar always visible",
-                             @"Status bar light content",
+                             @"Gesture area full screen",
+                             @"Editable table view",
                              @"Custom style"];
 
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-
-        self.clearsSelectionOnViewWillAppear = NO;
     }
     return self;
 }
@@ -68,39 +67,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ViewController *viewController = [ViewController new];
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-    MainViewController *mainViewController = [MainViewController new];
-    mainViewController.rootViewController = navigationController;
+    UIViewController *viewController;
 
-    switch (indexPath.row) {
-        case 0:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromBig type:0];
-            break;
-        case 1:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:0];
-            break;
-        case 2:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideBelow type:0];
-            break;
-        case 3:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromLittle type:0];
-            break;
-        case 4:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleScaleFromBig type:1];
-            break;
-        case 5:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:2];
-            break;
-        case 6:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:3];
-            break;
-        case 7:
-            [mainViewController setupWithPresentationStyle:LGSideMenuPresentationStyleSlideAbove type:4];
-            break;
+    if (indexPath.row == self.titlesArray.count - 2) {
+        viewController = [OtherViewController new];
+    }
+    else {
+        viewController = [ViewController new];
     }
 
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+    
+    MainViewController *mainViewController = [MainViewController new];
+    mainViewController.rootViewController = navigationController;
+    [mainViewController setupWithType:indexPath.row];
+
+    UIWindow *window = UIApplication.sharedApplication.delegate.window;
     window.rootViewController = mainViewController;
 
     [UIView transitionWithView:window

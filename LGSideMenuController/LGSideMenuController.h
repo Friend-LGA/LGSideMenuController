@@ -29,21 +29,23 @@
 
 #import <UIKit/UIKit.h>
 
-# pragma mark - Constants
+@protocol LGSideMenuControllerDelegate;
 
-static NSString * _Nonnull const LGSideMenuControllerWillShowLeftViewNotification    = @"LGSideMenuControllerWillShowLeftViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerWillDismissLeftViewNotification = @"LGSideMenuControllerWillDismissLeftViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerDidShowLeftViewNotification     = @"LGSideMenuControllerDidShowLeftViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerDidDismissLeftViewNotification  = @"LGSideMenuControllerDidDismissLeftViewNotification";
+#pragma mark - Constants
 
-static NSString * _Nonnull const LGSideMenuControllerWillShowRightViewNotification    = @"LGSideMenuControllerWillShowRightViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerWillDismissRightViewNotification = @"LGSideMenuControllerWillDismissRightViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerDidShowRightViewNotification     = @"LGSideMenuControllerDidShowRightViewNotification";
-static NSString * _Nonnull const LGSideMenuControllerDidDismissRightViewNotification  = @"LGSideMenuControllerDidDismissRightViewNotification";
+static NSString * _Nonnull const LGSideMenuControllerWillShowLeftViewNotification = @"LGSideMenuControllerWillShowLeftViewNotification";
+static NSString * _Nonnull const LGSideMenuControllerDidShowLeftViewNotification  = @"LGSideMenuControllerDidShowLeftViewNotification";
 
-@interface LGSideMenuController : UIViewController
+static NSString * _Nonnull const LGSideMenuControllerWillHideLeftViewNotification = @"LGSideMenuControllerWillHideLeftViewNotification";
+static NSString * _Nonnull const LGSideMenuControllerDidHideLeftViewNotification  = @"LGSideMenuControllerDidHideLeftViewNotification";
 
-# pragma mark - Types
+static NSString * _Nonnull const LGSideMenuControllerWillShowRightViewNotification = @"LGSideMenuControllerWillShowRightViewNotification";
+static NSString * _Nonnull const LGSideMenuControllerDidShowRightViewNotification  = @"LGSideMenuControllerDidShowRightViewNotification";
+
+static NSString * _Nonnull const LGSideMenuControllerWillHideRightViewNotification = @"LGSideMenuControllerWillHideRightViewNotification";
+static NSString * _Nonnull const LGSideMenuControllerDidHideRightViewNotification  = @"LGSideMenuControllerDidHideRightViewNotification";
+
+#pragma mark - Types
 
 typedef void (^ _Nullable LGSideMenuControllerCompletionHandler)();
 
@@ -53,16 +55,9 @@ typedef NS_OPTIONS(NSUInteger, LGSideMenuAlwaysVisibleOptions) {
     LGSideMenuAlwaysVisibleOnPadPortrait    = 1 << 1,
     LGSideMenuAlwaysVisibleOnPhoneLandscape = 1 << 2,
     LGSideMenuAlwaysVisibleOnPhonePortrait  = 1 << 3,
-    LGSideMenuAlwaysVisibleOnAll            = 1 << 4
-};
-
-typedef NS_OPTIONS(NSUInteger, LGSideMenuStatusBarVisibleOptions) {
-    LGSideMenuStatusBarVisibleOnNone           = 0,
-    LGSideMenuStatusBarVisibleOnPadLandscape   = 1 << 0,
-    LGSideMenuStatusBarVisibleOnPadPortrait    = 1 << 1,
-    LGSideMenuStatusBarVisibleOnPhoneLandscape = 1 << 2,
-    LGSideMenuStatusBarVisibleOnPhonePortrait  = 1 << 3,
-    LGSideMenuStatusBarVisibleOnAll            = 1 << 4
+    LGSideMenuAlwaysVisibleOnLandscape      = 1 << 4,
+    LGSideMenuAlwaysVisibleOnPortrait       = 1 << 5,
+    LGSideMenuAlwaysVisibleOnAll            = 1 << 6
 };
 
 typedef NS_ENUM(NSUInteger, LGSideMenuPresentationStyle) {
@@ -77,30 +72,53 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea) {
     LGSideMenuSwipeGestureAreaFull      = 1
 };
 
-# pragma mark - Properties
+typedef struct LGSideMenuSwipeGestureRange {
+    CGFloat left;
+    CGFloat right;
+} LGSideMenuSwipeGestureRange;
 
-@property (weak, nonatomic, nullable) IBOutlet UIViewController *rootViewController;
+LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloat right);
 
-@property (assign, nonatomic, readonly) CGFloat leftViewWidth;
-@property (assign, nonatomic, readonly) CGFloat rightViewWidth;
+#pragma mark -
 
-@property (assign, nonatomic, readonly) LGSideMenuPresentationStyle leftViewPresentationStyle;
-@property (assign, nonatomic, readonly) LGSideMenuPresentationStyle rightViewPresentationStyle;
+@interface LGSideMenuController : UIViewController
 
-@property (assign, nonatomic, readonly) LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
-@property (assign, nonatomic, readonly) LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
+@property (strong, nonatomic, nullable) UIViewController *rootViewController;
+@property (strong, nonatomic, nullable) UIViewController *leftViewController;
+@property (strong, nonatomic, nullable) UIViewController *rightViewController;
 
-@property (assign, nonatomic) IBInspectable LGSideMenuStatusBarVisibleOptions leftViewStatusBarVisibleOptions;
-@property (assign, nonatomic) IBInspectable LGSideMenuStatusBarVisibleOptions rightViewStatusBarVisibleOptions;
+@property (strong, nonatomic, nullable) UIView *rootView;
+@property (strong, nonatomic, nullable) UIView *leftView;
+@property (strong, nonatomic, nullable) UIView *rightView;
 
-@property (assign, nonatomic) IBInspectable UIStatusBarStyle leftViewStatusBarStyle;
-@property (assign, nonatomic) IBInspectable UIStatusBarStyle rightViewStatusBarStyle;
+/** Container for rootViewController or rootView. Usually you do not need to use it */
+@property (strong, nonatomic, nullable, readonly) UIView *rootViewContainer;
+/** Container for leftViewController or leftView. Usually you do not need to use it */
+@property (strong, nonatomic, nullable, readonly) UIView *leftViewContainer;
+/** Container for rightViewController or rightView. Usually you do not need to use it */
+@property (strong, nonatomic, nullable, readonly) UIView *rightViewContainer;
 
-@property (assign, nonatomic) IBInspectable UIStatusBarAnimation leftViewStatusBarUpdateAnimation;
-@property (assign, nonatomic) IBInspectable UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
+/** cancelsTouchesInView = NO */
+@property (strong, nonatomic, readonly, nonnull) UITapGestureRecognizer *tapGesture;
+/** cancelsTouchesInView = YES, only inside your swipeGestureArea */
+@property (strong, nonatomic, readonly, nonnull) UIPanGestureRecognizer *panGesture;
 
-@property (assign, nonatomic, readonly, getter=isLeftViewShowing)  BOOL leftViewShowing;
-@property (assign, nonatomic, readonly, getter=isRightViewShowing) BOOL rightViewShowing;
+#pragma mark - Static defaults
+
+/** Default is MainScreen.size.min - 44.0 */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewWidth;
+/** Default is MainScreen.size.min - 44.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewWidth;
+
+/** Default is LGSideMenuPresentationStyleSlideAbove */
+@property (assign, nonatomic) IBInspectable LGSideMenuPresentationStyle leftViewPresentationStyle;
+/** Default is LGSideMenuPresentationStyleSlideAbove */
+@property (assign, nonatomic) IBInspectable LGSideMenuPresentationStyle rightViewPresentationStyle;
+
+/** Default is LGSideMenuAlwaysVisibleOnNone */
+@property (assign, nonatomic) IBInspectable LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
+/** Default is LGSideMenuAlwaysVisibleOnNone */
+@property (assign, nonatomic) IBInspectable LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
 
 /** Default is YES */
 @property (assign, nonatomic, getter=isLeftViewHidesOnTouch)  IBInspectable BOOL leftViewHidesOnTouch;
@@ -111,153 +129,397 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea) {
 @property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  IBInspectable BOOL leftViewSwipeGestureEnabled;
 /** Default is YES */
 @property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) IBInspectable BOOL rightViewSwipeGestureEnabled;
-/** Default is YES */
-@property (assign, nonatomic, getter=isGesturesCancelsTouchesInView) IBInspectable BOOL gesturesCancelsTouchesInView;
+
+/** Default is NO */
+@property (assign, nonatomic, getter=isLeftViewSwipeGestureDisabled)  BOOL leftViewSwipeGestureDisabled;
+/** Default is NO */
+@property (assign, nonatomic, getter=isRightViewSwipeGestureDisabled) BOOL rightViewSwipeGestureDisabled;
 
 /** Default is LGSideMenuSwipeGestureAreaBorders */
 @property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureArea swipeGestureArea;
 
 /**
- Color that hides root view, when left view is showing
- For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ Only if (swipeGestureArea == LGSideMenuSwipeGestureAreaBorders)
+ Default is LGSideMenuSwipeGestureRangeMake(44.0, 44.0)
+ Explanation: 
+ For LGSideMenuSwipeGestureRangeMake(44.0, 44.0) => leftView 44 | 44 rootView
+ For LGSideMenuSwipeGestureRangeMake(0.0, 44.0)  => leftView    | 44 rootView
+ For LGSideMenuSwipeGestureRangeMake(44.0, 0.0)  => leftView 44 |    rootView
  */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForLeftView;
-/**
- Color that hides root view, when right view is showing
- For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
- */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForRightView;
+@property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureRange leftViewSwipeGestureRange;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig default is 0.8.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
+ Only if (swipeGestureArea == LGSideMenuSwipeGestureAreaBorders)
+ Default is LGSideMenuSwipeGestureRangeMake(44.0, 44.0)
+ Explanation:
+ For LGSideMenuSwipeGestureRangeMake(44.0, 44.0) => rootView 44 | 44 rightView
+ For LGSideMenuSwipeGestureRangeMake(44.0, 0.0)  => rootView 44 |    rightView
+ For LGSideMenuSwipeGestureRangeMake(0.0, 44.0)  => rootView    | 44 rightView
  */
-@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForLeftView;
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig default is 0.8.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
- */
-@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForRightView;
+@property (assign, nonatomic) IBInspectable LGSideMenuSwipeGestureRange rightViewSwipeGestureRange;
 
-/**
- Color that hides left view, when if is not showing.
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- Default is [UIColor colorWithWhite:0.0 alpha:0.5]
- */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewCoverColor;
-/**
- Color that hides right view, when if is not showing.
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- Default is [UIColor colorWithWhite:0.0 alpha:0.5]
- */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewCoverColor;
-
-/** Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) */
-@property (strong, nonatomic, nullable) IBInspectable UIImage *leftViewBackgroundImage;
-/** Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) */
-@property (strong, nonatomic, nullable) IBInspectable UIImage *rightViewBackgroundImage;
-
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4.
- */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4.
- */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
-
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig default is 1.2.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
- */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialScale;
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is 1.
- For LGSideMenuPresentationStyleScaleFromBig default is 1.2.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8.
- */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialScale;
-
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is -width/2.
- For LGSideMenuPresentationStyleScaleFromBig default is 0.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.
- */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialOffsetX;
-/**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle).
- For LGSideMenuPresentationStyleSlideBelow default is width/2.
- For LGSideMenuPresentationStyleScaleFromBig default is 0.
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.
- */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialOffsetX;
-
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerBorderColor;
-@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerBorderWidth;
-/** For (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) default is [UIColor colorWithWhite:0.0 alpha:0.5] */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerShadowColor;
-/** For (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle) default is 5.0 */
-@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerShadowRadius;
-
-@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewBackgroundColor;
-@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerBorderColor;
-@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerBorderWidth;
-/** For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5] */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerShadowColor;
-/** For LGSideMenuPresentationStyleSlideAbove default is 5.0 */
-@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerShadowRadius;
-
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewBackgroundColor;
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewLayerBorderColor;
-@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerBorderWidth;
-/** For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5] */
-@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewLayerShadowColor;
-/** For LGSideMenuPresentationStyleSlideAbove default is 5.0 */
-@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerShadowRadius;
 /** Default is 0.5 */
 @property (assign, nonatomic) IBInspectable NSTimeInterval leftViewAnimationSpeed;
 /** Default is 0.5 */
 @property (assign, nonatomic) IBInspectable NSTimeInterval rightViewAnimationSpeed;
 
-@property (assign, nonatomic) IBInspectable BOOL shouldShowLeftView;
-@property (assign, nonatomic) IBInspectable BOOL shouldShowRightView;
+/** Default is YES */
+@property (assign, nonatomic, getter=isLeftViewEnabled)  IBInspectable BOOL leftViewEnabled;
+/** Default is YES */
+@property (assign, nonatomic, getter=isRightViewEnabled) IBInspectable BOOL rightViewEnabled;
 
-# pragma mark - Methods
+/** Default is NO */
+@property (assign, nonatomic, getter=isLeftViewDisabled)  BOOL leftViewDisabled;
+/** Default is NO */
+@property (assign, nonatomic, getter=isRightViewDisabled) BOOL rightViewDisabled;
+
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewBackgroundColor;
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewBackgroundColor;
+
+/** 
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIImage *leftViewBackgroundImage;
+/** 
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIImage *rightViewBackgroundImage;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *leftViewBackgroundBlurEffect;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rightViewBackgroundBlurEffect;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundAlpha;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundAlpha;
+
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerBorderColor;
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerBorderColor;
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewLayerBorderColor;
+
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerBorderWidth;
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerBorderWidth;
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerBorderWidth;
+
+/** Default is [UIColor colorWithWhite:0.0 alpha:0.5] */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerShadowColor;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerShadowColor;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewLayerShadowColor;
+
+/** Default is 5.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerShadowRadius;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 5.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewLayerShadowRadius;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 5.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewLayerShadowRadius;
+
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rootViewCoverBlurEffectForLeftView;
+/** Default is nil */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rootViewCoverBlurEffectForRightView;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *leftViewCoverBlurEffect;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is nil
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rightViewCoverBlurEffect;
+
+/** Default is 1.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewCoverAlphaForLeftView;
+/** Default is 1.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewCoverAlphaForRightView;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewCoverAlpha;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is 1.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewCoverAlpha;
+
+#pragma mark - Dynamic defaults
+
+/**
+ Default:
+ If rootViewController exists, then rootViewController.shouldAutorotate
+ Else super.shouldAutorotate
+ */
+@property (assign, nonatomic) IBInspectable BOOL rootViewShouldAutorotate;
+
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
+ Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
+ Else super.prefersStatusBarHidden
+ */
+@property (assign, nonatomic, getter=isRootViewStatusBarHidden) IBInspectable BOOL rootViewStatusBarHidden;
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
+ Else if leftViewController exists, then leftViewController.prefersStatusBarHidden
+ Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
+ Else super.prefersStatusBarHidden
+ */
+@property (assign, nonatomic, getter=isLeftViewStatusBarHidden) IBInspectable BOOL leftViewStatusBarHidden;
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
+ Else if rightViewController exists, then rightViewController.prefersStatusBarHidden
+ Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
+ Else super.prefersStatusBarHidden
+ */
+@property (assign, nonatomic, getter=isRightViewStatusBarHidden) IBInspectable BOOL rightViewStatusBarHidden;
+
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
+ Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
+ Else super.preferredStatusBarStyle
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarStyle rootViewStatusBarStyle;
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
+ Else if leftViewController exists, then leftViewController.preferredStatusBarStyle
+ Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
+ Else super.preferredStatusBarStyle
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarStyle leftViewStatusBarStyle;
+/**
+ Default:
+ If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
+ Else if rightViewController exists, then rightViewController.preferredStatusBarStyle
+ Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
+ Else super.preferredStatusBarStyle
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarStyle rightViewStatusBarStyle;
+
+/**
+ Default:
+ If rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
+ Else super.preferredStatusBarUpdateAnimation
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarAnimation rootViewStatusBarUpdateAnimation;
+/**
+ Default:
+ If leftViewController exists, then leftViewController.preferredStatusBarUpdateAnimation
+ Else if rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
+ Else super.preferredStatusBarUpdateAnimation
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarAnimation leftViewStatusBarUpdateAnimation;
+/**
+ Default:
+ If rightViewController exists, then rightViewController.preferredStatusBarUpdateAnimation
+ Else if rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
+ Else super.preferredStatusBarUpdateAnimation
+ */
+@property (assign, nonatomic) IBInspectable UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
+
+/**
+ Color that hides root view, when left view is showing
+ Default is nil
+ For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForLeftView;
+/**
+ Color that hides root view, when right view is showing
+ Default is nil
+ For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForRightView;
+/**
+ Color that hides left view, when it is not showing
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewCoverColor;
+/**
+ Color that hides right view, when it is not showing
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ */
+@property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewCoverColor;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig default is 0.8
+ For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForLeftView;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig default is 0.8
+ For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForRightView;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig default is 1.2
+ For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialScale;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig default is 1.2
+ For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialScale;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is -width/2
+ For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 0.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewInititialOffsetX;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is width/2
+ For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 0.0
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewInititialOffsetX;
+
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4
+ */
+@property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ For LGSideMenuPresentationStyleSlideBelow default is 1.0
+ For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4
+ */
+@property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
+
+#pragma mark - Only getters
+
+/** Is left view fully opened */
+@property (assign, nonatomic, readonly, getter=isLeftViewShowing)  BOOL leftViewShowing;
+/** Is right view fully opened */
+@property (assign, nonatomic, readonly, getter=isRightViewShowing) BOOL rightViewShowing;
+
+/** Is left view fully closed */
+@property (assign, nonatomic, readonly, getter=isLeftViewHidden)  BOOL leftViewHidden;
+/** Is right view fully closed */
+@property (assign, nonatomic, readonly, getter=isRightViewHidden) BOOL rightViewHidden;
+
+/** Is left view showing or going to show or going to hide right now */
+@property (assign, nonatomic, readonly, getter=isLeftViewVisible)  BOOL leftViewVisible;
+/** Is right view showing or going to show or going to hide right now */
+@property (assign, nonatomic, readonly, getter=isRightViewVisible) BOOL rightViewVisible;
+
+/** Is left view has property "always visible" for current orientation */
+@property (assign, nonatomic, readonly, getter=isLeftViewAlwaysVisibleForCurrentOrientation)  BOOL leftViewAlwaysVisibleForCurrentOrientation;
+/** Is right view has property "always visible" for current orientation */
+@property (assign, nonatomic, readonly, getter=isRightViewAlwaysVisibleForCurrentOrientation) BOOL rightViewAlwaysVisibleForCurrentOrientation;
+
+#pragma mark - Callbacks
+
+@property (strong, nonatomic, nullable) void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+@property (strong, nonatomic, nullable) void(^didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+
+@property (strong, nonatomic, nullable) void(^willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+@property (strong, nonatomic, nullable) void(^didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+
+@property (strong, nonatomic, nullable) void(^willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+@property (strong, nonatomic, nullable) void(^didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+
+@property (strong, nonatomic, nullable) void(^willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+@property (strong, nonatomic, nullable) void(^didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+
+@property (strong, nonatomic, nullable) void(^showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+@property (strong, nonatomic, nullable) void(^hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+
+@property (strong, nonatomic, nullable) void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+@property (strong, nonatomic, nullable) void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+
+#pragma mark - Delegate
+
+@property (weak, nonatomic, nullable) id <LGSideMenuControllerDelegate> delegate;
+
+#pragma mark - Initialization
 
 - (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
+
 + (nonnull instancetype)sideMenuControllerWithRootViewController:(nullable UIViewController *)rootViewController;
 
-- (nullable UIView *)leftView;
-- (nullable UIView *)rightView;
+- (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController
+                                leftViewController:(nullable UIViewController *)leftViewController
+                               rightViewController:(nullable UIViewController *)rightViewController;
 
-- (BOOL)isLeftViewAlwaysVisible;
-- (BOOL)isRightViewAlwaysVisible;
++ (nonnull instancetype)sideMenuControllerWithRootViewController:(nullable UIViewController *)rootViewController
+                                              leftViewController:(nullable UIViewController *)leftViewController
+                                             rightViewController:(nullable UIViewController *)rightViewController;
 
-- (BOOL)isLeftViewAlwaysVisibleForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (BOOL)isRightViewAlwaysVisibleForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView;
 
-- (void)setLeftViewEnabledWithWidth:(CGFloat)width
-                  presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-               alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
++ (nonnull instancetype)sideMenuControllerWithRootView:(nullable UIView *)rootView;
 
-- (void)setRightViewEnabledWithWidth:(CGFloat)width
-                   presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-                alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
+- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView
+                                leftView:(nullable UIView *)leftView
+                               rightView:(nullable UIView *)rightView;
 
++ (nonnull instancetype)sideMenuControllerWithRootView:(nullable UIView *)rootView
+                                              leftView:(nullable UIView *)leftView
+                                             rightView:(nullable UIView *)rightView;
+
+#pragma mark -
+
+- (void)rootViewWillLayoutSubviewsWithSize:(CGSize)size;
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size;
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size;
+
+- (BOOL)isLeftViewAlwaysVisibleForOrientation:(UIInterfaceOrientation)orientation;
+- (BOOL)isRightViewAlwaysVisibleForOrientation:(UIInterfaceOrientation)orientation;
 
 - (void)showLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
 - (void)hideLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
@@ -283,22 +545,100 @@ typedef NS_ENUM(NSUInteger, LGSideMenuSwipeGestureArea) {
 - (IBAction)hideRightViewAnimated:(nullable id)sender;
 - (IBAction)toggleRightViewAnimated:(nullable id)sender;
 
-/** Unavailable, select it on your rootViewController */
-- (BOOL)shouldAutorotate __attribute__((unavailable("select it on your rootViewController")));
-/** Unavailable, select it on your rootViewController */
-- (BOOL)prefersStatusBarHidden __attribute__((unavailable("select it on your rootViewController")));
-/** Unavailable, select it on your rootViewController */
-- (UIStatusBarStyle)preferredStatusBarStyle __attribute__((unavailable("select it on your rootViewController")));
-/** Unavailable, select it on your rootViewController */
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation __attribute__((unavailable("select it on your rootViewController")));
+/** Unavailable, select it on your rootViewController OR use rootViewShouldAutorotate */
+- (BOOL)shouldAutorotate __attribute__((unavailable("select it on your rootViewController OR use rootViewShouldAutorotate")));
+/** Unavailable, select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarHidden, leftViewStatusBarHidden, rightViewStatusBarHidden */
+- (BOOL)prefersStatusBarHidden __attribute__((unavailable("select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarHidden, leftViewStatusBarHidden, rightViewStatusBarHidden")));
+/** Unavailable, select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarStyle, leftViewStatusBarStyle, rightViewStatusBarStyle */
+- (UIStatusBarStyle)preferredStatusBarStyle __attribute__((unavailable("select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarStyle, leftViewStatusBarStyle, rightViewStatusBarStyle")));
+/** Unavailable, select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarUpdateAnimation, leftViewStatusBarUpdateAnimation, rightViewStatusBarUpdateAnimation */
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation __attribute__((unavailable("select it on your rootViewController, leftViewController, rightViewController OR use rootViewStatusBarUpdateAnimation, leftViewStatusBarUpdateAnimation, rightViewStatusBarUpdateAnimation")));
 
 @end
 
-# pragma mark - Deprecated
+#pragma mark - Delegate
+
+@protocol LGSideMenuControllerDelegate <NSObject>
+
+@optional
+
+- (void)willShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)showAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+
+- (void)showAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+
+@end
+
+#pragma mark - Deprecated
+
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillHideLeftViewNotification instead")
+LGSideMenuControllerWillDismissLeftViewNotification  = @"LGSideMenuControllerWillHideLeftViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidHideLeftViewNotification instead")
+LGSideMenuControllerDidDismissLeftViewNotification   = @"LGSideMenuControllerDidHideLeftViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillHideRightViewNotification instead")
+LGSideMenuControllerWillDismissRightViewNotification = @"LGSideMenuControllerWillHideRightViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidHideRightViewNotification instead")
+LGSideMenuControllerDidDismissRightViewNotification  = @"LGSideMenuControllerDidHideRightViewNotification";
+
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillShowLeftViewNotification instead")
+kLGSideMenuControllerWillShowLeftViewNotification = @"LGSideMenuControllerWillShowLeftViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillHideLeftViewNotification instead")
+kLGSideMenuControllerWillHideLeftViewNotification = @"LGSideMenuControllerWillHideLeftViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidShowLeftViewNotification instead")
+kLGSideMenuControllerDidShowLeftViewNotification  = @"LGSideMenuControllerDidShowLeftViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidHideLeftViewNotification instead")
+kLGSideMenuControllerDidHideLeftViewNotification  = @"LGSideMenuControllerDidHideLeftViewNotification";
+
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillShowRightViewNotification instead")
+kLGSideMenuControllerWillShowRightViewNotification = @"LGSideMenuControllerWillShowRightViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerWillHideRightViewNotification instead")
+kLGSideMenuControllerWillHideRightViewNotification = @"LGSideMenuControllerWillHideRightViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidShowRightViewNotification instead")
+kLGSideMenuControllerDidShowRightViewNotification  = @"LGSideMenuControllerDidShowRightViewNotification";
+static NSString * _Nonnull const DEPRECATED_MSG_ATTRIBUTE("use LGSideMenuControllerDidHideRightViewNotification instead")
+kLGSideMenuControllerDidHideRightViewNotification  = @"LGSideMenuControllerDidHideRightViewNotification";
 
 @interface LGSideMenuController (Deprecated)
 
-- (void)showHideLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler DEPRECATED_ATTRIBUTE;
-- (void)showHideRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler DEPRECATED_ATTRIBUTE;
+@property (assign, nonatomic, getter=isShouldShowLeftView) IBInspectable BOOL shouldShowLeftView
+DEPRECATED_MSG_ATTRIBUTE("use leftViewEnabled instead");
+@property (assign, nonatomic, getter=isShouldShowRightView) IBInspectable BOOL shouldShowRightView
+DEPRECATED_MSG_ATTRIBUTE("use rightViewEnabled instead");
+
+@property (assign, nonatomic, readonly, getter=isLeftViewAlwaysVisible) BOOL leftViewAlwaysVisible
+DEPRECATED_MSG_ATTRIBUTE("use leftViewAlwaysVisibleForCurrentOrientation instead");
+@property (assign, nonatomic, readonly, getter=isRightViewAlwaysVisible) BOOL rightViewAlwaysVisible
+DEPRECATED_MSG_ATTRIBUTE("use rightViewAlwaysVisibleForCurrentOrientation instead");
+
+- (void)showHideLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler
+DEPRECATED_MSG_ATTRIBUTE("use toggleLeftViewAnimated:completionHandler instead");
+- (void)showHideRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler
+DEPRECATED_MSG_ATTRIBUTE("use toggleRightViewAnimated:completionHandler instead");
+
+- (BOOL)isLeftViewAlwaysVisibleForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+DEPRECATED_MSG_ATTRIBUTE("use isLeftViewAlwaysVisibleForOrientation instead");
+- (BOOL)isRightViewAlwaysVisibleForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+DEPRECATED_MSG_ATTRIBUTE("use isRightViewAlwaysVisibleForOrientation instead");
+
+- (void)setLeftViewEnabledWithWidth:(CGFloat)width
+                  presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
+               alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions DEPRECATED_ATTRIBUTE;
+
+- (void)setRightViewEnabledWithWidth:(CGFloat)width
+                   presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
+                alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions DEPRECATED_ATTRIBUTE;
 
 @end

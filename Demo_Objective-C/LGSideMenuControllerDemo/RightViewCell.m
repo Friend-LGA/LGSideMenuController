@@ -2,9 +2,6 @@
 //  RightViewCell.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 26.04.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "RightViewCell.h"
 
@@ -20,10 +17,12 @@
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.textLabel.textColor = [UIColor whiteColor];
 
         // -----
 
         self.separatorView = [UIView new];
+        self.separatorView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
         [self addSubview:self.separatorView];
     }
     return self;
@@ -32,16 +31,21 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    self.textLabel.textColor = self.tintColor;
-    self.separatorView.backgroundColor = [self.tintColor colorWithAlphaComponent:0.4];
+    CGRect textLabelFrame = self.textLabel.frame;
+    textLabelFrame.origin.x = 8.0;
+    textLabelFrame.size.width = CGRectGetWidth(self.frame) - 16.0;
+    self.textLabel.frame = textLabelFrame;
 
-    CGFloat height = [UIScreen mainScreen].scale == 1.0 ? 1.0 : 0.5;
+    CGFloat height = UIScreen.mainScreen.scale == 1.0 ? 1.0 : 0.5;
 
-    self.separatorView.frame = CGRectMake(self.frame.size.width*0.1, self.frame.size.height-height, self.frame.size.width*0.9, height);
+    self.separatorView.frame = CGRectMake(CGRectGetWidth(self.frame)*0.1,
+                                          CGRectGetHeight(self.frame)-height,
+                                          CGRectGetWidth(self.frame)*0.9,
+                                          height);
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    self.textLabel.textColor = highlighted ? [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0] : self.tintColor;
+    self.textLabel.alpha = highlighted ? 0.5 : 1.0;
 }
 
 @end

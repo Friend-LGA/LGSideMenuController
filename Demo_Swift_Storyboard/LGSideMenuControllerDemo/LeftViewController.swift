@@ -2,30 +2,35 @@
 //  LeftViewController.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class LeftViewController: UITableViewController {
-
-    var tintColor: UIColor?
     
     private let titlesArray = ["Open Right View",
+                               "",
+                               "Change Root VC",
                                "",
                                "Profile",
                                "News",
                                "Articles",
                                "Video",
                                "Music"]
-    
-    // MARK: - View Lifecycle
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
     }
     
     // MARK: - UITableViewDataSource
@@ -38,9 +43,8 @@ class LeftViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeftViewCell
 
         cell.textLabel!.text = titlesArray[indexPath.row]
-        cell.separatorView.isHidden = (indexPath.row <= 1 || indexPath.row == titlesArray.count - 1)
-        cell.isUserInteractionEnabled = (indexPath.row != 1)
-        cell.tintColor = tintColor
+        cell.separatorView.isHidden = (indexPath.row <= 3 || indexPath.row == self.titlesArray.count-1)
+        cell.isUserInteractionEnabled = (indexPath.row != 1 && indexPath.row != 3)
 
         return cell
     }
@@ -48,14 +52,14 @@ class LeftViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 1 ? 22.0 : 44.0
+        return (indexPath.row == 1 || indexPath.row == 3) ? 22.0 : 44.0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = UIApplication.shared.delegate!.window!!.rootViewController! as! MainViewController
+        let mainViewController = sideMenuController!
         
         if indexPath.row == 0 {
-            if mainViewController.isLeftViewAlwaysVisible() {
+            if mainViewController.isLeftViewAlwaysVisibleForCurrentOrientation {
                 mainViewController.showRightView(animated: true, completionHandler: nil)
             }
             else {
@@ -63,6 +67,21 @@ class LeftViewController: UITableViewController {
                     mainViewController.showRightView(animated: true, completionHandler: nil)
                 })
             }
+        }
+        else if indexPath.row == 2 {
+            let navigationController = mainViewController.rootViewController as! NavigationController
+            let viewController: UIViewController!
+
+            if navigationController.viewControllers.first is ViewController {
+                viewController = self.storyboard!.instantiateViewController(withIdentifier: "OtherViewController")
+            }
+            else {
+                viewController = self.storyboard!.instantiateViewController(withIdentifier: "ViewController")
+            }
+
+            navigationController.setViewControllers([viewController], animated: false)
+
+            mainViewController.hideLeftView(animated: true, completionHandler: nil)
         }
         else {
             let viewController = UIViewController()

@@ -2,15 +2,9 @@
 //  ViewController.m
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 18.02.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
 
 #import "ViewController.h"
-#import "AppDelegate.h"
 #import "ChooseNavigationController.h"
-#import "TableViewController.h"
-#import "MainViewController.h"
 #import "UIViewController+LGSideMenuController.h"
 
 @interface ViewController ()
@@ -31,8 +25,9 @@
 
         // -----
 
-        self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
+        self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"imageRoot"]];
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.clipsToBounds = YES;
         [self.view addSubview:self.imageView];
 
         self.button = [UIButton new];
@@ -45,8 +40,15 @@
 
         // -----
 
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(showLeftView)];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(showRightView)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left"
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(showLeftView)];
+
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right"
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(showRightView)];
     }
     return self;
 }
@@ -54,9 +56,9 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 
-    self.imageView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.imageView.frame = CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
 
-    self.button.frame = CGRectMake(0.0, self.view.frame.size.height-44.0, self.view.frame.size.width, 44.0);
+    self.button.frame = CGRectMake(0.0, CGRectGetHeight(self.view.frame)-44.0, CGRectGetWidth(self.view.frame), 44.0);
 }
 
 #pragma mark -
@@ -72,7 +74,7 @@
 - (void)showChooseController {
     ChooseNavigationController *navigationController = [ChooseNavigationController new];
 
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    UIWindow *window = UIApplication.sharedApplication.delegate.window;
     window.rootViewController = navigationController;
 
     [UIView transitionWithView:window

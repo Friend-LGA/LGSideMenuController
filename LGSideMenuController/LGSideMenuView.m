@@ -1,5 +1,5 @@
 //
-//  UIViewController+LGSideMenuController.h
+//  LGSideMenuView.m
 //  LGSideMenuController
 //
 //
@@ -27,37 +27,28 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "LGSideMenuController.h"
+#import "LGSideMenuView.h"
 
-@interface UIViewController (LGSideMenuController)
+@interface LGSideMenuView ()
 
-/** If this view controller is root view controller of side menu controller or one of children of root view controller, return it. */
-@property(nullable, nonatomic, readonly, weak) LGSideMenuController *sideMenuController;
-
-- (IBAction)showLeftView:(nullable id)sender;
-- (IBAction)hideLeftView:(nullable id)sender;
-- (IBAction)toggleLeftView:(nullable id)sender;
-
-- (IBAction)showLeftViewAnimated:(nullable id)sender;
-- (IBAction)hideLeftViewAnimated:(nullable id)sender;
-- (IBAction)toggleLeftViewAnimated:(nullable id)sender;
-
-- (IBAction)showRightView:(nullable id)sender;
-- (IBAction)hideRightView:(nullable id)sender;
-- (IBAction)toggleRightView:(nullable id)sender;
-
-- (IBAction)showRightViewAnimated:(nullable id)sender;
-- (IBAction)hideRightViewAnimated:(nullable id)sender;
-- (IBAction)toggleRightViewAnimated:(nullable id)sender;
+@property (strong, nonatomic) void (^layoutSubviewsHandler)();
 
 @end
 
-#pragma mark - Deprecated
+@implementation LGSideMenuView
 
-@interface UIViewController (LGSideMenuControllerDeprecated)
+- (nonnull instancetype)initWithLayoutSubviewsHandler:(void(^ _Nonnull)())layoutSubviewsHandler {
+    self = [super init];
+    if (self) {
+        self.layoutSubviewsHandler = layoutSubviewsHandler;
+    }
+    return self;
+}
 
-- (IBAction)openLeftView:(nullable id)sender DEPRECATED_ATTRIBUTE;
-- (IBAction)openRightView:(nullable id)sender DEPRECATED_ATTRIBUTE;
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    self.layoutSubviewsHandler();
+}
 
 @end

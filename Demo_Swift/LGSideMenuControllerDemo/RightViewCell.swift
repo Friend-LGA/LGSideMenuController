@@ -2,11 +2,6 @@
 //  RightViewCell.swift
 //  LGSideMenuControllerDemo
 //
-//  Created by Grigory Lutkov on 26.04.15.
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>. All rights reserved.
-//
-
-import UIKit
 
 class RightViewCell: UITableViewCell {
 
@@ -22,10 +17,12 @@ class RightViewCell: UITableViewCell {
         textLabel!.textAlignment = .center
         textLabel!.numberOfLines = 0
         textLabel!.lineBreakMode = .byWordWrapping
+        textLabel!.textColor = .white
 
         // -----
 
         separatorView = UIView()
+        separatorView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         addSubview(separatorView)
     }
     
@@ -36,8 +33,8 @@ class RightViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        textLabel!.textColor = tintColor
-        separatorView.backgroundColor = tintColor.withAlphaComponent(0.4)
+        textLabel!.frame.origin.x = 8.0
+        textLabel!.frame.size.width = self.frame.width - 16.0
 
         let height = UIScreen.main.scale == 1.0 ? 1.0 : 0.5 as CGFloat
 
@@ -45,7 +42,7 @@ class RightViewCell: UITableViewCell {
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        textLabel!.textColor = highlighted ? UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0) : tintColor
+        textLabel!.alpha = highlighted ? 0.5 : 1.0
     }
     
 }
