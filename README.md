@@ -288,7 +288,7 @@ For example:
 sideMenuController.leftViewBackgroundAlpha = 0.9;
 ```
 
-### Status bar
+### Status Bar
 
 You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
 instead you need to override all this methods for each controller separated, or use properties of sideMenuController:
@@ -507,7 +507,7 @@ sideMenuController.leftViewAlwaysVisibleOptions = LGSideMenuAlwaysVisibleOnPadLa
 sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLandscape]
 ```
 
-### UINavigationController's back gesture
+### NavigationController's back gesture
 
 Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
 But if you want you can disable it with `navigationController.interactivePopGestureRecognizer.enabled = NO`,
