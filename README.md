@@ -510,12 +510,15 @@ sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLand
 ### NavigationController's back gesture
 
 Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
-But if you want you can disable it with `navigationController.interactivePopGestureRecognizer.enabled = NO`,
-or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
+But if you want you can disable `interactivePopGestureRecognizer`, or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
 
 ##### Objective-C
 
 ```objective-c
+navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+// OR
+
 sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
 
 // OR
@@ -527,6 +530,10 @@ sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(
 ##### Swift
 
 ```swift
+navigationController.interactivePopGestureRecognizer.isEnabled = false
+
+// OR
+
 sideMenuController.swipeGestureArea = .full
 
 // OR
