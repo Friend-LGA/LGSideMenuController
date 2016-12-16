@@ -34,11 +34,6 @@
 
 @property (assign, nonatomic, nonnull) LGSideMenuController *sideMenuController;
 
-@property (assign, nonatomic) LGSideMenuSwipeGestureArea swipeGestureArea;
-
-@property (assign, nonatomic) LGSideMenuSwipeGestureRange leftViewSwipeGestureRange;
-@property (assign, nonatomic) LGSideMenuSwipeGestureRange rightViewSwipeGestureRange;
-
 @property (weak, nonatomic, nullable) UIView *rootViewContainer;
 @property (weak, nonatomic, nullable) UIView *leftViewContainer;
 @property (weak, nonatomic, nullable) UIView *rightViewContainer;
@@ -46,9 +41,6 @@
 @property (weak, nonatomic, nullable) UIView *rootViewCoverView;
 
 @property (assign, nonatomic, getter=isAnimating) BOOL animating;
-
-@property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  BOOL leftViewSwipeGestureEnabled;
-@property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) BOOL rightViewSwipeGestureEnabled;
 
 - (nonnull instancetype)initWithSideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 

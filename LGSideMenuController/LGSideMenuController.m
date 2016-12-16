@@ -1042,31 +1042,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
 #pragma mark -
 
-- (void)setSwipeGestureArea:(LGSideMenuSwipeGestureArea)swipeGestureArea {
-    _swipeGestureArea = swipeGestureArea;
-    self.gesturesHandler.swipeGestureArea = swipeGestureArea;
-}
-
-- (void)setLeftViewSwipeGestureRange:(LGSideMenuSwipeGestureRange)leftViewSwipeGestureRange {
-    _leftViewSwipeGestureRange = leftViewSwipeGestureRange;
-    self.gesturesHandler.leftViewSwipeGestureRange = leftViewSwipeGestureRange;
-}
-
-- (void)setRightViewSwipeGestureRange:(LGSideMenuSwipeGestureRange)rightViewSwipeGestureRange {
-    _rightViewSwipeGestureRange = rightViewSwipeGestureRange;
-    self.gesturesHandler.rightViewSwipeGestureRange = rightViewSwipeGestureRange;
-}
-
-- (void)setLeftViewSwipeGestureEnabled:(BOOL)leftViewSwipeGestureEnabled {
-    _leftViewSwipeGestureEnabled = leftViewSwipeGestureEnabled;
-    self.gesturesHandler.leftViewSwipeGestureEnabled = leftViewSwipeGestureEnabled;
-}
-
-- (void)setRightViewSwipeGestureEnabled:(BOOL)rightViewSwipeGestureEnabled {
-    _rightViewSwipeGestureEnabled = rightViewSwipeGestureEnabled;
-    self.gesturesHandler.rightViewSwipeGestureEnabled = rightViewSwipeGestureEnabled;
-}
-
 - (void)setRootViewContainer:(LGSideMenuView *)rootViewContainer {
     _rootViewContainer = rootViewContainer;
     self.gesturesHandler.rootViewContainer = rootViewContainer;
@@ -2776,7 +2751,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     // -----
 
-    if (self.leftView && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.rightViewGestireStartX && self.isRightViewHidden && self.isLeftViewEnabled) {
+    if (self.leftView && self.isLeftViewSwipeGestureEnabled && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.rightViewGestireStartX && self.isRightViewHidden && self.isLeftViewEnabled) {
         if (!self.leftViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged)) {
             BOOL velocityReady = self.isLeftViewShowing ? velocity.x < 0.0 : velocity.x > 0.0;
 
@@ -2844,7 +2819,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     // -----
 
-    if (self.rightView && !self.isRightViewAlwaysVisibleForCurrentOrientation && !self.leftViewGestireStartX && self.isLeftViewHidden && self.isRightViewEnabled) {
+    if (self.rightView && self.isRightViewSwipeGestureEnabled && !self.isRightViewAlwaysVisibleForCurrentOrientation && !self.leftViewGestireStartX && self.isLeftViewHidden && self.isRightViewEnabled) {
         if (!self.rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged)) {
             BOOL velocityReady = self.isRightViewShowing ? velocity.x > 0.0 : velocity.x < 0.0;
 
