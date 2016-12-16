@@ -217,15 +217,15 @@ For better examples check demo projects.
 
 You can use UIBlurEffect with next properties:
 
-```
-leftViewBackgroundBlurEffect
-rightViewBackgroundBlurEffect
+```objective-c
+UIBlurEffect *leftViewBackgroundBlurEffect;
+UIBlurEffect *rightViewBackgroundBlurEffect;
 
-rootViewCoverBlurEffectForLeftView
-rootViewCoverBlurEffectForRightView
+UIBlurEffect *rootViewCoverBlurEffectForLeftView;
+UIBlurEffect *rootViewCoverBlurEffectForRightView;
 
-leftViewCoverBlurEffect
-rightViewCoverBlurEffect
+UIBlurEffect *leftViewCoverBlurEffect;
+UIBlurEffect *rightViewCoverBlurEffect;
 ```
 
 For example:
@@ -244,15 +244,15 @@ sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
 
 If you want to change color of blurred view, use:
 
-```
-leftViewBackgroundColor
-rightViewBackgroundColor
+```objective-c
+UIColor* leftViewBackgroundColor;
+UIColor* rightViewBackgroundColor;
 
-rootViewCoverColorForLeftView
-rootViewCoverColorForRightView
+UIColor* rootViewCoverColorForLeftView;
+UIColor* rootViewCoverColorForRightView;
 
-leftViewCoverColor
-rightViewCoverColor
+UIColor* leftViewCoverColor;
+UIColor* rightViewCoverColor;
 ```
 
 For example:
@@ -271,43 +271,43 @@ sideMenuController.leftViewBackgroundColor = UIColor(red: 0.0, green: 0.5, blue:
 
 If you want to change intensity of blurred view, use:
 
-```
-leftViewBackgroundAlpha
-rightViewBackgroundAlpha
+```objective-c
+CGFloat leftViewBackgroundAlpha;
+CGFloat rightViewBackgroundAlpha;
 
-rootViewCoverAlphaForLeftView
-rootViewCoverAlphaForRightView
+CGFloat rootViewCoverAlphaForLeftView;
+CGFloat rootViewCoverAlphaForRightView;
 
-leftViewCoverAlpha
-rightViewCoverAlpha
+CGFloat CGFloatleftViewCoverAlpha;
+CGFloat rightViewCoverAlpha;
 ```
 
 For example:
 
-```swift
-sideMenuController.leftViewBackgroundAlpha = 0.9
+```objective-c
+sideMenuController.leftViewBackgroundAlpha = 0.9;
 ```
 
 ### Status bar
 
 You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
-instead you need to override all this methods for each controller separated, or use next properties of sideMenuController:
+instead you need to override all this methods for each controller separated, or use properties of sideMenuController:
 
+```objective-c
+BOOL rootViewStatusBarHidden;
+UIStatusBarStyle rootViewStatusBarStyle;
+UIStatusBarAnimation rootViewStatusBarUpdateAnimation;
+
+BOOL leftViewStatusBarHidden;
+UIStatusBarStyle leftViewStatusBarStyle;
+UIStatusBarAnimation leftViewStatusBarUpdateAnimation;
+
+BOOL rightViewStatusBarHidden;
+UIStatusBarStyle rightViewStatusBarStyle;
+UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
 ```
-rootViewStatusBarHidden
-rootViewStatusBarStyle
-rootViewStatusBarUpdateAnimation
 
-leftViewStatusBarHidden
-leftViewStatusBarStyle
-leftViewStatusBarUpdateAnimation
-
-rightViewStatusBarHidden
-rightViewStatusBarStyle
-rightViewStatusBarUpdateAnimation
-```
-
-And this properties has more priority, then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
+And this properties has greater priority, then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
 
 For example, you had sideMenuController with rootViewController, leftViewController and rightViewController.
 For rootViewController, you can override it's default methods or use sideMenuController's properties:
@@ -465,6 +465,74 @@ override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
 
     set { super.rootViewStatusBarUpdateAnimation = newValue }
 }
+```
+
+### Always visible options
+
+Sometimes, for example on iPad, you need to has toggleable side menu on portrait orientation and always visible side menu on landscape orientation
+
+You can get it with properties:
+
+```objective-c
+LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
+LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
+```
+
+LGSideMenuAlwaysVisibleOptions has values:
+
+```
+LGSideMenuAlwaysVisibleOnNone
+LGSideMenuAlwaysVisibleOnLandscape
+LGSideMenuAlwaysVisibleOnPortrait
+LGSideMenuAlwaysVisibleOnPad
+LGSideMenuAlwaysVisibleOnPhone
+LGSideMenuAlwaysVisibleOnPadLandscape
+LGSideMenuAlwaysVisibleOnPadPortrait
+LGSideMenuAlwaysVisibleOnPhoneLandscape
+LGSideMenuAlwaysVisibleOnPhonePortrait
+LGSideMenuAlwaysVisibleOnAll
+```
+
+You can choose multiple values like this:
+
+##### Objective-C
+
+```objective-c
+sideMenuController.leftViewAlwaysVisibleOptions = LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape;
+```
+
+##### Swift
+
+```swift
+sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLandscape]
+```
+
+### UINavigationController's back gesture
+
+Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
+But if you want you can disable it with `navigationController.interactivePopGestureRecognizer.enabled = NO`,
+or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
+
+##### Objective-C
+
+```objective-c
+sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
+
+// OR
+
+sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 88.0);
+sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0);
+```
+
+##### Swift
+
+```swift
+sideMenuController.swipeGestureArea = .full
+
+// OR
+
+sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 88.0)
+sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0)
 ```
 
 ### Handle actions
