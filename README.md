@@ -23,6 +23,7 @@ iOS view controller shows left and right views on top of everything by pressing 
 Then import header files where you need to use the library
 
 #### Objective-C
+
 ```objective-c
 #import "LGSideMenuController.h"
 #import "UIViewController+LGSideMenuController.h"
@@ -43,6 +44,7 @@ For swift you need to create [bridging header](https://developer.apple.com/libra
 CocoaPods is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries in your projects. To install with cocoaPods, follow the "Get Started" section on [CocoaPods](https://cocoapods.org/).
 
 #### Podfile
+
 ```ruby
 platform :ios, '8.0'
 use_frameworks!
@@ -52,6 +54,7 @@ pod 'LGSideMenuController'
 Then import framework where you need to use the library
 
 #### Objective-C
+
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
 #import <LGSideMenuController/UIViewController+LGSideMenuController.h>
@@ -76,6 +79,7 @@ import LGSideMenuController.UIViewController_LGSideMenuController
 Carthage is a lightweight dependency manager for Swift and Objective-C. It leverages CocoaTouch modules and is less invasive than CocoaPods. To install with carthage, follow the instruction on [Carthage](https://github.com/Carthage/Carthage/).
 
 #### Cartfile
+
 ```ruby
 github "Friend-LGA/LGSideMenuController"
 ```
@@ -83,6 +87,7 @@ github "Friend-LGA/LGSideMenuController"
 Then import framework where you need to use the library
 
 #### Objective-C
+
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
 #import <LGSideMenuController/UIViewController+LGSideMenuController.h>
@@ -106,90 +111,219 @@ import LGSideMenuController.UIViewController_LGSideMenuController
 
 ### Initialization
 
+You can use view controllers or views to initialize LGSideMenuController:
+
 #### Objective-C
+
 ```objective-c
 - (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
+
+- (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController
+                                leftViewController:(nullable UIViewController *)leftViewController
+                               rightViewController:(nullable UIViewController *)rightViewController;
+
+- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView;
+
+- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView
+                                leftView:(nullable UIView *)leftView
+                               rightView:(nullable UIView *)rightView;
 ```
 
 #### Swift
+
 ```swift
 public init(rootViewController: UIViewController?)
+
+public init(rootViewController: UIViewController?,
+            leftViewController: UIViewController?,
+           rightViewController: UIViewController?)
+
+public init(rootView: UIView?)
+
+public init(rootView: UIView?,
+            leftView: UIView?,
+           rightView: UIView?)
 ```
 
 ### Setup
 
-To enable left or right or both views call:
+To set or change root, left or right view controllers or views, call:
 
-#### Objective-C
-```objective-c
-- (void)setLeftViewEnabledWithWidth:(CGFloat)width
-                  presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-               alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
-
-- (void)setRightViewEnabledWithWidth:(CGFloat)width
-                   presentationStyle:(LGSideMenuPresentationStyle)presentationStyle
-                alwaysVisibleOptions:(LGSideMenuAlwaysVisibleOptions)alwaysVisibleOptions;
-```
-
-#### Swift
 ```swift
-open func setLeftViewEnabledWithWidth(_ width: CGFloat,
-                            presentationStyle: LGSideMenuPresentationStyle,
-                         alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+sideMenuController.rootViewController = rootViewController
+sideMenuController.leftViewController = leftViewController
+sideMenuController.rightViewController = rightViewController
 
-open func setRightViewEnabledWithWidth(_ width: CGFloat,
-                             presentationStyle: LGSideMenuPresentationStyle,
-                          alwaysVisibleOptions: LGSideMenuAlwaysVisibleOptions)
+sideMenuController.rootView = rootView
+sideMenuController.leftView = leftView
+sideMenuController.rightView = rightView
 ```
+
+If you will set, for example, `sideMenuController.rootViewController = rootViewController`, 
+then `sideMenuController.rootView == rootViewController.view`.    
+If you had, for example, root view controller and you will set, `sideMenuController.rootView = rootView`, 
+then `sideMenuController.rootViewController == nil`.
 
 ### Quick Example
 
 #### Objective-C
+
 ```objective-c
-ViewController *viewController = [ViewController new];
+UIViewController *rootViewController = [UIViewController new];
+UITableViewController *leftViewController = [UITableViewController new];
+UITableViewController *rightViewController = [UITableViewController new];
 
-UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 
-LGSideMenuController *sideMenuController = [[LGSideMenuController alloc] initWithRootViewController:navigationController];
+LGSideMenuController *sideMenuController = [LGSideMenuController sideMenuControllerWithRootViewController:navigationController
+                                                                                       leftViewController:leftViewController
+                                                                                      rightViewController:rightViewController];
 
-[sideMenuController setLeftViewEnabledWithWidth:250.0
-                              presentationStyle:LGSideMenuPresentationStyleScaleFromBig
-                           alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
+sideMenuController.leftViewWidth = 250.0;
+sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
 
-TableViewController *leftViewController = [TableViewController new];
-
-[sideMenuController.leftView addSubview:leftViewController.tableView];
+sideMenuController.rightViewWidth = 100.0;
+sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
 ```
 
 #### Swift
+
 ```swift
-let viewController = UIViewController()
-        
-let navigationController = UINavigationController(rootViewController: viewController)
-        
-let sideMenuController = LGSideMenuController(rootViewController: navigationController)
-        
-sideMenuController.setLeftViewEnabledWithWidth(250.0, presentationStyle: .scaleFromBig, alwaysVisibleOptions: [])
-        
+let rootViewController = UIViewController()
 let leftViewController = UITableViewController()
-        
-sideMenuController.leftView().addSubview(leftViewController.tableView)
+let rightViewController = UITableViewController()
+
+let navigationController = UINavigationController(rootViewController: rootViewController)
+
+let sideMenuController = LGSideMenuController(rootViewController: navigationController, 
+                                              leftViewController: leftViewController, 
+                                             rightViewController: rightViewController)
+
+sideMenuController.leftViewWidth = 250.0;
+sideMenuController.leftViewPresentationStyle = .scaleFromBig;
+
+sideMenuController.rightViewWidth = 100.0;
+sideMenuController.leftViewPresentationStyle = .slideBelow;
+```
+
+For more info check demo projects.
+
+### Handle actions
+
+To handle actions you can use delegate, blocks, or notifications:
+
+#### Delegate
+
+#### Objective-C
+
+```objective-c
+<LGSideMenuControllerDelegate>
+
+@optional
+
+- (void)willShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)willHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+- (void)didHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+- (void)showAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+
+- (void)showAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+```
+
+#### Swift
+
+```swift
+<LGSideMenuControllerDelegate>
+
+optional public func willShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+optional public func didShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+
+optional public func willHideLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+optional public func didHideLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+
+optional public func willShowRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+optional public func didShowRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+
+optional public func willHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+optional public func didHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+
+optional public func showAnimationsBlock(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func hideAnimationsBlock(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+
+optional public func showAnimationsBlock(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func hideAnimationsBlock(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+```
+
+#### Blocks
+
+#### Objective-C
+
+```objective-c
+void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+
+void(^willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+
+void(^willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+
+void(^willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+
+void(^showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+void(^hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+
+void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+```
+
+#### Swift
+
+```swift
+open var willShowLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var didShowLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+
+open var willHideLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var didHideLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+
+open var willShowRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var didShowRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+
+open var willHideRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var didHideRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+
+open var showLeftViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
+open var hideLeftViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
+
+open var showRightViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
+open var hideRightViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
 ```
 
 #### Notifications
 
-Here is also some notifications, that you can add to NSNotificationsCenter:
-
 ```
 LGSideMenuControllerWillShowLeftViewNotification
-LGSideMenuControllerWillDismissLeftViewNotification
 LGSideMenuControllerDidShowLeftViewNotification
-LGSideMenuControllerDidDismissLeftViewNotification
+
+LGSideMenuControllerWillHideLeftViewNotification
+LGSideMenuControllerDidHideLeftViewNotification
 
 LGSideMenuControllerWillShowRightViewNotification
-LGSideMenuControllerWillDismissRightViewNotification
 LGSideMenuControllerDidShowRightViewNotification
-LGSideMenuControllerDidDismissRightViewNotification
+
+LGSideMenuControllerWillHideRightViewNotification
+LGSideMenuControllerDidHideRightViewNotification
 ```
 
 ### More
