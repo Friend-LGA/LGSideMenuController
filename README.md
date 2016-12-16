@@ -16,20 +16,25 @@ iOS view controller shows left and right views on top of everything by pressing 
 
 ## Installation
 
+| LGSideMenuController version | iOS version |
+|------------------------------|-------------|
+| <= 1.0.10                    | >= 6.0      |
+| >= 1.1.0                     | >= 8.0      |
+
 ### With source code
 
 [Download repository](https://github.com/Friend-LGA/LGSideMenuController/archive/master.zip), then add [LGSideMenuController directory](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/) to your project.
 
 Then import header files where you need to use the library
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 #import "LGSideMenuController.h"
 #import "UIViewController+LGSideMenuController.h"
 ```
 
-#### Swift
+##### Swift
 
 For swift you need to create [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
 
@@ -53,7 +58,7 @@ pod 'LGSideMenuController'
 
 Then import framework where you need to use the library
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
@@ -65,7 +70,7 @@ Then import framework where you need to use the library
 @import LGSideMenuController.UIViewController_LGSideMenuController;
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 import LGSideMenuController
@@ -86,7 +91,7 @@ github "Friend-LGA/LGSideMenuController"
 
 Then import framework where you need to use the library
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
@@ -98,7 +103,7 @@ Then import framework where you need to use the library
 @import LGSideMenuController.UIViewController_LGSideMenuController;
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 import LGSideMenuController
@@ -113,7 +118,7 @@ import LGSideMenuController.UIViewController_LGSideMenuController
 
 You can use view controllers or views to initialize LGSideMenuController:
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 - (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
@@ -129,7 +134,7 @@ You can use view controllers or views to initialize LGSideMenuController:
                                rightView:(nullable UIView *)rightView;
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 public init(rootViewController: UIViewController?)
@@ -166,7 +171,7 @@ then `sideMenuController.rootViewController == nil`.
 
 ### Quick Example
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 UIViewController *rootViewController = [UIViewController new];
@@ -186,7 +191,7 @@ sideMenuController.rightViewWidth = 100.0;
 sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 let rootViewController = UIViewController()
@@ -206,7 +211,261 @@ sideMenuController.rightViewWidth = 100.0;
 sideMenuController.leftViewPresentationStyle = .slideBelow;
 ```
 
-For more info check demo projects.
+For better examples check demo projects.
+
+### Blur
+
+You can use UIBlurEffect with next properties:
+
+```
+leftViewBackgroundBlurEffect
+rightViewBackgroundBlurEffect
+
+rootViewCoverBlurEffectForLeftView
+rootViewCoverBlurEffectForRightView
+
+leftViewCoverBlurEffect
+rightViewCoverBlurEffect
+```
+
+For example:
+
+##### Objective-C
+
+```objective-c
+sideMenuController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+```
+
+##### Swift
+
+```swift
+sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
+```
+
+If you want to change color of blurred view, use:
+
+```
+leftViewBackgroundColor
+rightViewBackgroundColor
+
+rootViewCoverColorForLeftView
+rootViewCoverColorForRightView
+
+leftViewCoverColor
+rightViewCoverColor
+```
+
+For example:
+
+##### Objective-C
+
+```objective-c
+sideMenuController.leftViewBackgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.1];
+```
+
+##### Swift
+
+```swift
+sideMenuController.leftViewBackgroundColor = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 0.1)
+```
+
+If you want to change intensity of blurred view, use:
+
+```
+leftViewBackgroundAlpha
+rightViewBackgroundAlpha
+
+rootViewCoverAlphaForLeftView
+rootViewCoverAlphaForRightView
+
+leftViewCoverAlpha
+rightViewCoverAlpha
+```
+
+For example:
+
+```swift
+sideMenuController.leftViewBackgroundAlpha = 0.9
+```
+
+### Status bar
+
+You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
+instead you need to override all this methods for each controller separated, or use next properties of sideMenuController:
+
+```
+rootViewStatusBarHidden
+rootViewStatusBarStyle
+rootViewStatusBarUpdateAnimation
+
+leftViewStatusBarHidden
+leftViewStatusBarStyle
+leftViewStatusBarUpdateAnimation
+
+rightViewStatusBarHidden
+rightViewStatusBarStyle
+rightViewStatusBarUpdateAnimation
+```
+
+And this properties has more priority, then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
+
+For example, you had sideMenuController with rootViewController, leftViewController and rightViewController.
+For rootViewController, you can override it's default methods or use sideMenuController's properties:
+
+##### Objective-C
+
+```objective-c
+// In RootViewController.m
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationNone;
+}
+
+// OR in SideMenuController.m
+
+self.rootViewStatusBarHidden = NO;
+self.rootViewStatusBarStyle = UIStatusBarStyleDefault;
+self.rootViewStatusBarUpdateAnimation = UIStatusBarAnimationNone;
+
+// OR
+
+- (BOOL)isRootViewStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)rootViewStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
+- (UIStatusBarAnimation)rootViewStatusBarUpdateAnimation {
+    return UIStatusBarAnimationNone;
+}
+```
+
+##### Swift
+
+```swift
+// In RootViewController.swift
+
+override var prefersStatusBarHidden : Bool {
+    return false
+}
+
+override var preferredStatusBarStyle : UIStatusBarStyle {
+    return .default
+}
+
+override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
+    return .none
+}
+
+// OR in SideMenuController.swift
+
+rootViewStatusBarHidden = false
+rootViewStatusBarStyle = .default
+rootViewStatusBarUpdateAnimation = .none
+
+// OR
+
+override var isRootViewStatusBarHidden : Bool {
+    get { return false }
+    set { super.isRootViewStatusBarHidden = newValue }
+}
+
+override var rootViewStatusBarStyle : UIStatusBarStyle {
+    get { return .default }
+    set { super.rootViewStatusBarStyle = newValue }
+}
+
+override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
+    get { return .none }
+    set { super.rootViewStatusBarUpdateAnimation = newValue }
+}
+```
+
+For `leftViewController and rightViewController` principe the same, but lets take a look on situation, when animations is different for each viewController.    
+* When side views are hidden, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.    
+* When left view is going to show, then `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation`.    
+* When left view is going to hide and root view is going to show, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.
+
+But may be you want to `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation` also when left view is going to hide.    
+Then you can do next:
+
+##### Objective-C
+
+```objective-c
+// In RootViewController.m
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    if (self.sideMenuController.isLeftViewVisible) {
+        return UIStatusBarAnimationFade;
+    }
+    else if (self.sideMenuController.isRightViewVisible) {
+        return UIStatusBarAnimationSlide;
+    }
+    else {
+        return UIStatusBarAnimationNone;
+    }
+}
+
+// OR in SideMenuController.m
+
+- (UIStatusBarAnimation)rootViewStatusBarUpdateAnimation {
+    if (self.isLeftViewVisible) {
+        return UIStatusBarAnimationFade;
+    }
+    else if (self.isRightViewVisible) {
+        return UIStatusBarAnimationSlide;
+    }
+    else {
+        return UIStatusBarAnimationNone;
+    }
+}
+```
+
+##### Swift
+
+```swift
+// In RootViewController.swift
+
+override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
+    if sideMenuController.isLeftViewVisible {
+        return UIStatusBarAnimationFade
+    }
+    else if sideMenuController.isRightViewVisible {
+        return UIStatusBarAnimationSlide
+    }
+    else {
+        return UIStatusBarAnimationNone
+    }
+}
+
+// OR in SideMenuController.swift
+
+override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
+    get {
+        if isLeftViewVisible {
+            return UIStatusBarAnimationFade
+        }
+        else if isRightViewVisible {
+            return UIStatusBarAnimationSlide
+        }
+        else {
+            return UIStatusBarAnimationNone
+        }
+    }
+
+    set { super.rootViewStatusBarUpdateAnimation = newValue }
+}
+```
 
 ### Handle actions
 
@@ -214,7 +473,7 @@ To handle actions you can use delegate, blocks, or notifications:
 
 #### Delegate
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 <LGSideMenuControllerDelegate>
@@ -240,7 +499,7 @@ To handle actions you can use delegate, blocks, or notifications:
 - (void)hideAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 <LGSideMenuControllerDelegate>
@@ -266,7 +525,7 @@ optional public func hideAnimationsBlock(forRightView rightView: UIView, sideMen
 
 #### Blocks
 
-#### Objective-C
+##### Objective-C
 
 ```objective-c
 void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
@@ -288,7 +547,7 @@ void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuCont
 void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
 ```
 
-#### Swift
+##### Swift
 
 ```swift
 open var willShowLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
