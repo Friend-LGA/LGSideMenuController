@@ -1,6 +1,6 @@
 # LGSideMenuController
 
-iOS view controller shows left and right views on top of everything by pressing button or gesture.
+iOS view controller, shows left and right views by pressing button or gesture.
 
 ## Preview
 
