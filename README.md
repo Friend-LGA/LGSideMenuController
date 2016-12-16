@@ -152,7 +152,7 @@ public init(rootView: UIView?,
 
 ### Setup
 
-To set or change root, left or right view controllers or views, call:
+To set or to change root, left or right view controllers or views, call:
 
 ```swift
 sideMenuController.rootViewController = rootViewController
@@ -164,10 +164,9 @@ sideMenuController.leftView = leftView
 sideMenuController.rightView = rightView
 ```
 
-If you will set, for example, `sideMenuController.rootViewController = rootViewController`,
+If you set, for example, `sideMenuController.rootViewController = rootViewController`,
 then `sideMenuController.rootView == rootViewController.view`.    
-If you had, for example, `sideMenuController.rootViewController != nil` and you will set `sideMenuController.rootView = rootView`,
-then `sideMenuController.rootViewController == nil`.
+If you have, for example, `sideMenuController.rootViewController != nil` and you set `sideMenuController.rootView = rootView`, then `sideMenuController.rootViewController == nil`.
 
 ### Quick Example
 
@@ -291,7 +290,7 @@ sideMenuController.leftViewBackgroundAlpha = 0.9;
 ### Status Bar
 
 You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
-instead you need to override all this methods for each controller separated, or use properties of sideMenuController:
+instead you need to override all these methods for each controller separated, or use properties of sideMenuController:
 
 ```objective-c
 BOOL rootViewStatusBarHidden;
@@ -307,7 +306,7 @@ UIStatusBarStyle rightViewStatusBarStyle;
 UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
 ```
 
-And this properties has greater priority, then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
+And these properties have greater priority then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
 
 For example, you had sideMenuController with rootViewController, leftViewController and rightViewController.
 For rootViewController, you can override it's default methods or use sideMenuController's properties:
@@ -391,7 +390,7 @@ override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
 }
 ```
 
-For `leftViewController and rightViewController` principe the same, but lets take a look on situation, when animations is different for each viewController.    
+For `leftViewController and rightViewController` principe the same, but lets look at situation, when animations are different for each viewController.    
 * When side views are hidden, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.    
 * When left view is going to show, then `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation`.    
 * When left view is going to hide and root view is going to show, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.
@@ -469,7 +468,7 @@ override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
 
 ### Always visible options
 
-Sometimes, for example on iPad, you need to has toggleable side menu on portrait orientation and always visible side menu on landscape orientation
+Sometimes, for example on iPad, you need to have toggleable side menu on portrait orientation and always visible side menu on landscape orientation
 
 You can get it with properties:
 
@@ -510,7 +509,7 @@ sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLand
 ### NavigationController's back gesture
 
 Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
-But if you want you can disable `interactivePopGestureRecognizer`, or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
+But if you want, you can disable `interactivePopGestureRecognizer`, or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
 
 ##### Objective-C
 
@@ -544,7 +543,7 @@ sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(
 
 ### Editable Table View
 
-If you has editable table view inside sideMenuController, then it will work fine if you will swipe rows not inside `swipeGestureArea` for sideMenuController.
+If you have editable table view inside sideMenuController, then it will work fine if you swipe rows not inside `swipeGestureArea` for sideMenuController.
 If you need more place for swipe inside table view, then you can decrease `leftViewSwipeGestureRange, rightViewSwipeGestureRange` or disable it.
 
 ##### Objective-C
