@@ -80,8 +80,8 @@
             }
         }
 
-        return ((self.sideMenuController.leftView && CGRectContainsPoint(leftAvailableRect, location)) ||
-                (self.sideMenuController.rightView && CGRectContainsPoint(rightAvailableRect, location)));
+        return ((self.sideMenuController.leftView && self.isLeftViewSwipeGestureEnabled && CGRectContainsPoint(leftAvailableRect, location)) ||
+                (self.sideMenuController.rightView && self.isRightViewSwipeGestureEnabled && CGRectContainsPoint(rightAvailableRect, location)));
     }
     else {
         if (!self.rootViewCoverView) return NO;

@@ -47,6 +47,9 @@
 
 @property (assign, nonatomic, getter=isAnimating) BOOL animating;
 
+@property (assign, nonatomic, getter=isLeftViewSwipeGestureEnabled)  BOOL leftViewSwipeGestureEnabled;
+@property (assign, nonatomic, getter=isRightViewSwipeGestureEnabled) BOOL rightViewSwipeGestureEnabled;
+
 - (nonnull instancetype)initWithSideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 
 @end
