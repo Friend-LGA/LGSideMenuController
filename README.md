@@ -159,9 +159,9 @@ sideMenuController.leftView = leftView
 sideMenuController.rightView = rightView
 ```
 
-If you will set, for example, `sideMenuController.rootViewController = rootViewController`, 
+If you will set, for example, `sideMenuController.rootViewController = rootViewController`,
 then `sideMenuController.rootView == rootViewController.view`.    
-If you had, for example, root view controller and you will set, `sideMenuController.rootView = rootView`, 
+If you had, for example, `sideMenuController.rootViewController != nil` and you will set `sideMenuController.rootView = rootView`,
 then `sideMenuController.rootViewController == nil`.
 
 ### Quick Example
@@ -195,8 +195,8 @@ let rightViewController = UITableViewController()
 
 let navigationController = UINavigationController(rootViewController: rootViewController)
 
-let sideMenuController = LGSideMenuController(rootViewController: navigationController, 
-                                              leftViewController: leftViewController, 
+let sideMenuController = LGSideMenuController(rootViewController: navigationController,
+                                              leftViewController: leftViewController,
                                              rightViewController: rightViewController)
 
 sideMenuController.leftViewWidth = 250.0;
@@ -328,7 +328,7 @@ LGSideMenuControllerDidHideRightViewNotification
 
 ### More
 
-For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode demo projects: 
+For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode demo projects:
 * [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C)
 * [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C_Storyboard)
 * [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift)
