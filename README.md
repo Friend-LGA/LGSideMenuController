@@ -542,6 +542,39 @@ sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(4
 sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0)
 ```
 
+### Editable Table View
+
+If you has editable table view inside sideMenuController, then it will work fine if you will swipe rows not inside `swipeGestureArea` for sideMenuController.
+If you need more place for swipe inside table view, then you can decrease `leftViewSwipeGestureRange, rightViewSwipeGestureRange` or disable it.
+
+##### Objective-C
+
+```objective-c
+sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders; // Default
+
+sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 32.0);
+sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(32.0, 44.0);
+
+// OR
+
+sideMenuController.leftViewSwipeGestureEnabled = NO;
+sideMenuController.rightViewSwipeGestureEnabled = NO;
+```
+
+##### Swift
+
+```swift
+sideMenuController.swipeGestureArea = .borders // Default
+
+sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 32.0)
+sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(32.0, 44.0)
+
+// OR
+
+sideMenuController.leftViewSwipeGestureEnabled = false
+sideMenuController.rightViewSwipeGestureEnabled = false
+```
+
 ### Handle actions
 
 To handle actions you can use delegate, blocks, or notifications:
