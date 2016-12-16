@@ -51,13 +51,15 @@ typedef void (^ _Nullable LGSideMenuControllerCompletionHandler)();
 
 typedef NS_OPTIONS(NSUInteger, LGSideMenuAlwaysVisibleOptions) {
     LGSideMenuAlwaysVisibleOnNone           = 0,
-    LGSideMenuAlwaysVisibleOnPadLandscape   = 1 << 0,
-    LGSideMenuAlwaysVisibleOnPadPortrait    = 1 << 1,
-    LGSideMenuAlwaysVisibleOnPhoneLandscape = 1 << 2,
-    LGSideMenuAlwaysVisibleOnPhonePortrait  = 1 << 3,
-    LGSideMenuAlwaysVisibleOnLandscape      = 1 << 4,
-    LGSideMenuAlwaysVisibleOnPortrait       = 1 << 5,
-    LGSideMenuAlwaysVisibleOnAll            = 1 << 6
+    LGSideMenuAlwaysVisibleOnLandscape      = 1 << 1,
+    LGSideMenuAlwaysVisibleOnPortrait       = 1 << 2,
+    LGSideMenuAlwaysVisibleOnPad            = 1 << 3,
+    LGSideMenuAlwaysVisibleOnPhone          = 1 << 4,
+    LGSideMenuAlwaysVisibleOnPadLandscape   = 1 << 5,
+    LGSideMenuAlwaysVisibleOnPadPortrait    = 1 << 6,
+    LGSideMenuAlwaysVisibleOnPhoneLandscape = 1 << 7,
+    LGSideMenuAlwaysVisibleOnPhonePortrait  = 1 << 8,
+    LGSideMenuAlwaysVisibleOnAll            = 1 << 9
 };
 
 typedef NS_ENUM(NSUInteger, LGSideMenuPresentationStyle) {
