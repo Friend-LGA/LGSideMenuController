@@ -26,6 +26,10 @@ class LeftViewController: UITableViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
     }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

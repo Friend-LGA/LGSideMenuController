@@ -9,6 +9,8 @@ class RightViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        backgroundColor = .clear
                 
         textLabel!.textAlignment = .center
         textLabel!.numberOfLines = 0

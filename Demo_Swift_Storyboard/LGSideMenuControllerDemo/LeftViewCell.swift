@@ -9,6 +9,8 @@ class LeftViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        backgroundColor = .clear
                 
         textLabel!.font = UIFont.boldSystemFont(ofSize: 16.0)
         textLabel!.textColor = .white

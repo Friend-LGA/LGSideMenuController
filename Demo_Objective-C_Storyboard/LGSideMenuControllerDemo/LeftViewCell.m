@@ -10,6 +10,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
+    self.backgroundColor = [UIColor clearColor];
+
     self.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
     self.textLabel.textColor = [UIColor whiteColor];
 }

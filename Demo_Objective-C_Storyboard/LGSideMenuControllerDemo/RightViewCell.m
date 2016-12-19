@@ -10,6 +10,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
+    self.backgroundColor = [UIColor clearColor];
+
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.numberOfLines = 0;
     self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
