@@ -359,6 +359,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         [self rootViewsLayoutValidate];
         [self leftViewsLayoutValidate];
         [self rightViewsLayoutValidate];
+        // If side view is always visible and after rotating it should hide, we need to wait until rotation is finished
         [self visibilityValidateWithDelay:(appeared ? 0.25 : 0.0)];
     }
 }
@@ -378,10 +379,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 #pragma mark - Rotation
 
 - (BOOL)shouldAutorotate {
-    if (self.isLeftViewVisible || self.isRightViewVisible) {
-        return NO;
-    }
-
     if (self.rootView) {
         return self.rootViewShouldAutorotate;
     }
@@ -1821,7 +1818,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if (self.sideViewsCoverView) {
-        if (!self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRightViewAlwaysVisibleForCurrentOrientation) {
+        if (self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRightViewAlwaysVisibleForCurrentOrientation) {
             self.sideViewsCoverView.alpha = self.leftViewCoverAlpha - (self.leftViewCoverAlpha * percentage);
         }
 
@@ -1912,7 +1909,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if (self.sideViewsCoverView) {
-        if (!self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewAlwaysVisibleForCurrentOrientation) {
+        if (self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewAlwaysVisibleForCurrentOrientation) {
             self.sideViewsCoverView.alpha = self.rightViewCoverAlpha - (self.rightViewCoverAlpha * percentage);
         }
 
@@ -1995,13 +1992,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
 - (void)visibilityValidateWithDelay:(NSTimeInterval)delay {
     BOOL rootViewStyleViewHiddenForLeftView = YES;
-    BOOL rootViewStyleViewHiddenForRightView = YES;
     BOOL rootViewCoverViewHiddenForLeftView = YES;
-    BOOL rootViewCoverViewHiddenForRightView = YES;
     BOOL sideViewsCoverViewHiddenForLeftView = YES;
-    BOOL sideViewsCoverViewHiddenForRightView = YES;
-
-    // -----
 
     if (self.leftView) {
         if (self.isLeftViewAlwaysVisibleForCurrentOrientation) {
@@ -2047,6 +2039,10 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     // -----
+
+    BOOL rootViewStyleViewHiddenForRightView = YES;
+    BOOL rootViewCoverViewHiddenForRightView = YES;
+    BOOL sideViewsCoverViewHiddenForRightView = YES;
 
     if (self.rightView) {
         if (self.isRightViewAlwaysVisibleForCurrentOrientation) {
@@ -2126,8 +2122,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     // -----
 
     if ((sideViewsCoverViewHiddenForLeftView && sideViewsCoverViewHiddenForRightView) ||
-        self.isLeftViewAlwaysVisibleForCurrentOrientation ||
-        self.isRightViewAlwaysVisibleForCurrentOrientation) {
+        self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation) {
         if (delay) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
                 self.sideViewsCoverView.hidden = YES;
@@ -2291,6 +2286,10 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)showLeftViewDoneWithGesture:(BOOL)withGesture {
     self.leftViewShowing = YES;
 
+    if (self.rootViewController) {
+        [self addChildViewController:self.rootViewController];
+    }
+
     if (self.isLeftViewGoingToShow) {
         self.leftViewGoingToShow = NO;
 
@@ -2304,6 +2303,10 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     self.leftViewGoingToHide = YES;
 
     [self.view endEditing:YES];
+
+    if (self.rootViewController) {
+        [self addChildViewController:self.rootViewController];
+    }
 }
 
 - (void)hideLeftViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler {
@@ -2370,9 +2373,9 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                           style:self.leftViewStatusBarStyle
                                       animation:self.leftViewStatusBarUpdateAnimation];
     }
-
-    if (self.rootViewController) {
-        [self addChildViewController:self.rootViewController];
+    else {
+        [self rootViewsLayoutValidateWithPercentage:0.0];
+        [self leftViewsLayoutValidateWithPercentage:0.0];
     }
 
     self.leftViewShowing = NO;
@@ -2538,6 +2541,10 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)showRightViewDoneWithGesture:(BOOL)withGesture {
     self.rightViewShowing = YES;
 
+    if (self.rootViewController) {
+        [self addChildViewController:self.rootViewController];
+    }
+
     if (self.isRightViewGoingToShow) {
         self.rightViewGoingToShow = NO;
         
@@ -2551,6 +2558,10 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     self.rightViewGoingToHide = YES;
 
     [self.view endEditing:YES];
+
+    if (self.rootViewController) {
+        [self addChildViewController:self.rootViewController];
+    }
 }
 
 - (void)hideRightViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler {
@@ -2617,9 +2628,9 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                           style:self.rightViewStatusBarStyle
                                       animation:self.rightViewStatusBarUpdateAnimation];
     }
-
-    if (self.rootViewController) {
-        [self addChildViewController:self.rootViewController];
+    else {
+        [self rootViewsLayoutValidateWithPercentage:0.0];
+        [self rightViewsLayoutValidateWithPercentage:0.0];
     }
 
     self.rightViewShowing = NO;
