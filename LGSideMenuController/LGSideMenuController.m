@@ -1372,7 +1372,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     // -----
 
-    if (self.rootViewController && !self.isLeftViewVisible && !self.isRightViewVisible) {
+    if (self.rootViewController && !self.isLeftViewGoingToShow && !self.isRightViewGoingToShow) {
         [self addChildViewController:self.rootViewController];
     }
 
@@ -2286,12 +2286,12 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)showLeftViewDoneWithGesture:(BOOL)withGesture {
     self.leftViewShowing = YES;
 
-    if (self.rootViewController) {
-        [self addChildViewController:self.rootViewController];
-    }
-
     if (self.isLeftViewGoingToShow) {
         self.leftViewGoingToShow = NO;
+
+        if (self.rootViewController) {
+            [self addChildViewController:self.rootViewController];
+        }
 
         [self didShowLeftViewCallbacks];
     }
@@ -2541,12 +2541,12 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)showRightViewDoneWithGesture:(BOOL)withGesture {
     self.rightViewShowing = YES;
 
-    if (self.rootViewController) {
-        [self addChildViewController:self.rootViewController];
-    }
-
     if (self.isRightViewGoingToShow) {
         self.rightViewGoingToShow = NO;
+
+        if (self.rootViewController) {
+            [self addChildViewController:self.rootViewController];
+        }
         
         [self didShowRightViewCallbacks];
     }
