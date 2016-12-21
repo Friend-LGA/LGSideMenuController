@@ -287,90 +287,92 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 /**
  Default:
- If rootViewController exists, then rootViewController.shouldAutorotate
- Else super.shouldAutorotate
+ if (rootViewController != nil), then rootViewController.shouldAutorotate
+ else super.shouldAutorotate
  */
 @property (assign, nonatomic) IBInspectable BOOL rootViewShouldAutorotate;
 
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
- Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
- Else super.prefersStatusBarHidden
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarHidden
+ else if (rootViewController != nil), then rootViewController.prefersStatusBarHidden
+ else super.prefersStatusBarHidden
  */
 @property (assign, nonatomic, getter=isRootViewStatusBarHidden) IBInspectable BOOL rootViewStatusBarHidden;
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
- Else if leftViewController exists, then leftViewController.prefersStatusBarHidden
- Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
- Else super.prefersStatusBarHidden
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarHidden
+ else if (leftViewController != nil), then leftViewController.prefersStatusBarHidden
+ else if (rootViewController != nil), then rootViewController.prefersStatusBarHidden
+ else super.prefersStatusBarHidden
  */
 @property (assign, nonatomic, getter=isLeftViewStatusBarHidden) IBInspectable BOOL leftViewStatusBarHidden;
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarHidden
- Else if rightViewController exists, then rightViewController.prefersStatusBarHidden
- Else if rootViewController exists, then rootViewController.prefersStatusBarHidden
- Else super.prefersStatusBarHidden
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarHidden
+ else if (rightViewController != nil), then rightViewController.prefersStatusBarHidden
+ else if (rootViewController != nil), then rootViewController.prefersStatusBarHidden
+ else super.prefersStatusBarHidden
  */
 @property (assign, nonatomic, getter=isRightViewStatusBarHidden) IBInspectable BOOL rightViewStatusBarHidden;
 
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
- Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
- Else super.preferredStatusBarStyle
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarStyle
+ else if (rootViewController != nil), then rootViewController.preferredStatusBarStyle
+ else super.preferredStatusBarStyle
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarStyle rootViewStatusBarStyle;
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
- Else if leftViewController exists, then leftViewController.preferredStatusBarStyle
- Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
- Else super.preferredStatusBarStyle
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarStyle
+ else if (leftViewController != nil), then leftViewController.preferredStatusBarStyle
+ else if (rootViewController != nil), then rootViewController.preferredStatusBarStyle
+ else super.preferredStatusBarStyle
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarStyle leftViewStatusBarStyle;
 /**
  Default:
- If view controller-based status bar appearance == NO, then UIApplication.sharedApplication.statusBarStyle
- Else if rightViewController exists, then rightViewController.preferredStatusBarStyle
- Else if rootViewController exists, then rootViewController.preferredStatusBarStyle
- Else super.preferredStatusBarStyle
+ if (view controller-based status bar appearance == NO), then UIApplication.sharedApplication.statusBarStyle
+ else if (rightViewController != nil), then rightViewController.preferredStatusBarStyle
+ else if (rootViewController != nil), then rootViewController.preferredStatusBarStyle
+ else super.preferredStatusBarStyle
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarStyle rightViewStatusBarStyle;
 
 /**
  Default:
- If rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
- Else super.preferredStatusBarUpdateAnimation
+ if (rootViewController != nil), then rootViewController.preferredStatusBarUpdateAnimation
+ else super.preferredStatusBarUpdateAnimation
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarAnimation rootViewStatusBarUpdateAnimation;
 /**
  Default:
- If leftViewController exists, then leftViewController.preferredStatusBarUpdateAnimation
- Else if rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
- Else super.preferredStatusBarUpdateAnimation
+ if (leftViewController != nil), then leftViewController.preferredStatusBarUpdateAnimation
+ else if (rootViewController != nil), then rootViewController.preferredStatusBarUpdateAnimation
+ else super.preferredStatusBarUpdateAnimation
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarAnimation leftViewStatusBarUpdateAnimation;
 /**
  Default:
- If rightViewController exists, then rightViewController.preferredStatusBarUpdateAnimation
- Else if rootViewController exists, then rootViewController.preferredStatusBarUpdateAnimation
- Else super.preferredStatusBarUpdateAnimation
+ if (rightViewController != nil), then rightViewController.preferredStatusBarUpdateAnimation
+ else if (rootViewController != nil), then rootViewController.preferredStatusBarUpdateAnimation
+ else super.preferredStatusBarUpdateAnimation
  */
 @property (assign, nonatomic) IBInspectable UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
 
 /**
  Color that hides root view, when left view is showing
- Default is nil
- For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideAbove), then [UIColor colorWithWhite:0.0 alpha:0.5]
+ else nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForLeftView;
 /**
  Color that hides root view, when right view is showing
- Default is nil
- For LGSideMenuPresentationStyleSlideAbove default is [UIColor colorWithWhite:0.0 alpha:0.5]
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideAbove), then [UIColor colorWithWhite:0.0 alpha:0.5]
+ else nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForRightView;
 /**
@@ -388,57 +390,63 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig default is 0.8
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else 0.8
  */
 @property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForLeftView;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig default is 0.8
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else 0.8
  */
 @property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForRightView;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig default is 1.2
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.2
+ else if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 0.8
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewInititialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig default is 1.2
- For LGSideMenuPresentationStyleScaleFromLittle default is 0.8
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig), then 1.2
+ else if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle), then 0.8
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewInititialScale;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is -width/2
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 0.0
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then -width/2
+ else 0.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewInititialOffsetX;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is width/2
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 0.0
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then -width/2
+ else 0.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewInititialOffsetX;
 
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else 1.4
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
 /**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
- For LGSideMenuPresentationStyleSlideBelow default is 1.0
- For LGSideMenuPresentationStyleScaleFromBig and LGSideMenuPresentationStyleScaleFromLittle default is 1.4
+ Default:
+ if (presentationStyle == LGSideMenuPresentationStyleSlideBelow), then 1.0
+ else 1.4
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
 
@@ -466,26 +474,34 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 #pragma mark - Callbacks
 
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
 
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
 
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
 
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+/** Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
 
-/** You can use this block to add some custom animations */
+/** You can use this block to add some custom animations. Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
-/** You can use this block to add some custom animations */
+/** You can use this block to add some custom animations. Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
 
-/** You can use this block to add some custom animations */
+/** You can use this block to add some custom animations. Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
-/** You can use this block to add some custom animations */
+/** You can use this block to add some custom animations. Do not forget about weak reference to self */
 @property (strong, nonatomic, nullable) void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
 
 #pragma mark - Delegate
