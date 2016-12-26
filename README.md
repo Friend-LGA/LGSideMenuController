@@ -249,14 +249,14 @@ sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
 If you want to change color of blurred view, use:
 
 ```objective-c
-UIColor* leftViewBackgroundColor;
-UIColor* rightViewBackgroundColor;
+UIColor *leftViewBackgroundColor;
+UIColor *rightViewBackgroundColor;
 
-UIColor* rootViewCoverColorForLeftView;
-UIColor* rootViewCoverColorForRightView;
+UIColor *rootViewCoverColorForLeftView;
+UIColor *rootViewCoverColorForRightView;
 
-UIColor* leftViewCoverColor;
-UIColor* rightViewCoverColor;
+UIColor *leftViewCoverColor;
+UIColor *rightViewCoverColor;
 ```
 
 For example:
@@ -587,7 +587,7 @@ Almost all properties you can set right inside storyboard:
 
 ### Handle actions
 
-To handle actions you can use delegate, blocks, or notifications:
+To handle actions you can use delegate, blocks or notifications:
 
 #### Delegate
 
@@ -646,23 +646,23 @@ optional public func hideAnimationsBlock(forRightView rightView: UIView, sideMen
 ##### Objective-C
 
 ```objective-c
-void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-void(^didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
 
-void(^willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-void(^didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
 
-void(^willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-void(^didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
 
-void(^willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-void(^didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
 
-void(^showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
-void(^hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+void(^ _Nullable showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+void(^ _Nullable hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
 
-void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
-void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+void(^ _Nullable showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+void(^ _Nullable hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
 ```
 
 ##### Swift
