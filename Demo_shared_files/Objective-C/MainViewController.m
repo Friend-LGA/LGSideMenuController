@@ -199,19 +199,10 @@
     self.rightViewController = rightViewController;
 }
 
-- (void)rootViewWillLayoutSubviewsWithSize:(CGSize)size {
-    [super rootViewWillLayoutSubviewsWithSize:size];
-
-    self.rootView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
-}
-
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super leftViewWillLayoutSubviewsWithSize:size];
 
-    if (self.isLeftViewStatusBarHidden) {
-        self.leftView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
-    }
-    else {
+    if (!self.isLeftViewStatusBarHidden) {
         self.leftView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
     }
 }
@@ -224,9 +215,6 @@
          UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&
          UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation))) {
         self.rightView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
-    }
-    else {
-        self.rightView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
     }
 }
 

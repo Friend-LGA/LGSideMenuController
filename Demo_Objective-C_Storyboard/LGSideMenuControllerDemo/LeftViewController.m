@@ -60,7 +60,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LeftViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-    cell.textLabel.text = self.titlesArray[indexPath.row];
+    cell.titleLabel.text = self.titlesArray[indexPath.row];
     cell.separatorView.hidden = (indexPath.row <= 3 || indexPath.row == self.titlesArray.count-1);
     cell.userInteractionEnabled = (indexPath.row != 1 && indexPath.row != 3);
 

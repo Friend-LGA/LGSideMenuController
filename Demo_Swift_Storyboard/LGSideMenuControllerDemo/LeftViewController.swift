@@ -42,7 +42,7 @@ class LeftViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeftViewCell
 
-        cell.textLabel!.text = titlesArray[indexPath.row]
+        cell.titleLabel.text = titlesArray[indexPath.row]
         cell.separatorView.isHidden = (indexPath.row <= 3 || indexPath.row == self.titlesArray.count-1)
         cell.isUserInteractionEnabled = (indexPath.row != 1 && indexPath.row != 3)
 

@@ -38,6 +38,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd6-2R-Oik" userLabel="Title Label">
+                                            <rect key="frame" x="8" y="4" width="234" height="35"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDn-80-2Mx">
                                             <rect key="frame" x="0.0" y="43" width="226" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,14 +53,19 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="fd6-2R-Oik" firstAttribute="leading" secondItem="izR-Wk-2Bc" secondAttribute="leading" constant="8" id="5pz-JS-Mmh"/>
+                                        <constraint firstItem="HDn-80-2Mx" firstAttribute="top" secondItem="fd6-2R-Oik" secondAttribute="bottom" constant="4" id="Bgo-mb-3nl"/>
                                         <constraint firstItem="HDn-80-2Mx" firstAttribute="leading" secondItem="izR-Wk-2Bc" secondAttribute="leading" id="EKQ-fk-sOP"/>
+                                        <constraint firstAttribute="trailing" secondItem="fd6-2R-Oik" secondAttribute="trailing" constant="8" id="P6L-SZ-zCV"/>
                                         <constraint firstAttribute="bottom" secondItem="HDn-80-2Mx" secondAttribute="bottom" id="UpD-6h-SWy"/>
                                         <constraint firstAttribute="trailing" secondItem="HDn-80-2Mx" secondAttribute="trailing" constant="24" id="VgX-Jd-4Uh"/>
+                                        <constraint firstItem="fd6-2R-Oik" firstAttribute="top" secondItem="izR-Wk-2Bc" secondAttribute="top" constant="4" id="zp0-AP-tQv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="HDn-80-2Mx" id="xC5-v0-O1A"/>
+                                    <outlet property="titleLabel" destination="fd6-2R-Oik" id="l74-eL-l52"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,6 +98,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYt-6F-Gfi">
+                                            <rect key="frame" x="8" y="4" width="84" height="35"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mY-dV-qcE">
                                             <rect key="frame" x="8" y="43" width="92" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,14 +113,19 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="yYt-6F-Gfi" secondAttribute="trailing" constant="8" id="6nd-ni-t74"/>
+                                        <constraint firstItem="yYt-6F-Gfi" firstAttribute="leading" secondItem="JmT-rG-tya" secondAttribute="leading" constant="8" id="8Ga-SK-rjf"/>
                                         <constraint firstAttribute="bottom" secondItem="4mY-dV-qcE" secondAttribute="bottom" id="BnU-V4-3xo"/>
                                         <constraint firstItem="4mY-dV-qcE" firstAttribute="leading" secondItem="JmT-rG-tya" secondAttribute="leading" constant="8" id="S7p-0K-pN6"/>
                                         <constraint firstAttribute="trailing" secondItem="4mY-dV-qcE" secondAttribute="trailing" id="gjB-Dr-e2e"/>
+                                        <constraint firstItem="yYt-6F-Gfi" firstAttribute="top" secondItem="JmT-rG-tya" secondAttribute="top" constant="4" id="n4P-cP-U8J"/>
+                                        <constraint firstItem="4mY-dV-qcE" firstAttribute="top" secondItem="yYt-6F-Gfi" secondAttribute="bottom" constant="4" id="tX4-Rg-hFZ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="4mY-dV-qcE" id="DnH-Fp-h1t"/>
+                                    <outlet property="titleLabel" destination="yYt-6F-Gfi" id="gD1-gp-VWm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

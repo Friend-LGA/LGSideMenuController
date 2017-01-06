@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1046" y="1781"/>
+            <point key="canvasLocation" x="-1498" y="1781"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dRK-Gv-8em">
@@ -60,7 +60,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPL-Yf-bvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-558" y="1781"/>
+            <point key="canvasLocation" x="-769" y="1781"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="fd9-99-CZB">
@@ -78,6 +78,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rQ-9X-Lmp" userLabel="Title Label">
+                                            <rect key="frame" x="8" y="4" width="234" height="35"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B53-jt-ldX">
                                             <rect key="frame" x="0.0" y="43" width="226" height="1"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -87,7 +93,11 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="5rQ-9X-Lmp" firstAttribute="top" secondItem="5Gu-tZ-BKX" secondAttribute="top" constant="4" id="9Sk-aI-bg6"/>
+                                        <constraint firstItem="5rQ-9X-Lmp" firstAttribute="leading" secondItem="5Gu-tZ-BKX" secondAttribute="leading" constant="8" id="ATE-B6-oJr"/>
+                                        <constraint firstItem="B53-jt-ldX" firstAttribute="top" secondItem="5rQ-9X-Lmp" secondAttribute="bottom" constant="4" id="Puz-rS-XmW"/>
                                         <constraint firstAttribute="bottom" secondItem="B53-jt-ldX" secondAttribute="bottom" id="XRx-oP-9uQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="5rQ-9X-Lmp" secondAttribute="trailing" constant="8" id="nR9-oS-xmR"/>
                                         <constraint firstAttribute="trailing" secondItem="B53-jt-ldX" secondAttribute="trailing" constant="24" id="uFP-DH-3xl"/>
                                         <constraint firstItem="B53-jt-ldX" firstAttribute="leading" secondItem="5Gu-tZ-BKX" secondAttribute="leading" id="yEW-e5-NzC"/>
                                     </constraints>
@@ -95,6 +105,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="B53-jt-ldX" id="jHI-Bt-Lep"/>
+                                    <outlet property="titleLabel" destination="5rQ-9X-Lmp" id="SDJ-ir-yyY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -108,7 +119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gn2-oT-HTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1109" y="990"/>
+            <point key="canvasLocation" x="-1598" y="990"/>
         </scene>
         <!--LGSideMenuController-->
         <scene sceneID="OYz-cL-FCb">
@@ -187,6 +198,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhj-fp-1wL">
+                                            <rect key="frame" x="8" y="4" width="84" height="35"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGw-ZT-lux">
                                             <rect key="frame" x="8" y="43" width="92" height="1"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -196,14 +213,19 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="uhj-fp-1wL" secondAttribute="trailing" constant="8" id="1Xg-rQ-W7b"/>
                                         <constraint firstAttribute="bottom" secondItem="sGw-ZT-lux" secondAttribute="bottom" id="59Y-nB-u2u"/>
+                                        <constraint firstItem="uhj-fp-1wL" firstAttribute="leading" secondItem="1Gf-EQ-c05" secondAttribute="leading" constant="8" id="83N-3W-18k"/>
                                         <constraint firstItem="sGw-ZT-lux" firstAttribute="leading" secondItem="1Gf-EQ-c05" secondAttribute="leading" constant="8" id="Adn-is-gSm"/>
+                                        <constraint firstItem="uhj-fp-1wL" firstAttribute="top" secondItem="1Gf-EQ-c05" secondAttribute="top" constant="4" id="Xca-Dc-YWE"/>
                                         <constraint firstAttribute="trailing" secondItem="sGw-ZT-lux" secondAttribute="trailing" id="mhk-lu-ltN"/>
+                                        <constraint firstItem="sGw-ZT-lux" firstAttribute="top" secondItem="uhj-fp-1wL" secondAttribute="bottom" constant="4" id="w8J-os-N54"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="separatorView" destination="sGw-ZT-lux" id="Tij-ld-la7"/>
+                                    <outlet property="titleLabel" destination="uhj-fp-1wL" id="NJr-U3-Wcy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -217,7 +239,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ve-Ed-cMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-909" y="990"/>
+            <point key="canvasLocation" x="-1278" y="990"/>
         </scene>
         <!--LGSideMenuController-->
         <scene sceneID="mWK-bL-hRL">

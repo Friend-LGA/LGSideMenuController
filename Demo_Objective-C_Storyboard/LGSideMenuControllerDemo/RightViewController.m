@@ -60,8 +60,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RightViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-    cell.textLabel.text = self.titlesArray[indexPath.row];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:indexPath.row == 0 ? 15.0 : 30.0];
+    cell.titleLabel.text = self.titlesArray[indexPath.row];
+    cell.titleLabel.font = [UIFont boldSystemFontOfSize:indexPath.row == 0 ? 15.0 : 30.0];
     cell.separatorView.hidden = (indexPath.row <= 1 || indexPath.row == self.titlesArray.count - 1);
     cell.userInteractionEnabled = (indexPath.row != 1);
 

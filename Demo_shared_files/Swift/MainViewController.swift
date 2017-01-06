@@ -182,19 +182,10 @@ class MainViewController: LGSideMenuController {
         self.rightViewController = rightViewController
     }
 
-    override func rootViewWillLayoutSubviews(with size: CGSize) {
-        super.rootViewWillLayoutSubviews(with: size)
-
-        rootView?.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
-    }
-
     override func leftViewWillLayoutSubviews(with size: CGSize) {
         super.leftViewWillLayoutSubviews(with: size)
 
-        if isLeftViewStatusBarHidden {
-            leftView?.frame = CGRect(origin: CGPoint.zero, size: size)
-        }
-        else {
+        if !isLeftViewStatusBarHidden {
             leftView?.frame = CGRect(x: 0.0, y: 20.0, width: size.width, height: size.height - 20.0)
         }
     }
@@ -207,9 +198,6 @@ class MainViewController: LGSideMenuController {
                 UI_USER_INTERFACE_IDIOM() == .pad &&
                 UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation))) {
             rightView?.frame = CGRect(x: 0.0, y: 20.0, width: size.width, height: size.height - 20.0)
-        }
-        else {
-            rightView?.frame = CGRect(origin: CGPoint.zero, size: size)
         }
     }
 
