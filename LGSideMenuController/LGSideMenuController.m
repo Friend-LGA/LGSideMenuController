@@ -399,17 +399,17 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
     if (self.isLeftViewGoingToShow) {
-        [self showLeftViewDoneWithGesture:self.leftViewGestireStartX];
+        [self showLeftViewDoneWithGesture:(self.leftViewGestireStartX != nil)];
     }
     else if (self.isLeftViewGoingToHide) {
-        [self hideLeftViewDoneWithGesture:self.leftViewGestireStartX];
+        [self hideLeftViewDoneWithGesture:(self.leftViewGestireStartX != nil)];
     }
 
     if (self.isRightViewGoingToShow) {
-        [self showRightViewDoneWithGesture:self.rightViewGestireStartX];
+        [self showRightViewDoneWithGesture:(self.rightViewGestireStartX != nil)];
     }
     else if (self.isRightViewGoingToHide) {
-        [self hideRightViewDoneWithGesture:self.rightViewGestireStartX];
+        [self hideRightViewDoneWithGesture:(self.rightViewGestireStartX != nil)];
     }
 }
 
