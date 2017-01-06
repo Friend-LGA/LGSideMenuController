@@ -364,16 +364,25 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 }
 
+// inherit this method
 - (void)rootViewWillLayoutSubviewsWithSize:(CGSize)size {
-    // override this method
+    if (self.rootViewController) {
+        self.rootView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
+    }
 }
 
+// inherit this method
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size {
-    // override this method
+    if (self.leftViewController) {
+        self.leftView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
+    }
 }
 
+// inherit this method
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size {
-    // override this method
+    if (self.rightViewController) {
+        self.rightView.frame = CGRectMake(0.0, 0.0, size.width, size.height);
+    }
 }
 
 #pragma mark - Rotation
@@ -384,6 +393,24 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     return super.shouldAutorotate;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    if (self.isLeftViewGoingToShow) {
+        [self showLeftViewDoneWithGesture:self.leftViewGestireStartX];
+    }
+    else if (self.isLeftViewGoingToHide) {
+        [self hideLeftViewDoneWithGesture:self.leftViewGestireStartX];
+    }
+
+    if (self.isRightViewGoingToShow) {
+        [self showRightViewDoneWithGesture:self.rightViewGestireStartX];
+    }
+    else if (self.isRightViewGoingToHide) {
+        [self hideRightViewDoneWithGesture:self.rightViewGestireStartX];
+    }
 }
 
 #pragma mark - Status bar
@@ -2272,9 +2299,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
          }];
     }
     else {
-        [self rootViewsLayoutValidateWithPercentage:1.0];
-        [self leftViewsLayoutValidateWithPercentage:1.0];
-
         [self showLeftViewDoneWithGesture:NO];
 
         if (completionHandler) {
@@ -2284,6 +2308,14 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)showLeftViewDoneWithGesture:(BOOL)withGesture {
+    if (withGesture) {
+        self.leftViewGestireStartX = nil;
+    }
+    else {
+        [self rootViewsLayoutValidateWithPercentage:1.0];
+        [self leftViewsLayoutValidateWithPercentage:1.0];
+    }
+
     self.leftViewShowing = YES;
 
     if (self.isLeftViewGoingToShow) {
@@ -2354,9 +2386,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
          }];
     }
     else {
-        [self rootViewsLayoutValidateWithPercentage:0.0];
-        [self leftViewsLayoutValidateWithPercentage:0.0];
-
         [self hideLeftViewDoneWithGesture:NO];
 
         if (completionHandler) {
@@ -2372,6 +2401,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                          hidden:self.leftViewStatusBarHidden
                                           style:self.leftViewStatusBarStyle
                                       animation:self.leftViewStatusBarUpdateAnimation];
+
+        self.leftViewGestireStartX = nil;
     }
     else {
         [self rootViewsLayoutValidateWithPercentage:0.0];
@@ -2527,9 +2558,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
          }];
     }
     else {
-        [self rootViewsLayoutValidateWithPercentage:1.0];
-        [self rightViewsLayoutValidateWithPercentage:1.0];
-
         [self showRightViewDoneWithGesture:NO];
 
         if (completionHandler) {
@@ -2539,6 +2567,14 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)showRightViewDoneWithGesture:(BOOL)withGesture {
+    if (withGesture) {
+        self.rightViewGestireStartX = nil;
+    }
+    else {
+        [self rootViewsLayoutValidateWithPercentage:1.0];
+        [self rightViewsLayoutValidateWithPercentage:1.0];
+    }
+
     self.rightViewShowing = YES;
 
     if (self.isRightViewGoingToShow) {
@@ -2609,9 +2645,6 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
          }];
     }
     else {
-        [self rootViewsLayoutValidateWithPercentage:0.0];
-        [self rightViewsLayoutValidateWithPercentage:0.0];
-
         [self hideRightViewDoneWithGesture:NO];
 
         if (completionHandler) {
@@ -2627,6 +2660,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
                                          hidden:self.rightViewStatusBarHidden
                                           style:self.rightViewStatusBarStyle
                                       animation:self.rightViewStatusBarUpdateAnimation];
+
+        self.rightViewGestireStartX = nil;
     }
     else {
         [self rootViewsLayoutValidateWithPercentage:0.0];
