@@ -1074,6 +1074,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     [self leftViewsLayoutValidate];
 }
 
+- (void)setRootViewYCenterExcludesLayoutGuides:(BOOL)rootViewYCenterExcludesLayoutGuides {
+    _rootViewYCenterExcludesLayoutGuides = rootViewYCenterExcludesLayoutGuides;
+    [self leftViewsLayoutValidate];
+}
+
 #pragma mark -
 
 - (void)setRootViewContainer:(LGSideMenuView *)rootViewContainer {
@@ -1719,14 +1724,16 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     }
 
     if (!leftViewAlwaysVisible && !rightViewAlwaysVisible) {
+
         if (self.leftView && self.isLeftViewVisible && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
             CGFloat rootViewScale = 1.0+(self.rootViewScaleForLeftView-1.0)*percentage;
 
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
             CGFloat shiftX = frameWidth*(1.0-rootViewScale)/2 + self.rootViewOverlapAmountForLeftView;
+            CGFloat shiftY = [self shiftYAmountForScale:rootViewScale];
 
-            rootViewViewFrame = CGRectMake((self.leftViewWidth-shiftX)*percentage, 0.0, frameWidth, frameHeight);
+            rootViewViewFrame = CGRectMake((self.leftViewWidth-shiftX)*percentage, shiftY*percentage, frameWidth, frameHeight);
 
             if (UIScreen.mainScreen.scale == 1.0) {
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
@@ -1738,8 +1745,9 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
             CGFloat shiftX = frameWidth*(1.0-rootViewScale)/2 + self.rootViewOverlapAmountForRightView;
+            CGFloat shiftY = [self shiftYAmountForScale:rootViewScale];
 
-            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shiftX)*percentage, 0.0, frameWidth, frameHeight);
+            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shiftX)*percentage, shiftY*percentage, frameWidth, frameHeight);
 
             if (UIScreen.mainScreen.scale == 1.0) {
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
@@ -2986,6 +2994,24 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     NSNumber *viewControllerBasedStatusBarAppearance = [NSBundle.mainBundle objectForInfoDictionaryKey:@"UIViewControllerBasedStatusBarAppearance"];
 
     return viewControllerBasedStatusBarAppearance == nil ? YES : viewControllerBasedStatusBarAppearance.boolValue;
+}
+
+- (CGFloat)shiftYAmountForScale:(CGFloat)rootViewScale {
+    CGFloat shiftY = 0.0;
+
+    if (self.rootViewYCenterExcludesLayoutGuides && rootViewScale < 1.0)
+    {
+        CGFloat const frameHeight = CGRectGetHeight(self.view.frame);
+        CGFloat const rootViewScaledHeightDiff = frameHeight * (1.0 - rootViewScale);
+        CGFloat const maxAbsScaleY = rootViewScaledHeightDiff / 2.0;
+
+        shiftY = (self.topLayoutGuide.length - self.bottomLayoutGuide.length) / 2.0;
+
+        if (shiftY < -maxAbsScaleY) shiftY = -maxAbsScaleY;
+        if (shiftY >  maxAbsScaleY) shiftY =  maxAbsScaleY;
+    }
+
+    return shiftY;
 }
 
 @end

@@ -119,6 +119,10 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rootViewOverlapAmountForRightView;
 
 
+/** If true, a scaled root view is centered on screen excluding layout guides. Default is false */
+@property (assign, nonatomic) IBInspectable BOOL rootViewYCenterExcludesLayoutGuides;
+
+
 /** Default is LGSideMenuPresentationStyleSlideAbove */
 @property (assign, nonatomic) IBInspectable LGSideMenuPresentationStyle leftViewPresentationStyle;
 /** Default is LGSideMenuPresentationStyleSlideAbove */
