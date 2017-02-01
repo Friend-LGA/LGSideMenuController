@@ -112,6 +112,13 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** Default is MainScreen.size.min - 44.0 */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewWidth;
 
+
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewOverlapAmountForLeftView;
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewOverlapAmountForRightView;
+
+
 /** Default is LGSideMenuPresentationStyleSlideAbove */
 @property (assign, nonatomic) IBInspectable LGSideMenuPresentationStyle leftViewPresentationStyle;
 /** Default is LGSideMenuPresentationStyleSlideAbove */

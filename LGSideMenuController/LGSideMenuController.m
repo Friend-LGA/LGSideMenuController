@@ -1064,6 +1064,16 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     [self rightViewsLayoutValidate];
 }
 
+- (void)setRootViewOverlapAmountForLeftView:(CGFloat)rootViewOverlapAmountForLeftView {
+    _rootViewOverlapAmountForLeftView = rootViewOverlapAmountForLeftView;
+    [self leftViewsLayoutValidate];
+}
+
+- (void)setRootViewOverlapAmountForRightView:(CGFloat)rootViewOverlapAmountForRightView {
+    _rootViewOverlapAmountForRightView = rootViewOverlapAmountForRightView;
+    [self leftViewsLayoutValidate];
+}
+
 #pragma mark -
 
 - (void)setRootViewContainer:(LGSideMenuView *)rootViewContainer {
@@ -1714,9 +1724,9 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
-            CGFloat shift = frameWidth*(1.0-rootViewScale)/2;
+            CGFloat shiftX = frameWidth*(1.0-rootViewScale)/2 + self.rootViewOverlapAmountForLeftView;
 
-            rootViewViewFrame = CGRectMake((self.leftViewWidth-shift)*percentage, 0.0, frameWidth, frameHeight);
+            rootViewViewFrame = CGRectMake((self.leftViewWidth-shiftX)*percentage, 0.0, frameWidth, frameHeight);
 
             if (UIScreen.mainScreen.scale == 1.0) {
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
@@ -1727,9 +1737,9 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
             transform = CGAffineTransformMakeScale(rootViewScale, rootViewScale);
 
-            CGFloat shift = frameWidth*(1.0-rootViewScale)/2;
+            CGFloat shiftX = frameWidth*(1.0-rootViewScale)/2 + self.rootViewOverlapAmountForRightView;
 
-            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shift)*percentage, 0.0, frameWidth, frameHeight);
+            rootViewViewFrame = CGRectMake(-(self.rightViewWidth-shiftX)*percentage, 0.0, frameWidth, frameHeight);
 
             if (UIScreen.mainScreen.scale == 1.0) {
                 rootViewViewFrame = CGRectIntegral(rootViewViewFrame);
