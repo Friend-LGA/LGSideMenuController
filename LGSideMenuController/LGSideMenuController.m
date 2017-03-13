@@ -355,6 +355,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     self.leftViewLayerShadowRadius = 5.0;
     self.rightViewLayerShadowRadius = 5.0;
 
+    self.rootViewLayerCornerRadius = 0.0;
+
     self.rootViewCoverBlurEffectForLeftView = nil;
     self.rootViewCoverBlurEffectForRightView = nil;
     self.leftViewCoverBlurEffect = nil;
@@ -1832,6 +1834,22 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     // -----
 
+    if (self.rootViewLayerCornerRadius) {
+        self.rootViewContainer.layer.cornerRadius = self.rootViewLayerCornerRadius * percentage;
+        self.rootViewCoverView.layer.cornerRadius = self.rootViewLayerCornerRadius * percentage;
+
+        [LGSideMenuHelper imageView:self.rootViewStyleView
+                       setImageSafe:[LGSideMenuDrawer drawRectangleWithViewSize:self.rootViewContainer.bounds.size
+                                                                 roundedCorners:UIRectCornerAllCorners
+                                                                   cornerRadius:self.rootViewLayerCornerRadius * percentage
+                                                                    strokeColor:self.rootViewLayerBorderColor
+                                                                    strokeWidth:self.rootViewLayerBorderWidth
+                                                                    shadowColor:self.rootViewLayerShadowColor
+                                                                     shadowBlur:self.rootViewLayerShadowRadius]];
+    }
+
+    // -----
+
     if ((self.leftView && self.isLeftViewAlwaysVisibleForCurrentOrientation) ||
         (self.rightView && self.isRightViewAlwaysVisibleForCurrentOrientation)) {
         return;
@@ -2475,6 +2493,22 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (animated) {
         self.gesturesHandler.animating = YES;
 
+        // -----
+
+        if (self.rootViewLayerCornerRadius) {
+            NSString *animationKeyPath = @"cornerRadius";
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animation.fromValue = @(self.rootViewContainer.layer.cornerRadius);
+            animation.toValue = @(self.rootViewLayerCornerRadius);
+            animation.duration = self.leftViewAnimationSpeed;
+
+            [self.rootViewContainer.layer addAnimation:animation forKey:animationKeyPath];
+            [self.rootViewCoverView.layer addAnimation:animation forKey:animationKeyPath];
+        }
+
+        // -----
+
         [LGSideMenuHelper
          animateStandardWithDuration:self.leftViewAnimationSpeed
          animations:^(void) {
@@ -2562,6 +2596,22 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     if (animated) {
         self.gesturesHandler.animating = YES;
+
+        // -----
+
+        if (self.rootViewLayerCornerRadius) {
+            NSString *animationKeyPath = @"cornerRadius";
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animation.fromValue = @(self.rootViewContainer.layer.cornerRadius);
+            animation.toValue = @0.0;
+            animation.duration = self.leftViewAnimationSpeed;
+
+            [self.rootViewContainer.layer addAnimation:animation forKey:animationKeyPath];
+            [self.rootViewCoverView.layer addAnimation:animation forKey:animationKeyPath];
+        }
+
+        // -----
 
         [LGSideMenuHelper
          animateStandardWithDuration:self.leftViewAnimationSpeed
@@ -2758,6 +2808,22 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     if (animated) {
         self.gesturesHandler.animating = YES;
 
+        // -----
+
+        if (self.rootViewLayerCornerRadius) {
+            NSString *animationKeyPath = @"cornerRadius";
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animation.fromValue = @(self.rootViewContainer.layer.cornerRadius);
+            animation.toValue = @(self.rootViewLayerCornerRadius);
+            animation.duration = self.rightViewAnimationSpeed;
+
+            [self.rootViewContainer.layer addAnimation:animation forKey:animationKeyPath];
+            [self.rootViewCoverView.layer addAnimation:animation forKey:animationKeyPath];
+        }
+
+        // -----
+
         [LGSideMenuHelper
          animateStandardWithDuration:self.rightViewAnimationSpeed
          animations:^(void) {
@@ -2845,6 +2911,22 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
     if (animated) {
         self.gesturesHandler.animating = YES;
+
+        // -----
+
+        if (self.rootViewLayerCornerRadius) {
+            NSString *animationKeyPath = @"cornerRadius";
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            animation.fromValue = @(self.rootViewContainer.layer.cornerRadius);
+            animation.toValue = @0.0;
+            animation.duration = self.rightViewAnimationSpeed;
+
+            [self.rootViewContainer.layer addAnimation:animation forKey:animationKeyPath];
+            [self.rootViewCoverView.layer addAnimation:animation forKey:animationKeyPath];
+        }
+
+        // -----
 
         [LGSideMenuHelper
          animateStandardWithDuration:self.rightViewAnimationSpeed

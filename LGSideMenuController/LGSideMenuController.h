@@ -258,6 +258,9 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewLayerShadowRadius;
 
+/** Default is 0.0 */
+@property (assign, nonatomic) IBInspectable CGFloat rootViewLayerCornerRadius;
+
 /** Default is nil */
 @property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rootViewCoverBlurEffectForLeftView;
 /** Default is nil */

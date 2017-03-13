@@ -193,6 +193,8 @@
         }
     }
 
+    self.rootViewLayerCornerRadius = 32.0;
+
     // -----
 
     self.leftViewController = leftViewController;
