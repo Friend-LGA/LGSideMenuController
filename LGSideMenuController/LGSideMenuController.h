@@ -166,6 +166,11 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable NSTimeInterval rightViewAnimationSpeed;
 
 /** Default is YES */
+@property (assign, nonatomic, getter=isShouldHideLeftViewAnimated) IBInspectable BOOL shouldHideLeftViewAnimated;
+/** Default is YES */
+@property (assign, nonatomic, getter=isShouldHideRightViewAnimated) IBInspectable BOOL shouldHideRightViewAnimated;
+
+/** Default is YES */
 @property (assign, nonatomic, getter=isLeftViewEnabled)  IBInspectable BOOL leftViewEnabled;
 /** Default is YES */
 @property (assign, nonatomic, getter=isRightViewEnabled) IBInspectable BOOL rightViewEnabled;
@@ -535,9 +540,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 - (BOOL)isLeftViewAlwaysVisibleForOrientation:(UIInterfaceOrientation)orientation;
 - (BOOL)isRightViewAlwaysVisibleForOrientation:(UIInterfaceOrientation)orientation;
 
-- (void)showLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
-- (void)hideLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
-- (void)toggleLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+#pragma mark - Left view actions
 
 - (IBAction)showLeftView:(nullable id)sender;
 - (IBAction)hideLeftView:(nullable id)sender;
@@ -547,9 +550,29 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 - (IBAction)hideLeftViewAnimated:(nullable id)sender;
 - (IBAction)toggleLeftViewAnimated:(nullable id)sender;
 
-- (void)showRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
-- (void)hideRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
-- (void)toggleRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+- (void)showLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+- (void)hideLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+- (void)toggleLeftViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)showLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)hideLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)toggleLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+#pragma mark - Right view actions
 
 - (IBAction)showRightView:(nullable id)sender;
 - (IBAction)hideRightView:(nullable id)sender;
@@ -558,6 +581,33 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 - (IBAction)showRightViewAnimated:(nullable id)sender;
 - (IBAction)hideRightViewAnimated:(nullable id)sender;
 - (IBAction)toggleRightViewAnimated:(nullable id)sender;
+
+- (void)showRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+- (void)hideRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+- (void)toggleRightViewAnimated:(BOOL)animated completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)showRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)hideRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+/**
+ Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+ You can use delay to avoid this and probably other unexpected visual bugs
+ */
+- (void)toggleRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuControllerCompletionHandler)completionHandler;
+
+#pragma mark -
+
+/** Force update layouts and styles for all views */
+- (void)updateLayoutsAndStyles;
 
 #pragma mark - Unavailable methods
 

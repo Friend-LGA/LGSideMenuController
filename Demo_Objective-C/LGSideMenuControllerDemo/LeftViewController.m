@@ -106,7 +106,9 @@
 
         [navigationController setViewControllers:@[viewController]];
 
-        [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
+        // Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
+        // You can use delay to avoid this and probably other unexpected visual bugs
+        [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
     }
     else {
         UIViewController *viewController = [UIViewController new];

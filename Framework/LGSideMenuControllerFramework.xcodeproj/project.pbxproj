@@ -11,6 +11,10 @@
 		4A06D0C01DF7580F00498335 /* LGSideMenuControllerGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A06D0BC1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.m */; };
 		4A06D0C11DF7580F00498335 /* LGSideMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A06D0BD1DF7580F00498335 /* LGSideMenuView.h */; };
 		4A06D0C21DF7580F00498335 /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A06D0BE1DF7580F00498335 /* LGSideMenuView.m */; };
+		4A6887761E816F4F000D9315 /* LGSideMenuDrawer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6887721E816F4F000D9315 /* LGSideMenuDrawer.h */; };
+		4A6887771E816F4F000D9315 /* LGSideMenuDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887731E816F4F000D9315 /* LGSideMenuDrawer.m */; };
+		4A6887781E816F4F000D9315 /* LGSideMenuHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A6887741E816F4F000D9315 /* LGSideMenuHelper.h */; };
+		4A6887791E816F4F000D9315 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887751E816F4F000D9315 /* LGSideMenuHelper.m */; };
 		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
@@ -23,6 +27,10 @@
 		4A06D0BC1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuControllerGesturesHandler.m; sourceTree = "<group>"; };
 		4A06D0BD1DF7580F00498335 /* LGSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuView.h; sourceTree = "<group>"; };
 		4A06D0BE1DF7580F00498335 /* LGSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuView.m; sourceTree = "<group>"; };
+		4A6887721E816F4F000D9315 /* LGSideMenuDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuDrawer.h; sourceTree = "<group>"; };
+		4A6887731E816F4F000D9315 /* LGSideMenuDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuDrawer.m; sourceTree = "<group>"; };
+		4A6887741E816F4F000D9315 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
+		4A6887751E816F4F000D9315 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
 		4A92310A1DF31E1A00EFA4C9 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerFramework.h; sourceTree = "<group>"; };
@@ -78,6 +86,10 @@
 				4AF13A151BF395900037B073 /* LGSideMenuController.m */,
 				4A06D0BB1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.h */,
 				4A06D0BC1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.m */,
+				4A6887721E816F4F000D9315 /* LGSideMenuDrawer.h */,
+				4A6887731E816F4F000D9315 /* LGSideMenuDrawer.m */,
+				4A6887741E816F4F000D9315 /* LGSideMenuHelper.h */,
+				4A6887751E816F4F000D9315 /* LGSideMenuHelper.m */,
 				4A06D0BD1DF7580F00498335 /* LGSideMenuView.h */,
 				4A06D0BE1DF7580F00498335 /* LGSideMenuView.m */,
 				EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */,
@@ -96,6 +108,8 @@
 			files = (
 				4A06D0BF1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.h in Headers */,
 				4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */,
+				4A6887781E816F4F000D9315 /* LGSideMenuHelper.h in Headers */,
+				4A6887761E816F4F000D9315 /* LGSideMenuDrawer.h in Headers */,
 				EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */,
 				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
 				4A06D0C11DF7580F00498335 /* LGSideMenuView.h in Headers */,
@@ -172,6 +186,8 @@
 				4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */,
 				EDE795431D45DB60002930CA /* UIViewController+LGSideMenuController.m in Sources */,
 				4A06D0C01DF7580F00498335 /* LGSideMenuControllerGesturesHandler.m in Sources */,
+				4A6887771E816F4F000D9315 /* LGSideMenuDrawer.m in Sources */,
+				4A6887791E816F4F000D9315 /* LGSideMenuHelper.m in Sources */,
 				4A06D0C21DF7580F00498335 /* LGSideMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
