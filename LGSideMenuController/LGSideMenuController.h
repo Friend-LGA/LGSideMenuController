@@ -166,9 +166,9 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable NSTimeInterval rightViewAnimationSpeed;
 
 /** Default is YES */
-@property (assign, nonatomic, getter=isShouldHideLeftViewAnimated) IBInspectable BOOL shouldHideLeftViewAnimated;
+@property (assign, nonatomic) IBInspectable BOOL shouldHideLeftViewAnimated;
 /** Default is YES */
-@property (assign, nonatomic, getter=isShouldHideRightViewAnimated) IBInspectable BOOL shouldHideRightViewAnimated;
+@property (assign, nonatomic) IBInspectable BOOL shouldHideRightViewAnimated;
 
 /** Default is YES */
 @property (assign, nonatomic, getter=isLeftViewEnabled)  IBInspectable BOOL leftViewEnabled;
