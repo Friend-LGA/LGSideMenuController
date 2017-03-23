@@ -1,6 +1,6 @@
 //
-//  LGSideMenuControllerFramework.h
-//  LGSideMenuControllerFramework
+//  LGSideMenuSegue.h
+//  LGSideMenuController
 //
 //
 //  The MIT License (MIT)
@@ -29,12 +29,6 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for LGSideMenuController framework.
-FOUNDATION_EXPORT double LGSideMenuControllerVersionNumber;
+@interface LGSideMenuSegue : UIStoryboardSegue
 
-//! Project version string for LGSideMenuController framework.
-FOUNDATION_EXPORT const unsigned char LGSideMenuControllerVersionString[];
-
-#import <LGSideMenuController/LGSideMenuController.h>
-#import <LGSideMenuController/LGSideMenuSegue.h>
-#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
+@end

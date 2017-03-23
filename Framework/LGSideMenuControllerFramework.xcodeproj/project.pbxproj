@@ -18,6 +18,8 @@
 		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF13A141BF395900037B073 /* LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AF13A171BF395900037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A151BF395900037B073 /* LGSideMenuController.m */; };
+		4AFDF9691E842E380028BBEF /* LGSideMenuSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AFDF9671E842E380028BBEF /* LGSideMenuSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4AFDF96A1E842E380028BBEF /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDF9681E842E380028BBEF /* LGSideMenuSegue.m */; };
 		EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDE795431D45DB60002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,8 @@
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AF13A141BF395900037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LGSideMenuController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AF13A151BF395900037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LGSideMenuController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4AFDF9671E842E380028BBEF /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		4AFDF9681E842E380028BBEF /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
 		EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
 		EDE795411D45DB60002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
@@ -90,6 +94,8 @@
 				4A6887731E816F4F000D9315 /* LGSideMenuDrawer.m */,
 				4A6887741E816F4F000D9315 /* LGSideMenuHelper.h */,
 				4A6887751E816F4F000D9315 /* LGSideMenuHelper.m */,
+				4AFDF9671E842E380028BBEF /* LGSideMenuSegue.h */,
+				4AFDF9681E842E380028BBEF /* LGSideMenuSegue.m */,
 				4A06D0BD1DF7580F00498335 /* LGSideMenuView.h */,
 				4A06D0BE1DF7580F00498335 /* LGSideMenuView.m */,
 				EDE795401D45DB60002930CA /* UIViewController+LGSideMenuController.h */,
@@ -106,12 +112,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
 				4A06D0BF1DF7580F00498335 /* LGSideMenuControllerGesturesHandler.h in Headers */,
 				4AF13A161BF395900037B073 /* LGSideMenuController.h in Headers */,
-				4A6887781E816F4F000D9315 /* LGSideMenuHelper.h in Headers */,
+				4AFDF9691E842E380028BBEF /* LGSideMenuSegue.h in Headers */,
 				4A6887761E816F4F000D9315 /* LGSideMenuDrawer.h in Headers */,
 				EDE795421D45DB60002930CA /* UIViewController+LGSideMenuController.h in Headers */,
-				4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */,
+				4A6887781E816F4F000D9315 /* LGSideMenuHelper.h in Headers */,
 				4A06D0C11DF7580F00498335 /* LGSideMenuView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +196,7 @@
 				4A6887771E816F4F000D9315 /* LGSideMenuDrawer.m in Sources */,
 				4A6887791E816F4F000D9315 /* LGSideMenuHelper.m in Sources */,
 				4A06D0C21DF7580F00498335 /* LGSideMenuView.m in Sources */,
+				4AFDF96A1E842E380028BBEF /* LGSideMenuSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

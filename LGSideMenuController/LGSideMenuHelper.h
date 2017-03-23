@@ -48,4 +48,8 @@
 
 + (BOOL)isRetina;
 
++ (BOOL)isPhone;
+
++ (BOOL)isPad;
+
 @end

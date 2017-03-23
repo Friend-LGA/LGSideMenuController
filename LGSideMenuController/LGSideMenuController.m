@@ -34,6 +34,7 @@
 #import "LGSideMenuControllerGesturesHandler.h"
 #import "LGSideMenuDrawer.h"
 #import "LGSideMenuHelper.h"
+#import "LGSideMenuSegue.h"
 
 #pragma mark - Constants
 
@@ -123,12 +124,14 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic, getter=isUserRightViewCoverColor)                  BOOL userRightViewCoverColor;
 @property (assign, nonatomic, getter=isUserRootViewScaleForLeftView)             BOOL userRootViewScaleForLeftView;
 @property (assign, nonatomic, getter=isUserRootViewScaleForRightView)            BOOL userRootViewScaleForRightView;
-@property (assign, nonatomic, getter=isUserLeftViewInititialScale)               BOOL userLeftViewInititialScale;
-@property (assign, nonatomic, getter=isUserRightViewInititialScale)              BOOL userRightViewInititialScale;
-@property (assign, nonatomic, getter=isUserLeftViewInititialOffsetX)             BOOL userLeftViewInititialOffsetX;
-@property (assign, nonatomic, getter=isUserRightViewInititialOffsetX)            BOOL userRightViewInititialOffsetX;
+@property (assign, nonatomic, getter=isUserLeftViewInitialScale)                 BOOL userLeftViewInitialScale;
+@property (assign, nonatomic, getter=isUserRightViewInitialScale)                BOOL userRightViewInitialScale;
+@property (assign, nonatomic, getter=isUserLeftViewInitialOffsetX)               BOOL userLeftViewInitialOffsetX;
+@property (assign, nonatomic, getter=isUserRightViewInitialOffsetX)              BOOL userRightViewInitialOffsetX;
 @property (assign, nonatomic, getter=isUserLeftViewBackgroundImageInitialScale)  BOOL userLeftViewBackgroundImageInitialScale;
 @property (assign, nonatomic, getter=isUserRightViewBackgroundImageInitialScale) BOOL userRightViewBackgroundImageInitialScale;
+@property (assign, nonatomic, getter=isUserLeftViewBackgroundImageFinalScale)  BOOL userLeftViewBackgroundImageFinalScale;
+@property (assign, nonatomic, getter=isUserRightViewBackgroundImageFinalScale) BOOL userRightViewBackgroundImageFinalScale;
 
 @end
 
@@ -168,12 +171,14 @@ leftViewCoverColor = _leftViewCoverColor,
 rightViewCoverColor = _rightViewCoverColor,
 rootViewScaleForLeftView = _rootViewScaleForLeftView,
 rootViewScaleForRightView = _rootViewScaleForRightView,
-leftViewInititialScale = _leftViewInititialScale,
-rightViewInititialScale = _rightViewInititialScale,
-leftViewInititialOffsetX = _leftViewInititialOffsetX,
-rightViewInititialOffsetX = _rightViewInititialOffsetX,
+leftViewInitialScale = _leftViewInitialScale,
+rightViewInitialScale = _rightViewInitialScale,
+leftViewInitialOffsetX = _leftViewInitialOffsetX,
+rightViewInitialOffsetX = _rightViewInitialOffsetX,
 leftViewBackgroundImageInitialScale = _leftViewBackgroundImageInitialScale,
-rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
+rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale,
+leftViewBackgroundImageFinalScale = _leftViewBackgroundImageFinalScale,
+rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 - (nonnull instancetype)init {
     self = [super init];
@@ -269,6 +274,24 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupDefaults];
+
+    // Try to initialize left and right view controllers from storyboard by segues
+    if (self.storyboard) {
+        @try {
+            [self performSegueWithIdentifier:LGSideMenuSegueRootIdentifier sender:nil];
+        }
+        @catch (NSException *exception) {}
+
+        @try {
+            [self performSegueWithIdentifier:LGSideMenuSegueLeftIdentifier sender:nil];
+        }
+        @catch (NSException *exception) {}
+
+        @try {
+            [self performSegueWithIdentifier:LGSideMenuSegueRightIdentifier sender:nil];
+        }
+        @catch (NSException *exception) {}
+    }
 }
 
 - (void)setupDefaults {
@@ -293,8 +316,12 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 #pragma mark - Static defaults
 
 - (void)setupDefaultProperties {
-    CGFloat minSide = MIN(CGRectGetWidth(UIScreen.mainScreen.bounds), CGRectGetHeight(UIScreen.mainScreen.bounds));
-    CGFloat sideMenuWidth = minSide - 44.0;
+    CGFloat sideMenuWidth = 320.0;
+
+    if (LGSideMenuHelper.isPhone) {
+        CGFloat minSide = MIN(CGRectGetWidth(UIScreen.mainScreen.bounds), CGRectGetHeight(UIScreen.mainScreen.bounds));
+        sideMenuWidth = minSide - 44.0;
+    }
 
     // Needed to be initialized before default properties
     self.gesturesHandler = [[LGSideMenuControllerGesturesHandler alloc] initWithSideMenuController:self];
@@ -957,14 +984,14 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     return 0.8;
 }
 
-- (void)setLeftViewInititialScale:(CGFloat)leftViewInititialScale {
-    _leftViewInititialScale = leftViewInititialScale;
-    self.userLeftViewInititialScale = YES;
+- (void)setLeftViewInitialScale:(CGFloat)leftViewInitialScale {
+    _leftViewInitialScale = leftViewInitialScale;
+    self.userLeftViewInitialScale = YES;
 }
 
-- (CGFloat)leftViewInititialScale {
-    if (self.isUserLeftViewInititialScale) {
-        return _leftViewInititialScale;
+- (CGFloat)leftViewInitialScale {
+    if (self.isUserLeftViewInitialScale) {
+        return _leftViewInitialScale;
     }
 
     if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle) {
@@ -978,14 +1005,14 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     return 1.0;
 }
 
-- (void)setRightViewInititialScale:(CGFloat)rightViewInititialScale {
-    _rightViewInititialScale = rightViewInititialScale;
-    self.userRightViewInititialScale = YES;
+- (void)setRightViewInitialScale:(CGFloat)rightViewInitialScale {
+    _rightViewInitialScale = rightViewInitialScale;
+    self.userRightViewInitialScale = YES;
 }
 
-- (CGFloat)rightViewInititialScale {
-    if (self.isUserRightViewInititialScale) {
-        return _rightViewInititialScale;
+- (CGFloat)rightViewInitialScale {
+    if (self.isUserRightViewInitialScale) {
+        return _rightViewInitialScale;
     }
 
     if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle) {
@@ -999,35 +1026,35 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     return 1.0;
 }
 
-- (void)setLeftViewInititialOffsetX:(CGFloat)leftViewInititialOffsetX {
-    _leftViewInititialOffsetX = leftViewInititialOffsetX;
-    self.userLeftViewInititialOffsetX = YES;
+- (void)setLeftViewInitialOffsetX:(CGFloat)leftViewInitialOffsetX {
+    _leftViewInitialOffsetX = leftViewInitialOffsetX;
+    self.userLeftViewInitialOffsetX = YES;
 }
 
-- (CGFloat)leftViewInititialOffsetX {
-    if (self.isUserLeftViewInititialOffsetX) {
-        return _leftViewInititialOffsetX;
+- (CGFloat)leftViewInitialOffsetX {
+    if (self.isUserLeftViewInitialOffsetX) {
+        return _leftViewInitialOffsetX;
     }
 
     if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideBelow) {
-        self.leftViewInititialOffsetX = -self.leftViewWidth/2;
+        self.leftViewInitialOffsetX = -self.leftViewWidth/2;
     }
 
     return 0.0;
 }
 
-- (void)setRightViewInititialOffsetX:(CGFloat)rightViewInititialOffsetX {
-    _rightViewInititialOffsetX = rightViewInititialOffsetX;
-    self.userRightViewInititialOffsetX = YES;
+- (void)setRightViewInitialOffsetX:(CGFloat)rightViewInitialOffsetX {
+    _rightViewInitialOffsetX = rightViewInitialOffsetX;
+    self.userRightViewInitialOffsetX = YES;
 }
 
-- (CGFloat)rightViewInititialOffsetX {
-    if (self.isUserRightViewInititialOffsetX) {
-        return _rightViewInititialOffsetX;
+- (CGFloat)rightViewInitialOffsetX {
+    if (self.isUserRightViewInitialOffsetX) {
+        return _rightViewInitialOffsetX;
     }
 
     if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideBelow) {
-        self.rightViewInititialOffsetX = self.rightViewWidth/2;
+        self.rightViewInitialOffsetX = self.rightViewWidth/2;
     }
 
     return 0.0;
@@ -1043,8 +1070,7 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         return _leftViewBackgroundImageInitialScale;
     }
 
-    if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle ||
-        self.leftViewPresentationStyle == LGSideMenuPresentationStyleScaleFromBig) {
+    if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleScaleFromBig) {
         return 1.4;
     }
 
@@ -1061,8 +1087,41 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         return _rightViewBackgroundImageInitialScale;
     }
 
-    if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle ||
-        self.rightViewPresentationStyle == LGSideMenuPresentationStyleScaleFromBig) {
+    if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleScaleFromBig) {
+        return 1.4;
+    }
+
+    return 1.0;
+}
+
+- (void)setLeftViewBackgroundImageFinalScale:(CGFloat)leftViewBackgroundImageFinalScale {
+    _leftViewBackgroundImageFinalScale = leftViewBackgroundImageFinalScale;
+    self.userLeftViewBackgroundImageFinalScale = YES;
+}
+
+- (CGFloat)leftViewBackgroundImageFinalScale {
+    if (self.isUserLeftViewBackgroundImageFinalScale) {
+        return _leftViewBackgroundImageFinalScale;
+    }
+
+    if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle) {
+        return 1.4;
+    }
+
+    return 1.0;
+}
+
+- (void)setRightViewBackgroundImageFinalScale:(CGFloat)rightViewBackgroundImageFinalScale {
+    _rightViewBackgroundImageFinalScale = rightViewBackgroundImageFinalScale;
+    self.userRightViewBackgroundImageFinalScale = YES;
+}
+
+- (CGFloat)rightViewBackgroundImageFinalScale {
+    if (self.isUserRightViewBackgroundImageFinalScale) {
+        return _rightViewBackgroundImageFinalScale;
+    }
+
+    if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleScaleFromLittle) {
         return 1.4;
     }
 
@@ -1243,11 +1302,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     return ((self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnAll) ||
             (UIInterfaceOrientationIsPortrait(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPortrait) ||
             (UIInterfaceOrientationIsLandscape(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnLandscape) ||
-            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone &&
+            (LGSideMenuHelper.isPhone &&
              ((self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhone) ||
               (UIInterfaceOrientationIsPortrait(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhonePortrait) ||
               (UIInterfaceOrientationIsLandscape(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhoneLandscape))) ||
-            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&
+            (LGSideMenuHelper.isPad &&
              ((self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPad) ||
               (UIInterfaceOrientationIsPortrait(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadPortrait) ||
               (UIInterfaceOrientationIsLandscape(orientation) && self.leftViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadLandscape))));
@@ -1257,11 +1316,11 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
     return ((self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnAll) ||
             (UIInterfaceOrientationIsPortrait(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPortrait) ||
             (UIInterfaceOrientationIsLandscape(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnLandscape) ||
-            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone &&
+            (LGSideMenuHelper.isPhone &&
              ((self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhone) ||
               (UIInterfaceOrientationIsPortrait(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhonePortrait) ||
               (UIInterfaceOrientationIsLandscape(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPhoneLandscape))) ||
-            (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&
+            (LGSideMenuHelper.isPad &&
              ((self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPad) ||
               (UIInterfaceOrientationIsPortrait(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadPortrait) ||
               (UIInterfaceOrientationIsLandscape(orientation) && self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadLandscape))));
@@ -1270,6 +1329,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 #pragma mark - ViewControllers
 
 - (void)setRootViewController:(UIViewController *)rootViewController {
+    if (self.rootViewController == rootViewController) return;
+
     [self removeRootViews];
 
     if (!rootViewController) return;
@@ -1284,6 +1345,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)setLeftViewController:(UIViewController *)leftViewController {
+    if (self.leftViewController == leftViewController) return;
+
     [self removeLeftViews];
 
     if (!leftViewController) return;
@@ -1295,6 +1358,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)setRightViewController:(UIViewController *)rightViewController {
+    if (self.rightViewController == rightViewController) return;
+
     [self removeRightViews];
 
     if (!rightViewController) return;
@@ -1308,6 +1373,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 #pragma mark - Views
 
 - (void)setRootView:(UIView *)rootView {
+    if (self.rootView == rootView) return;
+
     [self removeRootViews];
 
     if (!rootView) return;
@@ -1318,6 +1385,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)setLeftView:(LGSideMenuView *)leftView {
+    if (self.leftView == leftView) return;
+
     [self removeLeftViews];
 
     if (!leftView) return;
@@ -1328,6 +1397,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 }
 
 - (void)setRightView:(LGSideMenuView *)rightView {
+    if (self.rightView == rightView) return;
+
     [self removeRightViews];
 
     if (!rightView) return;
@@ -1963,13 +2034,13 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
             frameX = -(self.leftViewWidth + self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius) * (1.0 - percentage);
         }
         else {
-            CGFloat leftViewScale = 1.0 + (self.leftViewInititialScale - 1.0) * (1.0 - percentage);
-            CGFloat backgroundViewScale = 1.0 + (self.leftViewBackgroundImageInitialScale - 1.0) * (1.0 - percentage);
+            CGFloat leftViewScale = 1.0 + (self.leftViewInitialScale - 1.0) * (1.0 - percentage);
+            CGFloat backgroundViewScale = self.leftViewBackgroundImageFinalScale + ((self.leftViewBackgroundImageInitialScale - self.leftViewBackgroundImageFinalScale) * (1.0 - percentage));
 
             leftViewScaleTransform = CGAffineTransformMakeScale(leftViewScale, leftViewScale);
             backgroundViewTransform = CGAffineTransformMakeScale(backgroundViewScale, backgroundViewScale);
 
-            frameX = self.leftViewInititialOffsetX * (1.0 - percentage);
+            frameX = self.leftViewInitialOffsetX * (1.0 - percentage);
         }
     }
 
@@ -2086,13 +2157,13 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
             frameX = (self.rightViewWidth + self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * (1.0 - percentage);
         }
         else {
-            CGFloat rightViewScale = 1.0 + (self.rightViewInititialScale - 1.0) * (1.0 - percentage);
-            CGFloat backgroundViewScale = 1.0 + (self.rightViewBackgroundImageInitialScale - 1.0) * (1.0 - percentage);
+            CGFloat rightViewScale = 1.0 + (self.rightViewInitialScale - 1.0) * (1.0 - percentage);
+            CGFloat backgroundViewScale = self.rightViewBackgroundImageFinalScale + ((self.rightViewBackgroundImageInitialScale - self.rightViewBackgroundImageFinalScale) * (1.0 - percentage));
 
             rightViewScaleTransform = CGAffineTransformMakeScale(rightViewScale, rightViewScale);
             backgroundViewTransform = CGAffineTransformMakeScale(backgroundViewScale, backgroundViewScale);
 
-            frameX = self.rightViewInititialOffsetX * (1.0 - percentage);
+            frameX = self.rightViewInitialOffsetX * (1.0 - percentage);
         }
     }
 
@@ -2347,30 +2418,58 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
 #pragma mark - Left view actions
 
-- (IBAction)showLeftView:(nullable id)sender {
+- (void)showLeftView {
     [self showLeftViewAnimated:NO completionHandler:nil];
 }
 
-- (IBAction)hideLeftView:(nullable id)sender {
+- (void)hideLeftView {
     [self hideLeftViewAnimated:NO completionHandler:nil];
 }
 
-- (IBAction)toggleLeftView:(nullable id)sender {
+- (void)toggleLeftView {
     [self toggleLeftViewAnimated:NO completionHandler:nil];
 }
 
 #pragma mark -
 
-- (IBAction)showLeftViewAnimated:(nullable id)sender {
+- (IBAction)showLeftView:(nullable id)sender {
+    [self showLeftView];
+}
+
+- (IBAction)hideLeftView:(nullable id)sender {
+    [self hideLeftView];
+}
+
+- (IBAction)toggleLeftView:(nullable id)sender {
+    [self toggleLeftView];
+}
+
+#pragma mark -
+
+- (void)showLeftViewAnimated {
     [self showLeftViewAnimated:YES completionHandler:nil];
 }
 
-- (IBAction)hideLeftViewAnimated:(nullable id)sender {
+- (void)hideLeftViewAnimated {
     [self hideLeftViewAnimated:YES completionHandler:nil];
 }
 
-- (IBAction)toggleLeftViewAnimated:(nullable id)sender {
+- (void)toggleLeftViewAnimated {
     [self toggleLeftViewAnimated:YES completionHandler:nil];
+}
+
+#pragma mark -
+
+- (IBAction)showLeftViewAnimated:(nullable id)sender {
+    [self showLeftViewAnimated];
+}
+
+- (IBAction)hideLeftViewAnimated:(nullable id)sender {
+    [self hideLeftViewAnimated];
+}
+
+- (IBAction)toggleLeftViewAnimated:(nullable id)sender {
+    [self toggleLeftViewAnimated];
 }
 
 #pragma mark -
@@ -2380,6 +2479,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         self.isLeftViewDisabled ||
         self.isLeftViewShowing ||
         self.isLeftViewAlwaysVisibleForCurrentOrientation ||
+        self.isLeftViewGoingToShow ||
+        self.isLeftViewGoingToHide ||
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
@@ -2393,6 +2494,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         self.isLeftViewDisabled ||
         self.isLeftViewHidden ||
         self.isLeftViewAlwaysVisibleForCurrentOrientation ||
+        self.isLeftViewGoingToShow ||
+        self.isLeftViewGoingToHide ||
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
@@ -2630,30 +2733,58 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
 
 #pragma mark - Right view actions
 
-- (IBAction)showRightView:(nullable id)sender {
+- (void)showRightView {
     [self showRightViewAnimated:NO completionHandler:nil];
 }
 
-- (IBAction)hideRightView:(nullable id)sender {
+- (void)hideRightView {
     [self hideRightViewAnimated:NO completionHandler:nil];
 }
 
-- (IBAction)toggleRightView:(nullable id)sender {
+- (void)toggleRightView {
     [self toggleRightViewAnimated:NO completionHandler:nil];
 }
 
 #pragma mark -
 
-- (IBAction)showRightViewAnimated:(nullable id)sender {
+- (IBAction)showRightView:(nullable id)sender {
+    [self showRightView];
+}
+
+- (IBAction)hideRightView:(nullable id)sender {
+    [self hideRightView];
+}
+
+- (IBAction)toggleRightView:(nullable id)sender {
+    [self toggleRightView];
+}
+
+#pragma mark -
+
+- (void)showRightViewAnimated {
     [self showRightViewAnimated:YES completionHandler:nil];
 }
 
-- (IBAction)hideRightViewAnimated:(nullable id)sender {
+- (void)hideRightViewAnimated {
     [self hideRightViewAnimated:YES completionHandler:nil];
 }
 
-- (IBAction)toggleRightViewAnimated:(nullable id)sender {
+- (void)toggleRightViewAnimated {
     [self toggleRightViewAnimated:YES completionHandler:nil];
+}
+
+#pragma mark -
+
+- (IBAction)showRightViewAnimated:(nullable id)sender {
+    [self showRightViewAnimated];
+}
+
+- (IBAction)hideRightViewAnimated:(nullable id)sender {
+    [self hideRightViewAnimated];
+}
+
+- (IBAction)toggleRightViewAnimated:(nullable id)sender {
+    [self toggleRightViewAnimated];
 }
 
 #pragma mark -
@@ -2663,6 +2794,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         self.isRightViewDisabled ||
         self.isRightViewShowing ||
         self.isRightViewAlwaysVisibleForCurrentOrientation ||
+        self.isRightViewGoingToShow ||
+        self.isRightViewGoingToHide ||
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
@@ -2676,6 +2809,8 @@ rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale;
         self.isRightViewDisabled ||
         self.isRightViewHidden ||
         self.isRightViewAlwaysVisibleForCurrentOrientation ||
+        self.isRightViewGoingToShow ||
+        self.isRightViewGoingToHide ||
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }

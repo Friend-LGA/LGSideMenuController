@@ -103,4 +103,12 @@
     return isRetina;
 }
 
++ (BOOL)isPhone {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
+}
+
++ (BOOL)isPad {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+
 @end
