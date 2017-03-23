@@ -12,17 +12,13 @@ class MainViewController: LGSideMenuController {
 
         // -----
 
-        var leftViewController: LeftViewController
-        var rightViewController: RightViewController
-
-        // -----
-
         if (self.storyboard != nil) {
-            leftViewController = self.storyboard!.instantiateViewController(withIdentifier: "LeftViewController") as! LeftViewController
-            rightViewController = self.storyboard!.instantiateViewController(withIdentifier: "RightViewController") as! RightViewController
+            // Left and Right view controllers is set in storyboard
+            // Use custom segues with class "LGSideMenuSegue" and identifiers "left" and "right"
 
             // Sizes and styles is set in storybord
-            // You can also find there all other parameters
+            // You can also find there all other properties
+
             // LGSideMenuController fully customizable from storyboard
         }
         else {
@@ -31,12 +27,12 @@ class MainViewController: LGSideMenuController {
 
             leftViewWidth = 250.0;
             leftViewBackgroundImage = UIImage(named: "imageLeft")
-            leftViewBackgroundColor = UIColor(red: 0.5, green: 0.6, blue: 0.5, alpha: 0.9)
+            leftViewBackgroundColor = UIColor(red: 0.5, green: 0.65, blue: 0.5, alpha: 0.95)
             rootViewCoverColorForLeftView = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.05)
 
             rightViewWidth = 100.0;
             rightViewBackgroundImage = UIImage(named: "imageRight")
-            rightViewBackgroundColor = UIColor(red: 0.6, green: 0.5, blue: 0.6, alpha: 0.9)
+            rightViewBackgroundColor = UIColor(red: 0.65, green: 0.5, blue: 0.65, alpha: 0.95)
             rootViewCoverColorForRightView = UIColor(red: 1.0, green: 0.0, blue: 1.0, alpha: 0.05)
         }
 
@@ -149,8 +145,8 @@ class MainViewController: LGSideMenuController {
             leftViewAnimationSpeed = 1.0
             leftViewBackgroundColor = UIColor(red: 0.5, green: 0.75, blue: 0.5, alpha: 1.0)
             leftViewBackgroundImageInitialScale = 1.5
-            leftViewInititialOffsetX = -200.0
-            leftViewInititialScale = 1.5
+            leftViewInitialOffsetX = -200.0
+            leftViewInitialScale = 1.5
             leftViewCoverBlurEffect = UIBlurEffect(style: .dark)
             leftViewBackgroundImage = nil;
 
@@ -175,11 +171,6 @@ class MainViewController: LGSideMenuController {
         default:
             break
         }
-
-        // -----
-
-        self.leftViewController = leftViewController
-        self.rightViewController = rightViewController
     }
 
     override func leftViewWillLayoutSubviews(with size: CGSize) {

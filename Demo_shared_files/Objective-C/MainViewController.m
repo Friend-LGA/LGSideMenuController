@@ -21,29 +21,27 @@
 
     // -----
 
-    LeftViewController *leftViewController;
-    RightViewController *rightViewController;
-
     if (self.storyboard) {
-        leftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
-        rightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+        // Left and Right view controllers is set in storyboard
+        // Use custom segues with class "LGSideMenuSegue" and identifiers "left" and "right"
 
         // Sizes and styles is set in storybord
-        // You can also find there all other parameters
+        // You can also find there all other properties
+
         // LGSideMenuController fully customizable from storyboard
     }
     else {
-        leftViewController = [LeftViewController new];
-        rightViewController = [RightViewController new];
+        self.leftViewController = [LeftViewController new];
+        self.rightViewController = [RightViewController new];
 
         self.leftViewWidth = 250.0;
         self.leftViewBackgroundImage = [UIImage imageNamed:@"imageLeft"];
-        self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.6 blue:0.5 alpha:0.9];
+        self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.65 blue:0.5 alpha:0.95];
         self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
 
         self.rightViewWidth = 100.0;
         self.rightViewBackgroundImage = [UIImage imageNamed:@"imageRight"];
-        self.rightViewBackgroundColor = [UIColor colorWithRed:0.6 green:0.5 blue:0.6 alpha:0.9];
+        self.rightViewBackgroundColor = [UIColor colorWithRed:0.65 green:0.5 blue:0.65 alpha:0.95];
         self.rootViewCoverColorForRightView = [UIColor colorWithRed:1.0 green:0.0 blue:1.0 alpha:0.05];
     }
 
@@ -167,8 +165,8 @@
             self.leftViewAnimationSpeed = 1.0;
             self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.75 blue:0.5 alpha:1.0];
             self.leftViewBackgroundImageInitialScale = 1.5;
-            self.leftViewInititialOffsetX = -200.0;
-            self.leftViewInititialScale = 1.5;
+            self.leftViewInitialOffsetX = -200.0;
+            self.leftViewInitialScale = 1.5;
             self.leftViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
             self.leftViewBackgroundImage = nil;
 
@@ -192,11 +190,6 @@
             break;
         }
     }
-
-    // -----
-
-    self.leftViewController = leftViewController;
-    self.rightViewController = rightViewController;
 }
 
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size {

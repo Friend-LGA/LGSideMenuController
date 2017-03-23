@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,18 +32,23 @@
                         <userDefinedRuntimeAttribute type="image" keyPath="leftViewBackgroundImage" value="imageLeft.png"/>
                         <userDefinedRuntimeAttribute type="image" keyPath="rightViewBackgroundImage" value="imageRight.png"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="leftViewBackgroundColor">
-                            <color key="value" red="0.49803921569999998" green="0.59999999999999998" blue="0.49803921569999998" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.43137254901960786" green="0.58823529411764708" blue="0.43137254901960786" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rightViewBackgroundColor">
-                            <color key="value" red="0.59999999999999998" green="0.49803921569999998" blue="0.59999999999999998" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.58823529411764708" green="0.43137254901960786" blue="0.58823529411764708" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForLeftView">
-                            <color key="value" red="0.0" green="1" blue="0.0" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.0" green="1" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForRightView">
-                            <color key="value" red="1" green="0.0" blue="1" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                            <color key="value" red="1" green="0.0" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="na3-uM-Boz" kind="custom" identifier="left" customClass="LGSideMenuSegue" id="2bn-Xt-yPC"/>
+                        <segue destination="Oy0-t8-jtO" kind="custom" identifier="right" customClass="LGSideMenuSegue" id="Pda-Cf-TVp"/>
+                        <segue destination="2N2-Jb-kPU" kind="custom" identifier="root" customClass="LGSideMenuSegue" id="rOO-K3-Wsf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,7 +65,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPL-Yf-bvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-769" y="1781"/>
+            <point key="canvasLocation" x="-714" y="1781"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="fd9-99-CZB">
@@ -119,7 +124,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gn2-oT-HTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1598" y="990"/>
+            <point key="canvasLocation" x="-1598" y="2555"/>
         </scene>
         <!--LGSideMenuController-->
         <scene sceneID="OYz-cL-FCb">
@@ -180,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kv-zL-edg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-64" y="1781"/>
+            <point key="canvasLocation" x="62" y="1781"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="qMB-jL-0u9">
@@ -239,7 +244,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ve-Ed-cMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1278" y="990"/>
+            <point key="canvasLocation" x="-1278" y="2555"/>
         </scene>
         <!--LGSideMenuController-->
         <scene sceneID="mWK-bL-hRL">
@@ -284,12 +289,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1x1-pp-f3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-64" y="990"/>
+            <point key="canvasLocation" x="62" y="1074"/>
         </scene>
     </scenes>
     <resources>
         <image name="imageLeft.png" width="1024" height="1024"/>
-        <image name="imageRight.png" width="1371" height="1371"/>
+        <image name="imageRight.png" width="1024" height="1024"/>
         <image name="imageRoot.png" width="1024" height="1024"/>
     </resources>
 </document>

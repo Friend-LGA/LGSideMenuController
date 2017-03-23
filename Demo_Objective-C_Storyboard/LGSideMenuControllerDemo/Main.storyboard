@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Qe-ZH-n0V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Qe-ZH-n0V">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZD-Tj-tpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73.5" y="573.5"/>
+            <point key="canvasLocation" x="44" y="573"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="fOz-9g-CjJ">
@@ -80,7 +80,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiI-Rm-XiG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-851" y="-165"/>
+            <point key="canvasLocation" x="-851" y="1339"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="Cxj-n3-JK8">
@@ -140,7 +140,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8M-n7-gxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-531" y="-166"/>
+            <point key="canvasLocation" x="-531" y="1339"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="FD9-Pe-zX1">
@@ -166,18 +166,23 @@
                         <userDefinedRuntimeAttribute type="image" keyPath="leftViewBackgroundImage" value="imageLeft.png"/>
                         <userDefinedRuntimeAttribute type="image" keyPath="rightViewBackgroundImage" value="imageRight.png"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="leftViewBackgroundColor">
-                            <color key="value" red="0.49803921568627452" green="0.59999999999999998" blue="0.49803921568627452" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.43137254901960786" green="0.58823529411764708" blue="0.43137254901960786" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rightViewBackgroundColor">
-                            <color key="value" red="0.59999999999999998" green="0.49803921568627452" blue="0.59999999999999998" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.58823529411764708" green="0.43137254901960786" blue="0.58823529411764708" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForLeftView">
-                            <color key="value" red="0.0" green="1" blue="0.0" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                            <color key="value" red="0.0" green="1" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForRightView">
-                            <color key="value" red="1" green="0.0" blue="1" alpha="0.050000000000000003" colorSpace="calibratedRGB"/>
+                            <color key="value" red="1" green="0.0" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="9nD-Rt-5hf" kind="custom" identifier="left" customClass="LGSideMenuSegue" id="fCk-ka-htG"/>
+                        <segue destination="MRq-JZ-L0N" kind="custom" identifier="right" customClass="LGSideMenuSegue" id="BsC-s5-VZg"/>
+                        <segue destination="W26-8j-p1z" kind="custom" identifier="root" customClass="LGSideMenuSegue" id="m4g-GV-Irt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZZ-Nl-Oxq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeL-Fy-HB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="573"/>
+            <point key="canvasLocation" x="838" y="573"/>
         </scene>
         <!--LGSideMenuController-->
         <scene sceneID="2ot-PQ-MsJ">
@@ -287,12 +292,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JZ5-9J-nb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="-165"/>
+            <point key="canvasLocation" x="838" y="-144"/>
         </scene>
     </scenes>
     <resources>
         <image name="imageLeft.png" width="1024" height="1024"/>
-        <image name="imageRight.png" width="1371" height="1371"/>
+        <image name="imageRight.png" width="1024" height="1024"/>
         <image name="imageRoot.png" width="1024" height="1024"/>
     </resources>
 </document>

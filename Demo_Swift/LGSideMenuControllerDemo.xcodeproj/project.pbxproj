@@ -18,6 +18,7 @@
 		4A68876A1E816F38000D9315 /* LGSideMenuDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887671E816F38000D9315 /* LGSideMenuDrawer.m */; };
 		4A68876B1E816F38000D9315 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887691E816F38000D9315 /* LGSideMenuHelper.m */; };
 		4A7BF8F11E01A04900C6A9D4 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7BF8F01E01A04900C6A9D4 /* OtherViewController.swift */; };
+		4AE287B71E82AA3B001DC22B /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE287B61E82AA3B001DC22B /* LGSideMenuSegue.m */; };
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
 		EDE795171D45B7A1002930CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE795161D45B7A1002930CA /* Assets.xcassets */; };
 		EDE795241D45B7D4002930CA /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795231D45B7D4002930CA /* LGSideMenuController.m */; };
@@ -47,6 +48,8 @@
 		4A6887681E816F38000D9315 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
 		4A6887691E816F38000D9315 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
 		4A7BF8F01E01A04900C6A9D4 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
+		4AE287B51E82AA3B001DC22B /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		4AE287B61E82AA3B001DC22B /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
 		EDE7950C1D45B7A1002930CA /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE7950F1D45B7A1002930CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDE795161D45B7A1002930CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 				4A6887671E816F38000D9315 /* LGSideMenuDrawer.m */,
 				4A6887681E816F38000D9315 /* LGSideMenuHelper.h */,
 				4A6887691E816F38000D9315 /* LGSideMenuHelper.m */,
+				4AE287B51E82AA3B001DC22B /* LGSideMenuSegue.h */,
+				4AE287B61E82AA3B001DC22B /* LGSideMenuSegue.m */,
 				4A06D0B11DF757FE00498335 /* LGSideMenuView.h */,
 				4A06D0B21DF757FE00498335 /* LGSideMenuView.m */,
 				EDE7954A1D45DF0E002930CA /* UIViewController+LGSideMenuController.h */,
@@ -270,6 +275,7 @@
 				EDE7953F1D45CFED002930CA /* ChooseNavigationController.swift in Sources */,
 				4A5EB34C1DEF402A005D1DF0 /* ViewController.swift in Sources */,
 				EDE795291D45B879002930CA /* TableViewController.swift in Sources */,
+				4AE287B71E82AA3B001DC22B /* LGSideMenuSegue.m in Sources */,
 				EDE7953A1D45BACB002930CA /* NavigationController.swift in Sources */,
 				EDE795381D45BAB4002930CA /* LeftViewController.swift in Sources */,
 				EDE795241D45B7D4002930CA /* LGSideMenuController.m in Sources */,

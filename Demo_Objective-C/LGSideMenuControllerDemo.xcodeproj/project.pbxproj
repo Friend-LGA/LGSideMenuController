@@ -29,6 +29,7 @@
 		4A5888C61AE9489E004AFC57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5888C51AE9489E004AFC57 /* Images.xcassets */; };
 		4A5888E31AE94907004AFC57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5888E11AE94907004AFC57 /* ViewController.m */; };
 		4A8505C61E7AEAB6008C3F86 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8505C51E7AEAB6008C3F86 /* LGSideMenuHelper.m */; };
+		4AE287BA1E82AA45001DC22B /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE287B91E82AA45001DC22B /* LGSideMenuSegue.m */; };
 		4AF13A0E1BF3950C0037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A0D1BF3950C0037B073 /* LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,8 @@
 		4A5888E11AE94907004AFC57 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A8505C41E7AEAB6008C3F86 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
 		4A8505C51E7AEAB6008C3F86 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
+		4AE287B81E82AA45001DC22B /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		4AE287B91E82AA45001DC22B /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
 		4AF13A0C1BF3950C0037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LGSideMenuController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4AF13A0D1BF3950C0037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LGSideMenuController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
@@ -208,6 +211,8 @@
 				4A244AC81E77021F004EB6BE /* LGSideMenuDrawer.m */,
 				4A8505C41E7AEAB6008C3F86 /* LGSideMenuHelper.h */,
 				4A8505C51E7AEAB6008C3F86 /* LGSideMenuHelper.m */,
+				4AE287B81E82AA45001DC22B /* LGSideMenuSegue.h */,
+				4AE287B91E82AA45001DC22B /* LGSideMenuSegue.m */,
 				4A06D0A31DF7465A00498335 /* LGSideMenuView.h */,
 				4A06D0A41DF7465A00498335 /* LGSideMenuView.m */,
 				4A454CDC1DECCA7100C09F69 /* UIViewController+LGSideMenuController.h */,
@@ -306,6 +311,7 @@
 				4A454CDE1DECCA7100C09F69 /* UIViewController+LGSideMenuController.m in Sources */,
 				4A371ED81BEBA53000FB3DA4 /* NavigationController.m in Sources */,
 				4A5888E31AE94907004AFC57 /* ViewController.m in Sources */,
+				4AE287BA1E82AA45001DC22B /* LGSideMenuSegue.m in Sources */,
 				4A06D0A51DF7465A00498335 /* LGSideMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
