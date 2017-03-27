@@ -7,53 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A06D0B91DF7580700498335 /* LGSideMenuControllerGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A06D0B61DF7580700498335 /* LGSideMenuControllerGesturesHandler.m */; };
-		4A06D0BA1DF7580700498335 /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A06D0B81DF7580700498335 /* LGSideMenuView.m */; };
+		4A04FA7E1E894C25000E90AB /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA711E894C25000E90AB /* LGSideMenuController.m */; };
+		4A04FA7F1E894C25000E90AB /* LGSideMenuControllerGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA731E894C25000E90AB /* LGSideMenuControllerGesturesHandler.m */; };
+		4A04FA801E894C25000E90AB /* LGSideMenuDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA751E894C25000E90AB /* LGSideMenuDrawer.m */; };
+		4A04FA811E894C25000E90AB /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA771E894C25000E90AB /* LGSideMenuHelper.m */; };
+		4A04FA821E894C25000E90AB /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA791E894C25000E90AB /* LGSideMenuSegue.m */; };
+		4A04FA831E894C25000E90AB /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA7B1E894C25000E90AB /* LGSideMenuView.m */; };
+		4A04FA841E894C25000E90AB /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA7D1E894C25000E90AB /* UIViewController+LGSideMenuController.m */; };
+		4A04FABA1E894C62000E90AB /* imageLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FAB71E894C62000E90AB /* imageLeft.png */; };
+		4A04FABB1E894C62000E90AB /* imageRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FAB81E894C62000E90AB /* imageRight.png */; };
+		4A04FABC1E894C62000E90AB /* imageRoot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FAB91E894C62000E90AB /* imageRoot.png */; };
+		4A04FACE1E894CA7000E90AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FACD1E894CA7000E90AB /* LaunchScreen.storyboard */; };
+		4A04FAD61E894D01000E90AB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FAD51E894D01000E90AB /* MainViewController.m */; };
 		4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA551BECFE610072427E /* ChooseNavigationController.m */; };
 		4A19DA591BECFE610072427E /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA571BECFE610072427E /* TableViewController.m */; };
 		4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA5B1BECFE900072427E /* NavigationController.m */; };
-		4A23021F1DF4165100701E9F /* imageRoot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A23021C1DF4165100701E9F /* imageRoot.png */; };
-		4A2302201DF4165100701E9F /* imageLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A23021D1DF4165100701E9F /* imageLeft.png */; };
-		4A2302211DF4165100701E9F /* imageRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A23021E1DF4165100701E9F /* imageRight.png */; };
-		4A23022C1DF416E700701E9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A23022B1DF416E700701E9F /* LaunchScreen.storyboard */; };
 		4A2302521DF41C0000701E9F /* Choose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2302511DF41C0000701E9F /* Choose.storyboard */; };
 		4A2302541DF41C0500701E9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2302531DF41C0500701E9F /* Main.storyboard */; };
-		4A2302571DF4222100701E9F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2302561DF4222100701E9F /* MainViewController.m */; };
 		4A3C468E1DFEE49F007A01D8 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C468D1DFEE49F007A01D8 /* OtherViewController.m */; };
 		4A4243A11B6808E4008432A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A01B6808E4008432A9 /* main.m */; };
 		4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A31B6808E4008432A9 /* AppDelegate.m */; };
 		4A4243A71B6808E4008432A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* ViewController.m */; };
 		4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A4243AB1B6808E4008432A9 /* Images.xcassets */; };
-		4A6887641E816F31000D9315 /* LGSideMenuDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887611E816F31000D9315 /* LGSideMenuDrawer.m */; };
-		4A6887651E816F31000D9315 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6887631E816F31000D9315 /* LGSideMenuHelper.m */; };
 		4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */; };
 		4ADAFC441B691DA500B33211 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3E1B691DA500B33211 /* LeftViewController.m */; };
 		4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC401B691DA500B33211 /* RightViewCell.m */; };
 		4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC421B691DA500B33211 /* RightViewController.m */; };
-		4AE287B11E82A5A6001DC22B /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE287B01E82A5A6001DC22B /* LGSideMenuSegue.m */; };
-		4AF13A121BF395510037B073 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF13A111BF395510037B073 /* LGSideMenuController.m */; };
-		EDE795461D45DCB8002930CA /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4A06D0B51DF7580700498335 /* LGSideMenuControllerGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerGesturesHandler.h; sourceTree = "<group>"; };
-		4A06D0B61DF7580700498335 /* LGSideMenuControllerGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuControllerGesturesHandler.m; sourceTree = "<group>"; };
-		4A06D0B71DF7580700498335 /* LGSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuView.h; sourceTree = "<group>"; };
-		4A06D0B81DF7580700498335 /* LGSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuView.m; sourceTree = "<group>"; };
+		4A04FA701E894C25000E90AB /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
+		4A04FA711E894C25000E90AB /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
+		4A04FA721E894C25000E90AB /* LGSideMenuControllerGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerGesturesHandler.h; sourceTree = "<group>"; };
+		4A04FA731E894C25000E90AB /* LGSideMenuControllerGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuControllerGesturesHandler.m; sourceTree = "<group>"; };
+		4A04FA741E894C25000E90AB /* LGSideMenuDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuDrawer.h; sourceTree = "<group>"; };
+		4A04FA751E894C25000E90AB /* LGSideMenuDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuDrawer.m; sourceTree = "<group>"; };
+		4A04FA761E894C25000E90AB /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
+		4A04FA771E894C25000E90AB /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
+		4A04FA781E894C25000E90AB /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		4A04FA791E894C25000E90AB /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
+		4A04FA7A1E894C25000E90AB /* LGSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuView.h; sourceTree = "<group>"; };
+		4A04FA7B1E894C25000E90AB /* LGSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuView.m; sourceTree = "<group>"; };
+		4A04FA7C1E894C25000E90AB /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		4A04FA7D1E894C25000E90AB /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
+		4A04FAB71E894C62000E90AB /* imageLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageLeft.png; path = ../../_shared_files/imageLeft.png; sourceTree = "<group>"; };
+		4A04FAB81E894C62000E90AB /* imageRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageRight.png; path = ../../_shared_files/imageRight.png; sourceTree = "<group>"; };
+		4A04FAB91E894C62000E90AB /* imageRoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageRoot.png; path = ../../_shared_files/imageRoot.png; sourceTree = "<group>"; };
+		4A04FACD1E894CA7000E90AB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../_shared_files/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4A04FAD41E894D01000E90AB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = "../../_shared_files/Objective-C/MainViewController.h"; sourceTree = "<group>"; };
+		4A04FAD51E894D01000E90AB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = "../../_shared_files/Objective-C/MainViewController.m"; sourceTree = "<group>"; };
 		4A19DA541BECFE610072427E /* ChooseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ChooseNavigationController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A19DA551BECFE610072427E /* ChooseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChooseNavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A19DA561BECFE610072427E /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TableViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A19DA571BECFE610072427E /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A19DA5A1BECFE900072427E /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NavigationController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A19DA5B1BECFE900072427E /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A23021C1DF4165100701E9F /* imageRoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageRoot.png; path = ../../Demo_shared_files/imageRoot.png; sourceTree = "<group>"; };
-		4A23021D1DF4165100701E9F /* imageLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageLeft.png; path = ../../Demo_shared_files/imageLeft.png; sourceTree = "<group>"; };
-		4A23021E1DF4165100701E9F /* imageRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageRight.png; path = ../../Demo_shared_files/imageRight.png; sourceTree = "<group>"; };
-		4A23022B1DF416E700701E9F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Demo_shared_files/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A2302511DF41C0000701E9F /* Choose.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Choose.storyboard; sourceTree = "<group>"; };
 		4A2302531DF41C0500701E9F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4A2302551DF4222100701E9F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = "../../Demo_shared_files/Objective-C/MainViewController.h"; sourceTree = "<group>"; };
-		4A2302561DF4222100701E9F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = "../../Demo_shared_files/Objective-C/MainViewController.m"; sourceTree = "<group>"; };
 		4A3C468C1DFEE49F007A01D8 /* OtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
 		4A3C468D1DFEE49F007A01D8 /* OtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
 		4A42439B1B6808E4008432A9 /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,10 +74,6 @@
 		4A4243A51B6808E4008432A9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A4243A61B6808E4008432A9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A4243AB1B6808E4008432A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4A6887601E816F30000D9315 /* LGSideMenuDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuDrawer.h; sourceTree = "<group>"; };
-		4A6887611E816F31000D9315 /* LGSideMenuDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuDrawer.m; sourceTree = "<group>"; };
-		4A6887621E816F31000D9315 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
-		4A6887631E816F31000D9315 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
 		4ADAFC3B1B691DA500B33211 /* LeftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LeftViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LeftViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ADAFC3D1B691DA500B33211 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LeftViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -76,12 +82,6 @@
 		4ADAFC401B691DA500B33211 /* RightViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RightViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ADAFC411B691DA500B33211 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RightViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4ADAFC421B691DA500B33211 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RightViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4AE287AF1E82A5A6001DC22B /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
-		4AE287B01E82A5A6001DC22B /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
-		4AF13A101BF395510037B073 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4AF13A111BF395510037B073 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		EDE795441D45DCB8002930CA /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +95,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A04FA6F1E894C25000E90AB /* LGSideMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				4A04FA701E894C25000E90AB /* LGSideMenuController.h */,
+				4A04FA711E894C25000E90AB /* LGSideMenuController.m */,
+				4A04FA721E894C25000E90AB /* LGSideMenuControllerGesturesHandler.h */,
+				4A04FA731E894C25000E90AB /* LGSideMenuControllerGesturesHandler.m */,
+				4A04FA741E894C25000E90AB /* LGSideMenuDrawer.h */,
+				4A04FA751E894C25000E90AB /* LGSideMenuDrawer.m */,
+				4A04FA761E894C25000E90AB /* LGSideMenuHelper.h */,
+				4A04FA771E894C25000E90AB /* LGSideMenuHelper.m */,
+				4A04FA781E894C25000E90AB /* LGSideMenuSegue.h */,
+				4A04FA791E894C25000E90AB /* LGSideMenuSegue.m */,
+				4A04FA7A1E894C25000E90AB /* LGSideMenuView.h */,
+				4A04FA7B1E894C25000E90AB /* LGSideMenuView.m */,
+				4A04FA7C1E894C25000E90AB /* UIViewController+LGSideMenuController.h */,
+				4A04FA7D1E894C25000E90AB /* UIViewController+LGSideMenuController.m */,
+			);
+			name = LGSideMenuController;
+			path = ../../LGSideMenuController;
+			sourceTree = "<group>";
+		};
 		4A06D0A21DF733EF00498335 /* Root View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +148,8 @@
 				4A06D0A21DF733EF00498335 /* Root View Controller */,
 				4ADAFC481B691E1300B33211 /* Left View Controller */,
 				4ADAFC471B691E0F00B33211 /* Right View Controller */,
-				4A2302551DF4222100701E9F /* MainViewController.h */,
-				4A2302561DF4222100701E9F /* MainViewController.m */,
+				4A04FAD41E894D01000E90AB /* MainViewController.h */,
+				4A04FAD51E894D01000E90AB /* MainViewController.m */,
 				4A2302531DF41C0500701E9F /* Main.storyboard */,
 			);
 			name = "Side Menu Controller";
@@ -136,9 +158,9 @@
 		4A23021B1DF4162200701E9F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4A23021C1DF4165100701E9F /* imageRoot.png */,
-				4A23021D1DF4165100701E9F /* imageLeft.png */,
-				4A23021E1DF4165100701E9F /* imageRight.png */,
+				4A04FAB71E894C62000E90AB /* imageLeft.png */,
+				4A04FAB81E894C62000E90AB /* imageRight.png */,
+				4A04FAB91E894C62000E90AB /* imageRoot.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -146,7 +168,7 @@
 		4A4243921B6808E4008432A9 = {
 			isa = PBXGroup;
 			children = (
-				4AF13A0F1BF395510037B073 /* LGSideMenuController */,
+				4A04FA6F1E894C25000E90AB /* LGSideMenuController */,
 				4A42439D1B6808E4008432A9 /* LGSideMenuControllerDemo */,
 				4A42439C1B6808E4008432A9 /* Products */,
 			);
@@ -170,7 +192,7 @@
 				4A4243AB1B6808E4008432A9 /* Images.xcassets */,
 				4A23021B1DF4162200701E9F /* Resources */,
 				4A42439E1B6808E4008432A9 /* Supporting Files */,
-				4A23022B1DF416E700701E9F /* LaunchScreen.storyboard */,
+				4A04FACD1E894CA7000E90AB /* LaunchScreen.storyboard */,
 			);
 			path = LGSideMenuControllerDemo;
 			sourceTree = "<group>";
@@ -204,28 +226,6 @@
 				4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */,
 			);
 			name = "Left View Controller";
-			sourceTree = "<group>";
-		};
-		4AF13A0F1BF395510037B073 /* LGSideMenuController */ = {
-			isa = PBXGroup;
-			children = (
-				4AF13A101BF395510037B073 /* LGSideMenuController.h */,
-				4AF13A111BF395510037B073 /* LGSideMenuController.m */,
-				4A06D0B51DF7580700498335 /* LGSideMenuControllerGesturesHandler.h */,
-				4A06D0B61DF7580700498335 /* LGSideMenuControllerGesturesHandler.m */,
-				4A6887601E816F30000D9315 /* LGSideMenuDrawer.h */,
-				4A6887611E816F31000D9315 /* LGSideMenuDrawer.m */,
-				4A6887621E816F31000D9315 /* LGSideMenuHelper.h */,
-				4A6887631E816F31000D9315 /* LGSideMenuHelper.m */,
-				4AE287AF1E82A5A6001DC22B /* LGSideMenuSegue.h */,
-				4AE287B01E82A5A6001DC22B /* LGSideMenuSegue.m */,
-				4A06D0B71DF7580700498335 /* LGSideMenuView.h */,
-				4A06D0B81DF7580700498335 /* LGSideMenuView.m */,
-				EDE795441D45DCB8002930CA /* UIViewController+LGSideMenuController.h */,
-				EDE795451D45DCB8002930CA /* UIViewController+LGSideMenuController.m */,
-			);
-			name = LGSideMenuController;
-			path = ../LGSideMenuController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,12 +286,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A2302541DF41C0500701E9F /* Main.storyboard in Resources */,
-				4A2302201DF4165100701E9F /* imageLeft.png in Resources */,
 				4A4243AC1B6808E4008432A9 /* Images.xcassets in Resources */,
-				4A2302211DF4165100701E9F /* imageRight.png in Resources */,
-				4A23022C1DF416E700701E9F /* LaunchScreen.storyboard in Resources */,
-				4A23021F1DF4165100701E9F /* imageRoot.png in Resources */,
+				4A04FABB1E894C62000E90AB /* imageRight.png in Resources */,
+				4A04FABA1E894C62000E90AB /* imageLeft.png in Resources */,
+				4A04FACE1E894CA7000E90AB /* LaunchScreen.storyboard in Resources */,
 				4A2302521DF41C0000701E9F /* Choose.storyboard in Resources */,
+				4A04FABC1E894C62000E90AB /* imageRoot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,23 +304,23 @@
 			files = (
 				4A4243A71B6808E4008432A9 /* ViewController.m in Sources */,
 				4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */,
-				4AF13A121BF395510037B073 /* LGSideMenuController.m in Sources */,
 				4A4243A11B6808E4008432A9 /* main.m in Sources */,
-				4A6887651E816F31000D9315 /* LGSideMenuHelper.m in Sources */,
-				4A2302571DF4222100701E9F /* MainViewController.m in Sources */,
+				4A04FA801E894C25000E90AB /* LGSideMenuDrawer.m in Sources */,
+				4A04FA831E894C25000E90AB /* LGSideMenuView.m in Sources */,
 				4A19DA591BECFE610072427E /* TableViewController.m in Sources */,
-				4A6887641E816F31000D9315 /* LGSideMenuDrawer.m in Sources */,
+				4A04FAD61E894D01000E90AB /* MainViewController.m in Sources */,
 				4ADAFC441B691DA500B33211 /* LeftViewController.m in Sources */,
+				4A04FA7E1E894C25000E90AB /* LGSideMenuController.m in Sources */,
 				4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */,
 				4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */,
+				4A04FA811E894C25000E90AB /* LGSideMenuHelper.m in Sources */,
+				4A04FA841E894C25000E90AB /* UIViewController+LGSideMenuController.m in Sources */,
 				4A3C468E1DFEE49F007A01D8 /* OtherViewController.m in Sources */,
 				4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */,
-				EDE795461D45DCB8002930CA /* UIViewController+LGSideMenuController.m in Sources */,
 				4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */,
+				4A04FA821E894C25000E90AB /* LGSideMenuSegue.m in Sources */,
 				4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */,
-				4A06D0B91DF7580700498335 /* LGSideMenuControllerGesturesHandler.m in Sources */,
-				4AE287B11E82A5A6001DC22B /* LGSideMenuSegue.m in Sources */,
-				4A06D0BA1DF7580700498335 /* LGSideMenuView.m in Sources */,
+				4A04FA7F1E894C25000E90AB /* LGSideMenuControllerGesturesHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
