@@ -9,9 +9,9 @@ iOS view controller, shows left and right views by pressing button or gesture.
 
 ## Preview
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/Preview1.gif" width="285"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/1.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/2.png" width="286"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/Preview2.gif" width="285"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/3.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/4.png" width="286"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/Preview3.gif" width="285"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/5.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/6.png" width="286"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview1.gif" width="285"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/1.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/2.png" width="286"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview2.gif" width="285"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/3.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/4.png" width="286"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview3.gif" width="285"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/5.png" width="286"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/6.png" width="286"/>
 
 ## Installation
 
@@ -169,6 +169,8 @@ If you have, for example, `sideMenuController.rootViewController != nil` and you
 
 ### Quick Example
 
+#### Programmatically
+
 ##### Objective-C
 
 ```objective-c
@@ -209,7 +211,23 @@ sideMenuController.rightViewWidth = 100.0;
 sideMenuController.leftViewPresentationStyle = .slideBelow;
 ```
 
-For better examples check demo projects.
+#### With storyboard
+
+1. Create instance of LGSideMenuController
+2. Create some root view controller (for example UINavigationController)
+3. Create some left view controller (for example UITableViewController)
+4. Create some right view controller (for example UITableViewController)
+5. Now you need to connect them all using segues of class `LGSideMenuSegue` and with identifiers: `root`, `left`, `right`.
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root1.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root2.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root3.png" height="300"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left1.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left2.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left3.png" height="300"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Right1.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Right2.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Right3.png" height="300"/>
+
+6. You can change `leftViewWidth`, `leftViewPresentationStyle`, `rightViewWidth` and `rightViewPresentationStyle` inside LGSideMenuController's attributes inspector. There you can also find all other properties.
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/d46bbba932f09fc91d91ada65d7060abec2be807/LGSideMenuController/Storyboard_Instructions/Properties.png" width="280"/>
+
+For better examples check [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo).
 
 ### Blur
 
@@ -573,12 +591,6 @@ sideMenuController.leftViewSwipeGestureEnabled = false
 sideMenuController.rightViewSwipeGestureEnabled = false
 ```
 
-### Storyboard
-
-Almost all properties you can set right inside storyboard:
-
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/8e5626531f465b664defbcf79f84908a008355a9/LGSideMenuController/Storyboard_Instructions/Properties.png" width="244"/>
-
 ### Handle actions
 
 To handle actions you can use delegate, blocks or notifications:
@@ -699,11 +711,11 @@ LGSideMenuControllerDidHideRightViewNotification
 
 ### More
 
-For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode demo projects:
-* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C)
-* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Objective-C_Storyboard)
-* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift)
-* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo_Swift_Storyboard)
+For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
+* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Objective-C)
+* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Objective-C_Storyboard)
+* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift)
+* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift_Storyboard)
 
 ## Xamarin
 
