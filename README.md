@@ -577,7 +577,7 @@ sideMenuController.rightViewSwipeGestureEnabled = false
 
 Almost all properties you can set right inside storyboard:
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGSideMenuController/StoryboardProperties.png" width="244"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/8e5626531f465b664defbcf79f84908a008355a9/LGSideMenuController/Storyboard_Instructions/Properties.png" width="244"/>
 
 ### Handle actions
 
