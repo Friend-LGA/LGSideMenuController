@@ -61,20 +61,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController: UIViewController
-
-        if (indexPath.row == self.titlesArray.count - 2) {
-            viewController = OtherViewController()
-        }
-        else {
-            viewController = ViewController()
-        }
-
-        let navigationController = NavigationController(rootViewController: viewController)
-        
         let mainViewController = MainViewController()
-        mainViewController.rootViewController = navigationController
-        mainViewController.setup(type: UInt(indexPath.row))
 
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = mainViewController
