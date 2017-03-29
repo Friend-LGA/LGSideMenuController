@@ -29,6 +29,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class LGSideMenuController;
 @protocol LGSideMenuControllerDelegate;
 
 #pragma mark - Constants
@@ -52,6 +53,10 @@ static NSString * _Nonnull const LGSideMenuSegueRightIdentifier = @"right";
 #pragma mark - Types
 
 typedef void (^ _Nullable LGSideMenuControllerCompletionHandler)();
+typedef void (^ _Nullable LGSideMenuControllerLeftHandler)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+typedef void (^ _Nullable LGSideMenuControllerRightHandler)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+typedef void (^ _Nullable LGSideMenuControllerLeftAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+typedef void (^ _Nullable LGSideMenuControllerRightAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
 
 typedef NS_OPTIONS(NSUInteger, LGSideMenuAlwaysVisibleOptions) {
     LGSideMenuAlwaysVisibleOnNone           = 0,
@@ -85,7 +90,7 @@ typedef struct LGSideMenuSwipeGestureRange {
 
 LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloat right);
 
-#pragma mark -
+#pragma mark - Interface
 
 @interface LGSideMenuController : UIViewController
 
@@ -526,27 +531,47 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 #pragma mark - Callbacks
 
-@property (copy, nonatomic, nullable) void(^willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-@property (copy, nonatomic, nullable) void(^didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftHandler willShowLeftView;
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftHandler didShowLeftView;
 
-@property (copy, nonatomic, nullable) void(^willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-@property (copy, nonatomic, nullable) void(^didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftHandler willHideLeftView;
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftHandler didHideLeftView;
 
-@property (copy, nonatomic, nullable) void(^willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-@property (copy, nonatomic, nullable) void(^didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightHandler willShowRightView;
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightHandler didShowRightView;
 
-@property (copy, nonatomic, nullable) void(^willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-@property (copy, nonatomic, nullable) void(^didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightHandler willHideRightView;
+/** To avoid retain cycle, do not forget about weak reference to self */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightHandler didHideRightView;
 
-/** You can use this block to add some custom animations */
-@property (copy, nonatomic, nullable) void(^showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
-/** You can use this block to add some custom animations */
-@property (copy, nonatomic, nullable) void(^hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+/**
+ You can use this block to add some custom animations
+ To avoid retain cycle, do not forget about weak reference to self
+ */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftAnimationsBlock showLeftViewAnimationsBlock;
+/**
+ You can use this block to add some custom animations
+ To avoid retain cycle, do not forget about weak reference to self
+ */
+@property (copy, nonatomic, nullable) LGSideMenuControllerLeftAnimationsBlock hideLeftViewAnimationsBlock;
 
-/** You can use this block to add some custom animations */
-@property (copy, nonatomic, nullable) void(^showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
-/** You can use this block to add some custom animations */
-@property (copy, nonatomic, nullable) void(^hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+/**
+ You can use this block to add some custom animations
+ To avoid retain cycle, do not forget about weak reference to self
+ */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightAnimationsBlock showRightViewAnimationsBlock;
+/**
+ You can use this block to add some custom animations
+ To avoid retain cycle, do not forget about weak reference to self
+ */
+@property (copy, nonatomic, nullable) LGSideMenuControllerRightAnimationsBlock hideRightViewAnimationsBlock;
 
 #pragma mark - Delegate
 

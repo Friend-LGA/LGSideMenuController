@@ -61,7 +61,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
     return range;
 }
 
-#pragma mark -
+#pragma mark - Interface
 
 @interface LGSideMenuController ()
 
@@ -134,6 +134,8 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic, getter=isUserRightViewBackgroundImageFinalScale) BOOL userRightViewBackgroundImageFinalScale;
 
 @end
+
+#pragma mark - Implementation
 
 @implementation LGSideMenuController
 
@@ -1865,7 +1867,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         rootViewStyleViewFrame.size.width -= self.rightViewWidth;
     }
 
-    if (LGSideMenuHelper.isRetina) {
+    if (LGSideMenuHelper.isNotRetina) {
         rootViewFrame = CGRectIntegral(rootViewFrame);
         rootViewStyleViewFrame = CGRectIntegral(rootViewStyleViewFrame);
     }
@@ -1947,7 +1949,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     CGRect leftViewFrame = CGRectMake(0.0, 0.0, self.leftViewWidth, frameHeight);
 
-    if (LGSideMenuHelper.isRetina) {
+    if (LGSideMenuHelper.isNotRetina) {
         leftViewFrame = CGRectIntegral(leftViewFrame);
     }
 
@@ -1959,7 +1961,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.sideViewsCoverView) {
         CGRect sideViewsCoverViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             sideViewsCoverViewFrame = CGRectIntegral(sideViewsCoverViewFrame);
         }
 
@@ -1977,7 +1979,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             backgroundViewFrame.size.width = frameWidth / (multiplier + 1.0);
         }
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             backgroundViewFrame = CGRectIntegral(backgroundViewFrame);
         }
 
@@ -1997,7 +1999,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                                                              CGRectGetWidth(leftViewFrame) + (offset * 2.0),
                                                              CGRectGetHeight(leftViewFrame) + (offset * 2.0));
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             leftViewBorderAndShadowViewFrame = CGRectIntegral(leftViewBorderAndShadowViewFrame);
         }
 
@@ -2069,7 +2071,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     CGRect rightViewFrame = CGRectMake(frameWidth - self.rightViewWidth, 0.0, self.rightViewWidth, frameHeight);
 
-    if (LGSideMenuHelper.isRetina) {
+    if (LGSideMenuHelper.isNotRetina) {
         rightViewFrame = CGRectIntegral(rightViewFrame);
     }
 
@@ -2081,7 +2083,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.sideViewsCoverView) {
         CGRect sideViewsCoverViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             sideViewsCoverViewFrame = CGRectIntegral(sideViewsCoverViewFrame);
         }
 
@@ -2100,7 +2102,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             backgroundViewFrame.origin.x = frameWidth - CGRectGetWidth(backgroundViewFrame);
         }
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             backgroundViewFrame = CGRectIntegral(backgroundViewFrame);
         }
 
@@ -2120,7 +2122,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                                                               CGRectGetWidth(rightViewFrame) + (offset * 2.0),
                                                               CGRectGetHeight(rightViewFrame) + (offset * 2.0));
 
-        if (LGSideMenuHelper.isRetina) {
+        if (LGSideMenuHelper.isNotRetina) {
             rightViewBorderAndShadowViewFrame = CGRectIntegral(rightViewBorderAndShadowViewFrame);
         }
 
@@ -2579,7 +2581,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.gesturesHandler.animating = YES;
 
         [LGSideMenuHelper
-         animateStandardWithDuration:self.leftViewAnimationSpeed
+         animateWithDuration:self.leftViewAnimationSpeed
          animations:^(void) {
              [self rootViewsTransformValidateWithPercentage:1.0];
              [self leftViewsTransformValidateWithPercentage:1.0];
@@ -2667,7 +2669,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.gesturesHandler.animating = YES;
 
         [LGSideMenuHelper
-         animateStandardWithDuration:self.leftViewAnimationSpeed
+         animateWithDuration:self.leftViewAnimationSpeed
          animations:^(void) {
              [self rootViewsTransformValidateWithPercentage:0.0];
              [self leftViewsTransformValidateWithPercentage:0.0];
@@ -2894,7 +2896,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.gesturesHandler.animating = YES;
 
         [LGSideMenuHelper
-         animateStandardWithDuration:self.rightViewAnimationSpeed
+         animateWithDuration:self.rightViewAnimationSpeed
          animations:^(void) {
              [self rootViewsTransformValidateWithPercentage:1.0];
              [self rightViewsTransformValidateWithPercentage:1.0];
@@ -2982,7 +2984,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.gesturesHandler.animating = YES;
 
         [LGSideMenuHelper
-         animateStandardWithDuration:self.rightViewAnimationSpeed
+         animateWithDuration:self.rightViewAnimationSpeed
          animations:^(void) {
              [self rootViewsTransformValidateWithPercentage:0.0];
              [self rightViewsTransformValidateWithPercentage:0.0];

@@ -31,9 +31,9 @@
 
 @interface LGSideMenuHelper : NSObject
 
-+ (void)animateStandardWithDuration:(NSTimeInterval)duration
-                         animations:(void(^)())animations
-                         completion:(void(^)(BOOL finished))completion;
++ (void)animateWithDuration:(NSTimeInterval)duration
+                 animations:(void(^)())animations
+                 completion:(void(^)(BOOL finished))completion;
 
 + (void)statusBarAppearanceUpdateAnimated:(BOOL)animated
                            viewController:(UIViewController *)viewController
@@ -46,7 +46,7 @@
 
 + (BOOL)isViewControllerBasedStatusBarAppearance;
 
-+ (BOOL)isRetina;
++ (BOOL)isNotRetina;
 
 + (BOOL)isPhone;
 

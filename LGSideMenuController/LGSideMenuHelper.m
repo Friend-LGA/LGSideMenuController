@@ -31,9 +31,9 @@
 
 @implementation LGSideMenuHelper
 
-+ (void)animateStandardWithDuration:(NSTimeInterval)duration
-                         animations:(void(^)())animations
-                         completion:(void(^)(BOOL finished))completion {
++ (void)animateWithDuration:(NSTimeInterval)duration
+                 animations:(void(^)())animations
+                 completion:(void(^)(BOOL finished))completion {
     [UIView animateWithDuration:duration
                           delay:0.0
          usingSpringWithDamping:1.0
@@ -92,15 +92,15 @@
     return isViewControllerBasedStatusBarAppearance;
 }
 
-+ (BOOL)isRetina {
-    static BOOL isRetina;
++ (BOOL)isNotRetina {
+    static BOOL isNotRetina;
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
-        isRetina = (UIScreen.mainScreen.scale > 1.0);
+        isNotRetina = (UIScreen.mainScreen.scale == 1.0);
     });
 
-    return isRetina;
+    return isNotRetina;
 }
 
 + (BOOL)isPhone {
