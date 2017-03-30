@@ -82,7 +82,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
-    
+
     if (indexPath.row == 0) {
         if ([mainViewController isLeftViewAlwaysVisibleForCurrentOrientation]) {
             [mainViewController showRightViewAnimated:YES completionHandler:nil];

@@ -138,7 +138,7 @@
 
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.rightViewStatusBarStyle = UIStatusBarStyleLightContent;
-            
+
             break;
         }
         case 9: {
@@ -223,7 +223,7 @@
     if (self.type == 8) {
         return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
     }
-    
+
     return super.isRightViewStatusBarHidden;
 }
 

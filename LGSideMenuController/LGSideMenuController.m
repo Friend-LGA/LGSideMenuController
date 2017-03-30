@@ -325,7 +325,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         sideMenuWidth = minSide - 44.0;
     }
 
-    // Needed to be initialized before default properties
+    // Needed to be initialized before default properties (setupDefaults)
     self.gesturesHandler = [[LGSideMenuControllerGesturesHandler alloc] initWithSideMenuController:self];
 
     self.leftViewWidth = sideMenuWidth;

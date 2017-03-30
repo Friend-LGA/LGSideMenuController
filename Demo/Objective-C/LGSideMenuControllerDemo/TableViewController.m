@@ -56,7 +56,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.font = [UIFont systemFontOfSize:16.0];
     cell.textLabel.text = self.titlesArray[indexPath.row];
-    
+
     return cell;
 }
 
@@ -77,7 +77,7 @@
     }
 
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
-    
+
     MainViewController *mainViewController = [MainViewController new];
     mainViewController.rootViewController = navigationController;
     [mainViewController setupWithType:indexPath.row];
