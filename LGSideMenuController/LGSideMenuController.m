@@ -1343,7 +1343,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     // Needed because when any of side menus is showing, rootViewController is removed from it's parentViewController
     objc_setAssociatedObject(rootViewController, @"sideMenuController", self, OBJC_ASSOCIATION_ASSIGN);
 
-    [self setNeedsUpdateLayoutsAndStyles];
+    [self rootViewsValidate];
+    [self viewsHierarchyValidate];
+    [self rootViewsFramesValidate];
+    [self stylesValidate];
+    [self rootViewsTransformValidate];
+    [self visibilityValidate];
 }
 
 - (void)setLeftViewController:(UIViewController *)leftViewController {
@@ -1356,7 +1361,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     _leftViewController = leftViewController;
     _leftView = leftViewController.view;
 
-    [self setNeedsUpdateLayoutsAndStyles];
+    [self leftViewsValidate];
+    [self viewsHierarchyValidate];
+    [self leftViewsFramesValidate];
+    [self stylesValidate];
+    [self leftViewsTransformValidate];
+    [self visibilityValidate];
 }
 
 - (void)setRightViewController:(UIViewController *)rightViewController {
@@ -1369,7 +1379,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     _rightViewController = rightViewController;
     _rightView = rightViewController.view;
 
-    [self setNeedsUpdateLayoutsAndStyles];
+    [self rightViewsValidate];
+    [self viewsHierarchyValidate];
+    [self rightViewsFramesValidate];
+    [self stylesValidate];
+    [self rightViewsTransformValidate];
+    [self visibilityValidate];
 }
 
 #pragma mark - Views
@@ -1971,6 +1986,24 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
+    self.leftViewStyleView.transform = CGAffineTransformIdentity;
+    self.leftViewStyleView.frame = leftViewFrame;
+
+    CGFloat offset = self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius;
+    CGRect leftViewBorderAndShadowViewFrame = CGRectMake(-offset,
+                                                         -offset,
+                                                         CGRectGetWidth(leftViewFrame) + (offset * 2.0),
+                                                         CGRectGetHeight(leftViewFrame) + (offset * 2.0));
+
+    if (LGSideMenuHelper.isNotRetina) {
+        leftViewBorderAndShadowViewFrame = CGRectIntegral(leftViewBorderAndShadowViewFrame);
+    }
+
+    self.leftViewBorderAndShadowView.transform = CGAffineTransformIdentity;
+    self.leftViewBorderAndShadowView.frame = leftViewBorderAndShadowViewFrame;
+
+    // -----
+
     if (self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
@@ -1988,23 +2021,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
         self.leftViewBackgroundImageView.transform = CGAffineTransformIdentity;
         self.leftViewBackgroundImageView.frame = backgroundViewFrame;
-    }
-    else {
-        self.leftViewStyleView.transform = CGAffineTransformIdentity;
-        self.leftViewStyleView.frame = leftViewFrame;
-
-        CGFloat offset = self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius;
-        CGRect leftViewBorderAndShadowViewFrame = CGRectMake(-offset,
-                                                             -offset,
-                                                             CGRectGetWidth(leftViewFrame) + (offset * 2.0),
-                                                             CGRectGetHeight(leftViewFrame) + (offset * 2.0));
-
-        if (LGSideMenuHelper.isNotRetina) {
-            leftViewBorderAndShadowViewFrame = CGRectIntegral(leftViewBorderAndShadowViewFrame);
-        }
-
-        self.leftViewBorderAndShadowView.transform = CGAffineTransformIdentity;
-        self.leftViewBorderAndShadowView.frame = leftViewBorderAndShadowViewFrame;
     }
 }
 
@@ -2093,6 +2109,24 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
+    self.rightViewStyleView.transform = CGAffineTransformIdentity;
+    self.rightViewStyleView.frame = rightViewFrame;
+
+    CGFloat offset = self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius;
+    CGRect rightViewBorderAndShadowViewFrame = CGRectMake(-offset,
+                                                          -offset,
+                                                          CGRectGetWidth(rightViewFrame) + (offset * 2.0),
+                                                          CGRectGetHeight(rightViewFrame) + (offset * 2.0));
+
+    if (LGSideMenuHelper.isNotRetina) {
+        rightViewBorderAndShadowViewFrame = CGRectIntegral(rightViewBorderAndShadowViewFrame);
+    }
+
+    self.rightViewBorderAndShadowView.transform = CGAffineTransformIdentity;
+    self.rightViewBorderAndShadowView.frame = rightViewBorderAndShadowViewFrame;
+
+    // -----
+
     if (self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         CGRect backgroundViewFrame = CGRectMake(0.0, 0.0, frameWidth, frameHeight);
 
@@ -2111,23 +2145,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
         self.rightViewBackgroundImageView.transform = CGAffineTransformIdentity;
         self.rightViewBackgroundImageView.frame = backgroundViewFrame;
-    }
-    else {
-        self.rightViewStyleView.transform = CGAffineTransformIdentity;
-        self.rightViewStyleView.frame = rightViewFrame;
-
-        CGFloat offset = self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius;
-        CGRect rightViewBorderAndShadowViewFrame = CGRectMake(-offset,
-                                                              -offset,
-                                                              CGRectGetWidth(rightViewFrame) + (offset * 2.0),
-                                                              CGRectGetHeight(rightViewFrame) + (offset * 2.0));
-
-        if (LGSideMenuHelper.isNotRetina) {
-            rightViewBorderAndShadowViewFrame = CGRectIntegral(rightViewBorderAndShadowViewFrame);
-        }
-
-        self.rightViewBorderAndShadowView.transform = CGAffineTransformIdentity;
-        self.rightViewBorderAndShadowView.frame = rightViewBorderAndShadowViewFrame;
     }
 }
 
@@ -2208,9 +2225,16 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         }
 
         if (self.leftViewStyleView) {
-            self.leftViewStyleView.backgroundColor = self.isLeftViewAlwaysVisibleForCurrentOrientation ? [self.leftViewBackgroundColor colorWithAlphaComponent:1.0] : self.leftViewBackgroundColor;
             self.leftViewStyleView.alpha = self.leftViewBackgroundAlpha;
-            self.leftViewStyleView.effect = self.leftViewBackgroundBlurEffect;
+
+            if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
+                self.leftViewStyleView.backgroundColor = self.isLeftViewAlwaysVisibleForCurrentOrientation ? [self.leftViewBackgroundColor colorWithAlphaComponent:1.0] : self.leftViewBackgroundColor;
+                self.leftViewStyleView.effect = self.leftViewBackgroundBlurEffect;
+            }
+            else {
+                self.leftViewStyleView.backgroundColor = nil;
+                self.leftViewStyleView.effect = nil;
+            }
 
             [LGSideMenuHelper imageView:self.leftViewBorderAndShadowView
                            setImageSafe:[LGSideMenuDrawer drawRectangleWithViewSize:self.leftViewContainer.bounds.size
@@ -2243,9 +2267,16 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         }
 
         if (self.rightViewStyleView) {
-            self.rightViewStyleView.backgroundColor = self.isRightViewAlwaysVisibleForCurrentOrientation ? [self.rightViewBackgroundColor colorWithAlphaComponent:1.0] : self.rightViewBackgroundColor;
             self.rightViewStyleView.alpha = self.rightViewBackgroundAlpha;
-            self.rightViewStyleView.effect = self.rightViewBackgroundBlurEffect;
+
+            if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
+                self.rightViewStyleView.backgroundColor = self.isRightViewAlwaysVisibleForCurrentOrientation ? [self.rightViewBackgroundColor colorWithAlphaComponent:1.0] : self.rightViewBackgroundColor;
+                self.rightViewStyleView.effect = self.rightViewBackgroundBlurEffect;
+            }
+            else {
+                self.rightViewStyleView.backgroundColor = nil;
+                self.rightViewStyleView.effect = nil;
+            }
 
             [LGSideMenuHelper imageView:self.rightViewBorderAndShadowView
                            setImageSafe:[LGSideMenuDrawer drawRectangleWithViewSize:self.rightViewContainer.bounds.size
