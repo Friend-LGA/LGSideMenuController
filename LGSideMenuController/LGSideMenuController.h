@@ -183,7 +183,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /**
  Only if (swipeGestureArea == LGSideMenuSwipeGestureAreaBorders)
  Default is LGSideMenuSwipeGestureRangeMake(44.0, 44.0)
- Explanation: 
+ Explanation:
  For LGSideMenuSwipeGestureRangeMake(44.0, 44.0) => leftView 44 | 44 rootView
  For LGSideMenuSwipeGestureRangeMake(0.0, 44.0)  => leftView    | 44 rootView
  For LGSideMenuSwipeGestureRangeMake(44.0, 0.0)  => leftView 44 |    rootView
@@ -260,9 +260,9 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 /** Default is nil */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerBorderColor;
-/** 
+/**
  Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
- Default is nil 
+ Default is nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerBorderColor;
 /**
