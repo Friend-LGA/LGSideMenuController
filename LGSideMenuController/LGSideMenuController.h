@@ -109,6 +109,9 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** Container for rightViewController or rightView. Usually you do not need to use it */
 @property (strong, nonatomic, nullable, readonly) UIView *rightViewContainer;
 
+@property (strong, nonatomic, nullable, readonly) UIImageView *leftViewBackgroundView;
+@property (strong, nonatomic, nullable, readonly) UIImageView *rightViewBackgroundView;
+
 /** tapGesture.cancelsTouchesInView = NO */
 @property (strong, nonatomic, readonly, nonnull) UITapGestureRecognizer *tapGesture;
 /** panGesture.cancelsTouchesInView = YES, only inside your swipeGestureArea */
@@ -222,13 +225,13 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** Default is nil */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewBackgroundColor;
 
-/** 
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+/**
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIImage *leftViewBackgroundImage;
-/** 
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+/**
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIImage *rightViewBackgroundImage;
@@ -257,16 +260,28 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 
 /** Default is nil */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewLayerBorderColor;
-/** Default is nil */
+/** 
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is nil 
+ */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewLayerBorderColor;
-/** Default is nil */
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is nil
+ */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewLayerBorderColor;
 
 /** Default is 0.0 */
 @property (assign, nonatomic) IBInspectable CGFloat rootViewLayerBorderWidth;
-/** Default is 0.0 */
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 0.0
+ */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewLayerBorderWidth;
-/** Default is 0.0 */
+/**
+ Only if (presentationStyle == LGSideMenuPresentationStyleSlideAbove)
+ Default is 0.0
+ */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewLayerBorderWidth;
 
 /** Default is [UIColor colorWithWhite:0.0 alpha:0.5] */
@@ -300,12 +315,12 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** Default is nil */
 @property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rootViewCoverBlurEffectForRightView;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *leftViewCoverBlurEffect;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is nil
  */
 @property (strong, nonatomic, nullable) IBInspectable UIBlurEffect *rightViewCoverBlurEffect;
@@ -315,12 +330,12 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** Default is 1.0 */
 @property (assign, nonatomic) IBInspectable CGFloat rootViewCoverAlphaForRightView;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewCoverAlpha;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat rightViewCoverAlpha;
@@ -419,26 +434,26 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rootViewCoverColorForRightView;
 /**
  Color that hides left view, when it is not showing
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is [UIColor colorWithWhite:0.0 alpha:0.5]
  */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *leftViewCoverColor;
 /**
  Color that hides right view, when it is not showing
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default is [UIColor colorWithWhite:0.0 alpha:0.5]
  */
 @property (strong, nonatomic, nullable) IBInspectable UIColor *rightViewCoverColor;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then 1.0
  else 0.8
  */
 @property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForLeftView;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then 1.0
  else 0.8
@@ -446,7 +461,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rootViewScaleForRightView;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then 1.0
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig) then 1.2
@@ -454,7 +469,7 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewInitialScale;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then 1.0
  else if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig) then 1.2
@@ -463,14 +478,14 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rightViewInitialScale;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then -width/2
  else 0.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewInitialOffsetX;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleSlideBelow) then -width/2
  else 0.0
@@ -478,14 +493,14 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rightViewInitialOffsetX;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig) then 1.4
  else 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageInitialScale;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleScaleFromBig) then 1.4
  else 1.0
@@ -493,14 +508,14 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rightViewBackgroundImageInitialScale;
 
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle) then 1.4
  else 1.0
  */
 @property (assign, nonatomic) IBInspectable CGFloat leftViewBackgroundImageFinalScale;
 /**
- Only if (presentationStyle == LGSideMenuPresentationStyleSlideBelow || LGSideMenuPresentationStyleScaleFromBig || LGSideMenuPresentationStyleScaleFromLittle)
+ Only if (presentationStyle != LGSideMenuPresentationStyleSlideAbove)
  Default:
  if (presentationStyle == LGSideMenuPresentationStyleScaleFromLittle) then 1.4
  else 1.0

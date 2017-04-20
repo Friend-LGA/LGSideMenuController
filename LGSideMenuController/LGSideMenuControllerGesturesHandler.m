@@ -42,59 +42,65 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (self.isAnimating) return NO;
 
-    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        if (!self.sideMenuController.rootView) return NO;
-
-        if (self.sideMenuController.swipeGestureArea == LGSideMenuSwipeGestureAreaFull &&
-            ((self.sideMenuController.leftView && self.sideMenuController.isLeftViewSwipeGestureEnabled) ||
-             (self.sideMenuController.rightView && self.sideMenuController.isRightViewSwipeGestureEnabled))) {
-                return YES;
-            }
-
-        // -----
-
-        CGPoint location = [touch locationInView:self.sideMenuController.view];
-        CGRect leftAvailableRect = CGRectNull;
-        CGRect rightAvailableRect = CGRectNull;
-
-        if (self.sideMenuController.leftView) {
-            if (self.sideMenuController.isLeftViewVisible) {
-                leftAvailableRect = CGRectMake(CGRectGetWidth(self.leftViewContainer.frame) - self.sideMenuController.leftViewSwipeGestureRange.left,
-                                               CGRectGetMinY(self.rootViewContainer.frame),
-                                               CGRectGetWidth(self.sideMenuController.view.frame),
-                                               CGRectGetHeight(self.rootViewContainer.frame));
-            }
-            else {
-                leftAvailableRect = CGRectMake(-self.sideMenuController.leftViewSwipeGestureRange.left,
-                                               CGRectGetMinY(self.rootViewContainer.frame),
-                                               self.sideMenuController.leftViewSwipeGestureRange.left + self.sideMenuController.leftViewSwipeGestureRange.right,
-                                               CGRectGetHeight(self.rootViewContainer.frame));
-            }
-        }
-
-        if (self.sideMenuController.rightView) {
-            if (self.sideMenuController.isRightViewVisible) {
-                rightAvailableRect = CGRectMake(CGRectGetWidth(self.sideMenuController.view.frame) - CGRectGetWidth(self.rightViewContainer.frame) + self.sideMenuController.rightViewSwipeGestureRange.left,
-                                                CGRectGetMinY(self.rootViewContainer.frame),
-                                                -CGRectGetWidth(self.sideMenuController.view.frame),
-                                                CGRectGetHeight(self.rootViewContainer.frame));
-            }
-            else {
-                rightAvailableRect = CGRectMake(CGRectGetWidth(self.rootViewContainer.frame) - self.sideMenuController.rightViewSwipeGestureRange.left,
-                                                CGRectGetMinY(self.rootViewContainer.frame),
-                                                self.sideMenuController.rightViewSwipeGestureRange.left + self.sideMenuController.rightViewSwipeGestureRange.right,
-                                                CGRectGetHeight(self.rootViewContainer.frame));
-            }
-        }
-
-        return ((self.sideMenuController.leftView && self.sideMenuController.isLeftViewSwipeGestureEnabled && CGRectContainsPoint(leftAvailableRect, location)) ||
-                (self.sideMenuController.rightView && self.sideMenuController.isRightViewSwipeGestureEnabled && CGRectContainsPoint(rightAvailableRect, location)));
-    }
-    else {
+    if (![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         if (!self.rootViewCoverView) return NO;
 
         return [touch.view isDescendantOfView:self.rootViewCoverView];
     }
+
+    if (!self.sideMenuController.rootView) return NO;
+
+    if (self.sideMenuController.swipeGestureArea == LGSideMenuSwipeGestureAreaFull &&
+        ((self.sideMenuController.leftView && self.sideMenuController.isLeftViewSwipeGestureEnabled) ||
+         (self.sideMenuController.rightView && self.sideMenuController.isRightViewSwipeGestureEnabled))) {
+            return YES;
+        }
+
+    // -----
+
+    CGPoint location = [touch locationInView:self.sideMenuController.view];
+    CGRect leftAvailableRect = CGRectNull;
+    CGRect rightAvailableRect = CGRectNull;
+
+    if (self.sideMenuController.leftView && self.sideMenuController.isLeftViewSwipeGestureEnabled) {
+        if (self.sideMenuController.isLeftViewVisible) {
+            leftAvailableRect = CGRectMake(CGRectGetWidth(self.leftViewContainer.frame) - self.sideMenuController.leftViewSwipeGestureRange.left,
+                                           CGRectGetMinY(self.rootViewContainer.frame),
+                                           CGRectGetWidth(self.sideMenuController.view.frame),
+                                           CGRectGetHeight(self.rootViewContainer.frame));
+        }
+        else {
+            leftAvailableRect = CGRectMake(-self.sideMenuController.leftViewSwipeGestureRange.left,
+                                           CGRectGetMinY(self.rootViewContainer.frame),
+                                           self.sideMenuController.leftViewSwipeGestureRange.left + self.sideMenuController.leftViewSwipeGestureRange.right,
+                                           CGRectGetHeight(self.rootViewContainer.frame));
+        }
+
+        if (CGRectContainsPoint(leftAvailableRect, location)) {
+            return YES;
+        }
+    }
+
+    if (self.sideMenuController.rightView && self.sideMenuController.isRightViewSwipeGestureEnabled) {
+        if (self.sideMenuController.isRightViewVisible) {
+            rightAvailableRect = CGRectMake(CGRectGetWidth(self.sideMenuController.view.frame) - CGRectGetWidth(self.rightViewContainer.frame) + self.sideMenuController.rightViewSwipeGestureRange.left,
+                                            CGRectGetMinY(self.rootViewContainer.frame),
+                                            -CGRectGetWidth(self.sideMenuController.view.frame),
+                                            CGRectGetHeight(self.rootViewContainer.frame));
+        }
+        else {
+            rightAvailableRect = CGRectMake(CGRectGetWidth(self.rootViewContainer.frame) - self.sideMenuController.rightViewSwipeGestureRange.left,
+                                            CGRectGetMinY(self.rootViewContainer.frame),
+                                            self.sideMenuController.rightViewSwipeGestureRange.left + self.sideMenuController.rightViewSwipeGestureRange.right,
+                                            CGRectGetHeight(self.rootViewContainer.frame));
+        }
+
+        if (CGRectContainsPoint(rightAvailableRect, location)) {
+            return YES;
+        }
+    }
+
+    return NO;
 }
 
 @end
