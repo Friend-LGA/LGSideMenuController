@@ -39,6 +39,8 @@
         self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.65 blue:0.5 alpha:0.95];
         self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
 
+
+
         self.rightViewWidth = 100.0;
         self.rightViewBackgroundImage = [UIImage imageNamed:@"imageRight"];
         self.rightViewBackgroundColor = [UIColor colorWithRed:0.65 green:0.5 blue:0.65 alpha:0.95];
@@ -60,7 +62,7 @@
 
     // -----
 
-    switch (type) {
+    switch (self.type) {
         case 0: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;

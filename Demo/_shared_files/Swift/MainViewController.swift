@@ -194,7 +194,7 @@ class MainViewController: LGSideMenuController {
 
     override var isLeftViewStatusBarHidden: Bool {
         get {
-            if (self.type == 8) {
+            if (type == 8) {
                 return UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == .phone
             }
 
@@ -208,7 +208,7 @@ class MainViewController: LGSideMenuController {
 
     override var isRightViewStatusBarHidden: Bool {
         get {
-            if (self.type == 8) {
+            if (type == 8) {
                 return UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == .phone
             }
 

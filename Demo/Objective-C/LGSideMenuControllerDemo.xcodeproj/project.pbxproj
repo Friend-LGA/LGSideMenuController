@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4A04FA681E894C1A000E90AB /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA5B1E894C1A000E90AB /* LGSideMenuController.m */; };
 		4A04FA691E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA5D1E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.m */; };
-		4A04FA6A1E894C1A000E90AB /* LGSideMenuDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA5F1E894C1A000E90AB /* LGSideMenuDrawer.m */; };
 		4A04FA6B1E894C1A000E90AB /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA611E894C1A000E90AB /* LGSideMenuHelper.m */; };
 		4A04FA6C1E894C1A000E90AB /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA631E894C1A000E90AB /* LGSideMenuSegue.m */; };
 		4A04FA6D1E894C1A000E90AB /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA651E894C1A000E90AB /* LGSideMenuView.m */; };
@@ -27,6 +26,7 @@
 		4A43191A1AECFECB0088EFD7 /* LeftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4319191AECFECB0088EFD7 /* LeftViewCell.m */; };
 		4A4319201AED009D0088EFD7 /* RightViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A43191D1AED009D0088EFD7 /* RightViewCell.m */; };
 		4A4319211AED009D0088EFD7 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A43191F1AED009D0088EFD7 /* RightViewController.m */; };
+		4A54E5001EA6902D00B283CE /* LGSideMenuBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A54E4FF1EA6902D00B283CE /* LGSideMenuBorderView.m */; };
 		4A5888BB1AE9489E004AFC57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5888BA1AE9489E004AFC57 /* main.m */; };
 		4A5888BE1AE9489E004AFC57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5888BD1AE9489E004AFC57 /* AppDelegate.m */; };
 		4A5888C61AE9489E004AFC57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5888C51AE9489E004AFC57 /* Images.xcassets */; };
@@ -38,8 +38,6 @@
 		4A04FA5B1E894C1A000E90AB /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
 		4A04FA5C1E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerGesturesHandler.h; sourceTree = "<group>"; };
 		4A04FA5D1E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuControllerGesturesHandler.m; sourceTree = "<group>"; };
-		4A04FA5E1E894C1A000E90AB /* LGSideMenuDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuDrawer.h; sourceTree = "<group>"; };
-		4A04FA5F1E894C1A000E90AB /* LGSideMenuDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuDrawer.m; sourceTree = "<group>"; };
 		4A04FA601E894C1A000E90AB /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
 		4A04FA611E894C1A000E90AB /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
 		4A04FA621E894C1A000E90AB /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
@@ -70,6 +68,8 @@
 		4A43191D1AED009D0088EFD7 /* RightViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RightViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A43191E1AED009D0088EFD7 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RightViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A43191F1AED009D0088EFD7 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RightViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A54E4FE1EA6902D00B283CE /* LGSideMenuBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuBorderView.h; sourceTree = "<group>"; };
+		4A54E4FF1EA6902D00B283CE /* LGSideMenuBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuBorderView.m; sourceTree = "<group>"; };
 		4A5888B51AE9489E004AFC57 /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5888B91AE9489E004AFC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A5888BA1AE9489E004AFC57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -98,8 +98,8 @@
 				4A04FA5B1E894C1A000E90AB /* LGSideMenuController.m */,
 				4A04FA5C1E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.h */,
 				4A04FA5D1E894C1A000E90AB /* LGSideMenuControllerGesturesHandler.m */,
-				4A04FA5E1E894C1A000E90AB /* LGSideMenuDrawer.h */,
-				4A04FA5F1E894C1A000E90AB /* LGSideMenuDrawer.m */,
+				4A54E4FE1EA6902D00B283CE /* LGSideMenuBorderView.h */,
+				4A54E4FF1EA6902D00B283CE /* LGSideMenuBorderView.m */,
 				4A04FA601E894C1A000E90AB /* LGSideMenuHelper.h */,
 				4A04FA611E894C1A000E90AB /* LGSideMenuHelper.m */,
 				4A04FA621E894C1A000E90AB /* LGSideMenuSegue.h */,
@@ -297,7 +297,6 @@
 				4A371EDB1BEBA97D00FB3DA4 /* TableViewController.m in Sources */,
 				4A5888BE1AE9489E004AFC57 /* AppDelegate.m in Sources */,
 				4A43191A1AECFECB0088EFD7 /* LeftViewCell.m in Sources */,
-				4A04FA6A1E894C1A000E90AB /* LGSideMenuDrawer.m in Sources */,
 				4A04FA6D1E894C1A000E90AB /* LGSideMenuView.m in Sources */,
 				4A4319171AECF95D0088EFD7 /* LeftViewController.m in Sources */,
 				4A04FAD31E894CF2000E90AB /* MainViewController.m in Sources */,
@@ -309,6 +308,7 @@
 				4A04FA6E1E894C1A000E90AB /* UIViewController+LGSideMenuController.m in Sources */,
 				4A4319201AED009D0088EFD7 /* RightViewCell.m in Sources */,
 				4A4319211AED009D0088EFD7 /* RightViewController.m in Sources */,
+				4A54E5001EA6902D00B283CE /* LGSideMenuBorderView.m in Sources */,
 				4A371ED81BEBA53000FB3DA4 /* NavigationController.m in Sources */,
 				4A04FA6C1E894C1A000E90AB /* LGSideMenuSegue.m in Sources */,
 				4A5888E31AE94907004AFC57 /* ViewController.m in Sources */,
