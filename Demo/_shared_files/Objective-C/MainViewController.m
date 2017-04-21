@@ -164,7 +164,7 @@
 
             self.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(0.0, 88.0);
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
-            self.leftViewAnimationSpeed = 1.0;
+            self.leftViewAnimationDuration = 1.0;
             self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.75 blue:0.5 alpha:1.0];
             self.leftViewBackgroundImageInitialScale = 1.5;
             self.leftViewInitialOffsetX = -200.0;
@@ -179,7 +179,7 @@
 
             self.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 0.0);
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
-            self.rightViewAnimationSpeed = 0.25;
+            self.rightViewAnimationDuration = 0.25;
             self.rightViewBackgroundColor = [UIColor colorWithRed:0.75 green:0.5 blue:0.75 alpha:1.0];
             self.rightViewLayerBorderWidth = 3.0;
             self.rightViewLayerBorderColor = [UIColor blackColor];

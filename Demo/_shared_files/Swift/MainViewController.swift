@@ -142,7 +142,7 @@ class MainViewController: LGSideMenuController {
 
             leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(0.0, 88.0)
             leftViewPresentationStyle = .scaleFromBig
-            leftViewAnimationSpeed = 1.0
+            leftViewAnimationDuration = 1.0
             leftViewBackgroundColor = UIColor(red: 0.5, green: 0.75, blue: 0.5, alpha: 1.0)
             leftViewBackgroundImageInitialScale = 1.5
             leftViewInitialOffsetX = -200.0
@@ -157,7 +157,7 @@ class MainViewController: LGSideMenuController {
 
             rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 0.0)
             rightViewPresentationStyle = .slideAbove
-            rightViewAnimationSpeed = 0.25
+            rightViewAnimationDuration = 0.25
             rightViewBackgroundColor = UIColor(red: 0.75, green: 0.5, blue: 0.75, alpha: 1.0)
             rightViewLayerBorderWidth = 3.0
             rightViewLayerBorderColor = .black

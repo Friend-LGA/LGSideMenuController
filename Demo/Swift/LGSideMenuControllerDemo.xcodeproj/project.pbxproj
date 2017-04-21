@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A04FA941E894C2D000E90AB /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA871E894C2D000E90AB /* LGSideMenuController.m */; };
-		4A04FA951E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA891E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.m */; };
+		4A04FA951E894C2D000E90AB /* LGSideMenuGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA891E894C2D000E90AB /* LGSideMenuGesturesHandler.m */; };
 		4A04FA971E894C2D000E90AB /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA8D1E894C2D000E90AB /* LGSideMenuHelper.m */; };
 		4A04FA981E894C2D000E90AB /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA8F1E894C2D000E90AB /* LGSideMenuSegue.m */; };
 		4A04FA991E894C2D000E90AB /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FA911E894C2D000E90AB /* LGSideMenuView.m */; };
@@ -35,8 +35,8 @@
 /* Begin PBXFileReference section */
 		4A04FA861E894C2D000E90AB /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
 		4A04FA871E894C2D000E90AB /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
-		4A04FA881E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerGesturesHandler.h; sourceTree = "<group>"; };
-		4A04FA891E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuControllerGesturesHandler.m; sourceTree = "<group>"; };
+		4A04FA881E894C2D000E90AB /* LGSideMenuGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuGesturesHandler.h; sourceTree = "<group>"; };
+		4A04FA891E894C2D000E90AB /* LGSideMenuGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuGesturesHandler.m; sourceTree = "<group>"; };
 		4A04FA8C1E894C2D000E90AB /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
 		4A04FA8D1E894C2D000E90AB /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
 		4A04FA8E1E894C2D000E90AB /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 			children = (
 				4A04FA861E894C2D000E90AB /* LGSideMenuController.h */,
 				4A04FA871E894C2D000E90AB /* LGSideMenuController.m */,
-				4A04FA881E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.h */,
-				4A04FA891E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.m */,
+				4A04FA881E894C2D000E90AB /* LGSideMenuGesturesHandler.h */,
+				4A04FA891E894C2D000E90AB /* LGSideMenuGesturesHandler.m */,
 				4AEE2B271EA92F7C0051D069 /* LGSideMenuBorderView.h */,
 				4AEE2B281EA92F7C0051D069 /* LGSideMenuBorderView.m */,
 				4A04FA8C1E894C2D000E90AB /* LGSideMenuHelper.h */,
@@ -266,7 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE795361D45BAAD002930CA /* LeftViewCell.swift in Sources */,
-				4A04FA951E894C2D000E90AB /* LGSideMenuControllerGesturesHandler.m in Sources */,
+				4A04FA951E894C2D000E90AB /* LGSideMenuGesturesHandler.m in Sources */,
 				4A04FA981E894C2D000E90AB /* LGSideMenuSegue.m in Sources */,
 				EDE795321D45BA9B002930CA /* RightViewController.swift in Sources */,
 				4A04FA941E894C2D000E90AB /* LGSideMenuController.m in Sources */,
