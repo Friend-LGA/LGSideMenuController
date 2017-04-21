@@ -1,5 +1,5 @@
 //
-//  LGSideMenuControllerGesturesHandler.h
+//  LGSideMenuGesturesHandler.h
 //  LGSideMenuController
 //
 //
@@ -30,7 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "LGSideMenuController.h"
 
-@interface LGSideMenuControllerGesturesHandler : NSObject <UIGestureRecognizerDelegate>
+@interface LGSideMenuGesturesHandler : NSObject <UIGestureRecognizerDelegate>
 
 @property (assign, nonatomic, nonnull) LGSideMenuController *sideMenuController;
 

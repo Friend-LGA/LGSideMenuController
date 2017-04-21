@@ -1,5 +1,5 @@
 //
-//  LGSideMenuControllerGesturesHandler.m
+//  LGSideMenuGesturesHandler.m
 //  LGSideMenuController
 //
 //
@@ -27,9 +27,9 @@
 //  SOFTWARE.
 //
 
-#import "LGSideMenuControllerGesturesHandler.h"
+#import "LGSideMenuGesturesHandler.h"
 
-@implementation LGSideMenuControllerGesturesHandler
+@implementation LGSideMenuGesturesHandler
 
 - (nonnull instancetype)initWithSideMenuController:(nonnull LGSideMenuController *)sideMenuController {
     self = [super init];
