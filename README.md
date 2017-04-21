@@ -600,7 +600,7 @@ To handle actions you can use delegate, blocks or notifications:
 ##### Objective-C
 
 ```objective-c
-<LGSideMenuControllerDelegate>
+<LGSideMenuDelegate>
 
 @optional
 
@@ -616,17 +616,17 @@ To handle actions you can use delegate, blocks or notifications:
 - (void)willHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 - (void)didHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 
-- (void)showAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
-- (void)hideAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)showAnimationsForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 
-- (void)showAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
-- (void)hideAnimationsBlockForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)showAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+- (void)hideAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 ```
 
 ##### Swift
 
 ```swift
-<LGSideMenuControllerDelegate>
+<LGSideMenuDelegate>
 
 optional public func willShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
 optional public func didShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
@@ -640,11 +640,11 @@ optional public func didShowRightView(_ rightView: UIView, sideMenuController: L
 optional public func willHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
 optional public func didHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
 
-optional public func showAnimationsBlock(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-optional public func hideAnimationsBlock(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func showAnimations(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func hideAnimations(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
 
-optional public func showAnimationsBlock(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-optional public func hideAnimationsBlock(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func showAnimations(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
+optional public func hideAnimations(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
 ```
 
 #### Blocks
@@ -652,61 +652,67 @@ optional public func hideAnimationsBlock(forRightView rightView: UIView, sideMen
 ##### Objective-C
 
 ```objective-c
-void(^ _Nullable willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-void(^ _Nullable didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
+void(^ _Nullable didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
 
-void(^ _Nullable willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
-void(^ _Nullable didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView);
+void(^ _Nullable willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
+void(^ _Nullable didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
 
-void(^ _Nullable willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-void(^ _Nullable didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
+void(^ _Nullable didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
 
-void(^ _Nullable willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
-void(^ _Nullable didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView);
+void(^ _Nullable willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
+void(^ _Nullable didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
 
-void(^ _Nullable showLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
-void(^ _Nullable hideLeftViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull leftView, NSTimeInterval duration);
+void(^ _Nullable showLeftViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
+void(^ _Nullable hideLeftViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
 
-void(^ _Nullable showRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
-void(^ _Nullable hideRightViewAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull rightView, NSTimeInterval duration);
+void(^ _Nullable showRightViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
+void(^ _Nullable hideRightViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
 ```
 
 ##### Swift
 
 ```swift
-open var willShowLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
-open var didShowLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var willShowLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
+open var didShowLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
 
-open var willHideLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
-open var didHideLeftView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var willHideLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
+open var didHideLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
 
-open var willShowRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
-open var didShowRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var willShowRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
+open var didShowRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
 
-open var willHideRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
-open var didHideRightView: ((LGSideMenuController, UIView) -> Swift.Void)?
+open var willHideRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
+open var didHideRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
 
-open var showLeftViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
-open var hideLeftViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
+open var showLeftViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
+open var hideLeftViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
 
-open var showRightViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
-open var hideRightViewAnimationsBlock: ((LGSideMenuController, UIView, TimeInterval) -> Swift.Void)?
+open var showRightViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
+open var hideRightViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
 ```
 
 #### Notifications
 
 ```
-LGSideMenuControllerWillShowLeftViewNotification
-LGSideMenuControllerDidShowLeftViewNotification
+LGSideMenuWillShowLeftViewNotification
+LGSideMenuDidShowLeftViewNotification
 
-LGSideMenuControllerWillHideLeftViewNotification
-LGSideMenuControllerDidHideLeftViewNotification
+LGSideMenuWillHideLeftViewNotification
+LGSideMenuDidHideLeftViewNotification
 
-LGSideMenuControllerWillShowRightViewNotification
-LGSideMenuControllerDidShowRightViewNotification
+LGSideMenuWillShowRightViewNotification
+LGSideMenuDidShowRightViewNotification
 
-LGSideMenuControllerWillHideRightViewNotification
-LGSideMenuControllerDidHideRightViewNotification
+LGSideMenuWillHideRightViewNotification
+LGSideMenuDidHideRightViewNotification
+
+LGSideMenuShowLeftViewAnimationsNotification
+LGSideMenuHideLeftViewAnimationsNotification
+
+LGSideMenuShowRightViewAnimationsNotification
+LGSideMenuHideRightViewAnimationsNotification
 ```
 
 ### More
