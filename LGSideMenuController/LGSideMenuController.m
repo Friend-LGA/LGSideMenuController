@@ -3077,7 +3077,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                 [self rootViewsTransformValidateWithPercentage:percentage];
                 [self leftViewsTransformValidateWithPercentage:percentage];
             }
-            else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && self.leftViewGestireStartX) {
+            else if ((gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled)
+                     && self.leftViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     self.leftViewGoingToShow = YES;
                     self.leftViewGoingToHide = NO;
@@ -3145,7 +3146,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                 [self rootViewsTransformValidateWithPercentage:percentage];
                 [self rightViewsTransformValidateWithPercentage:percentage];
             }
-            else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && self.rightViewGestireStartX) {
+            else if ((gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled)
+                     && self.rightViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     self.rightViewGoingToShow = YES;
                     self.rightViewGoingToHide = NO;
