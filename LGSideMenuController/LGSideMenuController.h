@@ -766,6 +766,8 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 /** You can use this method to add some custom animations */
 - (void)hideAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 
+// DEPRECATED
+
 /** You can use this method to add some custom animations */
 - (void)showAnimationsBlockForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration
 DEPRECATED_MSG_ATTRIBUTE("use showAnimationsForRightView:sideMenuController:duration: instead");
