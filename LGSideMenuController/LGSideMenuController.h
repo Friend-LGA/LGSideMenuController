@@ -146,30 +146,18 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic) IBInspectable CGFloat rightViewWidth;
 
 /** Default is LGSideMenuPresentationStyleSlideAbove */
-#if TARGET_INTERFACE_BUILDER
-@property (assign, nonatomic) IBInspectable NSUInteger leftViewPresentationStyle;
-#else
 @property (assign, nonatomic) LGSideMenuPresentationStyle leftViewPresentationStyle;
-#endif
+
 /** Default is LGSideMenuPresentationStyleSlideAbove */
-#if TARGET_INTERFACE_BUILDER
-@property (assign, nonatomic) IBInspectable NSUInteger rightViewPresentationStyle;
-#else
 @property (assign, nonatomic) LGSideMenuPresentationStyle rightViewPresentationStyle;
-#endif
+
 
 /** Default is LGSideMenuAlwaysVisibleOnNone */
-#if TARGET_INTERFACE_BUILDER
-@property (assign, nonatomic) IBInspectable NSUInteger leftViewAlwaysVisibleOptions;
-#else
 @property (assign, nonatomic) LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
-#endif
+
 /** Default is LGSideMenuAlwaysVisibleOnNone */
-#if TARGET_INTERFACE_BUILDER
-@property (assign, nonatomic) IBInspectable NSUInteger rightViewAlwaysVisibleOptions;
-#else
 @property (assign, nonatomic) LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
-#endif
+
 
 /** Default is YES */
 @property (assign, nonatomic, getter=isLeftViewHidesOnTouch)  IBInspectable BOOL leftViewHidesOnTouch;
@@ -187,11 +175,8 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic, getter=isRightViewSwipeGestureDisabled) BOOL rightViewSwipeGestureDisabled;
 
 /** Default is LGSideMenuSwipeGestureAreaBorders */
-#if TARGET_INTERFACE_BUILDER
-@property (assign, nonatomic) IBInspectable NSUInteger swipeGestureArea;
-#else
 @property (assign, nonatomic) LGSideMenuSwipeGestureArea swipeGestureArea;
-#endif
+
 
 /**
  Only if (swipeGestureArea == LGSideMenuSwipeGestureAreaBorders)
