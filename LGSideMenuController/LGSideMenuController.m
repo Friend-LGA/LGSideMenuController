@@ -523,8 +523,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     [self leftViewsValidate];
     [self rightViewsValidate];
 
-    [self viewsHierarchyValidate];
-
     [self rootViewsFramesValidate];
     [self leftViewsFramesValidate];
     [self rightViewsFramesValidate];
