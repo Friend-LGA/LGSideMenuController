@@ -67,7 +67,7 @@ static NSString * _Nonnull const LGSideMenuSegueRightIdentifier = @"right";
 
 #pragma mark - Types
 
-typedef void (^ _Nullable LGSideMenuCompletionHandler)();
+typedef void (^ _Nullable LGSideMenuCompletionHandler)(void);
 typedef void (^ _Nullable LGSideMenuHandler)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
 typedef void (^ _Nullable LGSideMenuAnimationsBlock)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
 

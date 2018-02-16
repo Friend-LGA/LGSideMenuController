@@ -31,6 +31,6 @@
 
 @interface LGSideMenuView : UIView
 
-- (nonnull instancetype)initWithLayoutSubviewsHandler:(void(^ _Nonnull)())layoutSubviewsHandler;
+- (nonnull instancetype)initWithLayoutSubviewsHandler:(void(^ _Nonnull)(void))layoutSubviewsHandler;
 
 @end
