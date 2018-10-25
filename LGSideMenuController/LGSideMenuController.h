@@ -756,6 +756,17 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 - (void)willHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 - (void)didHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 
+typedef NS_OPTIONS(NSUInteger, LGSideMenuWhichView) {
+    LGSideMenuWhichViewLeft           = 0,
+    LGSideMenuWhichViewRight          = 1
+};
+
+// By default, returns YES.
+- (BOOL)shouldShowView:(nonnull UIView *)view whichView: (LGSideMenuWhichView) whichView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
+// By default, returns YES.
+- (BOOL)shouldHideView:(nonnull UIView *)view whichView: (LGSideMenuWhichView) whichView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+
 /** You can use this method to add some custom animations */
 - (void)showAnimationsForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 /** You can use this method to add some custom animations */

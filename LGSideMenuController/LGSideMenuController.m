@@ -2325,6 +2325,13 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldShowView:whichView:sideMenuController:)]) {
+        if (! [self.delegate shouldShowView:self.leftView whichView:LGSideMenuWhichViewLeft sideMenuController: self]) {
+            if (completionHandler) completionHandler();
+            return;
+        }
+    }
 
     [self showLeftViewPrepareWithGesture:NO];
     [self showLeftViewAnimatedActions:animated completionHandler:completionHandler];
@@ -2339,6 +2346,13 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.isLeftViewGoingToHide ||
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldHideView:whichView:sideMenuController:)]) {
+        if (! [self.delegate shouldHideView:self.leftView whichView:LGSideMenuWhichViewLeft sideMenuController: self]) {
+            if (completionHandler) completionHandler();
+            return;
+        }
     }
 
     [self hideLeftViewPrepareWithGesture:NO];
@@ -2650,6 +2664,13 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldShowView:whichView:sideMenuController:)]) {
+        if (! [self.delegate shouldShowView:self.leftView whichView:LGSideMenuWhichViewRight sideMenuController: self]) {
+            if (completionHandler) completionHandler();
+            return;
+        }
+    }
 
     [self showRightViewPrepareWithGesture:NO];
     [self showRightViewAnimatedActions:animated completionHandler:completionHandler];
@@ -2665,6 +2686,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldHideView:whichView:sideMenuController:)]) {
+        if (! [self.delegate shouldHideView:self.leftView whichView:LGSideMenuWhichViewRight sideMenuController: self]) {
+            if (completionHandler) completionHandler();
+            return;
+        }
+    }
+
 
     [self hideRightViewPrepareWithGesture:NO];
     [self hideRightViewAnimatedActions:animated completionHandler:completionHandler];
