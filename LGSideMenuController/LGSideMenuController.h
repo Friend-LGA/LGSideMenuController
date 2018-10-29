@@ -761,6 +761,8 @@ typedef NS_OPTIONS(NSUInteger, LGSideMenuWhichView) {
     LGSideMenuWhichViewRight          = 1
 };
 
+// The following two methods apply to both tap and drag actions. E.g., tap outside of left view to close it, or drag to open right view.
+
 // By default, returns YES.
 - (BOOL)shouldShowView:(nonnull UIView *)view whichView: (LGSideMenuWhichView) whichView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
 

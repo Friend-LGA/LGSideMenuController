@@ -3068,6 +3068,26 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     // -----
 
     if (self.leftView && self.isLeftViewSwipeGestureEnabled && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.rightViewGestireStartX && self.isRightViewHidden && self.isLeftViewEnabled) {
+    
+        if (self.delegate) {
+            if (velocity.x < 0 && self.isLeftViewShowing) {
+                // "closing"
+                if ([self.delegate respondsToSelector:@selector(shouldHideView:whichView:sideMenuController:)]) {
+                    if (! [self.delegate shouldHideView:self.leftView whichView:LGSideMenuWhichViewLeft sideMenuController: self]) {
+                        return;
+                    }
+                }
+            }
+            else if (velocity.x > 0 && !self.isLeftViewShowing) {
+                // "opening"
+                if ([self.delegate respondsToSelector:@selector(shouldShowView:whichView:sideMenuController:)]) {
+                    if (! [self.delegate shouldShowView:self.leftView whichView:LGSideMenuWhichViewLeft sideMenuController: self]) {
+                        return;
+                    }
+                }
+            }
+        }
+        
         if (!self.leftViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged)) {
             BOOL velocityReady = self.isLeftViewShowing ? velocity.x < 0.0 : velocity.x > 0.0;
 
@@ -3137,6 +3157,26 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     // -----
 
     if (self.rightView && self.isRightViewSwipeGestureEnabled && !self.isRightViewAlwaysVisibleForCurrentOrientation && !self.leftViewGestireStartX && self.isLeftViewHidden && self.isRightViewEnabled) {
+
+        if (self.delegate) {
+            if (velocity.x > 0 && self.isRightViewShowing) {
+                // "closing"
+                if ([self.delegate respondsToSelector:@selector(shouldHideView:whichView:sideMenuController:)]) {
+                    if (! [self.delegate shouldHideView:self.rightView whichView:LGSideMenuWhichViewRight sideMenuController: self]) {
+                        return;
+                    }
+                }
+            }
+            else if (velocity.x < 0 && !self.isRightViewShowing) {
+                // "opening"
+                if ([self.delegate respondsToSelector:@selector(shouldShowView:whichView:sideMenuController:)]) {
+                    if (! [self.delegate shouldShowView:self.rightView whichView:LGSideMenuWhichViewRight sideMenuController: self]) {
+                        return;
+                    }
+                }
+            }
+        }
+
         if (!self.rightViewGestireStartX && (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged)) {
             BOOL velocityReady = self.isRightViewShowing ? velocity.x > 0.0 : velocity.x < 0.0;
 
