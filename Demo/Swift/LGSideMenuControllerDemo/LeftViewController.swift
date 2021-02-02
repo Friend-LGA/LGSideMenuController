@@ -14,7 +14,7 @@ class LeftViewController: UITableViewController {
                                "Articles",
                                "Video",
                                "Music"]
-    
+
     init() {
         super.init(style: .plain)
 
@@ -27,12 +27,8 @@ class LeftViewController: UITableViewController {
         tableView.backgroundColor = .clear
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -46,17 +42,17 @@ class LeftViewController: UITableViewController {
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
-    
+
     // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titlesArray.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeftViewCell
 
@@ -66,53 +62,44 @@ class LeftViewController: UITableViewController {
 
         return cell
     }
-    
+
     // MARK: - UITableViewDelegate
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (indexPath.row == 1 || indexPath.row == 3) ? 22.0 : 44.0
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = sideMenuController!
-        
+        guard let sideMenuController = sideMenuController else { return }
+
         if indexPath.row == 0 {
-            if mainViewController.isLeftViewAlwaysVisibleForCurrentOrientation {
-                mainViewController.showRightView(animated: true, completionHandler: nil)
+            if sideMenuController.isLeftViewAlwaysVisibleForCurrentOrientation {
+                sideMenuController.showRightView(animated: true, completionHandler: nil)
             }
             else {
-                mainViewController.hideLeftView(animated: true, completionHandler: {
-                    mainViewController.showRightView(animated: true, completionHandler: nil)
+                sideMenuController.hideLeftView(animated: true, completionHandler: {
+                    sideMenuController.showRightView(animated: true, completionHandler: nil)
                 })
             }
         }
         else if indexPath.row == 2 {
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            let viewController: UIViewController!
-
-            if navigationController.viewControllers.first is ViewController {
-                viewController = OtherViewController()
-            }
-            else {
-                viewController = ViewController()
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.setViewControllers([ViewController()], animated: false)
             }
 
-            navigationController.setViewControllers([viewController], animated: false)
-
-            // Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
-            // You can use delay to avoid this and probably other unexpected visual bugs
-            mainViewController.hideLeftView(animated: true, delay: 0.0, completionHandler: nil)
+            sideMenuController.hideLeftView(animated: true, completionHandler: nil)
         }
         else {
             let viewController = UIViewController()
-            viewController.view.backgroundColor = .white
+            viewController.view.backgroundColor = (isLightTheme() ? .white : .black)
             viewController.title = "Test \(titlesArray[indexPath.row])"
 
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            navigationController.pushViewController(viewController, animated: true)
-            
-            mainViewController.hideLeftView(animated: true, completionHandler: nil)
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.pushViewController(viewController, animated: true)
+            }
+
+            sideMenuController.hideLeftView(animated: true, completionHandler: nil)
         }
     }
-    
+
 }

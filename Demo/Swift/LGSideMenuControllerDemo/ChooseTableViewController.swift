@@ -1,41 +1,37 @@
 //
-//  TableViewController.swift
+//  ChooseTableViewController.swift
 //  LGSideMenuControllerDemo
 //
 
-class TableViewController: UITableViewController {
-
+class ChooseTableViewController: UITableViewController {
+    
     private let titlesArray = ["Style \"Scale From Big\"",
                                "Style \"Slide Above\"",
                                "Style \"Slide Below\"",
                                "Style \"Scale From Little\"",
                                "Blurred root view cover",
-                               "Blurred side views covers",
-                               "Blurred side views backgrounds",
-                               "Landscape always visible",
-                               "Status bar always visible",
-                               "Gesture area full screen",
-                               "Editable table view",
-                               "Custom style"]
-
+                               "Blurred covers of side views",
+                               "Blurred backgrounds side views",
+                               "Landscape is always visible",
+                               "Status bar is always visible",
+                               "Gesture area is full screen",
+                               "Concurrent touch actions",
+                               "Custom style example"]
+    
     init() {
         super.init(style: .plain)
-
-        title = "LGSideMenuController"
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        self.title = "LGSideMenuController"
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - UITableViewDataSource
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -46,7 +42,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        
         cell.accessoryType = .disclosureIndicator
         cell.textLabel!.font = UIFont.systemFont(ofSize: 16.0)
         cell.textLabel!.text = titlesArray[indexPath.row]
@@ -55,31 +51,29 @@ class TableViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController: UIViewController
-
+        let viewController: ViewController
         if (indexPath.row == self.titlesArray.count - 2) {
-            viewController = OtherViewController()
+            viewController = ViewController(withTableView: true)
         }
         else {
             viewController = ViewController()
         }
-
+        
         let navigationController = NavigationController(rootViewController: viewController)
         
         let mainViewController = MainViewController()
         mainViewController.rootViewController = navigationController
-        mainViewController.setup(type: UInt(indexPath.row))
-
+        mainViewController.setup(type: DemoType(rawValue: indexPath.row)!)
+        
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = mainViewController
-
         UIView.transition(with: window, duration: 0.3, options: [.transitionCrossDissolve], animations: nil, completion: nil)
     }
-
+    
 }

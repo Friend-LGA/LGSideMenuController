@@ -5,6 +5,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TableViewController : UITableViewController
+@interface ChooseTableViewController : UITableViewController
 
 @end

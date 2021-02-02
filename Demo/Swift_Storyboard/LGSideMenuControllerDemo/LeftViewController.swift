@@ -17,7 +17,6 @@ class LeftViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
     }
 
@@ -56,44 +55,37 @@ class LeftViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = sideMenuController!
+        guard let sideMenuController = sideMenuController else { return }
         
         if indexPath.row == 0 {
-            if mainViewController.isLeftViewAlwaysVisibleForCurrentOrientation {
-                mainViewController.showRightView(animated: true, completionHandler: nil)
+            if sideMenuController.isLeftViewAlwaysVisibleForCurrentOrientation {
+                sideMenuController.showRightView(animated: true, completionHandler: nil)
             }
             else {
-                mainViewController.hideLeftView(animated: true, completionHandler: {
-                    mainViewController.showRightView(animated: true, completionHandler: nil)
+                sideMenuController.hideLeftView(animated: true, completionHandler: {
+                    sideMenuController.showRightView(animated: true, completionHandler: nil)
                 })
             }
         }
         else if indexPath.row == 2 {
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            let viewController: UIViewController!
+            guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") else { return }
 
-            if navigationController.viewControllers.first is ViewController {
-                viewController = self.storyboard!.instantiateViewController(withIdentifier: "OtherViewController")
-            }
-            else {
-                viewController = self.storyboard!.instantiateViewController(withIdentifier: "ViewController")
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.setViewControllers([viewController], animated: false)
             }
 
-            navigationController.setViewControllers([viewController], animated: false)
-
-            // Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
-            // You can use delay to avoid this and probably other unexpected visual bugs
-            mainViewController.hideLeftView(animated: true, delay: 0.0, completionHandler: nil)
+            sideMenuController.hideLeftView(animated: true, completionHandler: nil)
         }
         else {
             let viewController = UIViewController()
-            viewController.view.backgroundColor = .white
+            viewController.view.backgroundColor = (isLightTheme() ? .white : .black)
             viewController.title = "Test \(titlesArray[indexPath.row])"
 
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            navigationController.pushViewController(viewController, animated: true)
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.pushViewController(viewController, animated: true)
+            }
             
-            mainViewController.hideLeftView(animated: true, completionHandler: nil)
+            sideMenuController.hideLeftView(animated: true, completionHandler: nil)
         }
     }
     

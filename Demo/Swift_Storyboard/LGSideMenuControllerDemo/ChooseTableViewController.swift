@@ -3,20 +3,20 @@
 //  LGSideMenuControllerDemo
 //
 
-class TableViewController: UITableViewController {
+class ChooseTableViewController: UITableViewController {
 
     private let titlesArray = ["Style \"Scale From Big\"",
                                "Style \"Slide Above\"",
                                "Style \"Slide Below\"",
                                "Style \"Scale From Little\"",
                                "Blurred root view cover",
-                               "Blurred side views covers",
-                               "Blurred side views backgrounds",
-                               "Landscape always visible",
-                               "Status bar always visible",
-                               "Gesture area full screen",
-                               "Editable table view",
-                               "Custom style"]
+                               "Blurred covers of side views",
+                               "Blurred backgrounds of side views",
+                               "Landscape is always visible",
+                               "Status bar is always visible",
+                               "Gesture area is full screen",
+                               "Concurrent touch actions",
+                               "Custom style example"]
 
     // MARK: - UITableViewDataSource
     
@@ -37,7 +37,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "NavigationController") as! UINavigationController
+        guard let navigationController = storyboard.instantiateViewController(withIdentifier: "NavigationController") as? UINavigationController else { return }
 
         if (indexPath.row == self.titlesArray.count - 2) {
             navigationController.setViewControllers([storyboard.instantiateViewController(withIdentifier: "OtherViewController")], animated: false)
@@ -46,9 +46,10 @@ class TableViewController: UITableViewController {
             navigationController.setViewControllers([storyboard.instantiateViewController(withIdentifier: "ViewController")], animated: false)
         }
         
-        let mainViewController = storyboard.instantiateInitialViewController() as! MainViewController
+        guard let mainViewController = storyboard.instantiateInitialViewController() as? MainViewController else { return }
+
         mainViewController.rootViewController = navigationController
-        mainViewController.setup(type: UInt(indexPath.row))
+        mainViewController.setup(type: DemoType(rawValue: indexPath.row)!)
 
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = mainViewController

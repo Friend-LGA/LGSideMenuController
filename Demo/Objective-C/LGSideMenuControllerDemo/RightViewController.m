@@ -7,6 +7,7 @@
 #import "RightViewCell.h"
 #import "MainViewController.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "Helper.h"
 
 @interface RightViewController ()
 
@@ -32,13 +33,13 @@
                              @"9",
                              @"10"];
 
-        self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = UIColor.clearColor;
 
-        [self.tableView registerClass:[RightViewCell class] forCellReuseIdentifier:@"cell"];
+        [self.tableView registerClass:RightViewCell.class forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         self.tableView.contentInset = UIEdgeInsetsMake(44.0, 0.0, 44.0, 0.0);
         self.tableView.showsVerticalScrollIndicator = NO;
-        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.backgroundColor = UIColor.clearColor;
     }
     return self;
 }
@@ -83,27 +84,27 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    MainViewController *sideMenuController = (MainViewController *)self.sideMenuController;
 
     if (indexPath.row == 0) {
-        if ([mainViewController isRightViewAlwaysVisibleForCurrentOrientation]) {
-            [mainViewController showLeftViewAnimated:YES completionHandler:nil];
+        if ([sideMenuController isRightViewAlwaysVisibleForCurrentOrientation]) {
+            [sideMenuController showLeftViewAnimated:YES completionHandler:nil];
         }
         else  {
-            [mainViewController hideRightViewAnimated:YES completionHandler:^(void) {
-                [mainViewController showLeftViewAnimated:YES completionHandler:nil];
+            [sideMenuController hideRightViewAnimated:YES completionHandler:^(void) {
+                [sideMenuController showLeftViewAnimated:YES completionHandler:nil];
             }];
         }
     }
     else {
         UIViewController *viewController = [UIViewController new];
-        viewController.view.backgroundColor = [UIColor whiteColor];
+        viewController.view.backgroundColor = (Helper.isLightTheme ? UIColor.whiteColor : UIColor.blackColor);
         viewController.title = [NSString stringWithFormat:@"Test %@", self.titlesArray[indexPath.row]];
 
-        UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
+        UINavigationController *navigationController = (UINavigationController *)sideMenuController.rootViewController;
         [navigationController pushViewController:viewController animated:YES];
 
-        [mainViewController hideRightViewAnimated:YES completionHandler:nil];
+        [sideMenuController hideRightViewAnimated:YES completionHandler:nil];
     }
 }
 

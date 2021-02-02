@@ -4,25 +4,21 @@
 //
 
 #import "ChooseNavigationController.h"
-#import "TableViewController.h"
+#import "ChooseTableViewController.h"
+#import "Helper.h"
 
 @implementation ChooseNavigationController
 
 - (instancetype)init {
-    TableViewController *viewController = [TableViewController new];
-
-    self = [super initWithRootViewController:viewController];
-
+    self = [super initWithRootViewController:ChooseTableViewController.new];
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.navigationBar.translucent = YES;
-    self.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0];
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.navigationBar.tintColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+    
+    self.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.9];
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: UIColor.whiteColor};
 }
 
 - (BOOL)shouldAutorotate {
@@ -39,6 +35,15 @@
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return UIStatusBarAnimationNone;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self setColors];
+}
+
+- (void)setColors {
+    self.view.backgroundColor = (Helper.isLightTheme ? UIColor.whiteColor : UIColor.blackColor);
 }
 
 @end

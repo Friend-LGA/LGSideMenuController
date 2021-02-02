@@ -4,36 +4,28 @@
 //
 
 class ChooseNavigationController: UINavigationController {
-
+    
     init() {
-        let viewController = TableViewController()
-
-        super.init(rootViewController: viewController)
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        super.init(rootViewController: ChooseTableViewController())
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.isTranslucent = true
         navigationBar.barTintColor = UIColor(red: 0.0, green: 0.5, blue:1.0, alpha:1.0)
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        navigationBar.tintColor = UIColor(white: 1.0, alpha: 0.5)
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
-
+    
     override var shouldAutorotate : Bool {
         return true
     }
     
     override var prefersStatusBarHidden : Bool {
-        return UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == .phone
+        return UIApplication.shared.statusBarOrientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -43,5 +35,13 @@ class ChooseNavigationController: UINavigationController {
     override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
         return .none
     }
-
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.setColors()
+    }
+    
+    func setColors() {
+        self.view.backgroundColor = (isLightTheme() ? .white : .black)
+    }
 }

@@ -7,8 +7,7 @@ class ViewController : UIViewController {
 
     @IBAction func showChooseController(sender: Any) {
         let storyboard = UIStoryboard(name: "Choose", bundle: nil)
-
-        let navigationController = storyboard.instantiateInitialViewController() as! ChooseNavigationController
+        guard let navigationController = storyboard.instantiateInitialViewController() as? ChooseNavigationController else { return }
 
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = navigationController

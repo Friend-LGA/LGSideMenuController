@@ -5,14 +5,13 @@
 
 #import "NavigationController.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "Helper.h"
 
 @implementation NavigationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.navigationBar.translucent = YES;
-    self.navigationBar.barTintColor = [UIColor whiteColor];
+    [self setColors];
 }
 
 - (BOOL)shouldAutorotate {
@@ -29,6 +28,16 @@
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return self.sideMenuController.isRightViewVisible ? UIStatusBarAnimationSlide : UIStatusBarAnimationFade;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self setColors];
+}
+
+- (void)setColors {
+    self.navigationBar.barTintColor = [UIColor colorWithWhite:(Helper.isLightTheme ? 1.0 : 0.0) alpha:0.9];
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: (Helper.isLightTheme ? UIColor.blackColor : UIColor.whiteColor)};
 }
 
 @end

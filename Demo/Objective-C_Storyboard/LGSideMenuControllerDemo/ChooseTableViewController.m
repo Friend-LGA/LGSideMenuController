@@ -3,16 +3,16 @@
 //  LGSideMenuControllerDemo
 //
 
-#import "TableViewController.h"
+#import "ChooseTableViewController.h"
 #import "MainViewController.h"
 
-@interface TableViewController ()
+@interface ChooseTableViewController ()
 
 @property (strong, nonatomic) NSArray *titlesArray;
 
 @end
 
-@implementation TableViewController
+@implementation ChooseTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,13 +22,13 @@
                          @"Style \"Slide Below\"",
                          @"Style \"Scale From Little\"",
                          @"Blurred root view cover",
-                         @"Blurred side views covers",
-                         @"Blurred side views backgrounds",
-                         @"Landscape always visible",
-                         @"Status bar always visible",
-                         @"Gesture area full screen",
-                         @"Editable table view",
-                         @"Custom style"];
+                         @"Blurred covers of side views",
+                         @"Blurred backgrounds of side views",
+                         @"Landscape is always visible",
+                         @"Status bar is always visible",
+                         @"Gesture area is full screen",
+                         @"Concurrent touch actions",
+                         @"Custom style example"];
 }
 
 #pragma mark - UITableViewDataSource

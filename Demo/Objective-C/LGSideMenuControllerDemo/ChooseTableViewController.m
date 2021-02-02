@@ -3,19 +3,18 @@
 //  LGSideMenuControllerDemo
 //
 
-#import "TableViewController.h"
+#import "ChooseTableViewController.h"
 #import "MainViewController.h"
 #import "NavigationController.h"
 #import "ViewController.h"
-#import "OtherViewController.h"
 
-@interface TableViewController ()
+@interface ChooseTableViewController ()
 
 @property (strong, nonatomic) NSArray *titlesArray;
 
 @end
 
-@implementation TableViewController
+@implementation ChooseTableViewController
 
 - (id)init {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -27,15 +26,15 @@
                              @"Style \"Slide Below\"",
                              @"Style \"Scale From Little\"",
                              @"Blurred root view cover",
-                             @"Blurred side views covers",
-                             @"Blurred side views backgrounds",
-                             @"Landscape always visible",
-                             @"Status bar always visible",
-                             @"Gesture area full screen",
-                             @"Editable table view",
-                             @"Custom style"];
+                             @"Blurred covers of side views",
+                             @"Blurred backgrounds of side views",
+                             @"Landscape is always visible",
+                             @"Status bar is always visible",
+                             @"Gesture area is full screen",
+                             @"Concurrent touch actions",
+                             @"Custom style example"];
 
-        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
     }
     return self;
 }
@@ -67,10 +66,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *viewController;
-
+    ViewController *viewController;
     if (indexPath.row == self.titlesArray.count - 2) {
-        viewController = [OtherViewController new];
+        viewController = [[ViewController alloc] initWithTableView];
     }
     else {
         viewController = [ViewController new];
@@ -80,7 +78,7 @@
 
     MainViewController *mainViewController = [MainViewController new];
     mainViewController.rootViewController = navigationController;
-    [mainViewController setupWithType:indexPath.row];
+    [mainViewController setupWithType:(DemoType)indexPath.row];
 
     UIWindow *window = UIApplication.sharedApplication.delegate.window;
     window.rootViewController = mainViewController;

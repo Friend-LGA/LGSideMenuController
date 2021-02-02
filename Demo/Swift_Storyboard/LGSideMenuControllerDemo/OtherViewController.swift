@@ -3,16 +3,15 @@
 //  LGSideMenuControllerDemo
 //
 
-class OtherViewController: UITableViewController {
+class OtherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var numberOfCells = 100 as Int
+    private var numberOfCells: Int = 100
 
     // MARK: -
 
     @IBAction func showChooseController(sender: Any) {
         let storyboard = UIStoryboard(name: "Choose", bundle: nil)
-
-        let navigationController = storyboard.instantiateInitialViewController() as! ChooseNavigationController
+        guard let navigationController = storyboard.instantiateInitialViewController() as? ChooseNavigationController else { return }
 
         let window = UIApplication.shared.delegate!.window!!
         window.rootViewController = navigationController
@@ -22,23 +21,23 @@ class OtherViewController: UITableViewController {
 
     // MARK: - UITableViewDataSource
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfCells
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.numberOfCells
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     }
 
     // MARK: - UITableViewDelegate
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            numberOfCells -= 1
+            self.numberOfCells -= 1
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

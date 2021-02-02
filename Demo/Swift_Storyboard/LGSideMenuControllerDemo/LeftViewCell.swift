@@ -10,7 +10,6 @@ class LeftViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
         backgroundColor = .clear
     }
 

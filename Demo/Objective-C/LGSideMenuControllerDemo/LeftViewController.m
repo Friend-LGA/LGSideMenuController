@@ -8,7 +8,7 @@
 #import "MainViewController.h"
 #import "UIViewController+LGSideMenuController.h"
 #import "ViewController.h"
-#import "OtherViewController.h"
+#import "Helper.h"
 
 @interface LeftViewController ()
 
@@ -31,13 +31,13 @@
                              @"Video",
                              @"Music"];
 
-        self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = UIColor.clearColor;
 
-        [self.tableView registerClass:[LeftViewCell class] forCellReuseIdentifier:@"cell"];
+        [self.tableView registerClass:LeftViewCell.class forCellReuseIdentifier:@"cell"];
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.contentInset = UIEdgeInsetsMake(44.0, 0.0, 44.0, 0.0);
         self.tableView.showsVerticalScrollIndicator = NO;
-        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.backgroundColor = UIColor.clearColor;
     }
     return self;
 }
@@ -95,24 +95,13 @@
     }
     else if (indexPath.row == 2) {
         UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
-        UIViewController *viewController;
+        [navigationController setViewControllers:@[ViewController.new]];
 
-        if ([navigationController.viewControllers.firstObject isKindOfClass:[ViewController class]]) {
-            viewController = [OtherViewController new];
-        }
-        else {
-            viewController = [ViewController new];
-        }
-
-        [navigationController setViewControllers:@[viewController]];
-
-        // Rarely you can get some visual bugs when you change view hierarchy and toggle side views in the same iteration
-        // You can use delay to avoid this and probably other unexpected visual bugs
-        [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
+        [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
     }
     else {
         UIViewController *viewController = [UIViewController new];
-        viewController.view.backgroundColor = [UIColor whiteColor];
+        viewController.view.backgroundColor = (Helper.isLightTheme ? UIColor.whiteColor : UIColor.blackColor);
         viewController.title = self.titlesArray[indexPath.row];
 
         UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;

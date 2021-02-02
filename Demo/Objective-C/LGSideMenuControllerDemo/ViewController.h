@@ -7,4 +7,6 @@
 
 @interface ViewController : UIViewController
 
+- (instancetype)initWithTableView;
+
 @end

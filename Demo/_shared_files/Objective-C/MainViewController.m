@@ -10,13 +10,13 @@
 
 @interface MainViewController ()
 
-@property (assign, nonatomic) NSUInteger type;
+@property (assign, nonatomic) DemoType type;
 
 @end
 
 @implementation MainViewController
 
-- (void)setupWithType:(NSUInteger)type {
+- (void)setupWithType:(DemoType)type {
     self.type = type;
 
     // -----
@@ -39,8 +39,6 @@
         self.leftViewBackgroundColor = [UIColor colorWithRed:0.5 green:0.65 blue:0.5 alpha:0.95];
         self.rootViewCoverColorForLeftView = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
 
-
-
         self.rightViewWidth = 100.0;
         self.rightViewBackgroundImage = [UIImage imageNamed:@"imageRight"];
         self.rightViewBackgroundColor = [UIColor colorWithRed:0.65 green:0.5 blue:0.65 alpha:0.95];
@@ -53,7 +51,7 @@
     UIColor *purpleCoverColor = [UIColor colorWithRed:0.1 green:0.0 blue:0.1 alpha:0.3];
     UIBlurEffectStyle regularStyle;
 
-    if (UIDevice.currentDevice.systemVersion.floatValue >= 10.0) {
+    if (@available(iOS 10.0, *)) {
         regularStyle = UIBlurEffectStyleRegular;
     }
     else {
@@ -63,13 +61,13 @@
     // -----
 
     switch (self.type) {
-        case 0: {
+        case DemoTypeStyleScaleFromBig: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
 
             break;
         }
-        case 1: {
+        case DemoTypeStyleSlideAbove: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
             self.rootViewCoverColorForLeftView = greenCoverColor;
 
@@ -78,19 +76,19 @@
 
             break;
         }
-        case 2: {
+        case DemoTypeStyleSlideBelow: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
 
             break;
         }
-        case 3: {
+        case DemoTypeStyleScaleFromLittle: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromLittle;
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromLittle;
 
             break;
         }
-        case 4: {
+        case DemoTypeBlurredRootViewCover: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.rootViewCoverBlurEffectForLeftView = [UIBlurEffect effectWithStyle:regularStyle];
             self.rootViewCoverAlphaForLeftView = 0.8;
@@ -101,7 +99,7 @@
 
             break;
         }
-        case 5: {
+        case DemoTypeBlurredCoversOfSideViews: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.leftViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
             self.leftViewCoverColor = nil;
@@ -112,7 +110,7 @@
 
             break;
         }
-        case 6: {
+        case DemoTypeBlurredBackgroundsOfSideViews: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
             self.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:regularStyle];
             self.leftViewBackgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.05];
@@ -125,7 +123,7 @@
 
             break;
         }
-        case 7: {
+        case DemoTypeLandscapeIsAlwaysVisible: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideAbove;
             self.rootViewCoverColorForLeftView = greenCoverColor;
 
@@ -134,7 +132,7 @@
 
             break;
         }
-        case 8: {
+        case DemoTypeStatusBarIsAlwaysVisisble: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.leftViewStatusBarStyle = UIStatusBarStyleLightContent;
 
@@ -143,7 +141,7 @@
 
             break;
         }
-        case 9: {
+        case DemoTypeGestureAreaIsFullScreen: {
             self.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
 
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
@@ -151,13 +149,13 @@
 
             break;
         }
-        case 10: {
+        case DemoTypeConcurrentTouchActions: {
             self.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
             self.rightViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
 
             break;
         }
-        case 11: {
+        case DemoTypeCustomStyleExample: {
             self.rootViewLayerBorderWidth = 5.0;
             self.rootViewLayerBorderColor = [UIColor whiteColor];
             self.rootViewLayerShadowRadius = 10.0;
@@ -214,7 +212,7 @@
 }
 
 - (BOOL)isLeftViewStatusBarHidden {
-    if (self.type == 8) {
+    if (self.type == DemoTypeStatusBarIsAlwaysVisisble) {
         return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
     }
 
@@ -222,7 +220,7 @@
 }
 
 - (BOOL)isRightViewStatusBarHidden {
-    if (self.type == 8) {
+    if (self.type == DemoTypeStatusBarIsAlwaysVisisble) {
         return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone;
     }
 

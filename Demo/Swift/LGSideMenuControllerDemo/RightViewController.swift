@@ -4,7 +4,7 @@
 //
 
 class RightViewController: UITableViewController {
-    
+
     private let titlesArray = ["Open Left View",
                                "",
                                "1",
@@ -21,21 +21,17 @@ class RightViewController: UITableViewController {
     init() {
         super.init(style: .plain)
 
-        view.backgroundColor = .clear
+        self.view.backgroundColor = .clear
 
-        tableView.register(RightViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
-        tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = .clear
+        self.tableView.register(RightViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.separatorStyle = .none
+        self.tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.backgroundColor = .clear
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -55,11 +51,11 @@ class RightViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titlesArray.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RightViewCell
 
@@ -67,38 +63,39 @@ class RightViewController: UITableViewController {
         cell.textLabel!.font = UIFont.boldSystemFont(ofSize: indexPath.row == 0 ? 15.0 : 30.0)
         cell.separatorView.isHidden = (indexPath.row <= 1 || indexPath.row == titlesArray.count - 1)
         cell.isUserInteractionEnabled = (indexPath.row != 1)
-        
+
         return cell
     }
-    
+
     // MARK: - UITableViewDelegate
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.row == 1 ? 50.0 : 100.0
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = sideMenuController!
+        guard let sideMenuController = self.sideMenuController else { return }
 
         if indexPath.row == 0 {
-            if mainViewController.isRightViewAlwaysVisibleForCurrentOrientation {
-                mainViewController.showLeftView(animated: true, completionHandler: nil)
+            if sideMenuController.isRightViewAlwaysVisibleForCurrentOrientation {
+                sideMenuController.showLeftView(animated: true, completionHandler: nil)
             }
             else {
-                mainViewController.hideRightView(animated: true, completionHandler: {
-                    mainViewController.showLeftView(animated: true, completionHandler: nil)
+                sideMenuController.hideRightView(animated: true, completionHandler: {
+                    sideMenuController.showLeftView(animated: true, completionHandler: nil)
                 })
             }
         }
         else {
             let viewController = UIViewController()
-            viewController.view.backgroundColor = .white
+            viewController.view.backgroundColor = (isLightTheme() ? .white : .black)
             viewController.title = "Test \(titlesArray[indexPath.row])"
 
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            navigationController.pushViewController(viewController, animated: true)
-            
-            mainViewController.hideRightView(animated: true, completionHandler: nil)
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.pushViewController(viewController, animated: true)
+            }
+
+            sideMenuController.hideRightView(animated: true, completionHandler: nil)
         }
     }
 

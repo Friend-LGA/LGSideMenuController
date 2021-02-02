@@ -20,7 +20,6 @@ class RightViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0.0, bottom: 44.0, right: 0.0)
     }
 
@@ -60,27 +59,28 @@ class RightViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainViewController = UIApplication.shared.delegate!.window!!.rootViewController! as! MainViewController
+        guard let sideMenuController = sideMenuController else { return }
 
         if indexPath.row == 0 {
-            if mainViewController.isRightViewAlwaysVisibleForCurrentOrientation {
-                mainViewController.showLeftView(animated: true, completionHandler: nil)
+            if sideMenuController.isRightViewAlwaysVisibleForCurrentOrientation {
+                sideMenuController.showLeftView(animated: true, completionHandler: nil)
             }
             else {
-                mainViewController.hideRightView(animated: true, completionHandler: {
-                    mainViewController.showLeftView(animated: true, completionHandler: nil)
+                sideMenuController.hideRightView(animated: true, completionHandler: {
+                    sideMenuController.showLeftView(animated: true, completionHandler: nil)
                 })
             }
         }
         else {
             let viewController = UIViewController()
-            viewController.view.backgroundColor = .white
+            viewController.view.backgroundColor = (isLightTheme() ? .white : .black)
             viewController.title = "Test \(titlesArray[indexPath.row])"
 
-            let navigationController = mainViewController.rootViewController as! NavigationController
-            navigationController.pushViewController(viewController, animated: true)
+            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+                navigationController.pushViewController(viewController, animated: true)
+            }
             
-            mainViewController.hideRightView(animated: true, completionHandler: nil)
+            sideMenuController.hideRightView(animated: true, completionHandler: nil)
         }
     }
 

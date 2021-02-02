@@ -11,11 +11,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = UIColor.clearColor;
 
         self.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        self.textLabel.textColor = [UIColor whiteColor];
+        self.textLabel.textColor = UIColor.whiteColor;
 
         // -----
 
@@ -31,14 +30,14 @@
 
     CGRect textLabelFrame = self.textLabel.frame;
     textLabelFrame.origin.x = 8.0;
-    textLabelFrame.size.width = CGRectGetWidth(self.frame) - 16.0;
+    textLabelFrame.size.width = self.frame.size.width - 16.0;
     self.textLabel.frame = textLabelFrame;
 
     CGFloat height = UIScreen.mainScreen.scale == 1.0 ? 1.0 : 0.5;
 
     self.separatorView.frame = CGRectMake(0.0,
-                                          CGRectGetHeight(self.frame)-height,
-                                          CGRectGetWidth(self.frame)*0.9,
+                                          self.frame.size.height - height,
+                                          self.frame.size.width * 0.9,
                                           height);
 }
 

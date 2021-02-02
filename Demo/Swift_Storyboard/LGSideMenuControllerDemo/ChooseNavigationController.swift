@@ -10,7 +10,7 @@ class ChooseNavigationController: UINavigationController {
     }
     
     override var prefersStatusBarHidden : Bool {
-        return UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) && UI_USER_INTERFACE_IDIOM() == .phone
+        return UIApplication.shared.statusBarOrientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {

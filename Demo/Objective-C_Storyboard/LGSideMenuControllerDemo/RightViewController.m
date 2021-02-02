@@ -7,6 +7,7 @@
 #import "RightViewCell.h"
 #import "MainViewController.h"
 #import "UIViewController+LGSideMenuController.h"
+#import "Helper.h"
 
 @interface RightViewController ()
 
@@ -89,7 +90,7 @@
     }
     else {
         UIViewController *viewController = [UIViewController new];
-        viewController.view.backgroundColor = [UIColor whiteColor];
+        viewController.view.backgroundColor = (Helper.isLightTheme ? UIColor.whiteColor : UIColor.blackColor);
         viewController.title = [NSString stringWithFormat:@"Test %@", self.titlesArray[indexPath.row]];
 
         UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;

@@ -5,6 +5,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OtherViewController : UITableViewController
+@interface OtherViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end
