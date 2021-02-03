@@ -2144,10 +2144,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         }
         else if (self.isLeftViewHidden) {
             if (delay) {
+                __weak typeof(self) wself = self;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
-                    self.leftViewBackgroundView.hidden = YES;
-                    self.leftViewStyleView.hidden = YES;
-                    self.leftViewContainer.hidden = YES;
+                    if (!wself) return;
+                    __strong typeof(wself) sseslf = wself;
+
+                    sseslf.leftViewBackgroundView.hidden = YES;
+                    sseslf.leftViewStyleView.hidden = YES;
+                    sseslf.leftViewContainer.hidden = YES;
                 });
             }
             else {
@@ -2189,10 +2193,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         }
         else if (self.isRightViewHidden) {
             if (delay) {
+                __weak typeof(self) wself = self;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
-                    self.rightViewBackgroundView.hidden = YES;
-                    self.rightViewStyleView.hidden = YES;
-                    self.rightViewContainer.hidden = YES;
+                    if (!wself) return;
+                    __strong typeof(wself) sseslf = wself;
+
+                    sseslf.rightViewBackgroundView.hidden = YES;
+                    sseslf.rightViewStyleView.hidden = YES;
+                    sseslf.rightViewContainer.hidden = YES;
                 });
             }
             else {
@@ -2211,8 +2219,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     if (rootViewStyleViewHiddenForLeftView && rootViewStyleViewHiddenForRightView) {
         if (delay) {
+            __weak typeof(self) wself = self;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
-                self.rootViewStyleView.hidden = YES;
+                if (!wself) return;
+                __strong typeof(wself) sseslf = wself;
+
+                sseslf.rootViewStyleView.hidden = YES;
             });
         }
         else {
@@ -2227,8 +2239,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     if (rootViewCoverViewHiddenForLeftView && rootViewCoverViewHiddenForRightView) {
         if (delay) {
+            __weak typeof(self) wself = self;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
-                self.rootViewCoverView.hidden = YES;
+                if (!wself) return;
+                __strong typeof(wself) sseslf = wself;
+
+                sseslf.rootViewCoverView.hidden = YES;
             });
         }
         else {
@@ -2244,8 +2260,12 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if ((sideViewsCoverViewHiddenForLeftView && sideViewsCoverViewHiddenForRightView) ||
         self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation) {
         if (delay) {
+            __weak typeof(self) wself = self;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void) {
-                self.sideViewsCoverView.hidden = YES;
+                if (!wself) return;
+                __strong typeof(wself) sseslf = wself;
+
+                sseslf.sideViewsCoverView.hidden = YES;
             });
         }
         else {
@@ -2357,20 +2377,29 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark -
 
 - (void)showLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self showLeftViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf showLeftViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
 - (void)hideLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hideLeftViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf hideLeftViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
 - (void)toggleLeftViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self toggleLeftViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf toggleLeftViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
@@ -2682,20 +2711,29 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark -
 
 - (void)showRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self showRightViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf showRightViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
 - (void)hideRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hideRightViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf hideRightViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
 - (void)toggleRightViewAnimated:(BOOL)animated delay:(NSTimeInterval)delay completionHandler:(LGSideMenuCompletionHandler)completionHandler {
+    __weak typeof(self) wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self toggleRightViewAnimated:animated completionHandler:completionHandler];
+        if (!wself) return;
+        __strong typeof(wself) sseslf = wself;
+        [sseslf toggleRightViewAnimated:animated completionHandler:completionHandler];
     });
 }
 
