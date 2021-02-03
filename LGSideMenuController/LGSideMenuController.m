@@ -2407,6 +2407,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 - (void)showLeftViewPrepareWithGesture:(BOOL)withGesture {
     self.leftViewWillShow = YES;
+    self.leftViewWillHide = NO;
 
     [self.view endEditing:YES];
 
@@ -2514,6 +2515,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 - (void)hideLeftViewPrepare {
     self.leftViewWillHide = YES;
+    self.leftViewWillShow = NO;
 
     [self.view endEditing:YES];
 
@@ -2741,6 +2743,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 - (void)showRightViewPrepareWithGesture:(BOOL)withGesture {
     self.rightViewWillShow = YES;
+    self.rightViewWillHide = NO;
 
     [self.view endEditing:YES];
 
@@ -2848,6 +2851,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 - (void)hideRightViewPrepare {
     self.rightViewWillHide = YES;
+    self.rightViewWillShow = NO;
 
     [self.view endEditing:YES];
 
@@ -3119,26 +3123,18 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                      && self.leftViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     [self showLeftViewPrepareWithGesture:YES];
-                    self.leftViewWillShow = YES;
-                    self.leftViewWillHide = NO;
                     [self showLeftViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if ((percentage > 0.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage < 0.5)) {
                     [self hideLeftViewPrepare];
-                    self.leftViewWillHide = YES;
-                    self.leftViewWillShow = NO;
                     [self hideLeftViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if (percentage == 1.0) {
                     [self showLeftViewPrepareWithGesture:YES];
-                    self.leftViewWillShow = YES;
-                    self.leftViewWillHide = NO;
                     [self showLeftViewDoneWithGesture:YES];
                 }
                 else if (percentage == 0.0) {
                     [self hideLeftViewPrepare];
-                    self.leftViewWillHide = YES;
-                    self.leftViewWillShow = NO;
                     [self hideLeftViewDoneWithGesture:YES];
                 }
 
@@ -3192,26 +3188,18 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                      && self.rightViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     [self showRightViewPrepareWithGesture:YES];
-                    self.rightViewWillShow = YES;
-                    self.rightViewWillHide = NO;
                     [self showRightViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if ((percentage > 0.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage < 0.5)) {
                     [self hideRightViewPrepare];
-                    self.rightViewWillHide = YES;
-                    self.rightViewWillShow = NO;
                     [self hideRightViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if (percentage == 1.0) {
                     [self showRightViewPrepareWithGesture:YES];
-                    self.rightViewWillShow = YES;
-                    self.rightViewWillHide = NO;
                     [self showRightViewDoneWithGesture:YES];
                 }
                 else if (percentage == 0.0) {
                     [self hideRightViewPrepare];
-                    self.rightViewWillHide = YES;
-                    self.rightViewWillShow = NO;
                     [self hideRightViewDoneWithGesture:YES];
                 }
 
