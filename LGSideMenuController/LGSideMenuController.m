@@ -81,11 +81,11 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic, readwrite, getter=isLeftViewShowing)  BOOL leftViewShowing;
 @property (assign, nonatomic, readwrite, getter=isRightViewShowing) BOOL rightViewShowing;
 
-@property (assign, nonatomic, getter=isLeftViewGoingToShow) BOOL leftViewGoingToShow;
-@property (assign, nonatomic, getter=isLeftViewGoingToHide) BOOL leftViewGoingToHide;
+@property (assign, nonatomic, getter=isLeftViewWillShow) BOOL leftViewWillShow;
+@property (assign, nonatomic, getter=isLeftViewWillHide) BOOL leftViewWillHide;
 
-@property (assign, nonatomic, getter=isRightViewGoingToShow) BOOL rightViewGoingToShow;
-@property (assign, nonatomic, getter=isRightViewGoingToHide) BOOL rightViewGoingToHide;
+@property (assign, nonatomic, getter=isRightViewWillShow) BOOL rightViewWillShow;
+@property (assign, nonatomic, getter=isRightViewWillHide) BOOL rightViewWillHide;
 
 @property (assign, nonatomic) CGSize savedSize;
 
@@ -439,17 +439,17 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
-    if (self.isLeftViewGoingToShow) {
+    if (self.isLeftViewWillShow) {
         [self showLeftViewDoneWithGesture:(self.leftViewGestireStartX != nil)];
     }
-    else if (self.isLeftViewGoingToHide) {
+    else if (self.isLeftViewWillHide) {
         [self hideLeftViewDoneWithGesture:(self.leftViewGestireStartX != nil)];
     }
 
-    if (self.isRightViewGoingToShow) {
+    if (self.isRightViewWillShow) {
         [self showRightViewDoneWithGesture:(self.rightViewGestireStartX != nil)];
     }
-    else if (self.isRightViewGoingToHide) {
+    else if (self.isRightViewWillHide) {
         [self hideRightViewDoneWithGesture:(self.rightViewGestireStartX != nil)];
     }
 }
@@ -457,11 +457,11 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark - Status bar
 
 - (BOOL)prefersStatusBarHidden {
-    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewGoingToShow) && !self.isLeftViewGoingToHide && !self.isLeftViewAlwaysVisible) {
+    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewWillShow) && !self.isLeftViewWillHide && !self.isLeftViewAlwaysVisible) {
         return self.leftViewStatusBarHidden;
     }
 
-    if (self.rightView && (self.isRightViewShowing || self.isRightViewGoingToShow) && !self.isRightViewGoingToHide && !self.isRightViewAlwaysVisible) {
+    if (self.rightView && (self.isRightViewShowing || self.isRightViewWillShow) && !self.isRightViewWillHide && !self.isRightViewAlwaysVisible) {
         return self.rightViewStatusBarHidden;
     }
 
@@ -473,11 +473,11 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewGoingToShow) && !self.isLeftViewGoingToHide && !self.isLeftViewAlwaysVisible) {
+    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewWillShow) && !self.isLeftViewWillHide && !self.isLeftViewAlwaysVisible) {
         return self.leftViewStatusBarStyle;
     }
 
-    if (self.rightView && (self.isRightViewShowing || self.isRightViewGoingToShow) && !self.isRightViewGoingToHide && !self.isRightViewAlwaysVisible) {
+    if (self.rightView && (self.isRightViewShowing || self.isRightViewWillShow) && !self.isRightViewWillHide && !self.isRightViewAlwaysVisible) {
         return self.rightViewStatusBarStyle;
     }
 
@@ -489,11 +489,11 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewGoingToShow) && !self.isLeftViewGoingToHide && !self.isLeftViewAlwaysVisible) {
+    if (self.leftView && (self.isLeftViewShowing || self.isLeftViewWillShow) && !self.isLeftViewWillHide && !self.isLeftViewAlwaysVisible) {
         return self.leftViewStatusBarUpdateAnimation;
     }
 
-    if (self.rightView && (self.isRightViewShowing || self.isRightViewGoingToShow) && !self.isRightViewGoingToHide && !self.isRightViewAlwaysVisible) {
+    if (self.rightView && (self.isRightViewShowing || self.isRightViewWillShow) && !self.isRightViewWillHide && !self.isRightViewAlwaysVisible) {
         return self.rightViewStatusBarUpdateAnimation;
     }
 
@@ -1113,11 +1113,11 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark -
 
 - (BOOL)isLeftViewVisible {
-    return self.isLeftViewShowing || self.isLeftViewGoingToShow || self.isLeftViewGoingToHide;
+    return self.isLeftViewShowing || self.isLeftViewWillShow || self.isLeftViewWillHide;
 }
 
 - (BOOL)isRightViewVisible {
-    return self.isRightViewShowing || self.isRightViewGoingToShow || self.isRightViewGoingToHide;
+    return self.isRightViewShowing || self.isRightViewWillShow || self.isRightViewWillHide;
 }
 
 - (void)setLeftViewDisabled:(BOOL)leftViewDisabled {
@@ -1440,7 +1440,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
-    if (self.rootViewController && !self.isLeftViewGoingToShow && !self.isRightViewGoingToShow) {
+    if (self.rootViewController && !self.isLeftViewWillShow && !self.isRightViewWillShow) {
         [self addChildViewController:self.rootViewController];
     }
 
@@ -2340,8 +2340,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.isLeftViewDisabled ||
         self.isLeftViewShowing ||
         self.isLeftViewAlwaysVisibleForCurrentOrientation ||
-        self.isLeftViewGoingToShow ||
-        self.isLeftViewGoingToHide ||
+        self.isLeftViewWillShow ||
+        self.isLeftViewWillHide ||
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
@@ -2355,13 +2355,13 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.isLeftViewDisabled ||
         self.isLeftViewHidden ||
         self.isLeftViewAlwaysVisibleForCurrentOrientation ||
-        self.isLeftViewGoingToShow ||
-        self.isLeftViewGoingToHide ||
+        self.isLeftViewWillShow ||
+        self.isLeftViewWillHide ||
         (self.isRightViewAlwaysVisibleForCurrentOrientation && self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
 
-    [self hideLeftViewPrepareWithGesture:NO];
+    [self hideLeftViewPrepare];
     [self hideLeftViewAnimatedActions:animated completionHandler:completionHandler];
 }
 
@@ -2406,7 +2406,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark - Show left view
 
 - (void)showLeftViewPrepareWithGesture:(BOOL)withGesture {
-    self.leftViewGoingToShow = YES;
+    self.leftViewWillShow = YES;
 
     [self.view endEditing:YES];
 
@@ -2430,7 +2430,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (void)showLeftViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuCompletionHandler)completionHandler {
-    if (self.leftViewGoingToShow) {
+    if (self.leftViewWillShow) {
         [self willShowLeftViewCallbacks];
     }
 
@@ -2499,8 +2499,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     self.leftViewShowing = YES;
 
-    if (self.isLeftViewGoingToShow) {
-        self.leftViewGoingToShow = NO;
+    if (self.isLeftViewWillShow) {
+        self.leftViewWillShow = NO;
 
         if (self.rootViewController) {
             [self addChildViewController:self.rootViewController];
@@ -2512,8 +2512,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 #pragma mark - Hide left view
 
-- (void)hideLeftViewPrepareWithGesture:(BOOL)withGesture {
-    self.leftViewGoingToHide = YES;
+- (void)hideLeftViewPrepare {
+    self.leftViewWillHide = YES;
 
     [self.view endEditing:YES];
 
@@ -2523,7 +2523,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (void)hideLeftViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuCompletionHandler)completionHandler {
-    if (self.isLeftViewGoingToHide) {
+    if (self.isLeftViewWillHide) {
         [self willHideLeftViewCallbacks];
     }
 
@@ -2599,8 +2599,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     self.leftViewShowing = NO;
 
-    if (self.isLeftViewGoingToHide) {
-        self.leftViewGoingToHide = NO;
+    if (self.isLeftViewWillHide) {
+        self.leftViewWillHide = NO;
 
         [self visibilityValidate];
 
@@ -2674,8 +2674,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.isRightViewDisabled ||
         self.isRightViewShowing ||
         self.isRightViewAlwaysVisibleForCurrentOrientation ||
-        self.isRightViewGoingToShow ||
-        self.isRightViewGoingToHide ||
+        self.isRightViewWillShow ||
+        self.isRightViewWillHide ||
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
@@ -2689,13 +2689,13 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         self.isRightViewDisabled ||
         self.isRightViewHidden ||
         self.isRightViewAlwaysVisibleForCurrentOrientation ||
-        self.isRightViewGoingToShow ||
-        self.isRightViewGoingToHide ||
+        self.isRightViewWillShow ||
+        self.isRightViewWillHide ||
         (self.isLeftViewAlwaysVisibleForCurrentOrientation && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         return;
     }
 
-    [self hideRightViewPrepareWithGesture:NO];
+    [self hideRightViewPrepare];
     [self hideRightViewAnimatedActions:animated completionHandler:completionHandler];
 }
 
@@ -2740,7 +2740,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 #pragma mark - Show right view
 
 - (void)showRightViewPrepareWithGesture:(BOOL)withGesture {
-    self.rightViewGoingToShow = YES;
+    self.rightViewWillShow = YES;
 
     [self.view endEditing:YES];
 
@@ -2764,7 +2764,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (void)showRightViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuCompletionHandler)completionHandler {
-    if (self.rightViewGoingToShow) {
+    if (self.rightViewWillShow) {
         [self willShowRightViewCallbacks];
     }
 
@@ -2833,8 +2833,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     self.rightViewShowing = YES;
 
-    if (self.isRightViewGoingToShow) {
-        self.rightViewGoingToShow = NO;
+    if (self.isRightViewWillShow) {
+        self.rightViewWillShow = NO;
 
         if (self.rootViewController) {
             [self addChildViewController:self.rootViewController];
@@ -2846,8 +2846,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
 #pragma mark - Hide right view
 
-- (void)hideRightViewPrepareWithGesture:(BOOL)withGesture {
-    self.rightViewGoingToHide = YES;
+- (void)hideRightViewPrepare {
+    self.rightViewWillHide = YES;
 
     [self.view endEditing:YES];
 
@@ -2857,7 +2857,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 - (void)hideRightViewAnimatedActions:(BOOL)animated completionHandler:(LGSideMenuCompletionHandler)completionHandler {
-    if (self.isRightViewGoingToHide) {
+    if (self.isRightViewWillHide) {
         [self willHideRightViewCallbacks];
     }
 
@@ -2933,8 +2933,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     self.rightViewShowing = NO;
 
-    if (self.isRightViewGoingToHide) {
-        self.rightViewGoingToHide = NO;
+    if (self.isRightViewWillHide) {
+        self.rightViewWillHide = NO;
 
         [self visibilityValidate];
 
@@ -3082,10 +3082,10 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
             if (velocityReady && (self.isLeftViewShowing || self.swipeGestureArea == LGSideMenuSwipeGestureAreaFull || location.x < frameWidth / 2.0)) {
                 self.leftViewGestireStartX = [NSNumber numberWithFloat:location.x];
-                self.leftViewShowingBeforeGesture = self.leftViewShowing;
+                self.leftViewShowingBeforeGesture = self.isLeftViewShowing;
 
                 if (self.isLeftViewShowing) {
-                    [self hideLeftViewPrepareWithGesture:YES];
+                    [self hideLeftViewPrepare];
                 }
                 else {
                     [self showLeftViewPrepareWithGesture:YES];
@@ -3119,26 +3119,26 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                      && self.leftViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     [self showLeftViewPrepareWithGesture:YES];
-                    self.leftViewGoingToShow = YES;
-                    self.leftViewGoingToHide = NO;
+                    self.leftViewWillShow = YES;
+                    self.leftViewWillHide = NO;
                     [self showLeftViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if ((percentage > 0.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage < 0.5)) {
-                    [self hideLeftViewPrepareWithGesture:YES];
-                    self.leftViewGoingToHide = YES;
-                    self.leftViewGoingToShow = NO;
+                    [self hideLeftViewPrepare];
+                    self.leftViewWillHide = YES;
+                    self.leftViewWillShow = NO;
                     [self hideLeftViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if (percentage == 1.0) {
                     [self showLeftViewPrepareWithGesture:YES];
-                    self.leftViewGoingToShow = YES;
-                    self.leftViewGoingToHide = NO;
+                    self.leftViewWillShow = YES;
+                    self.leftViewWillHide = NO;
                     [self showLeftViewDoneWithGesture:YES];
                 }
                 else if (percentage == 0.0) {
-                    [self hideLeftViewPrepareWithGesture:YES];
-                    self.leftViewGoingToHide = YES;
-                    self.leftViewGoingToShow = NO;
+                    [self hideLeftViewPrepare];
+                    self.leftViewWillHide = YES;
+                    self.leftViewWillShow = NO;
                     [self hideLeftViewDoneWithGesture:YES];
                 }
 
@@ -3155,10 +3155,10 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
             if (velocityReady && (self.isRightViewShowing || self.swipeGestureArea == LGSideMenuSwipeGestureAreaFull || location.x > frameWidth / 2.0)) {
                 self.rightViewGestireStartX = [NSNumber numberWithFloat:location.x];
-                self.rightViewShowingBeforeGesture = self.rightViewShowing;
+                self.rightViewShowingBeforeGesture = self.isRightViewShowing;
 
                 if (self.isRightViewShowing) {
-                    [self hideRightViewPrepareWithGesture:YES];
+                    [self hideRightViewPrepare];
                 }
                 else {
                     [self showRightViewPrepareWithGesture:YES];
@@ -3192,26 +3192,26 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
                      && self.rightViewGestireStartX) {
                 if ((percentage < 1.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage >= 0.5)) {
                     [self showRightViewPrepareWithGesture:YES];
-                    self.rightViewGoingToShow = YES;
-                    self.rightViewGoingToHide = NO;
+                    self.rightViewWillShow = YES;
+                    self.rightViewWillHide = NO;
                     [self showRightViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if ((percentage > 0.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage < 0.5)) {
-                    [self hideRightViewPrepareWithGesture:YES];
-                    self.rightViewGoingToHide = YES;
-                    self.rightViewGoingToShow = NO;
+                    [self hideRightViewPrepare];
+                    self.rightViewWillHide = YES;
+                    self.rightViewWillShow = NO;
                     [self hideRightViewAnimatedActions:YES completionHandler:nil];
                 }
                 else if (percentage == 1.0) {
                     [self showRightViewPrepareWithGesture:YES];
-                    self.rightViewGoingToShow = YES;
-                    self.rightViewGoingToHide = NO;
+                    self.rightViewWillShow = YES;
+                    self.rightViewWillHide = NO;
                     [self showRightViewDoneWithGesture:YES];
                 }
                 else if (percentage == 0.0) {
-                    [self hideRightViewPrepareWithGesture:YES];
-                    self.rightViewGoingToHide = YES;
-                    self.rightViewGoingToShow = NO;
+                    [self hideRightViewPrepare];
+                    self.rightViewWillHide = YES;
+                    self.rightViewWillShow = NO;
                     [self hideRightViewDoneWithGesture:YES];
                 }
 
