@@ -140,6 +140,10 @@ LGSideMenuSwipeGestureRange LGSideMenuSwipeGestureRangeMake(CGFloat left, CGFloa
 @property (assign, nonatomic, getter=isUserLeftViewBackgroundImageFinalScale)    BOOL userLeftViewBackgroundImageFinalScale;
 @property (assign, nonatomic, getter=isUserRightViewBackgroundImageFinalScale)   BOOL userRightViewBackgroundImageFinalScale;
 
+@property (assign, nonatomic, getter=isRootViewControllerAdded)  BOOL rootViewControllerAdded;
+@property (assign, nonatomic, getter=isLeftViewControllerAdded)  BOOL leftViewControllerAdded;
+@property (assign, nonatomic, getter=isRightViewControllerAdded) BOOL rightViewControllerAdded;
+
 @end
 
 #pragma mark - Implementation
@@ -1331,6 +1335,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.rootViewController) {
         [self.rootViewController.view removeFromSuperview];
         [self.rootViewController removeFromParentViewController];
+        self.rootViewControllerAdded = NO;
         _rootViewController = nil;
 
         objc_setAssociatedObject(_rootViewController, @"sideMenuController", nil, OBJC_ASSOCIATION_ASSIGN);
@@ -1361,6 +1366,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.leftViewController) {
         [self.leftViewController.view removeFromSuperview];
         [self.leftViewController removeFromParentViewController];
+        self.leftViewControllerAdded = NO;
         _leftViewController = nil;
     }
 
@@ -1399,6 +1405,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.rightViewController) {
         [self.rightViewController.view removeFromSuperview];
         [self.rightViewController removeFromParentViewController];
+        self.rightViewControllerAdded = NO;
         _rightViewController = nil;
     }
 
@@ -1440,8 +1447,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
-    if (self.rootViewController && !self.isLeftViewWillShow && !self.isRightViewWillShow) {
+    if (self.rootViewController && !self.isLeftViewWillShow && !self.isRightViewWillShow && !self.isRootViewControllerAdded) {
         [self addChildViewController:self.rootViewController];
+        self.rootViewControllerAdded = YES;
     }
 
     // -----
@@ -1485,8 +1493,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
-    if (self.leftViewController) {
+    if (self.leftViewController && !self.isLeftViewControllerAdded) {
         [self addChildViewController:self.leftViewController];
+        self.leftViewControllerAdded = YES;
     }
 
     // -----
@@ -1556,8 +1565,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     // -----
 
-    if (self.rightViewController) {
+    if (self.rightViewController && !self.isRightViewControllerAdded) {
         [self addChildViewController:self.rightViewController];
+        self.rightViewControllerAdded = YES;
     }
 
     // -----
@@ -2415,6 +2425,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     [self visibilityValidate];
 
     [self.rootViewController removeFromParentViewController];
+    self.rootViewControllerAdded = NO;
 
     if (withGesture) {
         [LGSideMenuHelper statusBarAppearanceUpdateAnimated:YES
@@ -2503,8 +2514,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.isLeftViewWillShow) {
         self.leftViewWillShow = NO;
 
-        if (self.rootViewController) {
+        if (self.rootViewController && !self.isRootViewControllerAdded) {
             [self addChildViewController:self.rootViewController];
+            self.rootViewControllerAdded = YES;
         }
 
         [self didShowLeftViewCallbacks];
@@ -2519,8 +2531,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     [self.view endEditing:YES];
 
-    if (self.rootViewController) {
+    if (self.rootViewController && !self.isRootViewControllerAdded) {
         [self addChildViewController:self.rootViewController];
+        self.rootViewControllerAdded = YES;
     }
 }
 
@@ -2751,6 +2764,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     [self visibilityValidate];
 
     [self.rootViewController removeFromParentViewController];
+    self.rootViewControllerAdded = NO;
 
     if (withGesture) {
         [LGSideMenuHelper statusBarAppearanceUpdateAnimated:YES
@@ -2839,8 +2853,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (self.isRightViewWillShow) {
         self.rightViewWillShow = NO;
 
-        if (self.rootViewController) {
+        if (self.rootViewController && !self.isRootViewControllerAdded) {
             [self addChildViewController:self.rootViewController];
+            self.rootViewControllerAdded = YES;
         }
 
         [self didShowRightViewCallbacks];
@@ -2855,8 +2870,9 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     [self.view endEditing:YES];
 
-    if (self.rootViewController) {
+    if (self.rootViewController && !self.isRootViewControllerAdded) {
         [self addChildViewController:self.rootViewController];
+        self.rootViewControllerAdded = YES;
     }
 }
 
