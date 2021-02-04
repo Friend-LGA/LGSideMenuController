@@ -4,7 +4,7 @@
 //
 
 #import "MainViewController.h"
-#import "ViewController.h"
+#import "RootViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
 
@@ -194,6 +194,9 @@
 
 - (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super leftViewWillLayoutSubviewsWithSize:size];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController leftViewWillLayoutSubviewsWithSize: %@], counter: %i", NSStringFromCGSize(size), counter);
 
     if (!self.isLeftViewStatusBarHidden) {
         self.leftView.frame = CGRectMake(0.0, 20.0, size.width, size.height-20.0);
@@ -202,6 +205,9 @@
 
 - (void)rightViewWillLayoutSubviewsWithSize:(CGSize)size {
     [super rightViewWillLayoutSubviewsWithSize:size];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController rightViewWillLayoutSubviewsWithSize: %@], counter: %i", NSStringFromCGSize(size), counter);
 
     if (!self.isRightViewStatusBarHidden ||
         (self.rightViewAlwaysVisibleOptions & LGSideMenuAlwaysVisibleOnPadLandscape &&
@@ -227,8 +233,61 @@
     return super.isRightViewStatusBarHidden;
 }
 
+#pragma mark - Logging
+
 - (void)dealloc {
-    NSLog(@"MainViewController deallocated");
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController dealloc], counter: %i", counter);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewDidLoad], counter: %i", counter);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewWillAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewDidAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewWillDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewDidDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController viewWillLayoutSubviews], counter: %i", counter);
+}
+
+- (void)rootViewWillLayoutSubviewsWithSize:(CGSize)size {
+    [super rootViewWillLayoutSubviewsWithSize:size];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[MainViewController rootViewWillLayoutSubviewsWithSize: %@], counter: %i", NSStringFromCGSize(size), counter);
 }
 
 @end

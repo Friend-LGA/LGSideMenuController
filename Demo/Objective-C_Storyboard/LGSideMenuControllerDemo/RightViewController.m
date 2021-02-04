@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewDidLoad], counter: %i", counter);
 
     // -----
 
@@ -98,6 +101,49 @@
 
         [mainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
+}
+
+#pragma mark - Logging
+
+- (void)dealloc {
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController dealloc], counter: %i", counter);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewWillAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewDidAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewWillDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewDidDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RightViewController viewWillLayoutSubviews], counter: %i", counter);
 }
 
 @end

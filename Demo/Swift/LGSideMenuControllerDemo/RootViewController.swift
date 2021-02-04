@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
+//  RootViewController.swift
 //  LGSideMenuControllerDemo
 //
 
-class ViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RootViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     private let imageView: UIImageView
     private let button: UIButton
@@ -55,6 +55,9 @@ class ViewController : UIViewController, UITableViewDelegate, UITableViewDataSou
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewWillLayoutSubviews(), counter: \(Counter.count)")
 
         let buttonHeight: CGFloat = 44.0
 
@@ -130,6 +133,49 @@ class ViewController : UIViewController, UITableViewDelegate, UITableViewDataSou
             self.numberOfCells -= 1
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+
+    // MARK: - Logging
+
+    deinit {
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.deinit(), counter: \(Counter.count)")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewDidLoad(), counter: \(Counter.count)")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewWillAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewDidAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewWillDisappear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewDidDisappear(\(animated)), counter: \(Counter.count)")
     }
 
 }

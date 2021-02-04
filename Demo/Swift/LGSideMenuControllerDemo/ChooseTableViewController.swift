@@ -57,15 +57,15 @@ class ChooseTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController: ViewController
+        let viewController: RootViewController
         if (indexPath.row == self.titlesArray.count - 2) {
-            viewController = ViewController(withTableView: true)
+            viewController = RootViewController(withTableView: true)
         }
         else {
-            viewController = ViewController()
+            viewController = RootViewController()
         }
         
-        let navigationController = NavigationController(rootViewController: viewController)
+        let navigationController = RootNavigationController(rootViewController: viewController)
         
         let mainViewController = MainViewController()
         mainViewController.rootViewController = navigationController

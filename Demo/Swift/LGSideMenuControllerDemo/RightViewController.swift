@@ -91,12 +91,62 @@ class RightViewController: UITableViewController {
             viewController.view.backgroundColor = (isLightTheme() ? .white : .black)
             viewController.title = "Test \(titlesArray[indexPath.row])"
 
-            if let navigationController = sideMenuController.rootViewController as? NavigationController {
+            if let navigationController = sideMenuController.rootViewController as? RootNavigationController {
                 navigationController.pushViewController(viewController, animated: true)
             }
 
             sideMenuController.hideRightView(animated: true, completionHandler: nil)
         }
+    }
+
+    // MARK: - Logging
+
+    deinit {
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.deinit(), counter: \(Counter.count)")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewDidLoad(), counter: \(Counter.count)")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewWillAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewDidAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewWillDisappear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewDidDisappear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RightViewController.viewWillLayoutSubviews(), counter: \(Counter.count)")
     }
 
 }

@@ -20,11 +20,11 @@
 		4A04FAD61E894D01000E90AB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FAD51E894D01000E90AB /* MainViewController.m */; };
 		4A19DA581BECFE610072427E /* ChooseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA551BECFE610072427E /* ChooseNavigationController.m */; };
 		4A19DA591BECFE610072427E /* ChooseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA571BECFE610072427E /* ChooseTableViewController.m */; };
-		4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA5B1BECFE900072427E /* NavigationController.m */; };
-		4A3C468E1DFEE49F007A01D8 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C468D1DFEE49F007A01D8 /* OtherViewController.m */; };
+		4A19DA5C1BECFE900072427E /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19DA5B1BECFE900072427E /* RootNavigationController.m */; };
+		4A3C468E1DFEE49F007A01D8 /* RootViewControllerWithTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C468D1DFEE49F007A01D8 /* RootViewControllerWithTableView.m */; };
 		4A4243A11B6808E4008432A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A01B6808E4008432A9 /* main.m */; };
 		4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A31B6808E4008432A9 /* AppDelegate.m */; };
-		4A4243A71B6808E4008432A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* ViewController.m */; };
+		4A4243A71B6808E4008432A9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4243A61B6808E4008432A9 /* RootViewController.m */; };
 		4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */; };
 		4ADAFC441B691DA500B33211 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC3E1B691DA500B33211 /* LeftViewController.m */; };
 		4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADAFC401B691DA500B33211 /* RightViewCell.m */; };
@@ -59,17 +59,17 @@
 		4A19DA551BECFE610072427E /* ChooseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChooseNavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A19DA561BECFE610072427E /* ChooseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ChooseTableViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A19DA571BECFE610072427E /* ChooseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChooseTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A19DA5A1BECFE900072427E /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NavigationController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4A19DA5B1BECFE900072427E /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A3C468C1DFEE49F007A01D8 /* OtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
-		4A3C468D1DFEE49F007A01D8 /* OtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
+		4A19DA5A1BECFE900072427E /* RootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RootNavigationController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4A19DA5B1BECFE900072427E /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootNavigationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A3C468C1DFEE49F007A01D8 /* RootViewControllerWithTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewControllerWithTableView.h; sourceTree = "<group>"; };
+		4A3C468D1DFEE49F007A01D8 /* RootViewControllerWithTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerWithTableView.m; sourceTree = "<group>"; };
 		4A42439B1B6808E4008432A9 /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A42439F1B6808E4008432A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A4243A01B6808E4008432A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4A4243A21B6808E4008432A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4A4243A31B6808E4008432A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		4A4243A51B6808E4008432A9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		4A4243A61B6808E4008432A9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4A4243A51B6808E4008432A9 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RootViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4A4243A61B6808E4008432A9 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ADAFC3B1B691DA500B33211 /* LeftViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LeftViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		4ADAFC3C1B691DA500B33211 /* LeftViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LeftViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4ADAFC3D1B691DA500B33211 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LeftViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -123,12 +123,12 @@
 		4A06D0A21DF733EF00498335 /* Root View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4A19DA5A1BECFE900072427E /* NavigationController.h */,
-				4A19DA5B1BECFE900072427E /* NavigationController.m */,
-				4A4243A51B6808E4008432A9 /* ViewController.h */,
-				4A4243A61B6808E4008432A9 /* ViewController.m */,
-				4A3C468C1DFEE49F007A01D8 /* OtherViewController.h */,
-				4A3C468D1DFEE49F007A01D8 /* OtherViewController.m */,
+				4A19DA5A1BECFE900072427E /* RootNavigationController.h */,
+				4A19DA5B1BECFE900072427E /* RootNavigationController.m */,
+				4A4243A51B6808E4008432A9 /* RootViewController.h */,
+				4A4243A61B6808E4008432A9 /* RootViewController.m */,
+				4A3C468C1DFEE49F007A01D8 /* RootViewControllerWithTableView.h */,
+				4A3C468D1DFEE49F007A01D8 /* RootViewControllerWithTableView.m */,
 			);
 			name = "Root View Controller";
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A4243A71B6808E4008432A9 /* ViewController.m in Sources */,
+				4A4243A71B6808E4008432A9 /* RootViewController.m in Sources */,
 				4A4243A41B6808E4008432A9 /* AppDelegate.m in Sources */,
 				4A4243A11B6808E4008432A9 /* main.m in Sources */,
 				4A04FA831E894C25000E90AB /* LGSideMenuView.m in Sources */,
@@ -319,10 +319,10 @@
 				4ADAFC451B691DA500B33211 /* RightViewCell.m in Sources */,
 				4A04FA811E894C25000E90AB /* LGSideMenuHelper.m in Sources */,
 				4A04FA841E894C25000E90AB /* UIViewController+LGSideMenuController.m in Sources */,
-				4A3C468E1DFEE49F007A01D8 /* OtherViewController.m in Sources */,
+				4A3C468E1DFEE49F007A01D8 /* RootViewControllerWithTableView.m in Sources */,
 				4ADAFC461B691DA500B33211 /* RightViewController.m in Sources */,
 				4AEE2B261EA92F5E0051D069 /* LGSideMenuBorderView.m in Sources */,
-				4A19DA5C1BECFE900072427E /* NavigationController.m in Sources */,
+				4A19DA5C1BECFE900072427E /* RootNavigationController.m in Sources */,
 				4A04FA821E894C25000E90AB /* LGSideMenuSegue.m in Sources */,
 				4ADAFC431B691DA500B33211 /* LeftViewCell.m in Sources */,
 				4A04FA7F1E894C25000E90AB /* LGSideMenuGesturesHandler.m in Sources */,
@@ -456,7 +456,7 @@
 		4A4243C01B6808E4008432A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9QN8QW38KG;
 				INFOPLIST_FILE = LGSideMenuControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

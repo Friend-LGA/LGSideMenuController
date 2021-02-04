@@ -7,7 +7,7 @@
 #import "LeftViewCell.h"
 #import "MainViewController.h"
 #import "UIViewController+LGSideMenuController.h"
-#import "ViewController.h"
+#import "RootViewController.h"
 #import "Helper.h"
 
 @interface LeftViewController ()
@@ -95,7 +95,7 @@
     }
     else if (indexPath.row == 2) {
         UINavigationController *navigationController = (UINavigationController *)mainViewController.rootViewController;
-        [navigationController setViewControllers:@[ViewController.new]];
+        [navigationController setViewControllers:@[RootViewController.new]];
 
         [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
     }
@@ -109,6 +109,56 @@
 
         [mainViewController hideLeftViewAnimated:YES completionHandler:nil];
     }
+}
+
+#pragma mark - Logging
+
+- (void)dealloc {
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController dealloc], counter: %i", counter);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewDidLoad], counter: %i", counter);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewWillAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewDidAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewWillDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewDidDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[LeftViewController viewWillLayoutSubviews], counter: %i", counter);
 }
 
 @end

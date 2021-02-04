@@ -164,6 +164,9 @@ class MainViewController: LGSideMenuController {
 
     override func leftViewWillLayoutSubviews(with size: CGSize) {
         super.leftViewWillLayoutSubviews(with: size)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.leftViewWillLayoutSubviews(with: \(size)), counter: \(Counter.count)")
 
         if !isLeftViewStatusBarHidden {
             leftView?.frame = CGRect(x: 0.0, y: 20.0, width: size.width, height: size.height - 20.0)
@@ -172,6 +175,9 @@ class MainViewController: LGSideMenuController {
     
     override func rightViewWillLayoutSubviews(with size: CGSize) {
         super.rightViewWillLayoutSubviews(with: size)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.rightViewWillLayoutSubviews(with: \(size)), counter: \(Counter.count)")
         
         if (!isRightViewStatusBarHidden ||
             (rightViewAlwaysVisibleOptions.contains(.onPadLandscape) &&
@@ -209,8 +215,61 @@ class MainViewController: LGSideMenuController {
         }
     }
 
+    // MARK: - Logging
+
     deinit {
-        print("MainViewController deinitialized")
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.deinit(), counter: \(Counter.count)")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewDidLoad(), counter: \(Counter.count)")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewWillAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewDidAppear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewWillDisappear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewDidDisappear(\(animated)), counter: \(Counter.count)")
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.viewWillLayoutSubviews(), counter: \(Counter.count)")
+    }
+
+    override func rootViewWillLayoutSubviews(with size: CGSize) {
+        super.rootViewWillLayoutSubviews(with: size)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("MainViewController.rootViewWillLayoutSubviews(with: \(size)), counter: \(Counter.count)")
     }
 
 }

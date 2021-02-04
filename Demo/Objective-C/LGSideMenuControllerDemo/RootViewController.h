@@ -1,11 +1,11 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  LGSideMenuControllerDemo
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface RootViewController : UIViewController
 
 - (instancetype)initWithTableView;
 

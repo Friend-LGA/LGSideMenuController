@@ -18,7 +18,7 @@
 		4A04FAC21E894C6D000E90AB /* imageRoot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FABF1E894C6D000E90AB /* imageRoot.png */; };
 		4A04FACC1E894C9D000E90AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FACB1E894C9D000E90AB /* LaunchScreen.storyboard */; };
 		4A04FAD81E894D10000E90AB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04FAD71E894D10000E90AB /* MainViewController.swift */; };
-		4A5EB34C1DEF402A005D1DF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */; };
+		4A5EB34C1DEF402A005D1DF0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5EB34B1DEF402A005D1DF0 /* RootViewController.swift */; };
 		4AEE2B291EA92F7C0051D069 /* LGSideMenuBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE2B281EA92F7C0051D069 /* LGSideMenuBorderView.m */; };
 		D94B022325C94AFD00FB40C2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94B022225C94AFC00FB40C2 /* Helper.swift */; };
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
@@ -28,7 +28,7 @@
 		EDE795341D45BAA7002930CA /* RightViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795331D45BAA7002930CA /* RightViewCell.swift */; };
 		EDE795361D45BAAD002930CA /* LeftViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795351D45BAAD002930CA /* LeftViewCell.swift */; };
 		EDE795381D45BAB4002930CA /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795371D45BAB4002930CA /* LeftViewController.swift */; };
-		EDE7953A1D45BACB002930CA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795391D45BACB002930CA /* NavigationController.swift */; };
+		EDE7953A1D45BACB002930CA /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795391D45BACB002930CA /* RootNavigationController.swift */; };
 		EDE7953F1D45CFED002930CA /* ChooseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +50,7 @@
 		4A04FABF1E894C6D000E90AB /* imageRoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = imageRoot.png; path = ../../_shared_files/imageRoot.png; sourceTree = "<group>"; };
 		4A04FACB1E894C9D000E90AB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../_shared_files/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A04FAD71E894D10000E90AB /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../../_shared_files/Swift/MainViewController.swift; sourceTree = "<group>"; };
-		4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4A5EB34B1DEF402A005D1DF0 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RootViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4AEE2B271EA92F7C0051D069 /* LGSideMenuBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuBorderView.h; sourceTree = "<group>"; };
 		4AEE2B281EA92F7C0051D069 /* LGSideMenuBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuBorderView.m; sourceTree = "<group>"; };
 		D94B022225C94AFC00FB40C2 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = ../../_shared_files/Swift/Helper.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		EDE795331D45BAA7002930CA /* RightViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewCell.swift; sourceTree = "<group>"; };
 		EDE795351D45BAAD002930CA /* LeftViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewCell.swift; sourceTree = "<group>"; };
 		EDE795371D45BAB4002930CA /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LeftViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		EDE795391D45BACB002930CA /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NavigationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		EDE795391D45BACB002930CA /* RootNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RootNavigationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EDE7953D1D45BB49002930CA /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		EDE7953E1D45CFED002930CA /* ChooseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChooseNavigationController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
@@ -114,8 +114,8 @@
 		4AC1F22F1DFAFB3100E9D359 /* Root View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EDE795391D45BACB002930CA /* NavigationController.swift */,
-				4A5EB34B1DEF402A005D1DF0 /* ViewController.swift */,
+				EDE795391D45BACB002930CA /* RootNavigationController.swift */,
+				4A5EB34B1DEF402A005D1DF0 /* RootViewController.swift */,
 			);
 			name = "Root View Controller";
 			sourceTree = "<group>";
@@ -276,10 +276,10 @@
 				D94B022325C94AFD00FB40C2 /* Helper.swift in Sources */,
 				EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */,
 				EDE7953F1D45CFED002930CA /* ChooseNavigationController.swift in Sources */,
-				4A5EB34C1DEF402A005D1DF0 /* ViewController.swift in Sources */,
+				4A5EB34C1DEF402A005D1DF0 /* RootViewController.swift in Sources */,
 				EDE795291D45B879002930CA /* ChooseTableViewController.swift in Sources */,
 				4AEE2B291EA92F7C0051D069 /* LGSideMenuBorderView.m in Sources */,
-				EDE7953A1D45BACB002930CA /* NavigationController.swift in Sources */,
+				EDE7953A1D45BACB002930CA /* RootNavigationController.swift in Sources */,
 				EDE795381D45BAB4002930CA /* LeftViewController.swift in Sources */,
 				4A04FAD81E894D10000E90AB /* MainViewController.swift in Sources */,
 				4A04FA971E894C2D000E90AB /* LGSideMenuHelper.m in Sources */,

@@ -5,8 +5,8 @@
 
 #import "ChooseTableViewController.h"
 #import "MainViewController.h"
-#import "NavigationController.h"
-#import "ViewController.h"
+#import "RootNavigationController.h"
+#import "RootViewController.h"
 
 @interface ChooseTableViewController ()
 
@@ -66,15 +66,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ViewController *viewController;
+    RootViewController *viewController;
     if (indexPath.row == self.titlesArray.count - 2) {
-        viewController = [[ViewController alloc] initWithTableView];
+        viewController = [[RootViewController alloc] initWithTableView];
     }
     else {
-        viewController = [ViewController new];
+        viewController = [RootViewController new];
     }
 
-    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+    RootNavigationController *navigationController = [[RootNavigationController alloc] initWithRootViewController:viewController];
 
     MainViewController *mainViewController = [MainViewController new];
     mainViewController.rootViewController = navigationController;

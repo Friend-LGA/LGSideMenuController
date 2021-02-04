@@ -1,21 +1,24 @@
 //
-//  OtherViewController.m
+//  RootViewControllerWithTableView.m
 //  LGSideMenuControllerDemo
 //
 
-#import "OtherViewController.h"
+#import "RootViewControllerWithTableView.h"
 #import "ChooseNavigationController.h"
 
-@interface OtherViewController ()
+@interface RootViewControllerWithTableView ()
 
 @property (assign, nonatomic) NSUInteger numberOfCells;
 
 @end
 
-@implementation OtherViewController
+@implementation RootViewControllerWithTableView
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewDidLoad], counter: %i", counter);
 
     self.numberOfCells = 100;
 }
@@ -58,6 +61,49 @@
         self.numberOfCells--;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+#pragma mark - Logging
+
+- (void)dealloc {
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController dealloc], counter: %i", counter);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewWillAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewDidAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewWillDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewDidDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootOtherViewController viewWillLayoutSubviews], counter: %i", counter);
 }
 
 @end

@@ -1,14 +1,14 @@
 //
-//  ViewController.m
+//  RootViewController.m
 //  LGSideMenuControllerDemo
 //
 
-#import "ViewController.h"
+#import "RootViewController.h"
 #import "ChooseNavigationController.h"
 #import "UIViewController+LGSideMenuController.h"
 #import "Helper.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface RootViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIButton *button;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation ViewController
+@implementation RootViewController
 
 - (instancetype)init {
     self = [super init];
@@ -77,6 +77,9 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewWillLayoutSubviews], counter: %i", counter);
 
     CGFloat buttonHeight = 44.0;
 
@@ -158,6 +161,49 @@
         self.numberOfCells--;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+#pragma mark - Logging
+
+- (void)dealloc {
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController dealloc], counter: %i", counter);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewDidLoad], counter: %i", counter);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewWillAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewDidAppear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewWillDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    static unsigned int counter = 0;
+    counter++;
+    NSLog(@"[RootViewController viewDidDisappear: %@], counter: %i", (animated ? @"true" : @"false"), counter);
 }
 
 @end
