@@ -1458,10 +1458,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         (self.rightView && self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove)) {
         if (!self.rootViewStyleView) {
             self.rootViewStyleView = [LGSideMenuBorderView new];
+            [self.view addSubview:self.rootViewStyleView];
         }
     }
     else {
-        self.rootViewStyleView = nil;
+        if (self.rootViewStyleView) {
+            [self.rootViewStyleView removeFromSuperview];
+            self.rootViewStyleView = nil;
+        }
     }
 
     // -----
@@ -1485,6 +1489,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     if (!self.rootViewCoverView) {
         self.rootViewCoverView = [UIVisualEffectView new];
         self.rootViewCoverView.clipsToBounds = YES;
+        [self.view addSubview:self.rootViewCoverView];
     }
 }
 
@@ -1506,10 +1511,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             self.leftViewBackgroundView.contentMode = UIViewContentModeScaleAspectFill;
             self.leftViewBackgroundView.clipsToBounds = YES;
             self.leftViewBackgroundView.userInteractionEnabled = NO;
+            [self.view addSubview:self.leftViewBackgroundView];
         }
     }
     else {
-        self.leftViewBackgroundView = nil;
+        if (self.leftViewBackgroundView) {
+            [self.leftViewBackgroundView removeFromSuperview];
+            self.leftViewBackgroundView = nil;
+        }
     }
 
     // -----
@@ -1520,14 +1529,22 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             self.leftViewStyleView.userInteractionEnabled = NO;
             self.leftViewStyleView.contentView.clipsToBounds = NO;
             self.leftViewStyleView.layer.anchorPoint = CGPointMake(0.0, 0.5);
+            [self.view addSubview:self.leftViewStyleView];
 
             self.leftViewBorderView = [LGSideMenuBorderView new];
             [self.leftViewStyleView.contentView addSubview:self.leftViewBorderView];
         }
     }
     else {
-        self.leftViewStyleView = nil;
-        self.leftViewBorderView = nil;
+        if (self.leftViewBorderView) {
+            [self.leftViewBorderView removeFromSuperview];
+            self.leftViewBorderView = nil;
+        }
+
+        if (self.leftViewStyleView) {
+            [self.leftViewStyleView removeFromSuperview];
+            self.leftViewStyleView = nil;
+        }
     }
 
     // -----
@@ -1553,10 +1570,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         if (!self.sideViewsCoverView) {
             self.sideViewsCoverView = [UIVisualEffectView new];
             self.sideViewsCoverView.userInteractionEnabled = NO;
+            [self.view addSubview:self.sideViewsCoverView];
         }
     }
     else if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
-        self.sideViewsCoverView = nil;
+        if (self.sideViewsCoverView) {
+            [self.sideViewsCoverView removeFromSuperview];
+            self.sideViewsCoverView = nil;
+        }
     }
 }
 
@@ -1578,10 +1599,14 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             self.rightViewBackgroundView.contentMode = UIViewContentModeScaleAspectFill;
             self.rightViewBackgroundView.clipsToBounds = YES;
             self.rightViewBackgroundView.userInteractionEnabled = NO;
+            [self.view addSubview:self.rightViewBackgroundView];
         }
     }
     else {
-        self.rightViewBackgroundView = nil;
+        if (self.rightViewBackgroundView) {
+            [self.rightViewBackgroundView removeFromSuperview];
+            self.rightViewBackgroundView = nil;
+        }
     }
 
     // -----
@@ -1592,14 +1617,22 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
             self.rightViewStyleView.userInteractionEnabled = NO;
             self.rightViewStyleView.contentView.clipsToBounds = NO;
             self.rightViewStyleView.layer.anchorPoint = CGPointMake(1.0, 0.5);
+            [self.view addSubview:self.rightViewStyleView];
 
             self.rightViewBorderView = [LGSideMenuBorderView new];
             [self.rightViewStyleView.contentView addSubview:self.rightViewBorderView];
         }
     }
     else {
-        self.rightViewStyleView = nil;
-        self.rightViewBorderView = nil;
+        if (self.rightViewBorderView) {
+            [self.rightViewBorderView removeFromSuperview];
+            self.rightViewBorderView = nil;
+        }
+
+        if (self.rightViewStyleView) {
+            [self.rightViewStyleView removeFromSuperview];
+            self.rightViewStyleView = nil;
+        }
     }
 
     // -----
@@ -1625,43 +1658,35 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         if (!self.sideViewsCoverView) {
             self.sideViewsCoverView = [UIVisualEffectView new];
             self.sideViewsCoverView.userInteractionEnabled = NO;
+            [self.view addSubview:self.sideViewsCoverView];
         }
     }
     else if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
-        self.sideViewsCoverView = nil;
+        if (self.sideViewsCoverView) {
+            [self.sideViewsCoverView removeFromSuperview];
+            self.sideViewsCoverView = nil;
+        }
     }
 }
 
 - (void)viewsHierarchyValidate {
-    [self.rootViewStyleView removeFromSuperview];
-    [self.rootViewContainer removeFromSuperview];
-    [self.rootViewCoverView removeFromSuperview];
-
-    [self.leftViewBackgroundView removeFromSuperview];
-    [self.leftViewStyleView removeFromSuperview];
-    [self.leftViewContainer removeFromSuperview];
-
-    [self.rightViewBackgroundView removeFromSuperview];
-    [self.rightViewStyleView removeFromSuperview];
-    [self.rightViewContainer removeFromSuperview];
-
-    [self.sideViewsCoverView removeFromSuperview];
-
-    // -----
-
     BOOL isSideViewAdded = false;
+    NSUInteger currentIndex = 0;
 
     if (self.leftViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         if (self.leftViewBackgroundView) {
-            [self.view addSubview:self.leftViewBackgroundView];
+            [self.view insertSubview:self.leftViewBackgroundView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.leftViewStyleView) {
-            [self.view addSubview:self.leftViewStyleView];
+            [self.view insertSubview:self.leftViewStyleView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.leftViewContainer) {
-            [self.view addSubview:self.leftViewContainer];
+            [self.view insertSubview:self.leftViewContainer atIndex:currentIndex];
+            currentIndex++;
         }
 
         isSideViewAdded = YES;
@@ -1669,15 +1694,18 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     if (self.rightViewPresentationStyle != LGSideMenuPresentationStyleSlideAbove) {
         if (self.rightViewBackgroundView) {
-            [self.view addSubview:self.rightViewBackgroundView];
+            [self.view insertSubview:self.rightViewBackgroundView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.rightViewStyleView) {
-            [self.view addSubview:self.rightViewStyleView];
+            [self.view insertSubview:self.rightViewStyleView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.rightViewContainer) {
-            [self.view addSubview:self.rightViewContainer];
+            [self.view insertSubview:self.rightViewContainer atIndex:currentIndex];
+            currentIndex++;
         }
 
         isSideViewAdded = YES;
@@ -1685,39 +1713,47 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     if (isSideViewAdded) {
         if (self.sideViewsCoverView) {
-            [self.view addSubview:self.sideViewsCoverView];
+            [self.view insertSubview:self.sideViewsCoverView atIndex:currentIndex];
+            currentIndex++;
         }
     }
 
     if (self.rootViewStyleView) {
-        [self.view addSubview:self.rootViewStyleView];
+        [self.view insertSubview:self.rootViewStyleView atIndex:currentIndex];
+        currentIndex++;
     }
 
     if (self.rootViewContainer) {
-        [self.view addSubview:self.rootViewContainer];
+        [self.view insertSubview:self.rootViewContainer atIndex:currentIndex];
+        currentIndex++;
     }
 
     if (self.rootViewCoverView) {
-        [self.view addSubview:self.rootViewCoverView];
+        [self.view insertSubview:self.rootViewCoverView atIndex:currentIndex];
+        currentIndex++;
     }
 
     if (self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         if (self.leftViewStyleView) {
-            [self.view addSubview:self.leftViewStyleView];
+            [self.view insertSubview:self.leftViewStyleView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.leftViewContainer) {
-            [self.view addSubview:self.leftViewContainer];
+            [self.view insertSubview:self.leftViewContainer atIndex:currentIndex];
+            currentIndex++;
         }
     }
 
     if (self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove) {
         if (self.rightViewStyleView) {
-            [self.view addSubview:self.rightViewStyleView];
+            [self.view insertSubview:self.rightViewStyleView atIndex:currentIndex];
+            currentIndex++;
         }
 
         if (self.rightViewContainer) {
-            [self.view addSubview:self.rightViewContainer];
+            [self.view insertSubview:self.rightViewContainer atIndex:currentIndex];
+            currentIndex++;
         }
     }
 }
