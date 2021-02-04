@@ -270,23 +270,33 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupDefaults];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
     // Try to initialize left and right view controllers from storyboard by segues
     if (self.storyboard) {
         @try {
             [self performSegueWithIdentifier:LGSideMenuSegueRootIdentifier sender:nil];
         }
-        @catch (NSException *exception) {}
+        @catch (NSException *exception) {
+            NSLog(@"LGSideMenuController Exception: %@", exception);
+        }
 
         @try {
             [self performSegueWithIdentifier:LGSideMenuSegueLeftIdentifier sender:nil];
         }
-        @catch (NSException *exception) {}
+        @catch (NSException *exception) {
+            NSLog(@"LGSideMenuController Exception: %@", exception);
+        }
 
         @try {
             [self performSegueWithIdentifier:LGSideMenuSegueRightIdentifier sender:nil];
         }
-        @catch (NSException *exception) {}
+        @catch (NSException *exception) {
+            NSLog(@"LGSideMenuController Exception: %@", exception);
+        }
     }
 }
 
