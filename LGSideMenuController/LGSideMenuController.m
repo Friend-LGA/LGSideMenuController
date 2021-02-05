@@ -1024,6 +1024,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     _leftViewPresentationStyle = leftViewPresentationStyle;
 
+    [self validateAlwaysVisibleConflict];
     [self setNeedsUpdateLayoutsAndStyles];
 }
 
@@ -1032,6 +1033,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     _rightViewPresentationStyle = rightViewPresentationStyle;
 
+    [self validateAlwaysVisibleConflict];
     [self setNeedsUpdateLayoutsAndStyles];
 }
 
@@ -1072,6 +1074,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     _leftViewAlwaysVisibleOptions = leftViewAlwaysVisibleOptions;
 
+    [self validateAlwaysVisibleConflict];
     [self setNeedsUpdateLayoutsAndStyles];
 }
 
@@ -1080,6 +1083,7 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 
     _rightViewAlwaysVisibleOptions = rightViewAlwaysVisibleOptions;
 
+    [self validateAlwaysVisibleConflict];
     [self setNeedsUpdateLayoutsAndStyles];
 }
 
@@ -1448,6 +1452,22 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 }
 
 #pragma mark - Validators
+
+- (void)validateAlwaysVisibleConflict {
+    if (self.leftViewAlwaysVisibleOptions == LGSideMenuAlwaysVisibleOnNone && self.rightViewAlwaysVisibleOptions == LGSideMenuAlwaysVisibleOnNone) {
+        return;
+    }
+
+    if (self.leftView) {
+        NSAssert(self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove || self.leftViewPresentationStyle == LGSideMenuPresentationStyleSlideBelow,
+                 @".AlwaysVisibleOptions can be used only with .SlideAbove or .SlideBelow presentation styles");
+    }
+
+    if (self.rightView) {
+        NSAssert(self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideAbove || self.rightViewPresentationStyle == LGSideMenuPresentationStyleSlideBelow,
+                 @".AlwaysVisibleOptions can be used only with .SlideAbove or .SlideBelow presentation styles");
+    }
+}
 
 - (void)rootViewsValidate {
     if (!self.rootView) return;
