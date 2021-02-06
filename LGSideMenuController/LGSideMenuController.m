@@ -578,10 +578,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         return _rootViewStatusBarHidden;
     }
 
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarHidden;
-    }
-
     if (self.rootViewController) {
         return self.rootViewController.prefersStatusBarHidden;
     }
@@ -597,10 +593,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 - (BOOL)isLeftViewStatusBarHidden {
     if (self.isUserLeftViewStatusBarHidden) {
         return _leftViewStatusBarHidden;
-    }
-
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarHidden;
     }
 
     if (self.leftViewController) {
@@ -624,10 +616,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         return _rightViewStatusBarHidden;
     }
 
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarHidden;
-    }
-
     if (self.rightViewController) {
         return self.rightViewController.prefersStatusBarHidden;
     }
@@ -649,10 +637,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         return _rootViewStatusBarStyle;
     }
 
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarStyle;
-    }
-
     if (self.rootViewController) {
         return self.rootViewController.preferredStatusBarStyle;
     }
@@ -668,10 +652,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 - (UIStatusBarStyle)leftViewStatusBarStyle {
     if (self.isUserLeftViewStatusBarStyle) {
         return _leftViewStatusBarStyle;
-    }
-
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarStyle;
     }
 
     if (self.leftViewController) {
@@ -693,10 +673,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
 - (UIStatusBarStyle)rightViewStatusBarStyle {
     if (self.isUserRightViewStatusBarStyle) {
         return _rightViewStatusBarStyle;
-    }
-
-    if (!LGSideMenuHelper.isViewControllerBasedStatusBarAppearance) {
-        return UIApplication.sharedApplication.statusBarStyle;
     }
 
     if (self.rightViewController) {

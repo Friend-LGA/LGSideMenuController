@@ -44,8 +44,6 @@
 
 + (void)imageView:(UIImageView *)imageView setImageSafe:(UIImage *)image;
 
-+ (BOOL)isViewControllerBasedStatusBarAppearance;
-
 + (BOOL)isNotRetina;
 
 + (BOOL)isPhone;

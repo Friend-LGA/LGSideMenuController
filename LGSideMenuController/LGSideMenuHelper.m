@@ -50,22 +50,14 @@
                                    hidden:(BOOL)hidden
                                     style:(UIStatusBarStyle)style
                                 animation:(UIStatusBarAnimation)animation {
-    if (self.isViewControllerBasedStatusBarAppearance) {
-        if (animated && animation != UIStatusBarAnimationNone) {
-            [UIView animateWithDuration:duration animations:^{
-                [viewController setNeedsStatusBarAppearanceUpdate];
-            }];
-        }
-        else {
+    if (animated && animation != UIStatusBarAnimationNone) {
+        [UIView animateWithDuration:duration animations:^{
             [viewController setNeedsStatusBarAppearanceUpdate];
-        }
+        }];
     }
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_9_0
     else {
-        [UIApplication.sharedApplication setStatusBarHidden:hidden withAnimation:animation];
-        [UIApplication.sharedApplication setStatusBarStyle:style animated:animated];
+        [viewController setNeedsStatusBarAppearanceUpdate];
     }
-#endif
 }
 
 + (void)imageView:(UIImageView *)imageView setImageSafe:(UIImage *)image {
@@ -73,23 +65,6 @@
     imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.image = image;
     imageView.contentMode = contentMode;
-}
-
-+ (BOOL)isViewControllerBasedStatusBarAppearance {
-    static BOOL isViewControllerBasedStatusBarAppearance;
-    static dispatch_once_t onceToken;
-
-    dispatch_once(&onceToken, ^{
-        if (UIDevice.currentDevice.systemVersion.floatValue >= 9.0) {
-            isViewControllerBasedStatusBarAppearance = YES;
-        }
-        else {
-            NSNumber *viewControllerBasedStatusBarAppearance = [NSBundle.mainBundle objectForInfoDictionaryKey:@"UIViewControllerBasedStatusBarAppearance"];
-            isViewControllerBasedStatusBarAppearance = (viewControllerBasedStatusBarAppearance == nil ? YES : viewControllerBasedStatusBarAppearance.boolValue);
-        }
-    });
-
-    return isViewControllerBasedStatusBarAppearance;
 }
 
 + (BOOL)isNotRetina {

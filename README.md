@@ -15,10 +15,11 @@ iOS view controller, shows left and right views by pressing button or gesture.
 
 ## Installation
 
-| LGSideMenuController version | iOS version |
-|------------------------------|-------------|
-| <= 1.0.10                    | >= 6.0      |
-| >= 1.1.0                     | >= 8.0      |
+| LGSideMenuController Version | Min iOS Version |
+|------------------------------|-----------------|
+| 1.0.0 - 1.0.10               | 6.0             |
+| 1.1.0 - 2.2.0                | 8.0             |
+| current                      | 9.0             |
 
 ### With source code
 
