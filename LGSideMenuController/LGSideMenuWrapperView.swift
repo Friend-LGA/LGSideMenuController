@@ -1,5 +1,5 @@
 //
-//  LGSideMenuView.m
+//  LGSideMenuWrapperView.swift
 //  LGSideMenuController
 //
 //
@@ -27,28 +27,31 @@
 //  SOFTWARE.
 //
 
-#import "LGSideMenuView.h"
+import Foundation
+import UIKit
 
-@interface LGSideMenuView ()
+public final class LGSideMenuWrapperView: UIView {
 
-@property (strong, nonatomic) void (^layoutSubviewsHandler)(void);
+    public var canLayoutSubviews = true
 
-@end
-
-@implementation LGSideMenuView
-
-- (nonnull instancetype)initWithLayoutSubviewsHandler:(void(^ _Nonnull)(void))layoutSubviewsHandler {
-    self = [super init];
-    if (self) {
-        self.layoutSubviewsHandler = layoutSubviewsHandler;
+    public override func setNeedsLayout() {
+        guard canLayoutSubviews else { return }
+        super.setNeedsLayout()
     }
-    return self;
+
+    public override func layoutIfNeeded() {
+        guard canLayoutSubviews else { return }
+        super.layoutIfNeeded()
+    }
+
+    public override func layoutSubviews() {
+        guard canLayoutSubviews else { return }
+        super.layoutSubviews()
+    }
+
+    public override func layoutSublayers(of layer: CALayer) {
+        guard canLayoutSubviews else { return }
+        super.layoutSublayers(of: layer)
+    }
+
 }
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-
-    self.layoutSubviewsHandler();
-}
-
-@end

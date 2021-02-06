@@ -1,5 +1,5 @@
 //
-//  UIViewController+LGSideMenuController.h
+//  LGSideMenuSegue.swift
 //  LGSideMenuController
 //
 //
@@ -27,37 +27,33 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "LGSideMenuController.h"
+import Foundation
+import UIKit
 
-@interface UIViewController (LGSideMenuController)
+public final class LGSideMenuSegue: UIStoryboardSegue {
 
-/** If this view controller is root view controller of side menu controller or one of children of root view controller, return it. */
-@property(nullable, nonatomic, readonly, weak) LGSideMenuController *sideMenuController;
+    public struct Identifier {
+        public static let root  = "root"
+        public static let left  = "left"
+        public static let right = "right"
+    }
 
-- (IBAction)showLeftView:(nullable id)sender;
-- (IBAction)hideLeftView:(nullable id)sender;
-- (IBAction)toggleLeftView:(nullable id)sender;
+    public override func perform() {
+        guard let sideMenuController = self.source as? LGSideMenuController else {
+            assert(false, "LGSideMenuSegue must have source as LGSideMenuController")
+            return
+        }
 
-- (IBAction)showLeftViewAnimated:(nullable id)sender;
-- (IBAction)hideLeftViewAnimated:(nullable id)sender;
-- (IBAction)toggleLeftViewAnimated:(nullable id)sender;
-
-- (IBAction)showRightView:(nullable id)sender;
-- (IBAction)hideRightView:(nullable id)sender;
-- (IBAction)toggleRightView:(nullable id)sender;
-
-- (IBAction)showRightViewAnimated:(nullable id)sender;
-- (IBAction)hideRightViewAnimated:(nullable id)sender;
-- (IBAction)toggleRightViewAnimated:(nullable id)sender;
-
-@end
-
-#pragma mark - Deprecated
-
-@interface UIViewController (LGSideMenuControllerDeprecated)
-
-- (IBAction)openLeftView:(nullable id)sender DEPRECATED_ATTRIBUTE;
-- (IBAction)openRightView:(nullable id)sender DEPRECATED_ATTRIBUTE;
-
-@end
+        switch identifier {
+        case Identifier.root:
+            sideMenuController.rootViewController = destination
+        case Identifier.left:
+            sideMenuController.leftViewController = destination
+        case Identifier.right:
+            sideMenuController.rightViewController = destination
+        default:
+            assert(false, "LGSideMenuSegue must have identifier either \"root\", \"left\" or \"right\"")
+        }
+    }
+    
+}

@@ -1,5 +1,5 @@
 //
-//  LGSideMenuSegue.h
+//  LGSideMenuController+Helpers.swift
 //  LGSideMenuController
 //
 //
@@ -27,8 +27,41 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+import Foundation
+import UIKit
 
-@interface LGSideMenuSegue : UIStoryboardSegue
+internal extension LGSideMenuController {
 
-@end
+    func disableRootViewLayouting() {
+        guard self.isRootViewLayoutingEnabled == true,
+              let wrapperView = self.rootViewWrapperView else { return }
+
+        wrapperView.canLayoutSubviews = false
+        self.isRootViewLayoutingEnabled = false
+    }
+
+    func enableRootViewLayouting() {
+        guard self.isRootViewLayoutingEnabled == false,
+              let wrapperView = self.rootViewWrapperView else { return }
+
+        wrapperView.canLayoutSubviews = true
+        self.isRootViewLayoutingEnabled = true
+    }
+
+    func disableRootViewControllerLayouting() {
+        guard self.isRootViewControllerLayoutingEnabled == true,
+              let viewController = self.rootViewController else { return }
+
+        viewController.removeFromParent()
+        self.isRootViewControllerLayoutingEnabled = false
+    }
+
+    func enableRootViewControllerLayouting() {
+        guard self.isRootViewControllerLayoutingEnabled == false,
+              let viewController = self.rootViewController else { return }
+
+        self.addChild(viewController)
+        self.isRootViewControllerLayoutingEnabled = true
+    }
+
+}

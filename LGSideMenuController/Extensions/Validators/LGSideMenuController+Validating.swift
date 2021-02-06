@@ -1,5 +1,5 @@
 //
-//  LGSideMenuHelper.h
+//  LGSideMenuController+Validating.swift
 //  LGSideMenuController
 //
 //
@@ -27,27 +27,23 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+import Foundation
+import UIKit
 
-@interface LGSideMenuHelper : NSObject
+internal extension LGSideMenuController {
 
-+ (void)animateWithDuration:(NSTimeInterval)duration
-                 animations:(void(^)(void))animations
-                 completion:(void(^)(BOOL finished))completion;
+    func validateAlwaysVisibleConflict() {
+        if self.leftViewAlwaysVisibleOptions.isEmpty && self.rightViewAlwaysVisibleOptions.isEmpty { return }
 
-+ (void)statusBarAppearanceUpdateAnimated:(BOOL)animated
-                           viewController:(UIViewController *)viewController
-                                 duration:(NSTimeInterval)duration
-                                   hidden:(BOOL)hidden
-                                    style:(UIStatusBarStyle)style
-                                animation:(UIStatusBarAnimation)animation;
+        if self.leftView != nil {
+            assert(self.leftViewPresentationStyle == .slideAbove || self.leftViewPresentationStyle == .slideBelow,
+                   "AlwaysVisibleOptions can be used only with .slideAbove or .slideBelow presentation styles")
+        }
 
-+ (void)imageView:(UIImageView *)imageView setImageSafe:(UIImage *)image;
+        if self.rightView != nil {
+            assert(self.rightViewPresentationStyle == .slideAbove || self.rightViewPresentationStyle == .slideBelow,
+                   "AlwaysVisibleOptions can be used only with .slideAbove or .slideBelow presentation styles")
+        }
+    }
 
-+ (BOOL)isNotRetina;
-
-+ (BOOL)isPhone;
-
-+ (BOOL)isPad;
-
-@end
+}
