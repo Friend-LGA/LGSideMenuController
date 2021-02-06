@@ -56,7 +56,7 @@ CocoaPods is a dependency manager for Objective-C, which automates and simplifie
 ### Podfile
 
 ```ruby
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 pod 'LGSideMenuController'
 ```
