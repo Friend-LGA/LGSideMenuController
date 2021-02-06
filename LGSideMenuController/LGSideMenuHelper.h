@@ -5,7 +5,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright © 2015 Grigory Lutkov <Friend.LGA@gmail.com>
+//  Copyright © 2015 Grigorii Lutkov <friend.lga@gmail.com>
 //  (https://github.com/Friend-LGA/LGSideMenuController)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
