@@ -7,13 +7,13 @@ iOS view controller, shows left and right views by pressing button or gesture.
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Friend-LGA/LGSideMenuController)
 [![License](http://img.shields.io/cocoapods/l/LGSideMenuController.svg)](https://raw.githubusercontent.com/Friend-LGA/LGSideMenuController/master/LICENSE)
 
-## Preview
+# Preview
 
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview1.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/1.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/2.png" height="490"/>
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview2.gif" height="490"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/3.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/4.png" height="490"/>
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview3.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/5.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/6.png" height="490"/>
 
-## Installation
+# Installation
 
 | LGSideMenuController Version | Min iOS Version |
 |------------------------------|-----------------|
@@ -21,20 +21,20 @@ iOS view controller, shows left and right views by pressing button or gesture.
 | 1.1.0 - 2.2.0                | 8.0             |
 | Current                      | 9.0             |
 
-### With source code
+## With Source Code
 
-[Download repository](https://github.com/Friend-LGA/LGSideMenuController/archive/master.zip), then add [LGSideMenuController directory](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/) to your project.
+1. [Download repository](https://github.com/Friend-LGA/LGSideMenuController/archive/master.zip)
+2. Add [LGSideMenuController directory](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/) to your project
+3. Import header files where you need to use the library
 
-Then import header files where you need to use the library
-
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 #import "LGSideMenuController.h"
 #import "UIViewController+LGSideMenuController.h"
 ```
 
-##### Swift
+#### Swift
 
 For swift you need to create [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
 
@@ -44,11 +44,16 @@ For swift you need to create [bridging header](https://developer.apple.com/libra
 #import "UIViewController+LGSideMenuController.h"
 ```
 
-### With CocoaPods
+## With Swift Package Manager
+
+Starting with Xcode 9.0 you can use built-in swift package manager, follow [apple documentation](https://developer.apple.com/documentation/swift_packages).
+First supported version is `2.3.0`
+
+## With CocoaPods
 
 CocoaPods is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries in your projects. To install with cocoaPods, follow the "Get Started" section on [CocoaPods](https://cocoapods.org/).
 
-#### Podfile
+### Podfile
 
 ```ruby
 platform :ios, '8.0'
@@ -58,7 +63,7 @@ pod 'LGSideMenuController'
 
 Then import framework where you need to use the library
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
@@ -70,7 +75,7 @@ Then import framework where you need to use the library
 @import LGSideMenuController.UIViewController_LGSideMenuController;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 import LGSideMenuController
@@ -79,11 +84,11 @@ import LGSideMenuController.LGSideMenuController
 import LGSideMenuController.UIViewController_LGSideMenuController
 ```
 
-### With Carthage
+## With Carthage
 
 Carthage is a lightweight dependency manager for Swift and Objective-C. It leverages CocoaTouch modules and is less invasive than CocoaPods. To install with carthage, follow the instruction on [Carthage](https://github.com/Carthage/Carthage/).
 
-#### Cartfile
+### Cartfile
 
 ```ruby
 github "Friend-LGA/LGSideMenuController"
@@ -91,7 +96,7 @@ github "Friend-LGA/LGSideMenuController"
 
 Then import framework where you need to use the library
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 #import <LGSideMenuController/LGSideMenuController.h>
@@ -103,7 +108,7 @@ Then import framework where you need to use the library
 @import LGSideMenuController.UIViewController_LGSideMenuController;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 import LGSideMenuController
@@ -112,13 +117,13 @@ import LGSideMenuController.LGSideMenuController
 import LGSideMenuController.UIViewController_LGSideMenuController
 ```
 
-## Usage
+# Usage
 
-### Initialization
+## Initialization
 
 You can use view controllers or views to initialize LGSideMenuController:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 - (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
@@ -134,7 +139,7 @@ You can use view controllers or views to initialize LGSideMenuController:
                                rightView:(nullable UIView *)rightView;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 public init(rootViewController: UIViewController?)
@@ -150,7 +155,7 @@ public init(rootView: UIView?,
            rightView: UIView?)
 ```
 
-### Setup
+## Setup
 
 To set or to change root, left or right view controllers or views, call:
 
@@ -168,11 +173,11 @@ If you set, for example, `sideMenuController.rootViewController = rootViewContro
 then `sideMenuController.rootView == rootViewController.view`.    
 If you have, for example, `sideMenuController.rootViewController != nil` and you set `sideMenuController.rootView = rootView`, then `sideMenuController.rootViewController == nil`.
 
-### Quick Example
+## Quick Example
 
-#### Programmatically
+### Without Storyboard
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 UIViewController *rootViewController = [UIViewController new];
@@ -192,7 +197,7 @@ sideMenuController.rightViewWidth = 100.0;
 sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 let rootViewController = UIViewController()
@@ -212,7 +217,7 @@ sideMenuController.rightViewWidth = 100.0;
 sideMenuController.leftViewPresentationStyle = .slideBelow;
 ```
 
-#### With storyboard
+### With Storyboard
 
 1. Create instance of LGSideMenuController
 2. Create some root view controller (for example UINavigationController)
@@ -230,7 +235,7 @@ sideMenuController.leftViewPresentationStyle = .slideBelow;
 
 For better examples check [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo).
 
-### Blur
+## Blur
 
 You can use UIBlurEffect with next properties:
 
@@ -247,13 +252,13 @@ UIBlurEffect *rightViewCoverBlurEffect;
 
 For example:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 sideMenuController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
@@ -274,13 +279,13 @@ UIColor *rightViewCoverColor;
 
 For example:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 sideMenuController.leftViewBackgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.1];
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 sideMenuController.leftViewBackgroundColor = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 0.1)
@@ -305,7 +310,7 @@ For example:
 sideMenuController.leftViewBackgroundAlpha = 0.9;
 ```
 
-### Status Bar
+## Status Bar
 
 You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
 instead you need to override all these methods for each controller separated, or use properties of sideMenuController:
@@ -329,7 +334,7 @@ And these properties have greater priority then overridden `prefersStatusBarHidd
 For example, you had sideMenuController with rootViewController, leftViewController and rightViewController.
 For rootViewController, you can override it's default methods or use sideMenuController's properties:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 // In RootViewController.m
@@ -367,7 +372,7 @@ self.rootViewStatusBarUpdateAnimation = UIStatusBarAnimationNone;
 }
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 // In RootViewController.swift
@@ -416,7 +421,7 @@ For `leftViewController and rightViewController` principe the same, but lets loo
 But may be you want to `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation` also when left view is going to hide.    
 Then you can do next:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 // In RootViewController.m
@@ -448,7 +453,7 @@ Then you can do next:
 }
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 // In RootViewController.swift
@@ -484,7 +489,7 @@ override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
 }
 ```
 
-### Always visible options
+## Always Visible Options
 
 Sometimes, for example on iPad, you need to have toggleable side menu on portrait orientation and always visible side menu on landscape orientation
 
@@ -512,24 +517,24 @@ LGSideMenuAlwaysVisibleOnAll
 
 You can choose multiple values like this:
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 sideMenuController.leftViewAlwaysVisibleOptions = LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLandscape]
 ```
 
-### NavigationController's back gesture
+## NavigationController's Back Gesture
 
 Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
 But if you want, you can disable `interactivePopGestureRecognizer`, or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -544,7 +549,7 @@ sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(4
 sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0);
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 navigationController.interactivePopGestureRecognizer.isEnabled = false
@@ -559,12 +564,12 @@ sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(4
 sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0)
 ```
 
-### Editable Table View
+## Editable Table View
 
 If you have editable table view inside sideMenuController, then it will work fine if you swipe rows not inside `swipeGestureArea` for sideMenuController.
 If you need more place for swipe inside table view, then you can decrease `leftViewSwipeGestureRange, rightViewSwipeGestureRange` or disable it.
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders; // Default
@@ -578,7 +583,7 @@ sideMenuController.leftViewSwipeGestureEnabled = NO;
 sideMenuController.rightViewSwipeGestureEnabled = NO;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 sideMenuController.swipeGestureArea = .borders // Default
@@ -592,13 +597,13 @@ sideMenuController.leftViewSwipeGestureEnabled = false
 sideMenuController.rightViewSwipeGestureEnabled = false
 ```
 
-### Handle actions
+## Handle Actions
 
 To handle actions you can use delegate, blocks or notifications:
 
-#### Delegate
+### Delegate
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 <LGSideMenuDelegate>
@@ -624,7 +629,7 @@ To handle actions you can use delegate, blocks or notifications:
 - (void)hideAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 <LGSideMenuDelegate>
@@ -648,9 +653,9 @@ optional public func showAnimations(forRightView rightView: UIView, sideMenuCont
 optional public func hideAnimations(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
 ```
 
-#### Blocks
+### Blocks
 
-##### Objective-C
+#### Objective-C
 
 ```objective-c
 void(^ _Nullable willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
@@ -672,7 +677,7 @@ void(^ _Nullable showRightViewAnimations)(LGSideMenuController * _Nonnull sideMe
 void(^ _Nullable hideRightViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
 ```
 
-##### Swift
+#### Swift
 
 ```swift
 open var willShowLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
@@ -694,7 +699,7 @@ open var showRightViewAnimations: ((sideMenuController: LGSideMenuController, vi
 open var hideRightViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
 ```
 
-#### Notifications
+### Notifications
 
 ```
 LGSideMenuWillShowLeftViewNotification
@@ -716,7 +721,7 @@ LGSideMenuShowRightViewAnimationsNotification
 LGSideMenuHideRightViewAnimationsNotification
 ```
 
-### More
+## More
 
 For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
 * [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Objective-C)
@@ -724,12 +729,12 @@ For more details see [header files](https://github.com/Friend-LGA/LGSideMenuCont
 * [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift)
 * [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift_Storyboard)
 
-## Xamarin
+# Xamarin
 
 If you use Xamarin, look at this repository:
 * https://github.com/yahavgb/LGSideMenuController-Xamarin
 
-## Frameworks
+# Frameworks
 
 If you like LGSideMenuController, check out my other useful libraries:
 * [LGAlertView](https://github.com/Friend-LGA/LGAlertView)
@@ -737,6 +742,6 @@ If you like LGSideMenuController, check out my other useful libraries:
 * [LGPlusButtonsView](https://github.com/Friend-LGA/LGPlusButtonsView)
   Customizable iOS implementation of Floating Action Button (Google Plus Button, fab).
 
-## License
+# License
 
 LGSideMenuController is released under the MIT license. See [LICENSE](https://raw.githubusercontent.com/Friend-LGA/LGSideMenuController/master/LICENSE) for details.
