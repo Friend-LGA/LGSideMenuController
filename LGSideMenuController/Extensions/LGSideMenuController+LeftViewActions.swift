@@ -1,5 +1,5 @@
 //
-//  LGSideMenuSegue.swift
+//  LGSideMenuController+LeftViewActions.swift
 //  LGSideMenuController
 //
 //
@@ -30,20 +30,48 @@
 import Foundation
 import UIKit
 
-final class LGSideMenuSegue: UIStoryboardSegue {
+public extension LGSideMenuController {
 
-    override func perform() {
-        guard let source = self.source as? LGSideMenuController else { return }
+    func showLeftView(animated: Bool = true, completion: Completion? = nil) {
 
-        if self.identifier == LGSideMenuSegueRootIdentifier {
-            source.rootViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueLeftIdentifier {
-            source.leftViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueRightIdentifier {
-            source.rightViewController = self.destination
-        }
+    }
+
+    func hideLeftView(animated: Bool = true, completion: Completion? = nil) {
+
+    }
+
+    func toggleLeftView(animated: Bool = true, completion: Completion? = nil) {
+
+    }
+
+    @IBAction
+    func showLeftView(sender: Any?) {
+        self.showLeftView(animated: false)
+    }
+
+    @IBAction
+    func hideLeftView(sender: Any?) {
+        self.hideLeftView(animated: false)
+    }
+
+    @IBAction
+    func toggleLeftView(sender: Any?) {
+        self.toggleLeftView(animated: false)
+    }
+
+    @IBAction
+    func showLeftViewAnimated(sender: Any?) {
+        self.showLeftView(animated: true)
+    }
+
+    @IBAction
+    func hideLeftViewAnimated(sender: Any?) {
+        self.hideLeftView(animated: true)
+    }
+
+    @IBAction
+    func toggleLeftViewAnimated(sender: Any?) {
+        self.toggleLeftView(animated: true)
     }
 
 }

@@ -31,7 +31,7 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-class LGSideMenuView: UIView {
+final class LGSideMenuView: UIView {
 
     let layoutSubviewCallback: () -> Void
 

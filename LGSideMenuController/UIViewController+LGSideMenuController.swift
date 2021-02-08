@@ -1,5 +1,5 @@
 //
-//  LGSideMenuSegue.swift
+//  UIViewController+LGSideMenuController.swift
 //  LGSideMenuController
 //
 //
@@ -30,20 +30,21 @@
 import Foundation
 import UIKit
 
-final class LGSideMenuSegue: UIStoryboardSegue {
+extension UIViewController {
 
-    override func perform() {
-        guard let source = self.source as? LGSideMenuController else { return }
-
-        if self.identifier == LGSideMenuSegueRootIdentifier {
-            source.rootViewController = self.destination
+    /// If the view controller or one of its ancestors is a child of a LGSideMenuController, this property contains the owning LGSideMenuController.
+    /// This property is nil if the view controller is not embedded inside a LGSideMenuController.
+    var sideMenuController: LGSideMenuController? {
+        if let controller = self as? LGSideMenuController {
+            return controller
         }
-        else if self.identifier == LGSideMenuSegueLeftIdentifier {
-            source.leftViewController = self.destination
+        if let controller = LGSideMenuHelper.getSideMenuController(from: self) {
+            return controller
         }
-        else if self.identifier == LGSideMenuSegueRightIdentifier {
-            source.rightViewController = self.destination
+        if let controller = self.parent?.sideMenuController {
+            return controller
         }
+        return nil
     }
 
 }

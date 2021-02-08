@@ -30,7 +30,7 @@
 import Foundation
 import UIKit
 
-class LGSideMenuGesturesHandler: NSObject, UIGestureRecognizerDelegate {
+final class LGSideMenuGesturesHandler: NSObject, UIGestureRecognizerDelegate {
 
     weak var sideMenuController: LGSideMenuController?
 
@@ -42,13 +42,9 @@ class LGSideMenuGesturesHandler: NSObject, UIGestureRecognizerDelegate {
 
     var isAnimating = false
 
-    init(sideMenuController: LGSideMenuController) {
-        self.sideMenuController = sideMenuController
-        super.init()
-    }
-
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let sideMenuController = self.sideMenuController, !self.isAnimating else { return false }
+        // TODO: Make animations interraptable with this gesture
 
         if !(gestureRecognizer is UIPanGestureRecognizer) {
             guard let touchView = touch.view, let rootViewCoverView = self.rootViewCoverView else { return false }

@@ -29,15 +29,18 @@
 
 import Foundation
 import UIKit
+import ObjectiveC
 
 struct LGSideMenuHelper {
+    private struct Constant {
+        static var sideMenuControllerKey = "sideMenuController"
+    }
 
     static func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
         UIView.animate(withDuration: duration,
                        delay: TimeInterval.zero,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 0.5,
-                       options: [],
                        animations: animations,
                        completion: completion)
     }
@@ -66,6 +69,14 @@ struct LGSideMenuHelper {
 
     static func isPad() -> Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
+    }
+
+    static func setSideMenuController(_ sideMenuController: LGSideMenuController?, to viewController: UIViewController) {
+        objc_setAssociatedObject(viewController, &Constant.sideMenuControllerKey, sideMenuController, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+    }
+
+    static func getSideMenuController(from viewController: UIViewController) -> LGSideMenuController? {
+        return objc_getAssociatedObject(viewController, &Constant.sideMenuControllerKey) as? LGSideMenuController
     }
 
 }

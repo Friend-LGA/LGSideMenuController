@@ -31,7 +31,7 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-class LGSideMenuBorderView: UIView {
+final class LGSideMenuBorderView: UIView {
 
     var roundedCorners = UIRectCorner()
     var cornerRadius: CGFloat = 0.0

@@ -307,6 +307,8 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
     self.view.clipsToBounds = YES;
     self.view.backgroundColor = nil;
 
+    self.gesturesHandler = [[LGSideMenuGesturesHandler alloc] initWithSideMenuController:self];
+
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
     self.tapGesture.delegate = self.gesturesHandler;
     self.tapGesture.numberOfTapsRequired = 1;
@@ -331,9 +333,6 @@ rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale;
         CGFloat minSide = MIN(CGRectGetWidth(UIScreen.mainScreen.bounds), CGRectGetHeight(UIScreen.mainScreen.bounds));
         sideMenuWidth = minSide - 44.0;
     }
-
-    // Needed to be initialized before default properties (setupDefaults)
-    self.gesturesHandler = [[LGSideMenuGesturesHandler alloc] initWithSideMenuController:self];
 
     self.leftViewWidth = sideMenuWidth;
     self.rightViewWidth = sideMenuWidth;

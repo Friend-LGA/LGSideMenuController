@@ -1,5 +1,5 @@
 //
-//  LGSideMenuSegue.swift
+//  LGSideMenuViewsVisibilityValidating.swift
 //  LGSideMenuController
 //
 //
@@ -30,20 +30,24 @@
 import Foundation
 import UIKit
 
-final class LGSideMenuSegue: UIStoryboardSegue {
+internal extension LGSideMenuController {
 
-    override func perform() {
-        guard let source = self.source as? LGSideMenuController else { return }
+    func viewsVisibilityValidate() {
+        self.rootViewsVisibilityValidate()
+        self.leftViewsVisibilityValidate()
+        self.rightViewsVisibilityValidate()
+    }
 
-        if self.identifier == LGSideMenuSegueRootIdentifier {
-            source.rootViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueLeftIdentifier {
-            source.leftViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueRightIdentifier {
-            source.rightViewController = self.destination
-        }
+    func rootViewsVisibilityValidate() {
+
+    }
+
+    func leftViewsVisibilityValidate() {
+
+    }
+
+    func rightViewsVisibilityValidate() {
+
     }
 
 }

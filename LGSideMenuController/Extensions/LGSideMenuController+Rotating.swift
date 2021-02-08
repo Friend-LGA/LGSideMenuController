@@ -1,5 +1,5 @@
 //
-//  LGSideMenuSegue.swift
+//  LGSideMenuController+Rotating.swift
 //  LGSideMenuController
 //
 //
@@ -30,20 +30,18 @@
 import Foundation
 import UIKit
 
-final class LGSideMenuSegue: UIStoryboardSegue {
+public extension LGSideMenuController {
 
-    override func perform() {
-        guard let source = self.source as? LGSideMenuController else { return }
+    override var shouldAutorotate: Bool {
+        if let rootViewController = self.rootViewController {
+            return rootViewController.shouldAutorotate
+        }
+        return super.shouldAutorotate
+    }
 
-        if self.identifier == LGSideMenuSegueRootIdentifier {
-            source.rootViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueLeftIdentifier {
-            source.leftViewController = self.destination
-        }
-        else if self.identifier == LGSideMenuSegueRightIdentifier {
-            source.rightViewController = self.destination
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // TODO: Handle this properly
     }
 
 }
