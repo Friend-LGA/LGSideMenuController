@@ -34,11 +34,11 @@ import UIKit
 final class LGSideMenuBorderView: UIView {
 
     var roundedCorners = UIRectCorner()
-    var cornerRadius: CGFloat = 0.0
+    var cornerRadius: CGFloat = .zero
     var strokeColor: UIColor?
-    var strokeWidth: CGFloat?
+    var strokeWidth: CGFloat = .zero
     var shadowColor: UIColor?
-    var shadowBlur: CGFloat?
+    var shadowBlur: CGFloat = .zero
 
     init() {
         super.init(frame: CGRect.zero)
@@ -56,11 +56,10 @@ final class LGSideMenuBorderView: UIView {
             return
         }
 
-        let shadowBlur = self.shadowBlur ?? .zero
-        let offset = shadowBlur * 2.0
+        let offset = self.shadowBlur * 2.0
 
-        let drawRect = CGRect(x: shadowBlur,
-                              y: shadowBlur,
+        let drawRect = CGRect(x: self.shadowBlur,
+                              y: self.shadowBlur,
                               width: rect.width - offset,
                               height: rect.height - offset)
 
@@ -74,7 +73,7 @@ final class LGSideMenuBorderView: UIView {
 
         // Fill it black to draw proper shadow, then erase black internals and keep only shadow
         if let shadowColor = self.shadowColor?.cgColor {
-            context.setShadow(offset: .zero, blur: shadowBlur, color: shadowColor)
+            context.setShadow(offset: .zero, blur: self.shadowBlur, color: shadowColor)
             context.setFillColor(UIColor.black.cgColor)
             context.fillPath()
             context.setShadow(offset: .zero, blur: .zero, color: nil)
@@ -85,12 +84,10 @@ final class LGSideMenuBorderView: UIView {
 
         // To stroke we need to fill rect inside already drawn shadows and erase smaller rect from inside of it
         if let strokeColor = self.strokeColor?.cgColor {
-            let strokeWidth = self.strokeWidth ?? .zero
-
             context.setFillColor(strokeColor)
             context.fillPath()
 
-            let innerPath = UIBezierPath(roundedRect: drawRect.insetBy(dx: strokeWidth, dy: strokeWidth),
+            let innerPath = UIBezierPath(roundedRect: drawRect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth),
                                          byRoundingCorners: self.roundedCorners,
                                          cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
             innerPath.close()

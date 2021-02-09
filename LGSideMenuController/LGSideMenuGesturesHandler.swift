@@ -30,7 +30,7 @@
 import Foundation
 import UIKit
 
-final class LGSideMenuGesturesHandler: NSObject, UIGestureRecognizerDelegate {
+final internal class LGSideMenuGesturesHandler: NSObject, UIGestureRecognizerDelegate {
 
     weak var sideMenuController: LGSideMenuController?
 

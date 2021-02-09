@@ -40,57 +40,75 @@ open class LGSideMenuController: UIViewController {
     /// Notification names and keys to observe behaviour of LGSideMenuController
     public struct Notification {
 
-        static public let willShowLeftView = NSNotification.Name("LGSideMenuWillShowLeftViewNotification")
-        static public let didShowLeftView  = NSNotification.Name("LGSideMenuDidShowLeftViewNotification")
+        static let willShowLeftView = NSNotification.Name("LGSideMenuController.Notification.willShowLeftView")
+        static let didShowLeftView  = NSNotification.Name("LGSideMenuController.Notification.didShowLeftView")
 
-        static public let willHideLeftView = NSNotification.Name("LGSideMenuWillHideLeftViewNotification")
-        static public let didHideLeftView  = NSNotification.Name("LGSideMenuDidHideLeftViewNotification")
+        static let willHideLeftView = NSNotification.Name("LGSideMenuController.Notification.willHideLeftView")
+        static let didHideLeftView  = NSNotification.Name("LGSideMenuController.Notification.didHideLeftView")
 
-        static public let willShowRightView = NSNotification.Name("LGSideMenuWillShowRightViewNotification")
-        static public let didShowRightView  = NSNotification.Name("LGSideMenuDidShowRightViewNotification")
+        static let willShowRightView = NSNotification.Name("LGSideMenuController.Notification.willShowRightView")
+        static let didShowRightView  = NSNotification.Name("LGSideMenuController.Notification.didShowRightView")
 
-        static public let willHideRightView = NSNotification.Name("LGSideMenuWillHideRightViewNotification")
-        static public let didHideRightView  = NSNotification.Name("LGSideMenuDidHideRightViewNotification")
-
-        /// You can use this notification to add some custom animations
-        static public let showLeftViewAnimations = NSNotification.Name("LGSideMenuShowLeftViewAnimationsNotification")
-        /// You can use this notification to add some custom animations
-        static public let hideLeftViewAnimations = NSNotification.Name("LGSideMenuHideLeftViewAnimationsNotification")
+        static let willHideRightView = NSNotification.Name("LGSideMenuController.Notification.willHideRightView")
+        static let didHideRightView  = NSNotification.Name("LGSideMenuController.Notification.didHideRightView")
 
         /// You can use this notification to add some custom animations
-        static public let showRightViewAnimations = NSNotification.Name("LGSideMenuShowRightViewAnimationsNotification")
+        static let showAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForLeftView")
         /// You can use this notification to add some custom animations
-        static public let hideRightViewAnimations = NSNotification.Name("LGSideMenuHideRightViewAnimationsNotification")
+        static let hideAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForLeftView")
 
-        /// Key for notifications userInfo dictionary
-        static public let view = "view"
-        /// Key for notifications userInfo dictionary
-        static public let animationDuration = "duration"
+        /// You can use this notification to add some custom animations
+        static let showAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForRightView")
+        /// You can use this notification to add some custom animations
+        static let hideAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForRightView")
+
+        public struct Key {
+            /// Key for userInfo dictionary which represents duration of the animation
+            static let duration = "duration"
+        }
 
     }
 
     public struct SegueIdentifier {
-        static public let root  = "root"
-        static public let left  = "left"
-        static public let right = "right"
+        static let root  = "root"
+        static let left  = "left"
+        static let right = "right"
     }
 
     public struct AlwaysVisibleOptions: OptionSet {
         public let rawValue: Int
 
-        static public let padLandscape   = AlwaysVisibleOptions(rawValue: 1 << 0)
-        static public let padPortrait    = AlwaysVisibleOptions(rawValue: 1 << 1)
-        static public let phoneLandscape = AlwaysVisibleOptions(rawValue: 1 << 2)
-        static public let phonePortrait  = AlwaysVisibleOptions(rawValue: 1 << 3)
+        static let padLandscape   = AlwaysVisibleOptions(rawValue: 1 << 0)
+        static let padPortrait    = AlwaysVisibleOptions(rawValue: 1 << 1)
+        static let phoneLandscape = AlwaysVisibleOptions(rawValue: 1 << 2)
+        static let phonePortrait  = AlwaysVisibleOptions(rawValue: 1 << 3)
 
-        static public let landscape: AlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
-        static public let portrait: AlwaysVisibleOptions  = [.padPortrait, .phonePortrait]
-        static public let pad: AlwaysVisibleOptions       = [.padLandscape, .padPortrait]
-        static public let phone: AlwaysVisibleOptions     = [.phoneLandscape, .phonePortrait]
-        static public let all: AlwaysVisibleOptions       = [.padLandscape, .padPortrait, .phoneLandscape, .phonePortrait]
+        static let landscape: AlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+        static let portrait: AlwaysVisibleOptions  = [.padPortrait, .phonePortrait]
+        static let pad: AlwaysVisibleOptions       = [.padLandscape, .padPortrait]
+        static let phone: AlwaysVisibleOptions     = [.phoneLandscape, .phonePortrait]
+        static let all: AlwaysVisibleOptions       = [.padLandscape, .padPortrait, .phoneLandscape, .phonePortrait]
 
         public init(rawValue: Int) {
             self.rawValue = rawValue
+        }
+
+        var isAlwaysVisibleForCurrentOrientation: Bool {
+            return self.isAlwaysVisibleForOrientation(UIApplication.shared.statusBarOrientation)
+        }
+
+        func isAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
+            return self.contains(.all) ||
+                (orientation.isPortrait && self.contains(.portrait)) ||
+                (orientation.isLandscape && self.contains(.landscape)) ||
+                (LGSideMenuHelper.isPhone() &&
+                    (self.contains(.phone) ||
+                        (orientation.isPortrait && self.contains(.phonePortrait)) ||
+                        (orientation.isLandscape && self.contains(.phoneLandscape)))) ||
+                (LGSideMenuHelper.isPad() &&
+                    (self.contains(.pad) ||
+                        (orientation.isPortrait && self.contains(.padPortrait)) ||
+                        (orientation.isLandscape && self.contains(.padLandscape))))
         }
     }
 
@@ -102,7 +120,7 @@ open class LGSideMenuController: UIViewController {
         case scaleFromLittle
         // TODO: Add slideAside
 
-        public init() {
+        init() {
             self = .slideAbove
         }
     }
@@ -111,17 +129,17 @@ open class LGSideMenuController: UIViewController {
         case borders
         case full
 
-        public init() {
+        init() {
             self = .borders
         }
     }
 
     public struct SwipeGestureRange {
-        public let left: CGFloat = 44.0
-        public let right: CGFloat = 44.0
+        let left: CGFloat = 44.0
+        let right: CGFloat = 44.0
     }
 
-    private enum State {
+    public enum State {
         case rootViewIsShowing
 
         case leftViewWillShow
@@ -131,6 +149,30 @@ open class LGSideMenuController: UIViewController {
         case rightViewWillShow
         case rightViewIsShowing
         case rightViewWillHide
+
+        init() {
+            self = .rootViewIsShowing
+        }
+
+        var isLeftViewVisible: Bool {
+            return self == .leftViewIsShowing || self == .leftViewWillShow || self == .leftViewWillHide
+        }
+
+        var isRightViewVisible: Bool {
+            return self == .rightViewIsShowing || self == .rightViewWillShow || self == .rightViewWillHide
+        }
+
+        var isRootViewHidden: Bool {
+            return self == .leftViewIsShowing || self == .rightViewIsShowing
+        }
+
+        var isLeftViewHidden: Bool {
+            return !self.isLeftViewVisible
+        }
+
+        var isRightViewHidden: Bool {
+            return !self.isRightViewVisible
+        }
     }
 
     // MARK: - Public Basic Properties
@@ -142,6 +184,9 @@ open class LGSideMenuController: UIViewController {
         didSet {
             guard let rootViewController = rootViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rootViewController)
+            if self.isRootViewShowing {
+                self.addChild(rootViewController)
+            }
             self.rootView = rootViewController.view
         }
     }
@@ -153,6 +198,9 @@ open class LGSideMenuController: UIViewController {
         didSet {
             guard let leftViewController = leftViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
+            if self.isLeftViewShowing {
+                self.addChild(leftViewController)
+            }
             self.leftView = leftViewController.view
         }
     }
@@ -164,6 +212,9 @@ open class LGSideMenuController: UIViewController {
         didSet {
             guard let rightViewController = rightViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
+            if self.isRightViewShowing {
+                self.addChild(rightViewController)
+            }
             self.rightView = rightViewController.view
         }
     }
@@ -205,23 +256,23 @@ open class LGSideMenuController: UIViewController {
     }
 
     /// Container for rootViewController or rootView. Usually you do not need to use it
-    open internal(set) var rootViewContainer: UIView? {
+    open internal(set) var rootContainerView: UIView? {
         didSet {
-            self.gesturesHandler.rootViewContainer = rootViewContainer
+            self.gesturesHandler.rootViewContainer = rootContainerView
         }
     }
 
     /// Container for leftViewController or leftView. Usually you do not need to use it
-    open internal(set) var leftViewContainer: UIView? {
+    open internal(set) var leftContainerView: UIView? {
         didSet {
-            self.gesturesHandler.leftViewContainer = leftViewContainer
+            self.gesturesHandler.leftViewContainer = leftContainerView
         }
     }
 
     /// Container for rightViewController or rightView. Usually you do not need to use it
-    open internal(set) var rightViewContainer: UIView? {
+    open internal(set) var rightContainerView: UIView? {
         didSet {
-            self.gesturesHandler.rightViewContainer = rightViewContainer
+            self.gesturesHandler.rightViewContainer = rightContainerView
         }
     }
 
@@ -295,27 +346,27 @@ open class LGSideMenuController: UIViewController {
         }
     }
 
-    @IBInspectable public var leftViewHidesOnTouch: Bool = true
-    @IBInspectable public var rightViewHidesOnTouch: Bool = true
+    @IBInspectable public var isLeftViewHidesOnTouch: Bool = true
+    @IBInspectable public var isRightViewHidesOnTouch: Bool = true
 
-    @IBInspectable public var leftViewSwipeGestureEnabled: Bool = true
-    @IBInspectable public var rightViewSwipeGestureEnabled: Bool = true
+    @IBInspectable public var isLeftViewSwipeGestureEnabled: Bool = true
+    @IBInspectable public var isRightViewSwipeGestureEnabled: Bool = true
 
-    public var leftViewSwipeGestureDisabled: Bool {
+    public var isLeftViewSwipeGestureDisabled: Bool {
         set {
-            self.leftViewSwipeGestureEnabled = !newValue
+            self.isLeftViewSwipeGestureEnabled = !newValue
         }
         get {
-            return !self.leftViewSwipeGestureEnabled
+            return !self.isLeftViewSwipeGestureEnabled
         }
     }
 
-    public var rightViewSwipeGestureDisabled: Bool {
+    public var isRightViewSwipeGestureDisabled: Bool {
         set {
-            self.rightViewSwipeGestureEnabled = !newValue
+            self.isRightViewSwipeGestureEnabled = !newValue
         }
         get {
-            return !self.rightViewSwipeGestureEnabled
+            return !self.isRightViewSwipeGestureEnabled
         }
     }
 
@@ -345,24 +396,24 @@ open class LGSideMenuController: UIViewController {
     @IBInspectable public var shouldHideLeftViewAnimated: Bool = true
     @IBInspectable public var shouldHideRightViewAnimated: Bool = true
 
-    @IBInspectable public var leftViewEnabled: Bool = true
-    @IBInspectable public var rightViewEnabled: Bool = true
+    @IBInspectable public var isLeftViewEnabled: Bool = true
+    @IBInspectable public var isRightViewEnabled: Bool = true
 
-    public var leftViewDisabled: Bool {
+    public var isLeftViewDisabled: Bool {
         set {
-            self.leftViewEnabled = !newValue
+            self.isLeftViewEnabled = !newValue
         }
         get {
-            return !self.leftViewEnabled
+            return !self.isLeftViewEnabled
         }
     }
 
-    public var rightViewDisabled: Bool {
+    public var isRightViewDisabled: Bool {
         set {
-            self.rightViewEnabled = !newValue
+            self.isRightViewEnabled = !newValue
         }
         get {
-            return !self.rightViewEnabled
+            return !self.isRightViewEnabled
         }
     }
 
@@ -445,13 +496,13 @@ open class LGSideMenuController: UIViewController {
     /// Default:
     /// if rootViewController != nil then rootViewController.prefersStatusBarHidden
     /// else self.prefersStatusBarHidden
-    @IBInspectable public var rootViewStatusBarHidden: Bool {
+    @IBInspectable public var isRootViewStatusBarHidden: Bool {
         set {
-            _rootViewStatusBarHidden = newValue
+            _isRootViewStatusBarHidden = newValue
         }
         get {
-            if let rootViewStatusBarHidden = _rootViewStatusBarHidden {
-                return rootViewStatusBarHidden
+            if let isRootViewStatusBarHidden = _isRootViewStatusBarHidden {
+                return isRootViewStatusBarHidden
             }
             if let rootViewController = self.rootViewController {
                 return rootViewController.prefersStatusBarHidden
@@ -459,45 +510,45 @@ open class LGSideMenuController: UIViewController {
             return self.prefersStatusBarHidden
         }
     }
-    private var _rootViewStatusBarHidden: Bool?
+    private var _isRootViewStatusBarHidden: Bool?
 
     /// Default:
     /// if leftViewController != nil then leftViewController.prefersStatusBarHidden
     /// else self.rootViewStatusBarHidden
-    @IBInspectable public var leftViewStatusBarHidden: Bool {
+    @IBInspectable public var isLeftViewStatusBarHidden: Bool {
         set {
-            _leftViewStatusBarHidden = newValue
+            _isLeftViewStatusBarHidden = newValue
         }
         get {
-            if let leftViewStatusBarHidden = _leftViewStatusBarHidden {
-                return leftViewStatusBarHidden
+            if let isLeftViewStatusBarHidden = _isLeftViewStatusBarHidden {
+                return isLeftViewStatusBarHidden
             }
             if let leftViewController = self.leftViewController {
                 return leftViewController.prefersStatusBarHidden
             }
-            return self.rootViewStatusBarHidden
+            return self.isRootViewStatusBarHidden
         }
     }
-    private var _leftViewStatusBarHidden: Bool?
+    private var _isLeftViewStatusBarHidden: Bool?
 
     /// Default:
     /// if rightViewController != nil then rightViewController.prefersStatusBarHidden
     /// else self.rootViewStatusBarHidden
-    @IBInspectable public var rightViewStatusBarHidden: Bool {
+    @IBInspectable public var isRightViewStatusBarHidden: Bool {
         set {
-            _rightViewStatusBarHidden = newValue
+            _isRightViewStatusBarHidden = newValue
         }
         get {
-            if let rightViewStatusBarHidden = _rightViewStatusBarHidden {
-                return rightViewStatusBarHidden
+            if let isRightViewStatusBarHidden = _isRightViewStatusBarHidden {
+                return isRightViewStatusBarHidden
             }
             if let rightViewController = self.rightViewController {
                 return rightViewController.prefersStatusBarHidden
             }
-            return self.rootViewStatusBarHidden
+            return self.isRootViewStatusBarHidden
         }
     }
-    private var _rightViewStatusBarHidden: Bool?
+    private var _isRightViewStatusBarHidden: Bool?
 
     /// Default:
     /// if rootViewController != nil then rootViewController.preferredStatusBarStyle
@@ -935,6 +986,11 @@ open class LGSideMenuController: UIViewController {
 
     // MARK: - State Properties
 
+    /// Is root view fully opened
+    public var isRootViewShowing: Bool {
+        return self.state == .rootViewIsShowing
+    }
+
     /// Is left view fully opened
     public var isLeftViewShowing: Bool {
         return self.state == .leftViewIsShowing
@@ -947,60 +1003,47 @@ open class LGSideMenuController: UIViewController {
 
     /// Is left view showing or going to show or going to hide right now
     public var isLeftViewVisible: Bool {
-        return self.state == .leftViewIsShowing || self.state == .leftViewWillShow || self.state == .leftViewWillHide
+        return self.state.isLeftViewVisible
     }
 
     /// Is right view showing or going to show or going to hide right now
     public var isRightViewVisible: Bool {
-        return self.state == .rightViewIsShowing || self.state == .rightViewWillShow || self.state == .rightViewWillHide
+        return self.state.isRightViewVisible
+    }
+
+    /// Is left view fully closed
+    public var isRootViewHidden: Bool {
+        return self.state.isRootViewHidden
     }
 
     /// Is left view fully closed
     public var isLeftViewHidden: Bool {
-        return !self.isLeftViewVisible
+        return self.state.isLeftViewHidden
     }
 
     /// Is right view fully closed
     public var isRightViewHidden: Bool {
-        return !self.isRightViewVisible
+        return self.state.isRightViewHidden
     }
 
-    /// Is left view has property "always visible" for current orientation
+    /// Is left view suppose to be "always visible" for current orientation
     public var isLeftViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.isLeftViewAlwaysVisibleForOrientation(orientation: UIApplication.shared.statusBarOrientation)
+        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
     }
 
-    /// Is right view has property "always visible" for current orientation
+    /// Is right view suppose to be "always visible" for current orientation
     public var isRightViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.isRightViewAlwaysVisibleForOrientation(orientation: UIApplication.shared.statusBarOrientation)
+        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
     }
 
-    public func isLeftViewAlwaysVisibleForOrientation(orientation: UIInterfaceOrientation) -> Bool {
-        return ((self.leftViewAlwaysVisibleOptions.contains(.all)) ||
-                    (orientation.isPortrait && self.leftViewAlwaysVisibleOptions.contains(.portrait)) ||
-                    (orientation.isLandscape && self.leftViewAlwaysVisibleOptions.contains(.landscape)) ||
-                (LGSideMenuHelper.isPhone() &&
-                    ((self.leftViewAlwaysVisibleOptions.contains(.phone)) ||
-                        (orientation.isPortrait && self.leftViewAlwaysVisibleOptions.contains(.phonePortrait)) ||
-                        (orientation.isLandscape && self.leftViewAlwaysVisibleOptions.contains(.phoneLandscape)))) ||
-                (LGSideMenuHelper.isPad() &&
-                    ((self.leftViewAlwaysVisibleOptions.contains(.pad)) ||
-                        (orientation.isPortrait && self.leftViewAlwaysVisibleOptions.contains(.padPortrait)) ||
-                        (orientation.isLandscape && self.leftViewAlwaysVisibleOptions.contains(.padLandscape)))))
+    /// Is left view suppose to be "always visible" for given orientation
+    public func isLeftViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
+        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
     }
 
-    public func isRightViewAlwaysVisibleForOrientation(orientation: UIInterfaceOrientation) -> Bool {
-        return ((self.rightViewAlwaysVisibleOptions.contains(.all)) ||
-                    (orientation.isPortrait && self.rightViewAlwaysVisibleOptions.contains(.portrait)) ||
-                    (orientation.isLandscape && self.rightViewAlwaysVisibleOptions.contains(.landscape)) ||
-                (LGSideMenuHelper.isPhone() &&
-                    ((self.rightViewAlwaysVisibleOptions.contains(.phone)) ||
-                        (orientation.isPortrait && self.rightViewAlwaysVisibleOptions.contains(.phonePortrait)) ||
-                        (orientation.isLandscape && self.rightViewAlwaysVisibleOptions.contains(.phoneLandscape)))) ||
-                (LGSideMenuHelper.isPad() &&
-                    ((self.rightViewAlwaysVisibleOptions.contains(.pad)) ||
-                        (orientation.isPortrait && self.rightViewAlwaysVisibleOptions.contains(.padPortrait)) ||
-                        (orientation.isLandscape && self.rightViewAlwaysVisibleOptions.contains(.padLandscape)))))
+    /// Is right view suppose to be "always visible" for given orientation
+    public func isRightViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
+        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
     }
 
     // MARK: - Callbacks
@@ -1033,6 +1076,10 @@ open class LGSideMenuController: UIViewController {
 
     // MARK: - Internal Properties
 
+    public internal(set) var state: State = .rootViewIsShowing
+
+    internal let gesturesHandler: LGSideMenuGesturesHandler
+
     internal var isNeedsUpdateLayoutsAndStyles: Bool = false
     internal var isNeedsUpdateRootViewLayoutsAndStyles: Bool = false
     internal var isNeedsUpdateLeftViewLayoutsAndStyles: Bool = false
@@ -1040,9 +1087,7 @@ open class LGSideMenuController: UIViewController {
 
     internal var savedSize: CGSize = .zero
 
-    internal var isRootViewControllerAdded: Bool = false
-    internal var isLeftViewControllerAdded: Bool = false
-    internal var isRightViewControllerAdded: Bool = false
+    internal var rootViewBorderView: LGSideMenuBorderView?
 
     internal var rootViewCoverView: UIVisualEffectView? {
         didSet {
@@ -1050,20 +1095,16 @@ open class LGSideMenuController: UIViewController {
         }
     }
 
-    internal var rootViewBorderView: LGSideMenuBorderView?
-
-    internal var leftViewCoverView: UIVisualEffectView?
-    internal var leftViewStyleView: UIVisualEffectView?
     internal var leftViewBorderView: LGSideMenuBorderView?
+    internal var leftViewStyleView: UIVisualEffectView?
+    internal var leftViewCoverView: UIVisualEffectView?
 
-    internal var rightViewCoverView: UIVisualEffectView?
-    internal var rightViewStyleView: UIVisualEffectView?
     internal var rightViewBorderView: LGSideMenuBorderView?
+    internal var rightViewStyleView: UIVisualEffectView?
+    internal var rightViewCoverView: UIVisualEffectView?
 
-    // MARK: - Private Properties
-
-    private var state: State = .rootViewIsShowing
-    private let gesturesHandler: LGSideMenuGesturesHandler
+    internal var leftViewGestireStartX: CGFloat?
+    internal var rightViewGestireStartX: CGFloat?
 
     // MARK: - Initialization
 

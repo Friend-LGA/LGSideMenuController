@@ -56,7 +56,7 @@ struct LGSideMenuHelper {
         }
     }
 
-    static func setImage(_ image: UIImage, for imageView: UIImageView) {
+    static func setImage(_ image: UIImage?, for imageView: UIImageView) {
         let contentMode = imageView.contentMode
         imageView.contentMode = .scaleToFill
         imageView.image = image

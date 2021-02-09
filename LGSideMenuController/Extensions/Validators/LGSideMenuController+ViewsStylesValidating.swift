@@ -39,15 +39,73 @@ internal extension LGSideMenuController {
     }
 
     func rootViewsStylesValidate() {
+        guard let rootViewBorderView = self.rootViewBorderView,
+              let rootViewCoverView = self.rootViewCoverView else { return }
 
+        rootViewBorderView.strokeColor = self.rootViewLayerBorderColor
+        rootViewBorderView.strokeWidth = self.rootViewLayerBorderWidth
+        rootViewBorderView.shadowColor = self.rootViewLayerShadowColor
+        rootViewBorderView.shadowBlur = self.rootViewLayerShadowRadius
+        rootViewBorderView.setNeedsDisplay()
+
+        if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            rootViewCoverView.backgroundColor = self.rootViewCoverColorForLeftView
+            rootViewCoverView.effect = self.rootViewCoverBlurEffectForLeftView
+        }
+        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            rootViewCoverView.backgroundColor = self.rootViewCoverColorForRightView
+            rootViewCoverView.effect = self.rootViewCoverBlurEffectForRightView
+        }
+        else {
+            rootViewCoverView.backgroundColor = nil
+            rootViewCoverView.effect = nil
+        }
     }
 
     func leftViewsStylesValidate() {
+        guard let leftViewBackgroundView = self.leftViewBackgroundView,
+              let leftViewBorderView = self.leftViewBorderView,
+              let leftViewStyleView = self.leftViewStyleView,
+              let leftViewCoverView = self.leftViewCoverView else { return }
 
+        leftViewBackgroundView.backgroundColor = self.leftViewBackgroundColor
+        LGSideMenuHelper.setImage(self.leftViewBackgroundImage, for: leftViewBackgroundView)
+
+        leftViewBorderView.strokeColor = self.leftViewLayerBorderColor
+        leftViewBorderView.strokeWidth = self.leftViewLayerBorderWidth
+        leftViewBorderView.shadowColor = self.leftViewLayerShadowColor
+        leftViewBorderView.shadowBlur = self.leftViewLayerShadowRadius
+        leftViewBorderView.setNeedsDisplay()
+
+        leftViewStyleView.alpha = self.leftViewBackgroundAlpha
+        leftViewStyleView.backgroundColor = self.isLeftViewAlwaysVisibleForCurrentOrientation ? self.leftViewBackgroundColor.withAlphaComponent(1.0) : self.leftViewBackgroundColor
+        leftViewStyleView.effect = self.leftViewBackgroundBlurEffect
+
+        leftViewCoverView.backgroundColor = self.leftViewCoverColor
+        leftViewCoverView.effect = self.leftViewCoverBlurEffect
     }
 
     func rightViewsStylesValidate() {
+        guard let rightViewBackgroundView = self.rightViewBackgroundView,
+              let rightViewBorderView = self.rightViewBorderView,
+              let rightViewStyleView = self.rightViewStyleView,
+              let rightViewCoverView = self.rightViewCoverView else { return }
 
+        rightViewBackgroundView.backgroundColor = self.rightViewBackgroundColor
+        LGSideMenuHelper.setImage(self.rightViewBackgroundImage, for: rightViewBackgroundView)
+
+        rightViewBorderView.strokeColor = self.rightViewLayerBorderColor
+        rightViewBorderView.strokeWidth = self.rightViewLayerBorderWidth
+        rightViewBorderView.shadowColor = self.rightViewLayerShadowColor
+        rightViewBorderView.shadowBlur = self.rightViewLayerShadowRadius
+        rightViewBorderView.setNeedsDisplay()
+
+        rightViewStyleView.alpha = self.rightViewBackgroundAlpha
+        rightViewStyleView.backgroundColor = self.isRightViewAlwaysVisibleForCurrentOrientation ? self.rightViewBackgroundColor.withAlphaComponent(1.0) : self.rightViewBackgroundColor
+        rightViewStyleView.effect = self.rightViewBackgroundBlurEffect
+
+        rightViewCoverView.backgroundColor = self.rightViewCoverColor
+        rightViewCoverView.effect = self.rightViewCoverBlurEffect
     }
     
 }

@@ -50,24 +50,6 @@ public extension LGSideMenuController {
         }
     }
 
-//    func rootViewLayoutSubviews(size: CGSize) {
-//        guard let rootView = self.rootView else { return }
-//        rootView.setNeedsLayout()
-//        rootView.layoutIfNeeded()
-//    }
-//
-//    func leftViewLayoutSubviews(size: CGSize) {
-//        guard let leftView = self.leftView else { return }
-//        leftView.setNeedsLayout()
-//        leftView.layoutIfNeeded()
-//    }
-//
-//    func rightViewLayoutSubviews(size: CGSize) {
-//        guard let rightView = self.rightView else { return }
-//        rightView.setNeedsLayout()
-//        rightView.layoutIfNeeded()
-//    }
-
     /// Invalidates the current layout and triggers a layout update during the next update cycle.
     func setNeedsUpdateLayoutsAndStyles() {
         self.isNeedsUpdateLayoutsAndStyles = true
@@ -107,7 +89,7 @@ public extension LGSideMenuController {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 
-        self.viewsValidate()
+        self.viewsInitValidate()
         self.viewsHierarchyValidate()
         self.viewsFramesValidate()
         self.viewsStylesValidate()
@@ -119,7 +101,7 @@ public extension LGSideMenuController {
     func updateRootViewLayoutsAndStyles() {
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
 
-        self.rootViewsValidate()
+        self.rootViewsInitValidate()
         self.rootViewsHierarchyValidate()
         self.rootViewsFramesValidate()
         self.rootViewsStylesValidate()
@@ -131,7 +113,7 @@ public extension LGSideMenuController {
     func updateLeftViewLayoutsAndStyles() {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
 
-        self.leftViewsValidate()
+        self.leftViewsInitValidate()
         self.leftViewsHierarchyValidate()
         self.leftViewsFramesValidate()
         self.leftViewsStylesValidate()
@@ -143,7 +125,7 @@ public extension LGSideMenuController {
     func updateRightViewLayoutsAndStyles() {
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 
-        self.rightViewsValidate()
+        self.rightViewsInitValidate()
         self.rightViewsHierarchyValidate()
         self.rightViewsFramesValidate()
         self.rightViewsStylesValidate()
