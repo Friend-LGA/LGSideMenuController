@@ -64,7 +64,7 @@ internal extension LGSideMenuController {
         guard let leftView = self.leftView else { return }
 
         leftView.clipsToBounds = true
-        leftView.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5);
+        leftView.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
 
         if self.leftContainerView == nil {
             self.leftContainerView = UIView()
@@ -86,7 +86,7 @@ internal extension LGSideMenuController {
             self.leftViewStyleView = UIVisualEffectView()
             self.leftViewStyleView?.backgroundColor = .clear
             self.leftViewStyleView?.isUserInteractionEnabled = false
-            self.leftViewStyleView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5);
+            self.leftViewStyleView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
         }
 
         if self.leftViewCoverView == nil {
@@ -100,7 +100,7 @@ internal extension LGSideMenuController {
         guard let rightView = self.rightView else { return }
 
         rightView.clipsToBounds = true
-        rightView.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5);
+        rightView.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
 
         if self.rightContainerView == nil {
             self.rightContainerView = UIView()
@@ -118,7 +118,7 @@ internal extension LGSideMenuController {
             self.rightViewStyleView = UIVisualEffectView()
             self.rightViewStyleView?.backgroundColor = .clear
             self.rightViewStyleView?.isUserInteractionEnabled = false
-            self.rightViewStyleView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5);
+            self.rightViewStyleView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
         }
 
         if self.rightViewBorderView == nil {

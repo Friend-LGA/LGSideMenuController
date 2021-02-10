@@ -32,8 +32,8 @@ import UIKit
 import ObjectiveC
 
 struct LGSideMenuHelper {
-    private struct Constant {
-        static var sideMenuControllerKey = "sideMenuController"
+    private struct Keys {
+        static var sideMenuController = "sideMenuController"
     }
 
     static func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
@@ -72,11 +72,11 @@ struct LGSideMenuHelper {
     }
 
     static func setSideMenuController(_ sideMenuController: LGSideMenuController?, to viewController: UIViewController) {
-        objc_setAssociatedObject(viewController, &Constant.sideMenuControllerKey, sideMenuController, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        objc_setAssociatedObject(viewController, &Keys.sideMenuController, sideMenuController, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
     }
 
     static func getSideMenuController(from viewController: UIViewController) -> LGSideMenuController? {
-        return objc_getAssociatedObject(viewController, &Constant.sideMenuControllerKey) as? LGSideMenuController
+        return objc_getAssociatedObject(viewController, &Keys.sideMenuController) as? LGSideMenuController
     }
 
 }

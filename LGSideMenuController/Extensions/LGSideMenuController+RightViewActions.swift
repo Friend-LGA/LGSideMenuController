@@ -37,6 +37,9 @@ public extension LGSideMenuController {
               self.isRightViewEnabled,
               !self.isRightViewAlwaysVisibleForCurrentOrientation,
               !self.isRightViewShowing else { return }
+
+        self.showRightViewPrepare(withGesture: false)
+        self.showRightViewActions(animated: animated, completion: completion)
     }
 
     func hideRightView(animated: Bool = true, completion: Completion? = nil) {
@@ -44,6 +47,9 @@ public extension LGSideMenuController {
               self.isRightViewEnabled,
               !self.isRightViewAlwaysVisibleForCurrentOrientation,
               !self.isRightViewHidden else { return }
+
+        self.hideRightViewPrepare()
+        self.hideRightViewActions(animated: animated, completion: completion)
     }
 
     func toggleRightView(animated: Bool = true, completion: Completion? = nil) {
@@ -52,10 +58,10 @@ public extension LGSideMenuController {
               !self.isRightViewAlwaysVisibleForCurrentOrientation else { return }
 
         if self.isRightViewShowing || self.state == .rightViewWillHide {
-            self.hideRightView()
+            self.hideRightView(animated: animated, completion: completion)
         }
         else if self.isRightViewHidden || self.state == .rightViewWillShow {
-            self.showRightView()
+            self.showRightView(animated: animated, completion: completion)
         }
     }
 
@@ -104,6 +110,8 @@ public extension LGSideMenuController {
         self.state = .rightViewWillShow
         self.willShowRightViewCallbacks()
 
+        self.rootView?.isUserInteractionEnabled = false
+
         if let rootViewController = self.rootViewController {
             rootViewController.removeFromParent()
         }
@@ -127,7 +135,7 @@ public extension LGSideMenuController {
         guard self.state == .rightViewWillShow else { return }
 
         if (animated) {
-            self.gesturesHandler.isAnimating = true
+            self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
                 self.rootViewsTransformsValidate(percentage: 1.0)
@@ -138,7 +146,7 @@ public extension LGSideMenuController {
                 guard let self = self else { return }
 
                 self.showRightViewDone()
-                self.gesturesHandler.isAnimating = false
+                self.isAnimating = false
 
                 if let completion = completion {
                     completion()
@@ -159,16 +167,20 @@ public extension LGSideMenuController {
 
         self.state = .rightViewIsShowing
         self.didShowRightViewCallbacks()
+
+        self.rightView?.isUserInteractionEnabled = true
     }
 
     // MARK: Hide
 
     internal func hideRightViewPrepare() {
-        guard self.rightView != nil else { return }
-        guard self.isRightViewShowing || self.state == .rightViewWillShow else { return }
+        guard self.rightView != nil,
+              self.isRightViewShowing || self.state == .rightViewWillShow else { return }
 
         self.state = .rightViewWillHide
         self.willHideRightViewCallbacks()
+
+        self.rightView?.isUserInteractionEnabled = false
     }
 
     internal func hideRightViewActions(animated: Bool, completion: Completion? = nil) {
@@ -185,7 +197,7 @@ public extension LGSideMenuController {
         }
 
         if (animated) {
-            self.gesturesHandler.isAnimating = true
+            self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
                 self.rootViewsTransformsValidate(percentage: 0.0)
@@ -196,7 +208,7 @@ public extension LGSideMenuController {
                 guard let self = self else { return }
 
                 self.hideRightViewDone(withGesture: false)
-                self.gesturesHandler.isAnimating = false
+                self.isAnimating = false
 
                 if let completion = completion {
                     completion();
@@ -229,6 +241,8 @@ public extension LGSideMenuController {
 
         self.state = .rootViewIsShowing;
         self.didHideRightViewCallbacks()
+
+        self.rootView?.isUserInteractionEnabled = true
 
         self.rootViewsVisibilityValidate()
         self.rightViewsVisibilityValidate()

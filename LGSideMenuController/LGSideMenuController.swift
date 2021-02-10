@@ -31,7 +31,7 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-open class LGSideMenuController: UIViewController {
+open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     public typealias Completion = () -> Void
     public typealias Callback = (LGSideMenuController) -> Void
@@ -261,25 +261,11 @@ open class LGSideMenuController: UIViewController {
     }
 
     /// Container for rootViewController or rootView. Usually you do not need to use it
-    open internal(set) var rootContainerView: UIView? {
-        didSet {
-            self.gesturesHandler.rootViewContainer = rootContainerView
-        }
-    }
-
+    open internal(set) var rootContainerView: UIView?
     /// Container for leftViewController or leftView. Usually you do not need to use it
-    open internal(set) var leftContainerView: UIView? {
-        didSet {
-            self.gesturesHandler.leftViewContainer = leftContainerView
-        }
-    }
-
+    open internal(set) var leftContainerView: UIView?
     /// Container for rightViewController or rightView. Usually you do not need to use it
-    open internal(set) var rightContainerView: UIView? {
-        didSet {
-            self.gesturesHandler.rightViewContainer = rightContainerView
-        }
-    }
+    open internal(set) var rightContainerView: UIView?
 
     open internal(set) var leftViewBackgroundView: UIImageView?
     open internal(set) var rightViewBackgroundView: UIImageView?
@@ -1021,7 +1007,7 @@ open class LGSideMenuController: UIViewController {
 
     public internal(set) var state: State = .rootViewIsShowing
 
-    internal let gesturesHandler: LGSideMenuGesturesHandler
+    public internal(set) var isAnimating = false
 
     internal var isNeedsUpdateLayoutsAndStyles: Bool = false
     internal var isNeedsUpdateRootViewLayoutsAndStyles: Bool = false
@@ -1031,12 +1017,7 @@ open class LGSideMenuController: UIViewController {
     internal var savedSize: CGSize = .zero
 
     internal var rootViewBorderView: LGSideMenuBorderView?
-
-    internal var rootViewCoverView: UIVisualEffectView? {
-        didSet {
-            self.gesturesHandler.rootViewCoverView = rootViewCoverView
-        }
-    }
+    internal var rootViewCoverView: UIVisualEffectView?
 
     internal var leftViewBorderView: LGSideMenuBorderView?
     internal var leftViewStyleView: UIVisualEffectView?
@@ -1049,26 +1030,26 @@ open class LGSideMenuController: UIViewController {
     internal var leftViewGestureStartX: CGFloat?
     internal var rightViewGestureStartX: CGFloat?
 
+    internal var isLeftViewShowingBeforeGesture: Bool = false
+    internal var isRightViewShowingBeforeGesture: Bool = false
+
     // MARK: - Initialization
 
     public init() {
         self.tapGesture = UITapGestureRecognizer()
         self.panGesture = UIPanGestureRecognizer()
-        self.gesturesHandler = LGSideMenuGesturesHandler()
 
         super.init(nibName: nil, bundle: nil)
 
-        self.gesturesHandler.sideMenuController = self
-
         self.tapGesture.addTarget(self, action: #selector(handleTapGesture))
-        self.tapGesture.delegate = self.gesturesHandler
+        self.tapGesture.delegate = self
         self.tapGesture.numberOfTapsRequired = 1
         self.tapGesture.numberOfTouchesRequired = 1
         self.tapGesture.cancelsTouchesInView = false // TODO: Make settings to enable/disable this
         self.view.addGestureRecognizer(self.tapGesture)
 
         self.panGesture.addTarget(self, action: #selector(handlePanGesture))
-        self.panGesture.delegate = self.gesturesHandler
+        self.panGesture.delegate = self
         self.panGesture.minimumNumberOfTouches = 1
         self.panGesture.maximumNumberOfTouches = 1
         self.panGesture.cancelsTouchesInView = false // TODO: Make settings to enable/disable this

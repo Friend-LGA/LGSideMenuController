@@ -37,6 +37,9 @@ public extension LGSideMenuController {
               self.isLeftViewEnabled,
               !self.isLeftViewAlwaysVisibleForCurrentOrientation,
               !self.isLeftViewShowing else { return }
+
+        self.showLeftViewPrepare(withGesture: false)
+        self.showLeftViewActions(animated: animated, completion: completion)
     }
 
     func hideLeftView(animated: Bool = true, completion: Completion? = nil) {
@@ -44,6 +47,9 @@ public extension LGSideMenuController {
               self.isLeftViewEnabled,
               !self.isLeftViewAlwaysVisibleForCurrentOrientation,
               !self.isLeftViewHidden else { return }
+
+        self.hideLeftViewPrepare()
+        self.hideLeftViewActions(animated: animated, completion: completion)
     }
 
     func toggleLeftView(animated: Bool = true, completion: Completion? = nil) {
@@ -52,10 +58,10 @@ public extension LGSideMenuController {
               !self.isLeftViewAlwaysVisibleForCurrentOrientation else { return }
 
         if self.isLeftViewShowing || self.state == .leftViewWillHide {
-            self.hideLeftView()
+            self.hideLeftView(animated: animated, completion: completion)
         }
         else if self.isLeftViewHidden || self.state == .leftViewWillShow {
-            self.showLeftView()
+            self.showLeftView(animated: animated, completion: completion)
         }
     }
 
@@ -104,6 +110,8 @@ public extension LGSideMenuController {
         self.state = .leftViewWillShow
         self.willShowLeftViewCallbacks()
 
+        self.rootView?.isUserInteractionEnabled = false
+
         if let rootViewController = self.rootViewController {
             rootViewController.removeFromParent()
         }
@@ -127,7 +135,7 @@ public extension LGSideMenuController {
         guard self.state == .leftViewWillShow else { return }
 
         if (animated) {
-            self.gesturesHandler.isAnimating = true
+            self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: self.leftViewAnimationDuration, animations: {
                 self.rootViewsTransformsValidate(percentage: 1.0)
@@ -138,7 +146,7 @@ public extension LGSideMenuController {
                 guard let self = self else { return }
 
                 self.showLeftViewDone()
-                self.gesturesHandler.isAnimating = false
+                self.isAnimating = false
 
                 if let completion = completion {
                     completion()
@@ -159,16 +167,20 @@ public extension LGSideMenuController {
 
         self.state = .leftViewIsShowing
         self.didShowLeftViewCallbacks()
+
+        self.leftView?.isUserInteractionEnabled = true
     }
 
     // MARK: Hide
 
     internal func hideLeftViewPrepare() {
-        guard self.leftView != nil else { return }
-        guard self.isLeftViewShowing || self.state == .leftViewWillShow else { return }
+        guard self.leftView != nil,
+              self.isLeftViewShowing || self.state == .leftViewWillShow else { return }
 
         self.state = .leftViewWillHide
         self.willHideLeftViewCallbacks()
+
+        self.leftView?.isUserInteractionEnabled = false
     }
 
     internal func hideLeftViewActions(animated: Bool, completion: Completion? = nil) {
@@ -185,7 +197,7 @@ public extension LGSideMenuController {
         }
 
         if (animated) {
-            self.gesturesHandler.isAnimating = true
+            self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: self.leftViewAnimationDuration, animations: {
                 self.rootViewsTransformsValidate(percentage: 0.0)
@@ -196,7 +208,7 @@ public extension LGSideMenuController {
                 guard let self = self else { return }
 
                 self.hideLeftViewDone(withGesture: false)
-                self.gesturesHandler.isAnimating = false
+                self.isAnimating = false
 
                 if let completion = completion {
                     completion();
@@ -229,6 +241,8 @@ public extension LGSideMenuController {
 
         self.state = .rootViewIsShowing;
         self.didHideLeftViewCallbacks()
+
+        self.rootView?.isUserInteractionEnabled = true
 
         self.rootViewsVisibilityValidate()
         self.leftViewsVisibilityValidate()
