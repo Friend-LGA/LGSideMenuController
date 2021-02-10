@@ -91,33 +91,31 @@ public extension LGSideMenuController {
 
     // MARK: - Show
 
-    private func showRightViewPrepare(withGesture: Bool) {
-        guard self.rightView != nil && self.isRightViewHidden else { return }
-
-        var shouldUpdateFrames = false
-        if (self.isRightViewHidden) {
-            shouldUpdateFrames = true
+    internal func showRightViewPrepare(withGesture: Bool) {
+        guard self.rightView != nil else { return }
+        guard self.isRightViewHidden else {
+            if self.state == .rightViewWillHide {
+                self.state = .rightViewWillShow
+                self.willShowRightViewCallbacks()
+            }
+            return
         }
 
         self.state = .rightViewWillShow
+        self.willShowRightViewCallbacks()
 
         if let rootViewController = self.rootViewController {
             rootViewController.removeFromParent()
         }
 
-        LGSideMenuHelper.statusBarAppearanceUpdate(animated: true,
-                                             viewController: self,
-                                                   duration: self.rightViewAnimationDuration,
-                                                  animation: self.rightViewStatusBarUpdateAnimation)
+        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.rightViewAnimationDuration)
 
         if let rightViewController = self.rightViewController {
             self.addChild(rightViewController)
         }
 
-        if (shouldUpdateFrames) {
-            self.rightViewsFramesValidate()
-            self.rightViewsTransformsValidate(percentage: 0.0)
-        }
+        self.rightViewsFramesValidate()
+        self.rightViewsTransformsValidate(percentage: 0.0)
 
         self.rootViewsStylesValidate()
         self.rightViewsStylesValidate()
@@ -125,7 +123,7 @@ public extension LGSideMenuController {
         self.rightViewsVisibilityValidate()
     }
 
-    private func showRightViewActions(animated: Bool, completion: Completion? = nil) {
+    internal func showRightViewActions(animated: Bool, completion: Completion? = nil) {
         guard self.state == .rightViewWillShow else { return }
 
         if (animated) {
@@ -134,18 +132,7 @@ public extension LGSideMenuController {
             LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
                 self.rootViewsTransformsValidate(percentage: 1.0)
                 self.rightViewsTransformsValidate(percentage: 1.0)
-
-                NotificationCenter.default.post(name: Notification.showAnimationsForRightView,
-                                                object: self,
-                                                userInfo: [Notification.Key.duration: self.rightViewAnimationDuration])
-
-                if let showAnimationsForRightView = self.showAnimationsForRightView {
-                    showAnimationsForRightView(self, self.rightViewAnimationDuration)
-                }
-
-                if let delegate = self.delegate {
-                    delegate.showAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
-                }
+                self.showAnimationsForRightViewCallbacks()
             },
             completion: { [weak self] (finished: Bool) in
                 guard let self = self else { return }
@@ -167,14 +154,84 @@ public extension LGSideMenuController {
         }
     }
 
-    private func showRightViewDone() {
+    internal func showRightViewDone() {
         guard self.state == .rightViewWillShow else { return }
 
-        self.rightViewGestireStartX = nil
         self.state = .rightViewIsShowing
         self.didShowRightViewCallbacks()
     }
 
-    // MARK: - Hide
+    // MARK: Hide
+
+    internal func hideRightViewPrepare() {
+        guard self.rightView != nil else { return }
+        guard self.isRightViewShowing || self.state == .rightViewWillShow else { return }
+
+        self.state = .rightViewWillHide
+        self.willHideRightViewCallbacks()
+    }
+
+    internal func hideRightViewActions(animated: Bool, completion: Completion? = nil) {
+        guard self.state == .rightViewWillHide else { return }
+
+        if let rightViewController = self.rightViewController {
+            rightViewController.removeFromParent()
+        }
+
+        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.rightViewAnimationDuration)
+
+        if let rootViewController = self.rootViewController {
+            self.addChild(rootViewController)
+        }
+
+        if (animated) {
+            self.gesturesHandler.isAnimating = true
+
+            LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
+                self.rootViewsTransformsValidate(percentage: 0.0)
+                self.rightViewsTransformsValidate(percentage: 0.0)
+                self.hideAnimationsForRightViewCallbacks()
+            },
+            completion: { [weak self] (finished: Bool) in
+                guard let self = self else { return }
+
+                self.hideRightViewDone(withGesture: false)
+                self.gesturesHandler.isAnimating = false
+
+                if let completion = completion {
+                    completion();
+                }
+            })
+        }
+        else {
+            self.hideRightViewDone(withGesture: false)
+
+            if let completion = completion {
+                completion();
+            }
+        }
+    }
+
+    internal func hideRightViewDone(withGesture: Bool) {
+        guard self.state == .rightViewWillHide else { return }
+
+        if withGesture {
+            if let rightViewController = self.rightViewController {
+                rightViewController.removeFromParent()
+            }
+
+            LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.rightViewAnimationDuration)
+
+            if let rootViewController = self.rootViewController {
+                self.addChild(rootViewController)
+            }
+        }
+
+        self.state = .rootViewIsShowing;
+        self.didHideRightViewCallbacks()
+
+        self.rootViewsVisibilityValidate()
+        self.rightViewsVisibilityValidate()
+    }
 
 }

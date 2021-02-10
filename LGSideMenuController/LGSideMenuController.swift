@@ -135,8 +135,13 @@ open class LGSideMenuController: UIViewController {
     }
 
     public struct SwipeGestureRange {
-        let left: CGFloat = 44.0
-        let right: CGFloat = 44.0
+        let left: CGFloat
+        let right: CGFloat
+
+        init(left: CGFloat = 44.0, right: CGFloat = 44.0) {
+            self.left = left
+            self.right = right
+        }
     }
 
     public enum State {
@@ -984,68 +989,6 @@ open class LGSideMenuController: UIViewController {
     }
     private var _rightViewBackgroundImageFinalScale: CGFloat?
 
-    // MARK: - State Properties
-
-    /// Is root view fully opened
-    public var isRootViewShowing: Bool {
-        return self.state == .rootViewIsShowing
-    }
-
-    /// Is left view fully opened
-    public var isLeftViewShowing: Bool {
-        return self.state == .leftViewIsShowing
-    }
-
-    /// Is right view fully opened
-    public var isRightViewShowing: Bool {
-        return self.state == .rightViewIsShowing
-    }
-
-    /// Is left view showing or going to show or going to hide right now
-    public var isLeftViewVisible: Bool {
-        return self.state.isLeftViewVisible
-    }
-
-    /// Is right view showing or going to show or going to hide right now
-    public var isRightViewVisible: Bool {
-        return self.state.isRightViewVisible
-    }
-
-    /// Is left view fully closed
-    public var isRootViewHidden: Bool {
-        return self.state.isRootViewHidden
-    }
-
-    /// Is left view fully closed
-    public var isLeftViewHidden: Bool {
-        return self.state.isLeftViewHidden
-    }
-
-    /// Is right view fully closed
-    public var isRightViewHidden: Bool {
-        return self.state.isRightViewHidden
-    }
-
-    /// Is left view suppose to be "always visible" for current orientation
-    public var isLeftViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
-    }
-
-    /// Is right view suppose to be "always visible" for current orientation
-    public var isRightViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
-    }
-
-    /// Is left view suppose to be "always visible" for given orientation
-    public func isLeftViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
-    }
-
-    /// Is right view suppose to be "always visible" for given orientation
-    public func isRightViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
-    }
-
     // MARK: - Callbacks
 
     public var willShowLeftView: Callback?
@@ -1103,8 +1046,8 @@ open class LGSideMenuController: UIViewController {
     internal var rightViewStyleView: UIVisualEffectView?
     internal var rightViewCoverView: UIVisualEffectView?
 
-    internal var leftViewGestireStartX: CGFloat?
-    internal var rightViewGestireStartX: CGFloat?
+    internal var leftViewGestureStartX: CGFloat?
+    internal var rightViewGestureStartX: CGFloat?
 
     // MARK: - Initialization
 

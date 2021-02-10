@@ -34,13 +34,13 @@ public extension LGSideMenuController {
 
     override var prefersStatusBarHidden: Bool {
         if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
-            return self.rootViewStatusBarHidden
+            return self.isRootViewStatusBarHidden
         }
         else if (self.leftView != nil) && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
-            return self.leftViewStatusBarHidden
+            return self.isLeftViewStatusBarHidden
         }
         else if (self.rightView != nil) && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
-            return self.rightViewStatusBarHidden
+            return self.isRightViewStatusBarHidden
         }
 
         return super.prefersStatusBarHidden

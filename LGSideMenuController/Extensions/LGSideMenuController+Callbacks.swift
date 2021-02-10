@@ -82,6 +82,34 @@ public extension LGSideMenuController {
         }
     }
 
+    func showAnimationsForLeftViewCallbacks() {
+        NotificationCenter.default.post(name: Notification.showAnimationsForLeftView,
+                                        object: self,
+                                        userInfo: [Notification.Key.duration: self.leftViewAnimationDuration])
+
+        if let showAnimationsForLeftView = self.showAnimationsForLeftView {
+            showAnimationsForLeftView(self, self.leftViewAnimationDuration)
+        }
+
+        if let delegate = self.delegate {
+            delegate.showAnimationsForLeftView(sideMenuController: self, duration: self.leftViewAnimationDuration)
+        }
+    }
+
+    func hideAnimationsForLeftViewCallbacks() {
+        NotificationCenter.default.post(name: Notification.hideAnimationsForLeftView,
+                                        object: self,
+                                        userInfo: [Notification.Key.duration: self.leftViewAnimationDuration])
+
+        if let hideAnimationsForLeftView = self.hideAnimationsForLeftView {
+            hideAnimationsForLeftView(self, self.leftViewAnimationDuration)
+        }
+
+        if let delegate = self.delegate {
+            delegate.hideAnimationsForLeftView(sideMenuController: self, duration: self.leftViewAnimationDuration)
+        }
+    }
+
     // MARK: - Right View
 
     func willShowRightViewCallbacks() {
@@ -129,6 +157,34 @@ public extension LGSideMenuController {
 
         if let delegate = self.delegate {
             delegate.didHideRightView(sideMenuController: self)
+        }
+    }
+
+    func showAnimationsForRightViewCallbacks() {
+        NotificationCenter.default.post(name: Notification.showAnimationsForRightView,
+                                        object: self,
+                                        userInfo: [Notification.Key.duration: self.rightViewAnimationDuration])
+
+        if let showAnimationsForRightView = self.showAnimationsForRightView {
+            showAnimationsForRightView(self, self.rightViewAnimationDuration)
+        }
+
+        if let delegate = self.delegate {
+            delegate.showAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
+        }
+    }
+
+    func hideAnimationsForRightViewCallbacks() {
+        NotificationCenter.default.post(name: Notification.hideAnimationsForRightView,
+                                        object: self,
+                                        userInfo: [Notification.Key.duration: self.rightViewAnimationDuration])
+
+        if let hideAnimationsForRightView = self.hideAnimationsForRightView {
+            hideAnimationsForRightView(self, self.rightViewAnimationDuration)
+        }
+
+        if let delegate = self.delegate {
+            delegate.hideAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
         }
     }
 
