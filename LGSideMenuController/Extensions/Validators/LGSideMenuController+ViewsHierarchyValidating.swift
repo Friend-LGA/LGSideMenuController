@@ -57,7 +57,7 @@ internal extension LGSideMenuController {
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewBorderView = self.leftViewBorderView,
-              let leftViewStyleView = self.leftViewStyleView,
+              let leftViewStyleView = self.leftViewEffectView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         if self.leftViewPresentationStyle == .slideAbove {
@@ -67,12 +67,12 @@ internal extension LGSideMenuController {
             self.view.insertSubview(leftContainerView, belowSubview: rootContainerView)
         }
 
-        leftContainerView.insertSubview(leftViewBackgroundView, at: 0)
-        leftContainerView.insertSubview(leftViewStyleView, at: 1)
-        leftContainerView.insertSubview(leftView, at: 2)
-        leftContainerView.insertSubview(leftViewCoverView, at: 3)
+        leftContainerView.insertSubview(leftViewBorderView, at: 0)
+        leftContainerView.insertSubview(leftView, at: 1)
+        leftContainerView.insertSubview(leftViewCoverView, at: 2)
 
-        leftViewStyleView.contentView.insertSubview(leftViewBorderView, at: 0)
+        leftViewBorderView.insertSubview(leftViewBackgroundView, at: 0)
+        leftViewBorderView.insertSubview(leftViewStyleView, at: 1)
     }
 
     func rightViewsHierarchyValidate() {
@@ -81,7 +81,7 @@ internal extension LGSideMenuController {
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewBorderView = self.rightViewBorderView,
-              let rightViewStyleView = self.rightViewStyleView,
+              let rightViewStyleView = self.rightViewEffectView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         if self.rightViewPresentationStyle == .slideAbove {
@@ -91,12 +91,12 @@ internal extension LGSideMenuController {
             self.view.insertSubview(rightContainerView, belowSubview: rootContainerView)
         }
 
-        rightContainerView.insertSubview(rightViewBackgroundView, at: 0)
-        rightContainerView.insertSubview(rightViewStyleView, at: 1)
-        rightContainerView.insertSubview(rightView, at: 2)
-        rightContainerView.insertSubview(rightViewCoverView, at: 3)
+        rightContainerView.insertSubview(rightViewBorderView, at: 0)
+        rightContainerView.insertSubview(rightView, at: 1)
+        rightContainerView.insertSubview(rightViewCoverView, at: 2)
 
-        rightViewStyleView.contentView.insertSubview(rightViewBorderView, at: 0)
+        rightViewBorderView.insertSubview(rightViewBackgroundView, at: 0)
+        rightViewBorderView.insertSubview(rightViewStyleView, at: 1)
     }
     
 }

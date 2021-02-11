@@ -37,6 +37,7 @@ struct LGSideMenuHelper {
     }
 
     static func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
+        // TODO: Why spring animations???
         UIView.animate(withDuration: duration,
                        delay: TimeInterval.zero,
                        usingSpringWithDamping: 1.0,
@@ -54,13 +55,6 @@ struct LGSideMenuHelper {
                 viewController.setNeedsStatusBarAppearanceUpdate()
             })
         }
-    }
-
-    static func setImage(_ image: UIImage?, for imageView: UIImageView) {
-        let contentMode = imageView.contentMode
-        imageView.contentMode = .scaleToFill
-        imageView.image = image
-        imageView.contentMode = contentMode
     }
 
     static func isPhone() -> Bool {

@@ -213,7 +213,7 @@ public extension LGSideMenuController {
             guard let touchView = touch.view, let rootContainerView = self.rootContainerView else { return false }
             return touchView == rootContainerView
         }
-        else if gesture is UIPanGestureRecognizer {
+        if gesture is UIPanGestureRecognizer {
             return true
         }
 

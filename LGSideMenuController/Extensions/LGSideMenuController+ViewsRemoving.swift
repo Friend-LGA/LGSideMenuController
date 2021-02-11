@@ -87,9 +87,9 @@ internal extension LGSideMenuController {
             self.leftViewCoverView = nil
         }
 
-        if let leftViewStyleView = self.leftViewStyleView {
+        if let leftViewStyleView = self.leftViewEffectView {
             leftViewStyleView.removeFromSuperview()
-            self.leftViewStyleView = nil
+            self.leftViewEffectView = nil
         }
 
         if let leftViewBorderView = self.leftViewBorderView {
@@ -132,9 +132,9 @@ internal extension LGSideMenuController {
             self.rightViewCoverView = nil
         }
 
-        if let rightViewStyleView = self.rightViewStyleView {
+        if let rightViewStyleView = self.rightViewEffectView {
             rightViewStyleView.removeFromSuperview()
-            self.rightViewStyleView = nil
+            self.rightViewEffectView = nil
         }
 
         if let rightViewBorderView = self.rightViewBorderView {

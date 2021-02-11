@@ -95,7 +95,7 @@ internal extension LGSideMenuController {
         guard let leftView = self.leftView,
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
-              let leftViewStyleView = self.leftViewStyleView,
+              let leftViewStyleView = self.leftViewEffectView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         if self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
@@ -131,7 +131,7 @@ internal extension LGSideMenuController {
         guard let rightView = self.rightView,
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
-              let rightViewStyleView = self.rightViewStyleView,
+              let rightViewStyleView = self.rightViewEffectView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         if self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {

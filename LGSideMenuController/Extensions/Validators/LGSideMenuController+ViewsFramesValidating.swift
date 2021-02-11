@@ -46,7 +46,6 @@ internal extension LGSideMenuController {
               let rootViewCoverView = self.rootViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
-        let offset = self.rootViewLayerBorderWidth + self.rootViewLayerShadowRadius
 
         if self.leftView != nil && self.isLeftViewAlwaysVisibleForCurrentOrientation {
             containerViewFrame.origin.x += self.leftViewWidth;
@@ -59,6 +58,8 @@ internal extension LGSideMenuController {
 
         rootContainerView.transform = .identity
         rootContainerView.frame = containerViewFrame
+
+        let offset = self.rootViewLayerBorderWidth + self.rootViewLayerShadowRadius
 
         rootViewBorderView.transform = .identity
         rootViewBorderView.frame = CGRect(x: -offset,
@@ -78,11 +79,10 @@ internal extension LGSideMenuController {
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewBorderView = self.leftViewBorderView,
-              let leftViewStyleView = self.leftViewStyleView,
+              let leftViewStyleView = self.leftViewEffectView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
-        let offset = self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius
 
         if self.leftViewPresentationStyle == .slideAbove {
             containerViewFrame.size.width = self.leftViewWidth
@@ -91,29 +91,31 @@ internal extension LGSideMenuController {
         leftContainerView.transform = .identity
         leftContainerView.frame = containerViewFrame
 
-        var backgroundViewFrame = leftContainerView.bounds
+        let offset = self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius
+        var borderViewFrame = CGRect(x: -offset,
+                                     y: -offset,
+                                     width: containerViewFrame.width + (offset * 2.0),
+                                     height: containerViewFrame.height + (offset * 2.0))
+
         if self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation {
-            let ratio = self.rightViewWidth / self.leftViewWidth
-            backgroundViewFrame.size.width = containerViewFrame.width / (ratio + 1.0)
+            let rightViewFullWidth = self.rightViewWidth + ((self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * 2.0)
+            borderViewFrame.size.width -= rightViewFullWidth
         }
 
-        leftViewBackgroundView.transform = .identity
-        leftViewBackgroundView.frame = backgroundViewFrame
+        leftViewBorderView.transform = .identity
+        leftViewBorderView.frame = borderViewFrame
 
-        var leftViewFrame = CGRect(origin: .zero, size: containerViewFrame.size)
-        leftViewFrame.size.width = self.leftViewWidth
+        let borderViewVisisbleFrame = leftViewBorderView.bounds.insetBy(dx: offset, dy: offset)
+
+        leftViewBackgroundView.transform = .identity
+        leftViewBackgroundView.frame = borderViewVisisbleFrame
 
         leftViewStyleView.transform = .identity
-        leftViewStyleView.frame = leftViewFrame
-
-        leftViewBorderView.transform = .identity
-        leftViewBorderView.frame = CGRect(x: -offset,
-                                          y: -offset,
-                                          width: leftViewFrame.width + (offset * 2.0),
-                                          height: leftViewFrame.height + (offset * 2.0))
+        leftViewStyleView.frame = borderViewVisisbleFrame
 
         leftView.transform = .identity
-        leftView.frame = leftViewFrame
+        leftView.frame = CGRect(origin: .zero,
+                                size: CGSize(width: self.leftViewWidth, height: containerViewFrame.height))
 
         leftViewCoverView.transform = .identity
         leftViewCoverView.frame = leftContainerView.bounds
@@ -124,11 +126,10 @@ internal extension LGSideMenuController {
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewBorderView = self.rightViewBorderView,
-              let rightViewStyleView = self.rightViewStyleView,
+              let rightViewStyleView = self.rightViewEffectView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
-        let offset = self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius
 
         if self.rightViewPresentationStyle == .slideAbove {
             containerViewFrame.size.width = self.rightViewWidth
@@ -138,31 +139,32 @@ internal extension LGSideMenuController {
         rightContainerView.transform = .identity
         rightContainerView.frame = containerViewFrame
 
-        var backgroundViewFrame = rightContainerView.bounds
-        if self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation {
-            let ratio = self.rightViewWidth / self.leftViewWidth
-            backgroundViewFrame.size.width = containerViewFrame.width / (ratio + 1.0)
-            backgroundViewFrame.origin.x = containerViewFrame.width - backgroundViewFrame.width
+        let offset = self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius
+        var borderViewFrame = CGRect(x: -offset,
+                                     y: -offset,
+                                     width: containerViewFrame.width + (offset * 2.0),
+                                     height: containerViewFrame.height + (offset * 2.0))
+
+        if self.isRightViewAlwaysVisibleForCurrentOrientation || self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            let leftViewFullWidth = self.rightViewWidth + ((self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * 2.0)
+            borderViewFrame.size.width -= leftViewFullWidth
+            borderViewFrame.origin.x += leftViewFullWidth
         }
 
-        rightViewBackgroundView.transform = .identity
-        rightViewBackgroundView.frame = rightContainerView.bounds
+        rightViewBorderView.transform = .identity
+        rightViewBorderView.frame = borderViewFrame
 
-        var rightViewFrame = CGRect(origin: .zero, size: containerViewFrame.size)
-        rightViewFrame.origin.x = containerViewFrame.width - self.rightViewWidth
-        rightViewFrame.size.width = self.rightViewWidth
+        let borderViewVisisbleFrame = rightViewBorderView.bounds.insetBy(dx: offset, dy: offset)
+
+        rightViewBackgroundView.transform = .identity
+        rightViewBackgroundView.frame = borderViewVisisbleFrame
 
         rightViewStyleView.transform = .identity
-        rightViewStyleView.frame = rightViewFrame
-
-        rightViewBorderView.transform = .identity
-        rightViewBorderView.frame = CGRect(x: -offset,
-                                          y: -offset,
-                                          width: rightViewFrame.width + (offset * 2.0),
-                                          height: rightViewFrame.height + (offset * 2.0))
+        rightViewStyleView.frame = borderViewVisisbleFrame
 
         rightView.transform = .identity
-        rightView.frame = rightViewFrame
+        rightView.frame = CGRect(origin: CGPoint(x: containerViewFrame.width - self.rightViewWidth, y: 0.0),
+                                 size: CGSize(width: self.rightViewWidth, height: containerViewFrame.height))
 
         rightViewCoverView.transform = .identity
         rightViewCoverView.frame = rightContainerView.bounds

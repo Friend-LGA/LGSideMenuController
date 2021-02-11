@@ -1020,11 +1020,11 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     internal var rootViewCoverView: UIVisualEffectView?
 
     internal var leftViewBorderView: LGSideMenuBorderView?
-    internal var leftViewStyleView: UIVisualEffectView?
+    internal var leftViewEffectView: UIVisualEffectView?
     internal var leftViewCoverView: UIVisualEffectView?
 
     internal var rightViewBorderView: LGSideMenuBorderView?
-    internal var rightViewStyleView: UIVisualEffectView?
+    internal var rightViewEffectView: UIVisualEffectView?
     internal var rightViewCoverView: UIVisualEffectView?
 
     internal var leftViewGestureStartX: CGFloat?

@@ -35,15 +35,15 @@ final class LGSideMenuBorderView: UIView {
 
     var roundedCorners = UIRectCorner()
     var cornerRadius: CGFloat = .zero
-    var strokeColor: UIColor?
+    var strokeColor: UIColor = .clear
     var strokeWidth: CGFloat = .zero
-    var shadowColor: UIColor?
+    var shadowColor: UIColor = .clear
     var shadowBlur: CGFloat = .zero
+    var fillColor: UIColor = .clear
 
     init() {
         super.init(frame: CGRect.zero)
         self.backgroundColor = .clear
-        self.isUserInteractionEnabled = false
     }
 
     required init?(coder: NSCoder) {
@@ -51,53 +51,64 @@ final class LGSideMenuBorderView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext(),
-              self.shadowColor != nil || self.strokeColor != nil else {
-            return
-        }
+        guard let context = UIGraphicsGetCurrentContext() else { return }
 
-        let offset = self.shadowBlur * 2.0
-
-        let drawRect = CGRect(x: self.shadowBlur,
+        var drawRect = CGRect(x: self.shadowBlur,
                               y: self.shadowBlur,
-                              width: rect.width - offset,
-                              height: rect.height - offset)
+                              width: rect.width - self.shadowBlur * 2.0,
+                              height: rect.height - self.shadowBlur * 2.0)
 
-        let path = UIBezierPath(roundedRect: drawRect,
+        var path = UIBezierPath(roundedRect: drawRect,
                                 byRoundingCorners: self.roundedCorners,
                                 cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
         path.close()
 
+        context.clear(rect)
         context.beginPath()
         context.addPath(path.cgPath)
 
         // Fill it black to draw proper shadow, then erase black internals and keep only shadow
-        if let shadowColor = self.shadowColor?.cgColor {
-            context.setShadow(offset: .zero, blur: self.shadowBlur, color: shadowColor)
+        if shadowColor != .clear && self.shadowBlur > 0 {
+            context.setShadow(offset: .zero, blur: self.shadowBlur, color: shadowColor.cgColor)
             context.setFillColor(UIColor.black.cgColor)
             context.fillPath()
             context.setShadow(offset: .zero, blur: .zero, color: nil)
+
+            context.beginPath()
+            context.addPath(path.cgPath)
+            context.setFillColor(UIColor.clear.cgColor)
             context.setBlendMode(.clear)
             context.fillPath()
             context.setBlendMode(.normal)
         }
 
         // To stroke we need to fill rect inside already drawn shadows and erase smaller rect from inside of it
-        if let strokeColor = self.strokeColor?.cgColor {
-            context.setFillColor(strokeColor)
+        if self.strokeColor != .clear && self.strokeWidth > 0 {
+            context.beginPath()
+            context.addPath(path.cgPath)
+            context.setFillColor(strokeColor.cgColor)
             context.fillPath()
 
-            let innerPath = UIBezierPath(roundedRect: drawRect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth),
+            drawRect = drawRect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth)
+            path = UIBezierPath(roundedRect: drawRect,
                                          byRoundingCorners: self.roundedCorners,
                                          cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
-            innerPath.close()
+            path.close()
 
             context.beginPath()
-            context.addPath(innerPath.cgPath)
-
+            context.addPath(path.cgPath)
+            context.setFillColor(UIColor.clear.cgColor)
             context.setBlendMode(.clear)
             context.fillPath()
             context.setBlendMode(.normal)
+        }
+
+        // Fill background
+        if self.fillColor != .clear {
+            context.beginPath()
+            context.addPath(path.cgPath)
+            context.setFillColor(fillColor.cgColor)
+            context.fillPath()
         }
     }
 
