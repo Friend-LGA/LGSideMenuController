@@ -52,7 +52,7 @@ internal extension LGSideMenuController {
     }
 
     func leftViewsHierarchyValidate() {
-        guard let rootView = self.rootView,
+        guard let rootContainerView = self.rootContainerView,
               let leftView = self.leftView,
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
@@ -61,10 +61,10 @@ internal extension LGSideMenuController {
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         if self.leftViewPresentationStyle == .slideAbove {
-            self.view.insertSubview(leftContainerView, aboveSubview: rootView)
+            self.view.insertSubview(leftContainerView, aboveSubview: rootContainerView)
         }
         else {
-            self.view.insertSubview(leftContainerView, belowSubview: rootView)
+            self.view.insertSubview(leftContainerView, belowSubview: rootContainerView)
         }
 
         leftContainerView.insertSubview(leftViewBackgroundView, at: 0)
@@ -76,7 +76,7 @@ internal extension LGSideMenuController {
     }
 
     func rightViewsHierarchyValidate() {
-        guard let rootView = self.rootView,
+        guard let rootContainerView = self.rootContainerView,
               let rightView = self.rightView,
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
@@ -85,10 +85,10 @@ internal extension LGSideMenuController {
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         if self.rightViewPresentationStyle == .slideAbove {
-            self.view.insertSubview(rightContainerView, aboveSubview: rootView)
+            self.view.insertSubview(rightContainerView, aboveSubview: rootContainerView)
         }
         else {
-            self.view.insertSubview(rightContainerView, belowSubview: rootView)
+            self.view.insertSubview(rightContainerView, belowSubview: rootContainerView)
         }
 
         rightContainerView.insertSubview(rightViewBackgroundView, at: 0)

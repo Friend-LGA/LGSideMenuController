@@ -154,6 +154,8 @@ public extension LGSideMenuController {
             })
         }
         else {
+            self.rootViewsTransformsValidate(percentage: 1.0)
+            self.rightViewsTransformsValidate(percentage: 1.0)
             self.showRightViewDone()
 
             if let completion = completion {
@@ -174,8 +176,14 @@ public extension LGSideMenuController {
     // MARK: Hide
 
     internal func hideRightViewPrepare() {
-        guard self.rightView != nil,
-              self.isRightViewShowing || self.state == .rightViewWillShow else { return }
+        guard self.rightView != nil else { return }
+        guard self.isRightViewShowing else {
+            if self.state == .rightViewWillShow {
+                self.state = .rightViewWillHide
+                self.willHideRightViewCallbacks()
+            }
+            return
+        }
 
         self.state = .rightViewWillHide
         self.willHideRightViewCallbacks()
@@ -216,6 +224,8 @@ public extension LGSideMenuController {
             })
         }
         else {
+            self.rootViewsTransformsValidate(percentage: 0.0)
+            self.rightViewsTransformsValidate(percentage: 0.0)
             self.hideRightViewDone(withGesture: false)
 
             if let completion = completion {

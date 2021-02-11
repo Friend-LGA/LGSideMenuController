@@ -102,7 +102,7 @@ public extension LGSideMenuController {
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
 
         self.rootViewsInitValidate()
-        self.rootViewsHierarchyValidate()
+        self.viewsHierarchyValidate() // Whole hierarchy should be validated
         self.rootViewsFramesValidate()
         self.rootViewsStylesValidate()
         self.rootViewsTransformsValidate()
@@ -114,7 +114,7 @@ public extension LGSideMenuController {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
 
         self.leftViewsInitValidate()
-        self.leftViewsHierarchyValidate()
+        self.viewsHierarchyValidate() // Whole hierarchy should be validated
         self.leftViewsFramesValidate()
         self.leftViewsStylesValidate()
         self.leftViewsTransformsValidate()
@@ -126,7 +126,7 @@ public extension LGSideMenuController {
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 
         self.rightViewsInitValidate()
-        self.rightViewsHierarchyValidate()
+        self.viewsHierarchyValidate() // Whole hierarchy should be validated
         self.rightViewsFramesValidate()
         self.rightViewsStylesValidate()
         self.rightViewsTransformsValidate()

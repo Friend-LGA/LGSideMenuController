@@ -43,11 +43,11 @@ internal extension LGSideMenuController {
     }
 
     func leftViewsTransformsValidate() {
-        rootViewsTransformsValidate(percentage: self.isLeftViewShowing ? 1.0 : 0.0)
+        leftViewsTransformsValidate(percentage: self.isLeftViewShowing ? 1.0 : 0.0)
     }
 
     func rightViewsTransformsValidate() {
-        rootViewsTransformsValidate(percentage: self.isRightViewShowing ? 1.0 : 0.0)
+        rightViewsTransformsValidate(percentage: self.isRightViewShowing ? 1.0 : 0.0)
     }
 
     func rootViewsTransformsValidate(percentage: CGFloat) {
@@ -134,7 +134,7 @@ internal extension LGSideMenuController {
               let rightViewStyleView = self.rightViewStyleView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
-        if self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        if self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
             rightViewCoverView.alpha = self.rightViewCoverAlpha - (self.rightViewCoverAlpha * percentage)
         }
 
