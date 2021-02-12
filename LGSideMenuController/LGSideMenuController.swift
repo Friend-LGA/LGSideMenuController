@@ -112,7 +112,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    // TODO: Make different style settings for each style
     public enum PresentationStyle {
         case slideAbove
         case slideBelow
@@ -263,10 +262,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    /// tapGesture.cancelsTouchesInView = NO
     public let tapGesture: UITapGestureRecognizer
-    /// panGesture.cancelsTouchesInView = YES, only inside your swipeGestureArea
-    public let panGesture: UIPanGestureRecognizer
+    public let panGestureForLeftView: UIPanGestureRecognizer
+    public let panGestureForRightView: UIPanGestureRecognizer
 
     // MARK: - Public Non-Conditional Configurable Properties
 
@@ -357,20 +355,20 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var swipeGestureArea: SwipeGestureArea = .borders
 
     /// Only if swipeGestureArea == .borders
-    /// Default is SwipeGestureRange(left: 44.0, right: 44.0)
+    /// Default is SwipeGestureRange(left: 0.0, right: 44.0)
     /// Explanation:
     /// For SwipeGestureRange(left: 44.0, right: 44.0) => leftView 44.0 | 44.0 rootView
     /// For SwipeGestureRange(left: 0.0, right: 44.0)  => leftView  0.0 | 44.0 rootView
     /// For SwipeGestureRange(left: 44.0, right: 0.0)  => leftView 44.0 | 0.0  rootView
-    open var leftViewSwipeGestureRange = SwipeGestureRange()
+    open var leftViewSwipeGestureRange = SwipeGestureRange(left: 0.0, right: 44.0)
 
     /// Only if swipeGestureArea == .borders
-    /// Default is SwipeGestureRange(left: 44.0, right: 44.0)
+    /// Default is SwipeGestureRange(left: 44.0, right: 0.0)
     /// Explanation:
     /// For SwipeGestureRange(left: 44.0, right: 44.0) => rootView 44.0 | 44.0 rightView
     /// For SwipeGestureRange(left: 0.0, right: 44.0)  => rootView  0.0 | 44.0 rightView
     /// For SwipeGestureRange(left: 44.0, right: 0.0)  => rootView 44.0 | 0.0  rightView
-    open var rightViewSwipeGestureRange = SwipeGestureRange()
+    open var rightViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 0.0)
 
     @IBInspectable open var leftViewAnimationDuration: TimeInterval = 0.5
     @IBInspectable open var rightViewAnimationDuration: TimeInterval = 0.5
@@ -1042,7 +1040,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     public init() {
         self.tapGesture = UITapGestureRecognizer()
-        self.panGesture = UIPanGestureRecognizer()
+        self.panGestureForLeftView = UIPanGestureRecognizer()
+        self.panGestureForRightView = UIPanGestureRecognizer()
 
         super.init(nibName: nil, bundle: nil)
 
@@ -1050,15 +1049,22 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.tapGesture.delegate = self
         self.tapGesture.numberOfTapsRequired = 1
         self.tapGesture.numberOfTouchesRequired = 1
-        self.tapGesture.cancelsTouchesInView = false // TODO: Make settings to enable/disable this
+        self.tapGesture.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
         self.view.addGestureRecognizer(self.tapGesture)
 
-        self.panGesture.addTarget(self, action: #selector(handlePanGesture))
-        self.panGesture.delegate = self
-        self.panGesture.minimumNumberOfTouches = 1
-        self.panGesture.maximumNumberOfTouches = 1
-        self.panGesture.cancelsTouchesInView = false // TODO: Make settings to enable/disable this
-        self.view.addGestureRecognizer(self.panGesture)
+        self.panGestureForLeftView.addTarget(self, action: #selector(handlePanGestureForLeftView))
+        self.panGestureForLeftView.delegate = self
+        self.panGestureForLeftView.minimumNumberOfTouches = 1
+        self.panGestureForLeftView.maximumNumberOfTouches = 1
+        self.panGestureForLeftView.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
+        self.view.addGestureRecognizer(self.panGestureForLeftView)
+
+        self.panGestureForRightView.addTarget(self, action: #selector(handlePanGestureForRightView))
+        self.panGestureForRightView.delegate = self
+        self.panGestureForRightView.minimumNumberOfTouches = 1
+        self.panGestureForRightView.maximumNumberOfTouches = 1
+        self.panGestureForRightView.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
+        self.view.addGestureRecognizer(self.panGestureForRightView)
     }
 
     convenience public init(rootViewController: UIViewController? = nil, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {

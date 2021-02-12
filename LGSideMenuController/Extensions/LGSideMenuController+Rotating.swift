@@ -39,9 +39,53 @@ extension LGSideMenuController {
         return super.shouldAutorotate
     }
 
+    open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+    }
+
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        // TODO: Handle this properly
+        // TODO: Handle this properly (NavigationBar size, AlwaysVisible is going black, rootCoverView is disappearing)
+
+        if self.leftView != nil {
+            self.cancelLeftViewAnimations()
+        }
+
+        if self.rightView != nil {
+            self.cancelRightViewAnimations()
+        }
+
+        coordinator.animate(alongsideTransition: { [weak self] (context: UIViewControllerTransitionCoordinatorContext) in
+            guard let self = self else { return }
+
+            if self.state == .leftViewWillShow {
+                if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+                    self.showLeftViewDone()
+                }
+            }
+            else if self.state == .leftViewWillHide {
+                self.hideLeftViewDone(withGesture: self.leftViewGestureStartX != nil)
+            }
+
+            if self.state == .rightViewWillShow {
+                if self.isRightViewAlwaysVisibleForCurrentOrientation {
+                    self.showRightViewDone()
+                }
+            }
+            else if self.state == .rightViewWillHide {
+                self.hideRightViewDone(withGesture: self.rightViewGestureStartX != nil)
+            }
+
+            if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewHidden {
+                self.hideLeftViewPrepare()
+                self.hideLeftViewDone(withGesture: self.leftViewGestureStartX != nil)
+            }
+
+            if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRightViewHidden {
+                self.hideRightViewPrepare()
+                self.hideRightViewDone(withGesture: self.leftViewGestureStartX != nil)
+            }
+        })
     }
 
 }

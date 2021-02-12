@@ -40,61 +40,61 @@ extension LGSideMenuController {
               self.leftView != nil || self.rightView != nil else { return false }
         // TODO: Make animations interraptable with this gesture
 
-        if gesture is UITapGestureRecognizer {
-            guard let touchView = touch.view, let rootContainerView = self.rootContainerView else { return false }
+        let isLeftViewActive = self.leftView != nil && self.isLeftViewEnabled && !self.isLeftViewAlwaysVisibleForCurrentOrientation
+        let isRightViewActive = self.rightView != nil && self.isRightViewEnabled && !self.isRightViewAlwaysVisibleForCurrentOrientation
+
+        if gesture == self.tapGesture {
+            guard !self.isRootViewShowing,
+                  (isLeftViewActive && self.isLeftViewHidesOnTouch) ||
+                    (isRightViewActive && self.isRightViewHidesOnTouch),
+                  let touchView = touch.view,
+                  let rootContainerView = self.rootContainerView else { return false }
+
             return touchView == rootContainerView
         }
-        if gesture is UIPanGestureRecognizer {
-            return true
+
+        if gesture == self.panGestureForLeftView {
+            guard isLeftViewActive && self.isLeftViewSwipeGestureEnabled && self.isRightViewHidden  else { return false }
+
+            let location = touch.location(in: self.view)
+            return isLocationInLeftSwipeableRect(location)
+        }
+
+        if gesture == self.panGestureForRightView {
+            guard isRightViewActive && self.isRightViewSwipeGestureEnabled && self.isLeftViewHidden else { return false }
+
+            let location = touch.location(in: self.view)
+            return isLocationInRightSwipeableRect(location)
         }
 
         return false
+    }
+
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 
     // MARK: - UIGestureRecognizer Targets
 
     @objc
     open func handleTapGesture(gesture: UITapGestureRecognizer) {
-        guard self.rootView != nil && gesture.state == .ended else { return }
+        guard gesture.state == .ended else { return }
 
-        if self.isLeftViewShowing && self.isLeftViewHidesOnTouch {
+        if self.isLeftViewVisible {
             self.hideLeftView(animated: self.shouldHideLeftViewAnimated)
         }
-        else if self.isRightViewShowing && self.isRightViewHidesOnTouch {
+        else if self.isRightViewVisible {
             self.hideRightView(animated: self.shouldHideRightViewAnimated)
         }
     }
 
     @objc
-    open func handlePanGesture(gesture: UIPanGestureRecognizer) {
-        guard self.rootView != nil else { return }
-
+    open func handlePanGestureForLeftView(gesture: UIPanGestureRecognizer) {
         let location = gesture.location(in: self.view)
         let velocity = gesture.velocity(in: self.view)
 
-        self.handlePanGestureForLeftView(gesture: gesture, location: location, velocity: velocity)
-        self.handlePanGestureForRightView(gesture: gesture, location: location, velocity: velocity)
-    }
-
-    // MARK: - Left View
-
-    private func handlePanGestureForLeftView(gesture: UIPanGestureRecognizer, location: CGPoint, velocity: CGPoint) {
-        guard self.leftView != nil,
-              self.isLeftViewEnabled,
-              self.isLeftViewSwipeGestureEnabled,
-              !self.isLeftViewAlwaysVisibleForCurrentOrientation,
-              self.isRightViewHidden else { return }
-
-        if gesture.state == .began || gesture.state == .changed,
-           self.swipeGestureArea == .borders && self.isLeftViewVisibilityStable && !self.isLocationInLeftSwipeableRect(location) {
-            return
-        }
-        if gesture.state == .ended || gesture.state == .cancelled,
-           self.isLeftViewVisibilityStable {
-            return
-        }
-
-        if self.isLeftViewVisibilityStable {
+        if self.isLeftViewVisibilityStable,
+           gesture.state == .began || gesture.state == .changed {
             if self.isLeftViewShowing ? velocity.x < 0.0 : velocity.x > 0.0 {
                 self.leftViewGestureStartX = location.x
                 self.isLeftViewShowingBeforeGesture = self.isLeftViewShowing
@@ -103,11 +103,13 @@ extension LGSideMenuController {
                     self.hideLeftViewPrepare()
                 }
                 else {
-                    self.showLeftViewPrepare(withGesture: true)
+                    self.showLeftViewPrepare()
                 }
             }
         }
-        else if self.isLeftViewVisibilityChanging, let leftViewGestureStartX = self.leftViewGestureStartX {
+        else if self.isLeftViewVisibilityChanging,
+                gesture.state == .changed || gesture.state == .ended || gesture.state == .cancelled,
+                let leftViewGestureStartX = self.leftViewGestureStartX {
             let shiftedAmount = self.isLeftViewShowingBeforeGesture ? leftViewGestureStartX - location.x : location.x - leftViewGestureStartX
             let percentage =  self.calculatePercentage(shiftedAmount: shiftedAmount,
                                                        viewWidth: self.leftViewWidth,
@@ -115,7 +117,7 @@ extension LGSideMenuController {
 
             if gesture.state == .changed {
                 if velocity.x > 0.0 {
-                    self.showLeftViewPrepare(withGesture: true)
+                    self.showLeftViewPrepare()
                 }
                 else if velocity.x < 0.0 {
                     self.hideLeftViewPrepare()
@@ -127,7 +129,7 @@ extension LGSideMenuController {
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
                     // We can start showing the view and ended the gesture without moving the view even by 1%
-                    self.showLeftViewPrepare(withGesture: true)
+                    self.showLeftViewPrepare()
                     self.showLeftViewDone()
                 }
                 else if percentage == 0.0 {
@@ -136,7 +138,7 @@ extension LGSideMenuController {
                     self.hideLeftViewDone(withGesture: true)
                 }
                 else if (percentage < 1.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage >= 0.5) {
-                    self.showLeftViewPrepare(withGesture: true)
+                    self.showLeftViewPrepare()
                     self.showLeftViewActions(animated: true)
                 }
                 else if (percentage > 0.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage < 0.5) {
@@ -149,25 +151,13 @@ extension LGSideMenuController {
         }
     }
 
-    // MARK: - Right View
+    @objc
+    open func handlePanGestureForRightView(gesture: UIPanGestureRecognizer) {
+        let location = gesture.location(in: self.view)
+        let velocity = gesture.velocity(in: self.view)
 
-    private func handlePanGestureForRightView(gesture: UIPanGestureRecognizer, location: CGPoint, velocity: CGPoint) {
-        guard self.rightView != nil,
-              self.isRightViewEnabled,
-              self.isRightViewSwipeGestureEnabled,
-              !self.isRightViewAlwaysVisibleForCurrentOrientation,
-              self.isLeftViewHidden else { return }
-
-        if gesture.state == .began || gesture.state == .changed,
-           self.swipeGestureArea == .borders && self.isRightViewVisibilityStable && !self.isLocationInRightSwipeableRect(location) {
-            return
-        }
-        if gesture.state == .ended || gesture.state == .cancelled,
-           self.isRightViewVisibilityStable {
-            return
-        }
-
-        if self.isRightViewVisibilityStable {
+        if self.isRightViewVisibilityStable,
+           gesture.state == .began || gesture.state == .changed {
             if self.isRightViewShowing ? velocity.x > 0.0 : velocity.x < 0.0 {
                 self.rightViewGestureStartX = location.x
                 self.isRightViewShowingBeforeGesture = self.isRightViewShowing
@@ -176,11 +166,13 @@ extension LGSideMenuController {
                     self.hideRightViewPrepare()
                 }
                 else {
-                    self.showRightViewPrepare(withGesture: true)
+                    self.showRightViewPrepare()
                 }
             }
         }
-        else if self.isRightViewVisibilityChanging, let rightViewGestureStartX = self.rightViewGestureStartX {
+        else if self.isRightViewVisibilityChanging,
+                gesture.state == .changed || gesture.state == .ended || gesture.state == .cancelled,
+                let rightViewGestureStartX = self.rightViewGestureStartX {
             let shiftedAmount = self.isRightViewShowingBeforeGesture ? location.x - rightViewGestureStartX : rightViewGestureStartX - location.x
             let percentage =  self.calculatePercentage(shiftedAmount: shiftedAmount,
                                                        viewWidth: self.rightViewWidth,
@@ -188,7 +180,7 @@ extension LGSideMenuController {
 
             if gesture.state == .changed {
                 if velocity.x < 0.0 {
-                    self.showRightViewPrepare(withGesture: true)
+                    self.showRightViewPrepare()
                 }
                 else if velocity.x > 0.0 {
                     self.hideRightViewPrepare()
@@ -200,7 +192,7 @@ extension LGSideMenuController {
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
                     // We can start showing the view and ended the gesture without moving the view even by 1%
-                    self.showRightViewPrepare(withGesture: true)
+                    self.showRightViewPrepare()
                     self.showRightViewDone()
                 }
                 else if percentage == 0.0 {
@@ -209,7 +201,7 @@ extension LGSideMenuController {
                     self.hideRightViewDone(withGesture: true)
                 }
                 else if (percentage < 1.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage >= 0.5) {
-                    self.showRightViewPrepare(withGesture: true)
+                    self.showRightViewPrepare()
                     self.showRightViewActions(animated: true)
                 }
                 else if (percentage > 0.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage < 0.5) {
@@ -228,15 +220,25 @@ extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let leftContainerView = self.leftContainerView else { return false }
 
-        if self.swipeGestureArea == .full {
-            return true
-        }
-
         let borderX = (self.leftViewPresentationStyle == .slideAbove && self.isLeftViewVisible) ? leftContainerView.frame.maxX : rootContainerView.frame.minX
+        let originX = borderX - self.leftViewSwipeGestureRange.left
 
-        let swipeableRect = CGRect(x: borderX - self.leftViewSwipeGestureRange.left,
+        let width: CGFloat = {
+            if self.swipeGestureArea == .full || self.isLeftViewVisible {
+                var result = self.view.bounds.width - originX
+                if self.isRightViewAlwaysVisibleForCurrentOrientation {
+                    result -= self.rightViewWidth
+                }
+                return result
+            }
+            else {
+                return self.leftViewSwipeGestureRange.left + self.leftViewSwipeGestureRange.right
+            }
+        }()
+
+        let swipeableRect = CGRect(x: originX,
                                    y: 0.0,
-                                   width: self.leftViewSwipeGestureRange.left + self.leftViewSwipeGestureRange.right,
+                                   width: width,
                                    height: self.view.bounds.height)
 
         return swipeableRect.contains(location)
@@ -246,15 +248,33 @@ extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rightContainerView = self.rightContainerView else { return false }
 
-        if self.swipeGestureArea == .full {
-            return true
-        }
-
         let borderX = (self.rightViewPresentationStyle == .slideAbove && self.isRightViewVisible) ? rightContainerView.frame.minX : rootContainerView.frame.maxX
 
-        let swipeableRect = CGRect(x: borderX - self.rightViewSwipeGestureRange.left,
+        let originX: CGFloat = {
+            if self.swipeGestureArea == .full || self.isRightViewVisible {
+                var result: CGFloat = 0.0
+                if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+                    result += self.leftViewWidth
+                }
+                return result
+            }
+            else {
+                return borderX - self.rightViewSwipeGestureRange.left
+            }
+        }()
+
+        let width: CGFloat = {
+            if self.swipeGestureArea == .full || self.isRightViewVisible {
+                return borderX - originX + self.rightViewSwipeGestureRange.right
+            }
+            else {
+                return self.rightViewSwipeGestureRange.left + self.rightViewSwipeGestureRange.right
+            }
+        }()
+
+        let swipeableRect = CGRect(x: originX,
                                    y: 0.0,
-                                   width: self.rightViewSwipeGestureRange.left + self.rightViewSwipeGestureRange.right,
+                                   width: width,
                                    height: self.view.bounds.height)
 
         return swipeableRect.contains(location)

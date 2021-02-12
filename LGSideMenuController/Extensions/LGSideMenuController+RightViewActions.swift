@@ -38,7 +38,7 @@ extension LGSideMenuController {
               !self.isRightViewAlwaysVisibleForCurrentOrientation,
               !self.isRightViewShowing else { return }
 
-        self.showRightViewPrepare(withGesture: false)
+        self.showRightViewPrepare()
         self.showRightViewActions(animated: animated, completion: completion)
     }
 
@@ -97,7 +97,7 @@ extension LGSideMenuController {
 
     // MARK: - Show
 
-    internal func showRightViewPrepare(withGesture: Bool) {
+    internal func showRightViewPrepare() {
         guard self.rightView != nil else { return }
         guard self.isRightViewHidden else {
             if self.state == .rightViewWillHide {
@@ -168,8 +168,6 @@ extension LGSideMenuController {
 
         self.state = .rightViewIsShowing
         self.didShowRightViewCallbacks()
-
-        self.rightViewWrapperView?.isUserInteractionEnabled = true
     }
 
     // MARK: Hide
@@ -186,8 +184,6 @@ extension LGSideMenuController {
 
         self.state = .rightViewWillHide
         self.willHideRightViewCallbacks()
-
-        self.rightViewWrapperView?.isUserInteractionEnabled = false
     }
 
     internal func hideRightViewActions(animated: Bool, completion: Completion? = nil) {
@@ -255,6 +251,20 @@ extension LGSideMenuController {
 
         self.validateRootViewsVisibility()
         self.validateRightViewsVisibility()
+    }
+
+    // MARK: - Cancel Animations
+
+    internal func cancelRightViewAnimations() {
+        guard let rightContainerView = self.rightContainerView,
+              let rightViewBorderView = self.rightViewBorderView,
+              let rightViewWrapperView = self.rightViewWrapperView,
+              let rightViewCoverView = self.rightViewCoverView else { return }
+
+        rightContainerView.layer.removeAllAnimations()
+        rightViewBorderView.layer.removeAllAnimations()
+        rightViewWrapperView.layer.removeAllAnimations()
+        rightViewCoverView.layer.removeAllAnimations()
     }
 
 }
