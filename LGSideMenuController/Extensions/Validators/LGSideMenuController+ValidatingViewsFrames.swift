@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsFramesValidating.swift
+//  LGSideMenuValidatingViewsFrames.swift
 //  LGSideMenuController
 //
 //
@@ -33,16 +33,17 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsFramesValidate() {
-        self.rootViewsFramesValidate()
-        self.leftViewsFramesValidate()
-        self.rightViewsFramesValidate()
+    func validateViewsFrames() {
+        self.validateRootViewsFrames()
+        self.validateLeftViewsFrames()
+        self.validateRightViewsFrames()
     }
 
-    func rootViewsFramesValidate() {
+    func validateRootViewsFrames() {
         guard let rootView = self.rootView,
               let rootContainerView = self.rootContainerView,
               let rootViewBorderView = self.rootViewBorderView,
+              let rootViewWrapperView = self.rootViewWrapperView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
@@ -67,19 +68,23 @@ internal extension LGSideMenuController {
                                           width: containerViewFrame.width + (offset * 2.0),
                                           height: containerViewFrame.height + (offset * 2.0))
 
+        rootViewWrapperView.transform = .identity
+        rootViewWrapperView.frame = rootContainerView.bounds
+
         rootView.transform = .identity
-        rootView.frame = rootContainerView.bounds
+        rootView.frame = rootViewWrapperView.bounds
 
         rootViewCoverView.transform = .identity
         rootViewCoverView.frame = rootContainerView.bounds
     }
 
-    func leftViewsFramesValidate() {
+    func validateLeftViewsFrames() {
         guard let leftView = self.leftView,
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewBorderView = self.leftViewBorderView,
               let leftViewStyleView = self.leftViewEffectView,
+              let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
@@ -97,7 +102,8 @@ internal extension LGSideMenuController {
                                      width: containerViewFrame.width + (offset * 2.0),
                                      height: containerViewFrame.height + (offset * 2.0))
 
-        if self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation {
+        if self.leftViewPresentationStyle != .slideAbove,
+           self.isLeftViewAlwaysVisibleForCurrentOrientation || self.isRightViewAlwaysVisibleForCurrentOrientation {
             let rightViewFullWidth = self.rightViewWidth + ((self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * 2.0)
             borderViewFrame.size.width -= rightViewFullWidth
         }
@@ -113,20 +119,24 @@ internal extension LGSideMenuController {
         leftViewStyleView.transform = .identity
         leftViewStyleView.frame = borderViewVisisbleFrame
 
+        leftViewWrapperView.transform = .identity
+        leftViewWrapperView.frame = CGRect(origin: .zero,
+                                           size: CGSize(width: self.leftViewWidth, height: containerViewFrame.height))
+
         leftView.transform = .identity
-        leftView.frame = CGRect(origin: .zero,
-                                size: CGSize(width: self.leftViewWidth, height: containerViewFrame.height))
+        leftView.frame = leftViewWrapperView.bounds
 
         leftViewCoverView.transform = .identity
         leftViewCoverView.frame = leftContainerView.bounds
     }
 
-    func rightViewsFramesValidate() {
+    func validateRightViewsFrames() {
         guard let rightView = self.rightView,
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewBorderView = self.rightViewBorderView,
               let rightViewStyleView = self.rightViewEffectView,
+              let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         var containerViewFrame = self.view.bounds
@@ -145,7 +155,8 @@ internal extension LGSideMenuController {
                                      width: containerViewFrame.width + (offset * 2.0),
                                      height: containerViewFrame.height + (offset * 2.0))
 
-        if self.isRightViewAlwaysVisibleForCurrentOrientation || self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        if self.rightViewPresentationStyle != .slideAbove,
+           self.isRightViewAlwaysVisibleForCurrentOrientation || self.isLeftViewAlwaysVisibleForCurrentOrientation {
             let leftViewFullWidth = self.rightViewWidth + ((self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * 2.0)
             borderViewFrame.size.width -= leftViewFullWidth
             borderViewFrame.origin.x += leftViewFullWidth
@@ -162,9 +173,12 @@ internal extension LGSideMenuController {
         rightViewStyleView.transform = .identity
         rightViewStyleView.frame = borderViewVisisbleFrame
 
+        rightViewWrapperView.transform = .identity
+        rightViewWrapperView.frame = CGRect(origin: CGPoint(x: containerViewFrame.width - self.rightViewWidth, y: 0.0),
+                                            size: CGSize(width: self.rightViewWidth, height: containerViewFrame.height))
+
         rightView.transform = .identity
-        rightView.frame = CGRect(origin: CGPoint(x: containerViewFrame.width - self.rightViewWidth, y: 0.0),
-                                 size: CGSize(width: self.rightViewWidth, height: containerViewFrame.height))
+        rightView.frame = rightViewWrapperView.bounds
 
         rightViewCoverView.transform = .identity
         rightViewCoverView.frame = rightContainerView.bounds

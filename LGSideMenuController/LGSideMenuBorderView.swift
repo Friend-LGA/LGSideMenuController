@@ -31,26 +31,26 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-final class LGSideMenuBorderView: UIView {
+public final class LGSideMenuBorderView: UIView {
 
-    var roundedCorners = UIRectCorner()
-    var cornerRadius: CGFloat = .zero
-    var strokeColor: UIColor = .clear
-    var strokeWidth: CGFloat = .zero
-    var shadowColor: UIColor = .clear
-    var shadowBlur: CGFloat = .zero
-    var fillColor: UIColor = .clear
+    public internal(set) var roundedCorners = UIRectCorner()
+    public internal(set) var cornerRadius: CGFloat = .zero
+    public internal(set) var strokeColor: UIColor = .clear
+    public internal(set) var strokeWidth: CGFloat = .zero
+    public internal(set) var shadowColor: UIColor = .clear
+    public internal(set) var shadowBlur: CGFloat = .zero
+    public internal(set) var fillColor: UIColor = .clear
 
-    init() {
+    public init() {
         super.init(frame: CGRect.zero)
         self.backgroundColor = .clear
     }
 
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
         var drawRect = CGRect(x: self.shadowBlur,

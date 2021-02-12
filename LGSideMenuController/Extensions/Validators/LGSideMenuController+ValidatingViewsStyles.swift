@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsStylesValidating.swift
+//  LGSideMenuValidatingViewsStyles.swift
 //  LGSideMenuController
 //
 //
@@ -32,13 +32,13 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsStylesValidate() {
-        self.rootViewsStylesValidate()
-        self.leftViewsStylesValidate()
-        self.rightViewsStylesValidate()
+    func validateViewsStyles() {
+        self.validateRootViewsStyles()
+        self.validateLeftViewsStyles()
+        self.validateRightViewsStyles()
     }
 
-    func rootViewsStylesValidate() {
+    func validateRootViewsStyles() {
         guard let rootViewBorderView = self.rootViewBorderView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
@@ -63,7 +63,7 @@ internal extension LGSideMenuController {
         }
     }
 
-    func leftViewsStylesValidate() {
+    func validateLeftViewsStyles() {
         guard let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewBorderView = self.leftViewBorderView,
               let leftViewStyleView = self.leftViewEffectView,
@@ -85,7 +85,7 @@ internal extension LGSideMenuController {
         leftViewCoverView.effect = self.leftViewCoverBlurEffect
     }
 
-    func rightViewsStylesValidate() {
+    func validateRightViewsStyles() {
         guard let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewBorderView = self.rightViewBorderView,
               let rightViewStyleView = self.rightViewEffectView,

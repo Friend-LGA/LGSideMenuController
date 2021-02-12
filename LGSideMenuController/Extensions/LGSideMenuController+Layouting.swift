@@ -30,9 +30,9 @@
 import Foundation
 import UIKit
 
-public extension LGSideMenuController {
+extension LGSideMenuController {
 
-    override func viewWillLayoutSubviews() {
+    open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let size = self.view.bounds.size;
         if self.isNeedsUpdateLayoutsAndStyles || self.savedSize != size {
@@ -51,7 +51,7 @@ public extension LGSideMenuController {
     }
 
     /// Invalidates the current layout and triggers a layout update during the next update cycle.
-    func setNeedsUpdateLayoutsAndStyles() {
+    open func setNeedsUpdateLayoutsAndStyles() {
         self.isNeedsUpdateLayoutsAndStyles = true
         if self.isViewLoaded {
             self.view.setNeedsLayout()
@@ -59,7 +59,7 @@ public extension LGSideMenuController {
     }
 
     /// Invalidates the current layout and triggers a layout update during the next update cycle.
-    func setNeedsUpdateRootViewLayoutsAndStyles() {
+    open func setNeedsUpdateRootViewLayoutsAndStyles() {
         self.isNeedsUpdateRootViewLayoutsAndStyles = true
         if self.isViewLoaded {
             self.view.setNeedsLayout()
@@ -67,7 +67,7 @@ public extension LGSideMenuController {
     }
 
     /// Invalidates the current layout and triggers a layout update during the next update cycle.
-    func setNeedsUpdateLeftViewLayoutsAndStyles() {
+    open func setNeedsUpdateLeftViewLayoutsAndStyles() {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = true
         if self.isViewLoaded {
             self.view.setNeedsLayout()
@@ -75,7 +75,7 @@ public extension LGSideMenuController {
     }
 
     /// Invalidates the current layout and triggers a layout update during the next update cycle.
-    func setNeedsUpdateRightViewLayoutsAndStyles() {
+    open func setNeedsUpdateRightViewLayoutsAndStyles() {
         self.isNeedsUpdateRightViewLayoutsAndStyles = true
         if self.isViewLoaded {
             self.view.setNeedsLayout()
@@ -83,54 +83,54 @@ public extension LGSideMenuController {
     }
 
     /// Force update layouts and styles for all views
-    func updateLayoutsAndStyles() {
+    open func updateLayoutsAndStyles() {
         self.isNeedsUpdateLayoutsAndStyles = false
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 
-        self.viewsInitValidate()
-        self.viewsHierarchyValidate()
-        self.viewsFramesValidate()
-        self.viewsStylesValidate()
-        self.viewsTransformsValidate()
-        self.viewsVisibilityValidate()
+        self.validateViewsInit()
+        self.validateViewsHierarchy()
+        self.validateViewsFrames()
+        self.validateViewsStyles()
+        self.validateViewsTransforms()
+        self.validateViewsVisibility()
     }
 
     /// Force update layouts and styles for root views
-    func updateRootViewLayoutsAndStyles() {
+    open func updateRootViewLayoutsAndStyles() {
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
 
-        self.rootViewsInitValidate()
-        self.viewsHierarchyValidate() // Whole hierarchy should be validated
-        self.rootViewsFramesValidate()
-        self.rootViewsStylesValidate()
-        self.rootViewsTransformsValidate()
-        self.rootViewsVisibilityValidate()
+        self.validateRootViewsInit()
+        self.validateViewsHierarchy() // Whole hierarchy should be validated
+        self.validateRootViewsFrames()
+        self.validateRootViewsStyles()
+        self.validateRootViewsTransforms()
+        self.validateRootViewsVisibility()
     }
 
     /// Force update layouts and styles for left views
-    func updateLeftViewLayoutsAndStyles() {
+    open func updateLeftViewLayoutsAndStyles() {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
 
-        self.leftViewsInitValidate()
-        self.viewsHierarchyValidate() // Whole hierarchy should be validated
-        self.leftViewsFramesValidate()
-        self.leftViewsStylesValidate()
-        self.leftViewsTransformsValidate()
-        self.leftViewsVisibilityValidate()
+        self.validateLeftViewsInit()
+        self.validateViewsHierarchy() // Whole hierarchy should be validated
+        self.validateLeftViewsFrames()
+        self.validateLeftViewsStyles()
+        self.validateLeftViewsTransforms()
+        self.validateLeftViewsVisibility()
     }
 
     /// Force update layouts and styles for right views
-    func updateRightViewLayoutsAndStyles() {
+    open func updateRightViewLayoutsAndStyles() {
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 
-        self.rightViewsInitValidate()
-        self.viewsHierarchyValidate() // Whole hierarchy should be validated
-        self.rightViewsFramesValidate()
-        self.rightViewsStylesValidate()
-        self.rightViewsTransformsValidate()
-        self.rightViewsVisibilityValidate()
+        self.validateRightViewsInit()
+        self.validateViewsHierarchy() // Whole hierarchy should be validated
+        self.validateRightViewsFrames()
+        self.validateRightViewsStyles()
+        self.validateRightViewsTransforms()
+        self.validateRightViewsVisibility()
     }
 
 }

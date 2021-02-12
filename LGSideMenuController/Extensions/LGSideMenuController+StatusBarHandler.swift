@@ -30,9 +30,9 @@
 import Foundation
 import UIKit
 
-public extension LGSideMenuController {
+extension LGSideMenuController {
 
-    override var prefersStatusBarHidden: Bool {
+    open override var prefersStatusBarHidden: Bool {
         if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.isRootViewStatusBarHidden
         }
@@ -46,7 +46,7 @@ public extension LGSideMenuController {
         return super.prefersStatusBarHidden
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.rootViewStatusBarStyle
         }
@@ -60,7 +60,7 @@ public extension LGSideMenuController {
         return super.preferredStatusBarStyle
     }
 
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.rootViewStatusBarUpdateAnimation
         }

@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsTransformsValidating.swift
+//  LGSideMenuValidatingViewsTransforms.swift
 //  LGSideMenuController
 //
 //
@@ -32,25 +32,25 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsTransformsValidate() {
-        self.rootViewsTransformsValidate()
-        self.leftViewsTransformsValidate()
-        self.rightViewsTransformsValidate()
+    func validateViewsTransforms() {
+        self.validateRootViewsTransforms()
+        self.validateLeftViewsTransforms()
+        self.validateRightViewsTransforms()
     }
 
-    func rootViewsTransformsValidate() {
-        rootViewsTransformsValidate(percentage: self.isLeftViewShowing || self.isRightViewShowing ? 1.0 : 0.0)
+    func validateRootViewsTransforms() {
+        validateRootViewsTransforms(percentage: self.isLeftViewShowing || self.isRightViewShowing ? 1.0 : 0.0)
     }
 
-    func leftViewsTransformsValidate() {
-        leftViewsTransformsValidate(percentage: self.isLeftViewShowing ? 1.0 : 0.0)
+    func validateLeftViewsTransforms() {
+        validateLeftViewsTransforms(percentage: self.isLeftViewShowing ? 1.0 : 0.0)
     }
 
-    func rightViewsTransformsValidate() {
-        rightViewsTransformsValidate(percentage: self.isRightViewShowing ? 1.0 : 0.0)
+    func validateRightViewsTransforms() {
+        validateRightViewsTransforms(percentage: self.isRightViewShowing ? 1.0 : 0.0)
     }
 
-    func rootViewsTransformsValidate(percentage: CGFloat) {
+    func validateRootViewsTransforms(percentage: CGFloat) {
         guard let rootContainerView = self.rootContainerView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
@@ -91,11 +91,12 @@ internal extension LGSideMenuController {
         rootContainerView.transform = transform
     }
 
-    func leftViewsTransformsValidate(percentage: CGFloat) {
-        guard let leftView = self.leftView,
+    func validateLeftViewsTransforms(percentage: CGFloat) {
+        guard self.leftView != nil,
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewStyleView = self.leftViewEffectView,
+              let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         if self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
@@ -103,18 +104,18 @@ internal extension LGSideMenuController {
         }
 
         var translateX: CGFloat = 0.0
-        var viewTransform: CGAffineTransform = .identity
+        var wrapperViewTransform: CGAffineTransform = .identity
         var backgroundViewTransform: CGAffineTransform = .identity
 
         if !self.isLeftViewAlwaysVisibleForCurrentOrientation {
             if self.leftViewPresentationStyle == .slideAbove {
-                translateX = -(self.leftViewWidth + self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius) * (1.0 - percentage)
+                translateX = (self.leftViewInitialOffsetX - (self.leftViewWidth + self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius)) * (1.0 - percentage)
             }
             else {
                 let scale = 1.0 + (self.leftViewInitialScale - 1.0) * (1.0 - percentage)
                 let backgroundViewScale = self.leftViewBackgroundImageFinalScale + ((self.leftViewBackgroundImageInitialScale - self.leftViewBackgroundImageFinalScale) * (1.0 - percentage))
 
-                viewTransform = CGAffineTransform(scaleX: scale, y: scale)
+                wrapperViewTransform = CGAffineTransform(scaleX: scale, y: scale)
                 backgroundViewTransform = CGAffineTransform(scaleX: backgroundViewScale, y: backgroundViewScale)
 
                 translateX = self.leftViewInitialOffsetX * (1.0 - percentage)
@@ -122,16 +123,17 @@ internal extension LGSideMenuController {
         }
 
         leftContainerView.transform = CGAffineTransform(translationX: translateX, y: 0.0)
-        leftView.transform = viewTransform
+        leftViewWrapperView.transform = wrapperViewTransform
         leftViewBackgroundView.transform = backgroundViewTransform
-        leftViewStyleView.transform = viewTransform
+        leftViewStyleView.transform = wrapperViewTransform
     }
 
-    func rightViewsTransformsValidate(percentage: CGFloat) {
-        guard let rightView = self.rightView,
+    func validateRightViewsTransforms(percentage: CGFloat) {
+        guard self.rightView != nil,
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewStyleView = self.rightViewEffectView,
+              let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         if self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
@@ -139,18 +141,18 @@ internal extension LGSideMenuController {
         }
 
         var translateX: CGFloat = 0.0
-        var viewTransform: CGAffineTransform = .identity
+        var wrapperViewTransform: CGAffineTransform = .identity
         var backgroundViewTransform: CGAffineTransform = .identity
 
         if !self.isRightViewAlwaysVisibleForCurrentOrientation {
             if self.rightViewPresentationStyle == .slideAbove {
-                translateX = (self.rightViewWidth + self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * (1.0 - percentage)
+                translateX = (self.rightViewInitialOffsetX + (self.rightViewWidth + self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius)) * (1.0 - percentage)
             }
             else {
                 let scale = 1.0 + (self.rightViewInitialScale - 1.0) * (1.0 - percentage)
                 let backgroundViewScale = self.rightViewBackgroundImageFinalScale + ((self.rightViewBackgroundImageInitialScale - self.rightViewBackgroundImageFinalScale) * (1.0 - percentage))
 
-                viewTransform = CGAffineTransform(scaleX: scale, y: scale)
+                wrapperViewTransform = CGAffineTransform(scaleX: scale, y: scale)
                 backgroundViewTransform = CGAffineTransform(scaleX: backgroundViewScale, y: backgroundViewScale)
 
                 translateX = self.rightViewInitialOffsetX * (1.0 - percentage)
@@ -158,9 +160,9 @@ internal extension LGSideMenuController {
         }
 
         rightContainerView.transform = CGAffineTransform(translationX: translateX, y: 0.0)
-        rightView.transform = viewTransform
+        rightViewWrapperView.transform = wrapperViewTransform
         rightViewBackgroundView.transform = backgroundViewTransform
-        rightViewStyleView.transform = viewTransform
+        rightViewStyleView.transform = wrapperViewTransform
     }
     
 }

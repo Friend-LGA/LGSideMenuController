@@ -30,10 +30,31 @@
 import Foundation
 import UIKit
 
-public extension LGSideMenuController {
+extension LGSideMenuController {
+
+    // MARK: - UIGestureRecognizerDelegate
+
+    open func gestureRecognizer(_ gesture: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard !self.isAnimating,
+              self.rootView != nil,
+              self.leftView != nil || self.rightView != nil else { return false }
+        // TODO: Make animations interraptable with this gesture
+
+        if gesture is UITapGestureRecognizer {
+            guard let touchView = touch.view, let rootContainerView = self.rootContainerView else { return false }
+            return touchView == rootContainerView
+        }
+        if gesture is UIPanGestureRecognizer {
+            return true
+        }
+
+        return false
+    }
+
+    // MARK: - UIGestureRecognizer Targets
 
     @objc
-    func handleTapGesture(gesture: UITapGestureRecognizer) {
+    open func handleTapGesture(gesture: UITapGestureRecognizer) {
         guard self.rootView != nil && gesture.state == .ended else { return }
 
         if self.isLeftViewShowing && self.isLeftViewHidesOnTouch {
@@ -45,7 +66,7 @@ public extension LGSideMenuController {
     }
 
     @objc
-    func handlePanGesture(gesture: UIPanGestureRecognizer) {
+    open func handlePanGesture(gesture: UIPanGestureRecognizer) {
         guard self.rootView != nil else { return }
 
         let location = gesture.location(in: self.view)
@@ -100,8 +121,8 @@ public extension LGSideMenuController {
                     self.hideLeftViewPrepare()
                 }
 
-                self.rootViewsTransformsValidate(percentage: percentage)
-                self.leftViewsTransformsValidate(percentage: percentage)
+                self.validateRootViewsTransforms(percentage: percentage)
+                self.validateLeftViewsTransforms(percentage: percentage)
             }
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
@@ -173,8 +194,8 @@ public extension LGSideMenuController {
                     self.hideRightViewPrepare()
                 }
 
-                self.rootViewsTransformsValidate(percentage: percentage)
-                self.rightViewsTransformsValidate(percentage: percentage)
+                self.validateRootViewsTransforms(percentage: percentage)
+                self.validateRightViewsTransforms(percentage: percentage)
             }
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
@@ -199,25 +220,6 @@ public extension LGSideMenuController {
                 self.rightViewGestureStartX = nil
             }
         }
-    }
-
-    // MARK: - UIGestureRecognizerDelegate
-
-    func gestureRecognizer(_ gesture: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        guard !self.isAnimating,
-              self.rootView != nil,
-              self.leftView != nil || self.rightView != nil else { return false }
-        // TODO: Make animations interraptable with this gesture
-
-        if gesture is UITapGestureRecognizer {
-            guard let touchView = touch.view, let rootContainerView = self.rootContainerView else { return false }
-            return touchView == rootContainerView
-        }
-        if gesture is UIPanGestureRecognizer {
-            return true
-        }
-
-        return false
     }
 
     // MARK: - Helpers

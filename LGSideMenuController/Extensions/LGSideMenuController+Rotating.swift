@@ -30,16 +30,16 @@
 import Foundation
 import UIKit
 
-public extension LGSideMenuController {
+extension LGSideMenuController {
 
-    override var shouldAutorotate: Bool {
+    open override var shouldAutorotate: Bool {
         if let rootViewController = self.rootViewController {
             return rootViewController.shouldAutorotate
         }
         return super.shouldAutorotate
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         // TODO: Handle this properly
     }

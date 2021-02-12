@@ -31,7 +31,7 @@ import Foundation
 import UIKit
 import ObjectiveC
 
-struct LGSideMenuHelper {
+internal struct LGSideMenuHelper {
     private struct Keys {
         static var sideMenuController = "sideMenuController"
     }

@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsVisibilityValidating.swift
+//  LGSideMenuValidatingViewsVisibility.swift
 //  LGSideMenuController
 //
 //
@@ -32,21 +32,21 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsVisibilityValidate() {
-        self.rootViewsVisibilityValidate()
-        self.leftViewsVisibilityValidate()
-        self.rightViewsVisibilityValidate()
+    func validateViewsVisibility() {
+        self.validateRootViewsVisibility()
+        self.validateLeftViewsVisibility()
+        self.validateRightViewsVisibility()
     }
 
-    func rootViewsVisibilityValidate() {
+    func validateRootViewsVisibility() {
         guard let rootViewBorderView = self.rootViewBorderView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
-        rootViewBorderView.isHidden = self.isRootViewShowing
+        rootViewBorderView.isHidden = self.isRootViewShowing && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRightViewAlwaysVisibleForCurrentOrientation
         rootViewCoverView.isHidden = self.isRootViewShowing
     }
 
-    func leftViewsVisibilityValidate() {
+    func validateLeftViewsVisibility() {
         guard let leftContainerView = self.leftContainerView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
@@ -54,7 +54,7 @@ internal extension LGSideMenuController {
         leftViewCoverView.isHidden = self.isLeftViewShowing || self.isLeftViewAlwaysVisibleForCurrentOrientation
     }
 
-    func rightViewsVisibilityValidate() {
+    func validateRightViewsVisibility() {
         guard let rightContainerView = self.rightContainerView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 

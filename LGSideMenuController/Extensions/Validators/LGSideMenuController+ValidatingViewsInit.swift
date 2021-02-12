@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsValidating.swift
+//  LGSideMenuValidatingViews.swift
 //  LGSideMenuController
 //
 //
@@ -32,119 +32,126 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsInitValidate() {
-        self.rootViewsInitValidate()
-        self.leftViewsInitValidate()
-        self.rightViewsInitValidate()
+    func validateViewsInit() {
+        self.validateRootViewsInit()
+        self.validateLeftViewsInit()
+        self.validateRightViewsInit()
     }
 
-    func rootViewsInitValidate() {
-        guard let rootView = self.rootView else { return }
-
-        rootView.clipsToBounds = true
+    func validateRootViewsInit() {
+        guard self.rootView != nil else { return }
 
         if self.rootContainerView == nil {
             self.rootContainerView = UIView()
-            self.rootContainerView?.backgroundColor = .clear
-            self.rootContainerView?.isUserInteractionEnabled = true
+            defaultRootViewSetup(self.rootContainerView, true)
         }
 
         if self.rootViewBorderView == nil {
             self.rootViewBorderView = LGSideMenuBorderView()
-            self.rootViewBorderView?.isUserInteractionEnabled = false
+            defaultRootViewSetup(self.rootViewBorderView)
+        }
+
+        if self.rootViewWrapperView == nil {
+            self.rootViewWrapperView = UIView()
+            self.rootViewWrapperView?.clipsToBounds = true
+            defaultRootViewSetup(self.rootViewWrapperView, true)
         }
 
         if self.rootViewCoverView == nil {
             self.rootViewCoverView = UIVisualEffectView()
-            self.rootViewCoverView?.backgroundColor = .clear
-            self.rootViewCoverView?.isUserInteractionEnabled = false
+            defaultRootViewSetup(self.rootViewCoverView)
         }
     }
 
-    func leftViewsInitValidate() {
-        guard let leftView = self.leftView else { return }
-
-        leftView.clipsToBounds = true
-        leftView.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+    func validateLeftViewsInit() {
+        guard self.leftView != nil else { return }
 
         if self.leftContainerView == nil {
             self.leftContainerView = UIView()
-            self.leftContainerView?.backgroundColor = .clear
-            self.leftContainerView?.isUserInteractionEnabled = true
-            self.leftContainerView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+            defaultLeftViewSetup(self.leftContainerView, true)
         }
 
         if self.leftViewBorderView == nil {
             self.leftViewBorderView = LGSideMenuBorderView()
-            self.leftViewBorderView?.isUserInteractionEnabled = false
-            self.leftViewBorderView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+            defaultLeftViewSetup(self.leftViewBorderView)
         }
 
         if self.leftViewBackgroundView == nil {
             self.leftViewBackgroundView = UIImageView()
-            self.leftViewBackgroundView?.backgroundColor = .clear
-            self.leftViewBackgroundView?.isUserInteractionEnabled = false
             self.leftViewBackgroundView?.clipsToBounds = true
             self.leftViewBackgroundView?.contentMode = .scaleAspectFill
-            self.leftViewBackgroundView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+            defaultLeftViewSetup(self.leftViewBackgroundView)
         }
 
         if self.leftViewEffectView == nil {
             self.leftViewEffectView = UIVisualEffectView()
-            self.leftViewEffectView?.backgroundColor = .clear
-            self.leftViewEffectView?.isUserInteractionEnabled = false
-            self.leftViewEffectView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+            defaultLeftViewSetup(self.leftViewEffectView)
+        }
+
+        if self.leftViewWrapperView == nil {
+            self.leftViewWrapperView = UIView()
+            self.leftViewWrapperView?.clipsToBounds = true
+            defaultLeftViewSetup(self.leftViewWrapperView, true)
         }
 
         if self.leftViewCoverView == nil {
             self.leftViewCoverView = UIVisualEffectView()
-            self.leftViewCoverView?.backgroundColor = .clear
-            self.leftViewCoverView?.isUserInteractionEnabled = false
-            self.leftViewCoverView?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+            defaultLeftViewSetup(self.leftViewCoverView)
         }
     }
 
-    func rightViewsInitValidate() {
-        guard let rightView = self.rightView else { return }
-
-        rightView.clipsToBounds = true
-        rightView.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+    func validateRightViewsInit() {
+        guard self.rightView != nil else { return }
 
         if self.rightContainerView == nil {
             self.rightContainerView = UIView()
-            self.rightContainerView?.backgroundColor = .clear
-            self.rightContainerView?.isUserInteractionEnabled = true
-            self.rightContainerView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+            defaultRightViewSetup(self.rightContainerView, true)
         }
 
         if self.rightViewBorderView == nil {
             self.rightViewBorderView = LGSideMenuBorderView()
-            self.rightViewBorderView?.isUserInteractionEnabled = false
-            self.rightViewBorderView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+            defaultRightViewSetup(self.rightViewBorderView)
         }
 
         if self.rightViewBackgroundView == nil {
             self.rightViewBackgroundView = UIImageView()
-            self.rightViewBackgroundView?.backgroundColor = .clear
-            self.rightViewBackgroundView?.isUserInteractionEnabled = false
             self.rightViewBackgroundView?.clipsToBounds = true
             self.rightViewBackgroundView?.contentMode = .scaleAspectFill
-            self.rightViewBackgroundView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+            defaultRightViewSetup(self.rightViewBackgroundView)
         }
 
         if self.rightViewEffectView == nil {
             self.rightViewEffectView = UIVisualEffectView()
-            self.rightViewEffectView?.backgroundColor = .clear
-            self.rightViewEffectView?.isUserInteractionEnabled = false
-            self.rightViewEffectView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+            defaultRightViewSetup(self.rightViewEffectView)
+        }
+
+        if self.rightViewWrapperView == nil {
+            self.rightViewWrapperView = UIView()
+            self.rightViewWrapperView?.clipsToBounds = true
+            defaultRightViewSetup(self.rightViewWrapperView, true)
         }
 
         if self.rightViewCoverView == nil {
             self.rightViewCoverView = UIVisualEffectView()
-            self.rightViewCoverView?.backgroundColor = .clear
-            self.rightViewCoverView?.isUserInteractionEnabled = false
-            self.rightViewCoverView?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
+            defaultRightViewSetup(self.rightViewCoverView)
         }
+    }
+
+    private func defaultRootViewSetup(_ view: UIView?, _ isUserInteractionEnabled: Bool = false) {
+        view?.backgroundColor = .clear
+        view?.isUserInteractionEnabled = isUserInteractionEnabled
+    }
+
+    private func defaultLeftViewSetup(_ view: UIView?, _ isUserInteractionEnabled: Bool = false) {
+        view?.backgroundColor = .clear
+        view?.isUserInteractionEnabled = isUserInteractionEnabled
+        view?.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5)
+    }
+
+    private func defaultRightViewSetup(_ view: UIView?, _ isUserInteractionEnabled: Bool = false) {
+        view?.backgroundColor = .clear
+        view?.isUserInteractionEnabled = isUserInteractionEnabled
+        view?.layer.anchorPoint = CGPoint(x: 1.0, y: 0.5)
     }
     
 }

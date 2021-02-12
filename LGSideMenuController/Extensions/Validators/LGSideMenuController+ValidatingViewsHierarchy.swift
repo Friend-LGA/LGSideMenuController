@@ -1,5 +1,5 @@
 //
-//  LGSideMenuViewsHierarchyValidating.swift
+//  LGSideMenuValidatingViewsHierarchy.swift
 //  LGSideMenuController
 //
 //
@@ -32,32 +32,36 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    func viewsHierarchyValidate() {
-        self.rootViewsHierarchyValidate()
-        self.leftViewsHierarchyValidate()
-        self.rightViewsHierarchyValidate()
+    func validateViewsHierarchy() {
+        self.validateRootViewsHierarchy()
+        self.validateLeftViewsHierarchy()
+        self.validateRightViewsHierarchy()
     }
 
-    func rootViewsHierarchyValidate() {
+    func validateRootViewsHierarchy() {
         guard let rootView = self.rootView,
               let rootContainerView = self.rootContainerView,
               let rootViewBorderView = self.rootViewBorderView,
+              let rootViewWrapperView = self.rootViewWrapperView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
         self.view.insertSubview(rootContainerView, at: 0)
 
         rootContainerView.insertSubview(rootViewBorderView, at: 0)
-        rootContainerView.insertSubview(rootView, at: 1)
+        rootContainerView.insertSubview(rootViewWrapperView, at: 1)
         rootContainerView.insertSubview(rootViewCoverView, at: 2)
+
+        rootViewWrapperView.insertSubview(rootView, at: 0)
     }
 
-    func leftViewsHierarchyValidate() {
+    func validateLeftViewsHierarchy() {
         guard let rootContainerView = self.rootContainerView,
               let leftView = self.leftView,
               let leftContainerView = self.leftContainerView,
               let leftViewBackgroundView = self.leftViewBackgroundView,
               let leftViewBorderView = self.leftViewBorderView,
               let leftViewStyleView = self.leftViewEffectView,
+              let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
         if self.leftViewPresentationStyle == .slideAbove {
@@ -68,20 +72,23 @@ internal extension LGSideMenuController {
         }
 
         leftContainerView.insertSubview(leftViewBorderView, at: 0)
-        leftContainerView.insertSubview(leftView, at: 1)
+        leftContainerView.insertSubview(leftViewWrapperView, at: 1)
         leftContainerView.insertSubview(leftViewCoverView, at: 2)
 
         leftViewBorderView.insertSubview(leftViewBackgroundView, at: 0)
         leftViewBorderView.insertSubview(leftViewStyleView, at: 1)
+
+        leftViewWrapperView.insertSubview(leftView, at: 0)
     }
 
-    func rightViewsHierarchyValidate() {
+    func validateRightViewsHierarchy() {
         guard let rootContainerView = self.rootContainerView,
               let rightView = self.rightView,
               let rightContainerView = self.rightContainerView,
               let rightViewBackgroundView = self.rightViewBackgroundView,
               let rightViewBorderView = self.rightViewBorderView,
               let rightViewStyleView = self.rightViewEffectView,
+              let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         if self.rightViewPresentationStyle == .slideAbove {
@@ -92,11 +99,13 @@ internal extension LGSideMenuController {
         }
 
         rightContainerView.insertSubview(rightViewBorderView, at: 0)
-        rightContainerView.insertSubview(rightView, at: 1)
+        rightContainerView.insertSubview(rightViewWrapperView, at: 1)
         rightContainerView.insertSubview(rightViewCoverView, at: 2)
 
         rightViewBorderView.insertSubview(rightViewBackgroundView, at: 0)
         rightViewBorderView.insertSubview(rightViewStyleView, at: 1)
+
+        rightViewWrapperView.insertSubview(rightView, at: 0)
     }
     
 }

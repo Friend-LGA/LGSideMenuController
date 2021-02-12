@@ -30,7 +30,7 @@
 import Foundation
 import UIKit
 
-public extension LGSideMenuController {
+internal extension LGSideMenuController {
 
     // MARK: - Left View
 
