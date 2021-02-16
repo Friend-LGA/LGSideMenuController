@@ -110,18 +110,23 @@ internal extension LGSideMenuController {
         var backgroundViewTransform: CGAffineTransform = .identity
 
         if !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            var wrapperViewTransformScale: CGAffineTransform = .identity
+
             if self.leftViewPresentationStyle == .slideAbove {
-                translateX = (self.leftViewInitialOffsetX - (self.leftViewWidth + self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius)) * (1.0 - percentage)
+                translateX = -(self.leftViewWidth + self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius) * (1.0 - percentage)
             }
             else {
                 let scale = 1.0 + (self.leftViewInitialScale - 1.0) * (1.0 - percentage)
                 let backgroundViewScale = self.leftViewBackgroundImageFinalScale + ((self.leftViewBackgroundImageInitialScale - self.leftViewBackgroundImageFinalScale) * (1.0 - percentage))
 
-                wrapperViewTransform = CGAffineTransform(scaleX: scale, y: scale)
+                wrapperViewTransformScale = CGAffineTransform(scaleX: scale, y: scale)
                 backgroundViewTransform = CGAffineTransform(scaleX: backgroundViewScale, y: backgroundViewScale)
-
-                translateX = self.leftViewInitialOffsetX * (1.0 - percentage)
             }
+
+            let additionalWrapperViewOffset = self.leftViewInitialOffsetX * (1.0 - percentage)
+            let wrapperViewTransformTranslate = CGAffineTransform(translationX: additionalWrapperViewOffset, y: 0.0)
+
+            wrapperViewTransform = wrapperViewTransformScale.concatenating(wrapperViewTransformTranslate)
         }
 
         leftContainerView.transform = CGAffineTransform(translationX: translateX, y: 0.0)
@@ -149,18 +154,23 @@ internal extension LGSideMenuController {
         var backgroundViewTransform: CGAffineTransform = .identity
 
         if !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            var wrapperViewTransformScale: CGAffineTransform = .identity
+
             if self.rightViewPresentationStyle == .slideAbove {
-                translateX = (self.rightViewInitialOffsetX + (self.rightViewWidth + self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius)) * (1.0 - percentage)
+                translateX = (self.rightViewWidth + self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius) * (1.0 - percentage)
             }
             else {
                 let scale = 1.0 + (self.rightViewInitialScale - 1.0) * (1.0 - percentage)
                 let backgroundViewScale = self.rightViewBackgroundImageFinalScale + ((self.rightViewBackgroundImageInitialScale - self.rightViewBackgroundImageFinalScale) * (1.0 - percentage))
 
-                wrapperViewTransform = CGAffineTransform(scaleX: scale, y: scale)
+                wrapperViewTransformScale = CGAffineTransform(scaleX: scale, y: scale)
                 backgroundViewTransform = CGAffineTransform(scaleX: backgroundViewScale, y: backgroundViewScale)
-
-                translateX = self.rightViewInitialOffsetX * (1.0 - percentage)
             }
+
+            let additionalWrapperViewOffset = self.rightViewInitialOffsetX * (1.0 - percentage)
+            let wrapperViewTransformTranslate = CGAffineTransform(translationX: additionalWrapperViewOffset, y: 0.0)
+
+            wrapperViewTransform = wrapperViewTransformScale.concatenating(wrapperViewTransformTranslate)
         }
 
         rightContainerView.transform = CGAffineTransform(translationX: translateX, y: 0.0)
