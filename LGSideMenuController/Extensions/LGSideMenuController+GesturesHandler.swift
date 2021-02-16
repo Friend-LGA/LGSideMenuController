@@ -45,8 +45,8 @@ extension LGSideMenuController {
 
         if gesture == self.tapGesture {
             guard !self.isRootViewShowing,
-                  (isLeftViewActive && self.isLeftViewHidesOnTouch) ||
-                    (isRightViewActive && self.isRightViewHidesOnTouch),
+                  (isLeftViewActive && self.shouldLeftViewHideOnTouch) ||
+                    (isRightViewActive && self.shouldRightViewHideOnTouch),
                   let touchView = touch.view,
                   let rootContainerView = self.rootContainerView else { return false }
 
@@ -81,10 +81,10 @@ extension LGSideMenuController {
         guard gesture.state == .ended else { return }
 
         if self.isLeftViewVisible {
-            self.hideLeftView(animated: self.shouldHideLeftViewAnimated)
+            self.hideLeftView(animated: self.shouldLeftViewHideOnTouchAnimated)
         }
         else if self.isRightViewVisible {
-            self.hideRightView(animated: self.shouldHideRightViewAnimated)
+            self.hideRightView(animated: self.shouldRightViewHideOnTouchAnimated)
         }
     }
 
@@ -224,7 +224,7 @@ extension LGSideMenuController {
         let originX = borderX - self.leftViewSwipeGestureRange.left
 
         let width: CGFloat = {
-            if self.swipeGestureArea == .full || self.isLeftViewVisible {
+            if self.leftViewSwipeGestureArea == .full || self.isLeftViewVisible {
                 var result = self.view.bounds.width - originX
                 if self.isRightViewAlwaysVisibleForCurrentOrientation {
                     result -= self.rightViewWidth
@@ -251,7 +251,7 @@ extension LGSideMenuController {
         let borderX = (self.rightViewPresentationStyle == .slideAbove && self.isRightViewVisible) ? rightContainerView.frame.minX : rootContainerView.frame.maxX
 
         let originX: CGFloat = {
-            if self.swipeGestureArea == .full || self.isRightViewVisible {
+            if self.rightViewSwipeGestureArea == .full || self.isRightViewVisible {
                 var result: CGFloat = 0.0
                 if self.isLeftViewAlwaysVisibleForCurrentOrientation {
                     result += self.leftViewWidth
@@ -264,7 +264,7 @@ extension LGSideMenuController {
         }()
 
         let width: CGFloat = {
-            if self.swipeGestureArea == .full || self.isRightViewVisible {
+            if self.rightViewSwipeGestureArea == .full || self.isRightViewVisible {
                 return borderX - originX + self.rightViewSwipeGestureRange.right
             }
             else {

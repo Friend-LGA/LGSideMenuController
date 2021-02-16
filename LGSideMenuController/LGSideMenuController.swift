@@ -98,21 +98,21 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
 
         public var isAlwaysVisibleForCurrentOrientation: Bool {
-            return self.isAlwaysVisibleForOrientation(UIApplication.shared.statusBarOrientation)
+            return isAlwaysVisibleForOrientation(UIApplication.shared.statusBarOrientation)
         }
 
         public func isAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-            return self.contains(.all) ||
-                (orientation.isPortrait && self.contains(.portrait)) ||
-                (orientation.isLandscape && self.contains(.landscape)) ||
+            return contains(.all) ||
+                (orientation.isPortrait && contains(.portrait)) ||
+                (orientation.isLandscape && contains(.landscape)) ||
                 (LGSideMenuHelper.isPhone() &&
-                    (self.contains(.phone) ||
-                        (orientation.isPortrait && self.contains(.phonePortrait)) ||
-                        (orientation.isLandscape && self.contains(.phoneLandscape)))) ||
+                    (contains(.phone) ||
+                        (orientation.isPortrait && contains(.phonePortrait)) ||
+                        (orientation.isLandscape && contains(.phoneLandscape)))) ||
                 (LGSideMenuHelper.isPad() &&
-                    (self.contains(.pad) ||
-                        (orientation.isPortrait && self.contains(.padPortrait)) ||
-                        (orientation.isLandscape && self.contains(.padLandscape))))
+                    (contains(.pad) ||
+                        (orientation.isPortrait && contains(.padPortrait)) ||
+                        (orientation.isLandscape && contains(.padLandscape))))
         }
     }
 
@@ -175,11 +175,11 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
 
         public var isLeftViewHidden: Bool {
-            return !self.isLeftViewVisible
+            return !isLeftViewVisible
         }
 
         public var isRightViewHidden: Bool {
-            return !self.isRightViewVisible
+            return !isRightViewVisible
         }
     }
 
@@ -187,14 +187,14 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var rootViewController: UIViewController? {
         willSet {
-            self.removeRootViewController()
+            removeRootViewController()
         }
         didSet {
             guard let rootViewController = rootViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rootViewController)
             rootViewController.removeFromParent()
-            if self.isRootViewShowing {
-                self.addChild(rootViewController)
+            if isRootViewShowing {
+                addChild(rootViewController)
             }
             self.rootView = rootViewController.view
         }
@@ -202,14 +202,14 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var leftViewController: UIViewController? {
         willSet {
-            self.removeLeftViewController()
+            removeLeftViewController()
         }
         didSet {
             guard let leftViewController = leftViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
             leftViewController.removeFromParent()
-            if self.isLeftViewShowing {
-                self.addChild(leftViewController)
+            if isLeftViewShowing {
+                addChild(leftViewController)
             }
             self.leftView = leftViewController.view
         }
@@ -217,14 +217,14 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var rightViewController: UIViewController? {
         willSet {
-            self.removeRightViewController()
+            removeRightViewController()
         }
         didSet {
             guard let rightViewController = rightViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
             rightViewController.removeFromParent()
-            if self.isRightViewShowing {
-                self.addChild(rightViewController)
+            if isRightViewShowing {
+                addChild(rightViewController)
             }
             self.rightView = rightViewController.view
         }
@@ -233,36 +233,36 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var rootView: UIView? {
         willSet {
             if newValue == nil {
-                self.removeRootViews()
+                removeRootViews()
             }
         }
         didSet {
-            guard self.rootView != nil else { return }
-            self.setNeedsUpdateRootViewLayoutsAndStyles()
+            guard rootView != nil else { return }
+            setNeedsUpdateRootViewLayoutsAndStyles()
         }
     }
 
     open var leftView: UIView? {
         willSet {
             if newValue == nil {
-                self.removeLeftViews()
+                removeLeftViews()
             }
         }
         didSet {
-            guard self.leftView != nil else { return }
-            self.setNeedsUpdateLeftViewLayoutsAndStyles()
+            guard leftView != nil else { return }
+            setNeedsUpdateLeftViewLayoutsAndStyles()
         }
     }
 
     open var rightView: UIView? {
         willSet {
             if newValue == nil {
-                self.removeRightViews()
+                removeRightViews()
             }
         }
         didSet {
-            guard self.rightView != nil else { return }
-            self.setNeedsUpdateRightViewLayoutsAndStyles()
+            guard rightView != nil else { return }
+            setNeedsUpdateRightViewLayoutsAndStyles()
         }
     }
 
@@ -272,68 +272,59 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Public Non-Conditional Configurable Properties
 
-    /// Default:
-    /// if iPhone { MainScreen.size.min - 44.0 }
-    /// else 320.0
+    /// Default is min(MainScreenSize.minSide - 44.0, 320.0)
     @IBInspectable open var leftViewWidth: CGFloat = {
-        var sideMenuWidth: CGFloat = 320.0
-        if LGSideMenuHelper.isPhone() {
-            let minSide = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-            sideMenuWidth = minSide - 44.0
-        }
-        return sideMenuWidth
+        let minScreenSide = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        return min(minScreenSide - 44.0, 320.0)
     }() {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
-    /// Default:
-    /// if iPhone { MainScreen.size.min - 44.0 }
-    /// else 320.0
+    /// Default is min(MainScreenSize.minSide - 44.0, 320.0)
     @IBInspectable open var rightViewWidth: CGFloat = {
-        var sideMenuWidth: CGFloat = 320.0
-        if LGSideMenuHelper.isPhone() {
-            let minSide = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
-            sideMenuWidth = minSide - 44.0
-        }
-        return sideMenuWidth
+        let minScreenSide = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        return min(minScreenSide - 44.0, 320.0)
     }() {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var leftViewPresentationStyle: PresentationStyle = .slideAbove {
         didSet {
-            self.validateAlwaysVisibleConflict()
-            self.setNeedsUpdateLayoutsAndStyles()
+            validateAlwaysVisibleConflict()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var rightViewPresentationStyle: PresentationStyle = .slideAbove {
         didSet {
-            self.validateAlwaysVisibleConflict()
-            self.setNeedsUpdateLayoutsAndStyles()
+            validateAlwaysVisibleConflict()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var leftViewAlwaysVisibleOptions: AlwaysVisibleOptions = [] {
         didSet {
-            self.validateAlwaysVisibleConflict()
-            self.setNeedsUpdateLayoutsAndStyles()
+            validateAlwaysVisibleConflict()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var rightViewAlwaysVisibleOptions: AlwaysVisibleOptions = [] {
         didSet {
-            self.validateAlwaysVisibleConflict()
-            self.setNeedsUpdateLayoutsAndStyles()
+            validateAlwaysVisibleConflict()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
-    @IBInspectable open var isLeftViewHidesOnTouch: Bool = true
-    @IBInspectable open var isRightViewHidesOnTouch: Bool = true
+    @IBInspectable open var shouldLeftViewHideOnTouch: Bool = true
+    @IBInspectable open var shouldRightViewHideOnTouch: Bool = true
+
+    @IBInspectable open var shouldLeftViewHideOnTouchAnimated: Bool = true
+    @IBInspectable open var shouldRightViewHideOnTouchAnimated: Bool = true
 
     @IBInspectable open var isLeftViewSwipeGestureEnabled: Bool = true
     @IBInspectable open var isRightViewSwipeGestureEnabled: Bool = true
@@ -343,7 +334,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.isLeftViewSwipeGestureEnabled = !newValue
         }
         get {
-            return !self.isLeftViewSwipeGestureEnabled
+            return !isLeftViewSwipeGestureEnabled
         }
     }
 
@@ -352,35 +343,33 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.isRightViewSwipeGestureEnabled = !newValue
         }
         get {
-            return !self.isRightViewSwipeGestureEnabled
+            return !isRightViewSwipeGestureEnabled
         }
     }
 
-    open var swipeGestureArea: SwipeGestureArea = .borders
+    open var leftViewSwipeGestureArea: SwipeGestureArea = .borders
+    open var rightViewSwipeGestureArea: SwipeGestureArea = .borders
 
-    /// Only if swipeGestureArea == .borders
-    /// Default is SwipeGestureRange(left: 0.0, right: 44.0)
     /// Explanation:
     /// For SwipeGestureRange(left: 44.0, right: 44.0) => leftView 44.0 | 44.0 rootView
     /// For SwipeGestureRange(left: 0.0, right: 44.0)  => leftView  0.0 | 44.0 rootView
     /// For SwipeGestureRange(left: 44.0, right: 0.0)  => leftView 44.0 | 0.0  rootView
+    /// Note:
+    /// If leftSwipeGestureArea == .full then right part is ignored
     open var leftViewSwipeGestureRange = SwipeGestureRange(left: 0.0, right: 44.0)
 
-    /// Only if swipeGestureArea == .borders
-    /// Default is SwipeGestureRange(left: 44.0, right: 0.0)
     /// Explanation:
     /// For SwipeGestureRange(left: 44.0, right: 44.0) => rootView 44.0 | 44.0 rightView
     /// For SwipeGestureRange(left: 0.0, right: 44.0)  => rootView  0.0 | 44.0 rightView
     /// For SwipeGestureRange(left: 44.0, right: 0.0)  => rootView 44.0 | 0.0  rightView
+    /// Note:
+    /// If rightSwipeGestureArea == .full then left part is ignored
     open var rightViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 0.0)
 
     @IBInspectable open var leftViewAnimationDuration: TimeInterval = 0.5
     @IBInspectable open var rightViewAnimationDuration: TimeInterval = 0.5
 
     // TODO: Add custom timing function
-
-    @IBInspectable open var shouldHideLeftViewAnimated: Bool = true
-    @IBInspectable open var shouldHideRightViewAnimated: Bool = true
 
     @IBInspectable open var isLeftViewEnabled: Bool = true
     @IBInspectable open var isRightViewEnabled: Bool = true
@@ -390,7 +379,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.isLeftViewEnabled = !newValue
         }
         get {
-            return !self.isLeftViewEnabled
+            return !isLeftViewEnabled
         }
     }
 
@@ -399,259 +388,169 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.isRightViewEnabled = !newValue
         }
         get {
-            return !self.isRightViewEnabled
+            return !isRightViewEnabled
         }
     }
 
     @IBInspectable open var rootViewBackgroundColor: UIColor = .clear {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     @IBInspectable open var leftViewBackgroundColor: UIColor = .clear {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     @IBInspectable open var rightViewBackgroundColor: UIColor = .clear {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var leftViewBackgroundImage: UIImage? {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var rightViewBackgroundImage: UIImage? {
         didSet {
-            self.setNeedsUpdateLayoutsAndStyles()
+            setNeedsUpdateLayoutsAndStyles()
         }
     }
 
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var leftViewBackgroundBlurEffect: UIBlurEffect?
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var rightViewBackgroundBlurEffect: UIBlurEffect?
 
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var leftViewBackgroundAlpha: CGFloat = 1.0
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var rightViewBackgroundAlpha: CGFloat = 1.0
 
     @IBInspectable open var rootViewLayerBorderColor: UIColor = .clear
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var leftViewLayerBorderColor: UIColor = .clear
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var rightViewLayerBorderColor: UIColor = .clear
 
     @IBInspectable open var rootViewLayerBorderWidth: CGFloat = 0.0
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var leftViewLayerBorderWidth: CGFloat = 0.0
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var rightViewLayerBorderWidth: CGFloat = 0.0
 
     @IBInspectable open var rootViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var leftViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
-    /// Only if presentationStyle == .slideAbove
     @IBInspectable open var rightViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
 
-    @IBInspectable open var rootViewLayerShadowRadius: CGFloat = 5.0
-    /// Only if presentationStyle == .slideAbove
-    @IBInspectable open var leftViewLayerShadowRadius: CGFloat = 5.0
-    /// Only if presentationStyle == .slideAbove
-    @IBInspectable open var rightViewLayerShadowRadius: CGFloat = 5.0
+    @IBInspectable open var rootViewLayerShadowRadius: CGFloat = 8.0
+    @IBInspectable open var leftViewLayerShadowRadius: CGFloat = 8.0
+    @IBInspectable open var rightViewLayerShadowRadius: CGFloat = 8.0
 
     @IBInspectable open var rootViewCoverBlurEffectForLeftView: UIBlurEffect?
     @IBInspectable open var rootViewCoverBlurEffectForRightView: UIBlurEffect?
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var leftViewCoverBlurEffect: UIBlurEffect?
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var rightViewCoverBlurEffect: UIBlurEffect?
 
     @IBInspectable open var rootViewCoverAlphaForLeftView: CGFloat = 1.0
     @IBInspectable open var rootViewCoverAlphaForRightView: CGFloat = 1.0
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var leftViewCoverAlpha: CGFloat = 1.0
-    /// Only if presentationStyle != .slideAbove
     @IBInspectable open var rightViewCoverAlpha: CGFloat = 1.0
 
     // MARK: - Public Conditional Configurable Properties
 
-    /// Default:
-    /// if rootViewController != nil then rootViewController.prefersStatusBarHidden
-    /// else self.prefersStatusBarHidden
+    /// Default: rootViewController.prefersStatusBarHidden ?? prefersStatusBarHidden
     @IBInspectable open var isRootViewStatusBarHidden: Bool {
         set {
             _isRootViewStatusBarHidden = newValue
         }
         get {
-            if let isRootViewStatusBarHidden = _isRootViewStatusBarHidden {
-                return isRootViewStatusBarHidden
-            }
-            if let rootViewController = self.rootViewController {
-                return rootViewController.prefersStatusBarHidden
-            }
-            return self.prefersStatusBarHidden
+            return _isRootViewStatusBarHidden ?? rootViewController?.prefersStatusBarHidden ?? prefersStatusBarHidden
         }
     }
     private var _isRootViewStatusBarHidden: Bool?
 
-    /// Default:
-    /// if leftViewController != nil then leftViewController.prefersStatusBarHidden
-    /// else self.rootViewStatusBarHidden
+    /// Default: leftViewController.prefersStatusBarHidden ?? rootViewStatusBarHidden
     @IBInspectable open var isLeftViewStatusBarHidden: Bool {
         set {
             _isLeftViewStatusBarHidden = newValue
         }
         get {
-            if let isLeftViewStatusBarHidden = _isLeftViewStatusBarHidden {
-                return isLeftViewStatusBarHidden
-            }
-            if let leftViewController = self.leftViewController {
-                return leftViewController.prefersStatusBarHidden
-            }
-            return self.isRootViewStatusBarHidden
+            return _isLeftViewStatusBarHidden ?? leftViewController?.prefersStatusBarHidden ?? isRootViewStatusBarHidden
         }
     }
     private var _isLeftViewStatusBarHidden: Bool?
 
-    /// Default:
-    /// if rightViewController != nil then rightViewController.prefersStatusBarHidden
-    /// else self.rootViewStatusBarHidden
+    /// Default: rightViewController.prefersStatusBarHidden ?? rootViewStatusBarHidden
     @IBInspectable open var isRightViewStatusBarHidden: Bool {
         set {
             _isRightViewStatusBarHidden = newValue
         }
         get {
-            if let isRightViewStatusBarHidden = _isRightViewStatusBarHidden {
-                return isRightViewStatusBarHidden
-            }
-            if let rightViewController = self.rightViewController {
-                return rightViewController.prefersStatusBarHidden
-            }
-            return self.isRootViewStatusBarHidden
+            return _isRightViewStatusBarHidden ?? rightViewController?.prefersStatusBarHidden ?? isRootViewStatusBarHidden
         }
     }
     private var _isRightViewStatusBarHidden: Bool?
 
-    /// Default:
-    /// if rootViewController != nil then rootViewController.preferredStatusBarStyle
-    /// else self.preferredStatusBarStyle
+    /// Default: rootViewController.preferredStatusBarStyle ?? preferredStatusBarStyle
     @IBInspectable open var rootViewStatusBarStyle: UIStatusBarStyle {
         set {
             _rootViewStatusBarStyle = newValue
         }
         get {
-            if let rootViewStatusBarStyle = _rootViewStatusBarStyle {
-                return rootViewStatusBarStyle
-            }
-            if let rootViewController = self.rootViewController {
-                return rootViewController.preferredStatusBarStyle
-            }
-            return self.preferredStatusBarStyle
+            return _rootViewStatusBarStyle ?? rootViewController?.preferredStatusBarStyle ?? preferredStatusBarStyle
         }
     }
     private var _rootViewStatusBarStyle: UIStatusBarStyle?
 
-    /// Default:
-    /// if leftViewController != nil then leftViewController.preferredStatusBarStyle
-    /// else self.rootViewStatusBarStyle
+    /// Default: leftViewController.preferredStatusBarStyle ?? rootViewStatusBarStyle
     @IBInspectable open var leftViewStatusBarStyle: UIStatusBarStyle {
         set {
             _leftViewStatusBarStyle = newValue
         }
         get {
-            if let leftViewStatusBarStyle = _leftViewStatusBarStyle {
-                return leftViewStatusBarStyle
-            }
-            if let leftViewController = self.leftViewController {
-                return leftViewController.preferredStatusBarStyle
-            }
-            return self.rootViewStatusBarStyle
+            return _leftViewStatusBarStyle ?? leftViewController?.preferredStatusBarStyle ?? rootViewStatusBarStyle
         }
     }
     private var _leftViewStatusBarStyle: UIStatusBarStyle?
 
-    /// Default:
-    /// if rightViewController != nil then rightViewController.preferredStatusBarStyle
-    /// else self.rootViewStatusBarStyle
+    /// Default: rightViewController.preferredStatusBarStyle ?? rootViewStatusBarStyle
     @IBInspectable open var rightViewStatusBarStyle: UIStatusBarStyle {
         set {
             _rightViewStatusBarStyle = newValue
         }
         get {
-            if let rightViewStatusBarStyle = _rightViewStatusBarStyle {
-                return rightViewStatusBarStyle
-            }
-            if let rightViewController = self.rightViewController {
-                return rightViewController.preferredStatusBarStyle
-            }
-            return self.rootViewStatusBarStyle
+            return _rightViewStatusBarStyle ?? rightViewController?.preferredStatusBarStyle ?? rootViewStatusBarStyle
         }
     }
     private var _rightViewStatusBarStyle: UIStatusBarStyle?
 
-    /// Default:
-    /// if rootViewController != nil then rootViewController.preferredStatusBarUpdateAnimation
-    /// else self.preferredStatusBarUpdateAnimation
+    /// Default: rootViewController.preferredStatusBarUpdateAnimation ?? preferredStatusBarUpdateAnimation
     @IBInspectable open var rootViewStatusBarUpdateAnimation: UIStatusBarAnimation {
         set {
             _rootViewStatusBarUpdateAnimation = newValue
         }
         get {
-            if let rootViewStatusBarUpdateAnimation = _rootViewStatusBarUpdateAnimation {
-                return rootViewStatusBarUpdateAnimation
-            }
-            if let rootViewController = self.rootViewController {
-                return rootViewController.preferredStatusBarUpdateAnimation
-            }
-            return self.preferredStatusBarUpdateAnimation
+            return _rootViewStatusBarUpdateAnimation ?? rootViewController?.preferredStatusBarUpdateAnimation ?? preferredStatusBarUpdateAnimation
         }
     }
     private var _rootViewStatusBarUpdateAnimation: UIStatusBarAnimation?
 
-    /// Default:
-    /// if leftViewController != nil then leftViewController.preferredStatusBarUpdateAnimation
-    /// else self.rootViewStatusBarUpdateAnimation
+    /// Default: leftViewController.preferredStatusBarUpdateAnimation ?? rootViewStatusBarUpdateAnimation
     @IBInspectable open var leftViewStatusBarUpdateAnimation: UIStatusBarAnimation {
         set {
             _leftViewStatusBarUpdateAnimation = newValue
         }
         get {
-            if let leftViewStatusBarUpdateAnimation = _leftViewStatusBarUpdateAnimation {
-                return leftViewStatusBarUpdateAnimation
-            }
-            if let leftViewController = self.leftViewController {
-                return leftViewController.preferredStatusBarUpdateAnimation
-            }
-            return self.rootViewStatusBarUpdateAnimation
+            return _leftViewStatusBarUpdateAnimation ?? leftViewController?.preferredStatusBarUpdateAnimation ?? rootViewStatusBarUpdateAnimation
         }
     }
     private var _leftViewStatusBarUpdateAnimation: UIStatusBarAnimation?
 
-    /// Default:
-    /// if rightViewController != nil then rightViewController.preferredStatusBarUpdateAnimation
-    /// else self.rootViewStatusBarUpdateAnimation
+    /// Default: rightViewController.preferredStatusBarUpdateAnimation ?? rootViewStatusBarUpdateAnimation
     @IBInspectable open var rightViewStatusBarUpdateAnimation: UIStatusBarAnimation {
         set {
             _rightViewStatusBarUpdateAnimation = newValue
         }
         get {
-            if let rightViewStatusBarUpdateAnimation = _rightViewStatusBarUpdateAnimation {
-                return rightViewStatusBarUpdateAnimation
-            }
-            if let rightViewController = self.rightViewController {
-                return rightViewController.preferredStatusBarUpdateAnimation
-            }
-            return self.rootViewStatusBarUpdateAnimation
+            return _rightViewStatusBarUpdateAnimation ?? rightViewController?.preferredStatusBarUpdateAnimation ?? rootViewStatusBarUpdateAnimation
         }
     }
     private var _rightViewStatusBarUpdateAnimation: UIStatusBarAnimation?
@@ -668,7 +567,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewCoverColorForLeftView = _rootViewCoverColorForLeftView {
                 return rootViewCoverColorForLeftView
             }
-            if self.leftViewPresentationStyle == .slideAbove {
+            if leftViewPresentationStyle == .slideAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -688,7 +587,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewCoverColorForRightView = _rootViewCoverColorForRightView {
                 return rootViewCoverColorForRightView
             }
-            if self.rightViewPresentationStyle == .slideAbove {
+            if rightViewPresentationStyle == .slideAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -708,7 +607,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewCoverColor = _leftViewCoverColor {
                 return leftViewCoverColor
             }
-            if self.leftViewPresentationStyle == .slideAbove {
+            if leftViewPresentationStyle == .slideAbove {
                 return .clear
             }
             return UIColor(white: 0.0, alpha: 0.5)
@@ -728,7 +627,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewCoverColor = _rightViewCoverColor {
                 return rightViewCoverColor
             }
-            if self.rightViewPresentationStyle == .slideAbove {
+            if rightViewPresentationStyle == .slideAbove {
                 return .clear
             }
             return UIColor(white: 0.0, alpha: 0.5)
@@ -736,7 +635,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewCoverColor: UIColor?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 0.8
     /// if presentationStyle == .scaleFromLittle then 0.8
@@ -746,13 +644,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _rootViewScaleForLeftView = newValue
         }
         get {
-            guard self.leftViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let rootViewScaleForLeftView = _rootViewScaleForLeftView {
                 return rootViewScaleForLeftView
             }
-            if self.leftViewPresentationStyle == .scaleFromBig || self.leftViewPresentationStyle == .scaleFromLittle {
+            if leftViewPresentationStyle == .scaleFromBig || leftViewPresentationStyle == .scaleFromLittle {
                 return 0.8
             }
             return 1.0
@@ -760,7 +655,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rootViewScaleForLeftView: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 0.8
     /// if presentationStyle == .scaleFromLittle then 0.8
@@ -770,13 +664,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _rootViewScaleForRightView = newValue
         }
         get {
-            guard self.rightViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let rootViewScaleForRightView = _rootViewScaleForRightView {
                 return rootViewScaleForRightView
             }
-            if self.rightViewPresentationStyle == .scaleFromBig || self.rightViewPresentationStyle == .scaleFromLittle {
+            if rightViewPresentationStyle == .scaleFromBig || rightViewPresentationStyle == .scaleFromLittle {
                 return 0.8
             }
             return 1.0
@@ -784,7 +675,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rootViewScaleForRightView: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.2
     /// if presentationStyle == .scaleFromLittle then 0.8
@@ -794,16 +684,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _leftViewInitialScale = newValue
         }
         get {
-            guard self.leftViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let leftViewInitialScale = _leftViewInitialScale {
                 return leftViewInitialScale
             }
-            if self.leftViewPresentationStyle == .scaleFromBig {
+            if leftViewPresentationStyle == .scaleFromBig {
                 return 1.2
             }
-            if self.leftViewPresentationStyle == .scaleFromLittle {
+            if leftViewPresentationStyle == .scaleFromLittle {
                 return 0.8
             }
             return 1.0
@@ -811,7 +698,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _leftViewInitialScale: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.2
     /// if presentationStyle == .scaleFromLittle then 0.8
@@ -821,16 +707,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _rightViewInitialScale = newValue
         }
         get {
-            guard self.rightViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let rightViewInitialScale = _rightViewInitialScale {
                 return rightViewInitialScale
             }
-            if self.rightViewPresentationStyle == .scaleFromBig {
+            if rightViewPresentationStyle == .scaleFromBig {
                 return 1.2
             }
-            if self.rightViewPresentationStyle == .scaleFromLittle {
+            if rightViewPresentationStyle == .scaleFromLittle {
                 return 0.8
             }
             return 1.0
@@ -838,53 +721,44 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewInitialScale: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
-    /// if presentationStyle == .slideBelow then -width/2
+    /// if presentationStyle == .slideBelow then -(leftViewWidth / 2.0)
     /// else 0.0
     @IBInspectable open var leftViewInitialOffsetX: CGFloat {
         set {
             _leftViewInitialOffsetX = newValue
         }
         get {
-            guard self.leftViewPresentationStyle != .slideAbove else {
-                return 0.0
-            }
             if let leftViewInitialOffsetX = _leftViewInitialOffsetX {
                 return leftViewInitialOffsetX
             }
-            if self.leftViewPresentationStyle == .slideBelow {
-                return -(self.leftViewWidth / 2.0)
+            if leftViewPresentationStyle == .slideBelow {
+                return -(leftViewWidth / 2.0)
             }
             return 0.0
         }
     }
     private var _leftViewInitialOffsetX: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
-    /// if presentationStyle == .slideBelow then width/2
+    /// if presentationStyle == .slideBelow then rightViewWidth / 2.0
     /// else 0.0
     @IBInspectable open var rightViewInitialOffsetX: CGFloat {
         set {
             _rightViewInitialOffsetX = newValue
         }
         get {
-            guard self.rightViewPresentationStyle != .slideAbove else {
-                return 0.0
-            }
             if let rightViewInitialOffsetX = _rightViewInitialOffsetX {
                 return rightViewInitialOffsetX
             }
-            if self.rightViewPresentationStyle == .slideBelow {
-                return self.rightViewWidth / 2.0
+            if rightViewPresentationStyle == .slideBelow {
+                return rightViewWidth / 2.0
             }
             return 0.0
         }
     }
     private var _rightViewInitialOffsetX: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
@@ -893,13 +767,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _leftViewBackgroundImageInitialScale = newValue
         }
         get {
-            guard self.leftViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let leftViewBackgroundImageInitialScale = _leftViewBackgroundImageInitialScale {
                 return leftViewBackgroundImageInitialScale
             }
-            if self.leftViewPresentationStyle == .scaleFromBig {
+            if leftViewPresentationStyle == .scaleFromBig {
                 return 1.4
             }
             return 1.0
@@ -907,7 +778,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _leftViewBackgroundImageInitialScale: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
@@ -916,13 +786,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _rightViewBackgroundImageInitialScale = newValue
         }
         get {
-            guard self.rightViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale {
                 return rightViewBackgroundImageInitialScale
             }
-            if self.rightViewPresentationStyle == .scaleFromBig {
+            if rightViewPresentationStyle == .scaleFromBig {
                 return 1.4
             }
             return 1.0
@@ -930,7 +797,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewBackgroundImageInitialScale: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
@@ -939,13 +805,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _leftViewBackgroundImageFinalScale = newValue
         }
         get {
-            guard self.leftViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let leftViewBackgroundImageFinalScale = _leftViewBackgroundImageFinalScale {
                 return leftViewBackgroundImageFinalScale
             }
-            if self.leftViewPresentationStyle == .scaleFromLittle {
+            if leftViewPresentationStyle == .scaleFromLittle {
                 return 1.4
             }
             return 1.0
@@ -953,7 +816,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _leftViewBackgroundImageFinalScale: CGFloat?
 
-    /// Only if presentationStyle != .slideAbove
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
@@ -962,13 +824,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             _rightViewBackgroundImageFinalScale = newValue
         }
         get {
-            guard self.rightViewPresentationStyle != .slideAbove else {
-                return 1.0
-            }
             if let rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale {
                 return rightViewBackgroundImageFinalScale
             }
-            if self.rightViewPresentationStyle == .scaleFromLittle {
+            if rightViewPresentationStyle == .scaleFromLittle {
                 return 1.4
             }
             return 1.0
@@ -1018,20 +877,17 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var isNeedsUpdateLeftViewLayoutsAndStyles: Bool = false
     open internal(set) var isNeedsUpdateRightViewLayoutsAndStyles: Bool = false
 
-    /// Container for rootViewController or rootView. Usually you do not need to use it
     open internal(set) var rootContainerView: UIView?
     open internal(set) var rootViewBorderView: LGSideMenuBorderView?
     open internal(set) var rootViewWrapperView: UIView?
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
-    /// Container for leftViewController or leftView. Usually you do not need to use it
     open internal(set) var leftContainerView: UIView?
     open internal(set) var leftViewBorderView: LGSideMenuBorderView?
     open internal(set) var leftViewEffectView: UIVisualEffectView?
     open internal(set) var leftViewWrapperView: UIView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
 
-    /// Container for rightViewController or rightView. Usually you do not need to use it
     open internal(set) var rightContainerView: UIView?
     open internal(set) var rightViewBorderView: LGSideMenuBorderView?
     open internal(set) var rightViewEffectView: UIVisualEffectView?
