@@ -1,5 +1,5 @@
 //
-//  LGSideMenuValidatingViewsTransforms.swift
+//  LGSideMenuController+ValidatingViewsTransforms.swift
 //  LGSideMenuController
 //
 //
@@ -99,6 +99,8 @@ internal extension LGSideMenuController {
               let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
+        // TODO: Add option to change alpha of the view itself
+
         if self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
             leftViewCoverView.alpha = self.leftViewCoverAlpha - (self.leftViewCoverAlpha * percentage)
         }
@@ -135,6 +137,8 @@ internal extension LGSideMenuController {
               let rightViewStyleView = self.rightViewEffectView,
               let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
+
+        // TODO: Add option to change alpha of the view itself
 
         if self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
             rightViewCoverView.alpha = self.rightViewCoverAlpha - (self.rightViewCoverAlpha * percentage)

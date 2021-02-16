@@ -1,5 +1,5 @@
 //
-//  LGSideMenuValidatingViewsFrames.swift
+//  LGSideMenuController+ValidatingViewsFrames.swift
 //  LGSideMenuController
 //
 //

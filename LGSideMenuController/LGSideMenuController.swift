@@ -93,6 +93,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.rawValue = rawValue
         }
 
+        public var isEmpty: Bool {
+            return self == []
+        }
+
         public var isAlwaysVisibleForCurrentOrientation: Bool {
             return self.isAlwaysVisibleForOrientation(UIApplication.shared.statusBarOrientation)
         }
@@ -396,6 +400,12 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
         get {
             return !self.isRightViewEnabled
+        }
+    }
+
+    @IBInspectable open var rootViewBackgroundColor: UIColor = .clear {
+        didSet {
+            self.setNeedsUpdateLayoutsAndStyles()
         }
     }
 
@@ -1036,6 +1046,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     internal var isLeftViewShowingBeforeGesture: Bool = false
     internal var isRightViewShowingBeforeGesture: Bool = false
 
+    internal var shouldUpdateVisibility: Bool = true
+
     // MARK: - Initialization
 
     public init() {
@@ -1049,21 +1061,18 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.tapGesture.delegate = self
         self.tapGesture.numberOfTapsRequired = 1
         self.tapGesture.numberOfTouchesRequired = 1
-        self.tapGesture.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
         self.view.addGestureRecognizer(self.tapGesture)
 
         self.panGestureForLeftView.addTarget(self, action: #selector(handlePanGestureForLeftView))
         self.panGestureForLeftView.delegate = self
         self.panGestureForLeftView.minimumNumberOfTouches = 1
         self.panGestureForLeftView.maximumNumberOfTouches = 1
-        self.panGestureForLeftView.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
         self.view.addGestureRecognizer(self.panGestureForLeftView)
 
         self.panGestureForRightView.addTarget(self, action: #selector(handlePanGestureForRightView))
         self.panGestureForRightView.delegate = self
         self.panGestureForRightView.minimumNumberOfTouches = 1
         self.panGestureForRightView.maximumNumberOfTouches = 1
-        self.panGestureForRightView.cancelsTouchesInView = true // TODO: Make settings to enable/disable this
         self.view.addGestureRecognizer(self.panGestureForRightView)
     }
 

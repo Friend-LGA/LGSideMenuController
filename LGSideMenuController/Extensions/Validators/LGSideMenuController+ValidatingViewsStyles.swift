@@ -1,5 +1,5 @@
 //
-//  LGSideMenuValidatingViewsStyles.swift
+//  LGSideMenuController+ValidatingViewsStyles.swift
 //  LGSideMenuController
 //
 //
@@ -42,7 +42,7 @@ internal extension LGSideMenuController {
         guard let rootViewBorderView = self.rootViewBorderView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
-        rootViewBorderView.fillColor = UIColor.black.withAlphaComponent(0.1)
+        rootViewBorderView.fillColor = self.rootViewBackgroundColor
         rootViewBorderView.strokeColor = self.rootViewLayerBorderColor
         rootViewBorderView.strokeWidth = self.rootViewLayerBorderWidth
         rootViewBorderView.shadowColor = self.rootViewLayerShadowColor
@@ -69,7 +69,7 @@ internal extension LGSideMenuController {
               let leftViewStyleView = self.leftViewEffectView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
-        leftViewBorderView.fillColor = self.isLeftViewAlwaysVisibleForCurrentOrientation ? self.leftViewBackgroundColor.withAlphaComponent(1.0) : self.leftViewBackgroundColor
+        leftViewBorderView.fillColor = self.leftViewBackgroundColor
         leftViewBorderView.strokeColor = self.leftViewLayerBorderColor
         leftViewBorderView.strokeWidth = self.leftViewLayerBorderWidth
         leftViewBorderView.shadowColor = self.leftViewLayerShadowColor
@@ -91,7 +91,7 @@ internal extension LGSideMenuController {
               let rightViewStyleView = self.rightViewEffectView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
-        rightViewBorderView.fillColor = self.isRightViewAlwaysVisibleForCurrentOrientation ? self.rightViewBackgroundColor.withAlphaComponent(1.0) : self.rightViewBackgroundColor
+        rightViewBorderView.fillColor = self.rightViewBackgroundColor
         rightViewBorderView.strokeColor = self.rightViewLayerBorderColor
         rightViewBorderView.strokeWidth = self.rightViewLayerBorderWidth
         rightViewBorderView.shadowColor = self.rightViewLayerShadowColor

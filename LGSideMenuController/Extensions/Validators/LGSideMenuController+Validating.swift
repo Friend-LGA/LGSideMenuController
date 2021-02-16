@@ -33,7 +33,7 @@ import UIKit
 internal extension LGSideMenuController {
 
     func validateAlwaysVisibleConflict() {
-        if self.leftViewAlwaysVisibleOptions == [] && self.rightViewAlwaysVisibleOptions == [] { return }
+        if self.leftViewAlwaysVisibleOptions.isEmpty && self.rightViewAlwaysVisibleOptions.isEmpty { return }
 
         if self.leftView != nil {
             assert(self.leftViewPresentationStyle == .slideAbove || self.leftViewPresentationStyle == .slideBelow,

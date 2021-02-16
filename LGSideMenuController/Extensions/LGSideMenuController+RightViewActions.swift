@@ -130,13 +130,13 @@ extension LGSideMenuController {
         self.validateRightViewsVisibility()
     }
 
-    internal func showRightViewActions(animated: Bool, completion: Completion? = nil) {
+    internal func showRightViewActions(animated: Bool, duration: TimeInterval? = nil, completion: Completion? = nil) {
         guard self.state == .rightViewWillShow else { return }
 
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
+            LGSideMenuHelper.animate(duration: duration ?? self.rightViewAnimationDuration, animations: {
                 self.validateRootViewsTransforms(percentage: 1.0)
                 self.validateRightViewsTransforms(percentage: 1.0)
                 self.showAnimationsForRightViewCallbacks()
@@ -186,14 +186,14 @@ extension LGSideMenuController {
         self.willHideRightViewCallbacks()
     }
 
-    internal func hideRightViewActions(animated: Bool, completion: Completion? = nil) {
+    internal func hideRightViewActions(animated: Bool, duration: TimeInterval? = nil, completion: Completion? = nil) {
         guard self.state == .rightViewWillHide else { return }
 
         if let rightViewController = self.rightViewController {
             rightViewController.removeFromParent()
         }
 
-        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.rightViewAnimationDuration)
+        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: duration ?? self.rightViewAnimationDuration)
 
         if let rootViewController = self.rootViewController {
             self.addChild(rootViewController)
@@ -202,7 +202,7 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: self.rightViewAnimationDuration, animations: {
+            LGSideMenuHelper.animate(duration: duration ?? self.rightViewAnimationDuration, animations: {
                 self.validateRootViewsTransforms(percentage: 0.0)
                 self.validateRightViewsTransforms(percentage: 0.0)
                 self.hideAnimationsForRightViewCallbacks()

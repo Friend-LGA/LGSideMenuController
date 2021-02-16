@@ -1,5 +1,5 @@
 //
-//  LGSideMenuValidatingViewsHierarchy.swift
+//  LGSideMenuController+ValidatingViewsHierarchy.swift
 //  LGSideMenuController
 //
 //

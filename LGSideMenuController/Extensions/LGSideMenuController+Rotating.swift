@@ -45,14 +45,14 @@ extension LGSideMenuController {
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        // TODO: Handle this properly (NavigationBar size, AlwaysVisible is going black, rootCoverView is disappearing)
+        // TODO: Handle NavigationBar size changing
 
-        if self.leftView != nil {
-            self.cancelLeftViewAnimations()
-        }
+        self.cancelLeftViewAnimations()
+        self.cancelRightViewAnimations()
 
-        if self.rightView != nil {
-            self.cancelRightViewAnimations()
+        if (self.leftView != nil && self.isLeftViewAlwaysVisibleForCurrentOrientation) ||
+            (self.rightView != nil && self.isRightViewAlwaysVisibleForCurrentOrientation) {
+            self.shouldUpdateVisibility = false
         }
 
         coordinator.animate(alongsideTransition: { [weak self] (context: UIViewControllerTransitionCoordinatorContext) in
@@ -77,13 +77,22 @@ extension LGSideMenuController {
             }
 
             if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewHidden {
+                self.shouldUpdateVisibility = false
                 self.hideLeftViewPrepare()
-                self.hideLeftViewDone(withGesture: self.leftViewGestureStartX != nil)
+                self.hideLeftViewActions(animated: true, duration: context.transitionDuration)
             }
 
             if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRightViewHidden {
+                self.shouldUpdateVisibility = false
                 self.hideRightViewPrepare()
-                self.hideRightViewDone(withGesture: self.leftViewGestureStartX != nil)
+                self.hideRightViewActions(animated: true, duration: context.transitionDuration)
+            }
+        }, completion: { [weak self] (context: UIViewControllerTransitionCoordinatorContext) in
+            guard let self = self else { return }
+
+            if !self.shouldUpdateVisibility {
+                self.shouldUpdateVisibility = true
+                self.validateLeftViewsVisibility()
             }
         })
     }

@@ -130,13 +130,13 @@ extension LGSideMenuController {
         self.validateLeftViewsVisibility()
     }
 
-    internal func showLeftViewActions(animated: Bool, completion: Completion? = nil) {
+    internal func showLeftViewActions(animated: Bool, duration: TimeInterval? = nil, completion: Completion? = nil) {
         guard self.state == .leftViewWillShow else { return }
 
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: self.leftViewAnimationDuration, animations: {
+            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
                 self.validateRootViewsTransforms(percentage: 1.0)
                 self.validateLeftViewsTransforms(percentage: 1.0)
                 self.showAnimationsForLeftViewCallbacks()
@@ -186,14 +186,14 @@ extension LGSideMenuController {
         self.willHideLeftViewCallbacks()
     }
 
-    internal func hideLeftViewActions(animated: Bool, completion: Completion? = nil) {
+    internal func hideLeftViewActions(animated: Bool, duration: TimeInterval? = nil, completion: Completion? = nil) {
         guard self.state == .leftViewWillHide else { return }
 
         if let leftViewController = self.leftViewController {
             leftViewController.removeFromParent()
         }
 
-        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.leftViewAnimationDuration)
+        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: duration ?? self.leftViewAnimationDuration)
 
         if let rootViewController = self.rootViewController {
             self.addChild(rootViewController)
@@ -202,7 +202,7 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: self.leftViewAnimationDuration, animations: {
+            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
                 self.validateRootViewsTransforms(percentage: 0.0)
                 self.validateLeftViewsTransforms(percentage: 0.0)
                 self.hideAnimationsForLeftViewCallbacks()
