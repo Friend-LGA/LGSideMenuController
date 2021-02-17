@@ -33,13 +33,13 @@ import UIKit
 extension LGSideMenuController {
 
     open override var prefersStatusBarHidden: Bool {
-        if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
+        if self.rootView != nil && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.isRootViewStatusBarHidden
         }
-        else if (self.leftView != nil) && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        else if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
             return self.isLeftViewStatusBarHidden
         }
-        else if (self.rightView != nil) && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
             return self.isRightViewStatusBarHidden
         }
 
@@ -47,13 +47,13 @@ extension LGSideMenuController {
     }
 
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
+        if self.rootView != nil && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.rootViewStatusBarStyle
         }
-        else if (self.leftView != nil) && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        else if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
             return self.leftViewStatusBarStyle
         }
-        else if (self.rightView != nil) && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
             return self.rightViewStatusBarStyle
         }
 
@@ -61,13 +61,13 @@ extension LGSideMenuController {
     }
 
     open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        if (self.rootView != nil) && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
+        if self.rootView != nil && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
             return self.rootViewStatusBarUpdateAnimation
         }
-        else if (self.leftView != nil) && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        else if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
             return self.leftViewStatusBarUpdateAnimation
         }
-        else if (self.rightView != nil) && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
             return self.rightViewStatusBarUpdateAnimation
         }
 

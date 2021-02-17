@@ -103,7 +103,7 @@ extension LGSideMenuController {
                     self.hideLeftViewPrepare()
                 }
                 else {
-                    self.showLeftViewPrepare()
+                    self.showLeftViewPrepare(withGesture: true)
                 }
             }
         }
@@ -117,7 +117,7 @@ extension LGSideMenuController {
 
             if gesture.state == .changed {
                 if velocity.x > 0.0 {
-                    self.showLeftViewPrepare()
+                    self.showLeftViewPrepare(withGesture: true)
                 }
                 else if velocity.x < 0.0 {
                     self.hideLeftViewPrepare()
@@ -129,7 +129,7 @@ extension LGSideMenuController {
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
                     // We can start showing the view and ended the gesture without moving the view even by 1%
-                    self.showLeftViewPrepare()
+                    self.showLeftViewPrepare(withGesture: true)
                     self.showLeftViewDone()
                 }
                 else if percentage == 0.0 {
@@ -138,7 +138,7 @@ extension LGSideMenuController {
                     self.hideLeftViewDone(withGesture: true)
                 }
                 else if (percentage < 1.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage >= 0.5) {
-                    self.showLeftViewPrepare()
+                    self.showLeftViewPrepare(withGesture: true)
                     self.showLeftViewActions(animated: true)
                 }
                 else if (percentage > 0.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage < 0.5) {
@@ -166,7 +166,7 @@ extension LGSideMenuController {
                     self.hideRightViewPrepare()
                 }
                 else {
-                    self.showRightViewPrepare()
+                    self.showRightViewPrepare(withGesture: true)
                 }
             }
         }
@@ -180,7 +180,7 @@ extension LGSideMenuController {
 
             if gesture.state == .changed {
                 if velocity.x < 0.0 {
-                    self.showRightViewPrepare()
+                    self.showRightViewPrepare(withGesture: true)
                 }
                 else if velocity.x > 0.0 {
                     self.hideRightViewPrepare()
@@ -192,7 +192,7 @@ extension LGSideMenuController {
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
                     // We can start showing the view and ended the gesture without moving the view even by 1%
-                    self.showRightViewPrepare()
+                    self.showRightViewPrepare(withGesture: true)
                     self.showRightViewDone()
                 }
                 else if percentage == 0.0 {
@@ -201,7 +201,7 @@ extension LGSideMenuController {
                     self.hideRightViewDone(withGesture: true)
                 }
                 else if (percentage < 1.0 && velocity.x < 0.0) || (velocity.x == 0.0 && percentage >= 0.5) {
-                    self.showRightViewPrepare()
+                    self.showRightViewPrepare(withGesture: true)
                     self.showRightViewActions(animated: true)
                 }
                 else if (percentage > 0.0 && velocity.x > 0.0) || (velocity.x == 0.0 && percentage < 0.5) {

@@ -39,7 +39,7 @@ internal struct LGSideMenuHelper {
     static func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
         // TODO: Why spring animations???
         UIView.animate(withDuration: duration,
-                       delay: TimeInterval.zero,
+                       delay: .zero,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 0.5,
                        animations: animations,
@@ -47,7 +47,7 @@ internal struct LGSideMenuHelper {
     }
 
     static func statusBarAppearanceUpdate(viewController: UIViewController, duration: TimeInterval) {
-        if viewController.preferredStatusBarUpdateAnimation == .none {
+        if viewController.preferredStatusBarUpdateAnimation == .none || duration == .zero {
             viewController.setNeedsStatusBarAppearanceUpdate()
         }
         else {
@@ -66,7 +66,7 @@ internal struct LGSideMenuHelper {
     }
 
     static func setSideMenuController(_ sideMenuController: LGSideMenuController?, to viewController: UIViewController) {
-        objc_setAssociatedObject(viewController, &Keys.sideMenuController, sideMenuController, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        objc_setAssociatedObject(viewController, &Keys.sideMenuController, sideMenuController, .OBJC_ASSOCIATION_ASSIGN)
     }
 
     static func getSideMenuController(from viewController: UIViewController) -> LGSideMenuController? {

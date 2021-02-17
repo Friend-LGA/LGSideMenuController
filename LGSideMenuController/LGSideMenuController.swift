@@ -208,7 +208,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             guard let leftViewController = leftViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
             leftViewController.removeFromParent()
-            if isLeftViewShowing {
+            if isLeftViewVisible {
                 addChild(leftViewController)
             }
             self.leftView = leftViewController.view
@@ -223,7 +223,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             guard let rightViewController = rightViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
             rightViewController.removeFromParent()
-            if isRightViewShowing {
+            if isRightViewVisible {
                 addChild(rightViewController)
             }
             self.rightView = rightViewController.view
@@ -453,6 +453,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     @IBInspectable open var rootViewCoverAlphaForRightView: CGFloat = 1.0
     @IBInspectable open var leftViewCoverAlpha: CGFloat = 1.0
     @IBInspectable open var rightViewCoverAlpha: CGFloat = 1.0
+
+    /// Duration with which status bar will update its style while swipe gesture
+    @IBInspectable open var statusBarAnimationDuration: TimeInterval = 0.2
 
     // MARK: - Public Conditional Configurable Properties
 

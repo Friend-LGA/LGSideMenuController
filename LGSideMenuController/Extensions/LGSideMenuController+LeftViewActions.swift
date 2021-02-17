@@ -38,7 +38,7 @@ extension LGSideMenuController {
               !self.isLeftViewAlwaysVisibleForCurrentOrientation,
               !self.isLeftViewShowing else { return }
 
-        self.showLeftViewPrepare()
+        self.showLeftViewPrepare(withGesture: false)
         self.showLeftViewActions(animated: animated, completion: completion)
     }
 
@@ -97,7 +97,7 @@ extension LGSideMenuController {
 
     // MARK: - Show
 
-    internal func showLeftViewPrepare() {
+    internal func showLeftViewPrepare(withGesture: Bool) {
         guard self.leftView != nil else { return }
         guard self.isLeftViewHidden else {
             if self.state == .leftViewWillHide {
@@ -116,10 +116,14 @@ extension LGSideMenuController {
             rootViewController.removeFromParent()
         }
 
-        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.leftViewAnimationDuration)
+        if withGesture {
+            LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.statusBarAnimationDuration)
 
-        if let leftViewController = self.leftViewController {
-            self.addChild(leftViewController)
+            if let leftViewController = self.leftViewController {
+                self.addChild(leftViewController)
+            }
+
+            // TODO: Check how it behaves if status bar visible only while left view is visible
         }
 
         self.validateLeftViewsFrames()
@@ -137,6 +141,7 @@ extension LGSideMenuController {
             self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
+                self.setNeedsStatusBarAppearanceUpdate()
                 self.validateRootViewsTransforms(percentage: 1.0)
                 self.validateLeftViewsTransforms(percentage: 1.0)
                 self.showAnimationsForLeftViewCallbacks()
@@ -153,6 +158,7 @@ extension LGSideMenuController {
             })
         }
         else {
+            self.setNeedsStatusBarAppearanceUpdate()
             self.validateRootViewsTransforms(percentage: 1.0)
             self.validateLeftViewsTransforms(percentage: 1.0)
             self.showLeftViewDone()
@@ -160,6 +166,10 @@ extension LGSideMenuController {
             if let completion = completion {
                 completion()
             }
+        }
+
+        if let leftViewController = self.leftViewController {
+            self.addChild(leftViewController)
         }
     }
 
@@ -193,16 +203,11 @@ extension LGSideMenuController {
             leftViewController.removeFromParent()
         }
 
-        LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: duration ?? self.leftViewAnimationDuration)
-
-        if let rootViewController = self.rootViewController {
-            self.addChild(rootViewController)
-        }
-
         if (animated) {
             self.isAnimating = true
 
             LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
+                self.setNeedsStatusBarAppearanceUpdate()
                 self.validateRootViewsTransforms(percentage: 0.0)
                 self.validateLeftViewsTransforms(percentage: 0.0)
                 self.hideAnimationsForLeftViewCallbacks()
@@ -219,6 +224,7 @@ extension LGSideMenuController {
             })
         }
         else {
+            self.setNeedsStatusBarAppearanceUpdate()
             self.validateRootViewsTransforms(percentage: 0.0)
             self.validateLeftViewsTransforms(percentage: 0.0)
             self.hideLeftViewDone(withGesture: false)
@@ -227,21 +233,25 @@ extension LGSideMenuController {
                 completion();
             }
         }
+
+        if let rootViewController = self.rootViewController {
+            self.addChild(rootViewController)
+        }
     }
 
     internal func hideLeftViewDone(withGesture: Bool) {
         guard self.state == .leftViewWillHide else { return }
 
         if withGesture {
+            if let rootViewController = self.rootViewController {
+                self.addChild(rootViewController)
+            }
+
             if let leftViewController = self.leftViewController {
                 leftViewController.removeFromParent()
             }
 
-            LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.leftViewAnimationDuration)
-
-            if let rootViewController = self.rootViewController {
-                self.addChild(rootViewController)
-            }
+            LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.statusBarAnimationDuration)
         }
 
         self.state = .rootViewIsShowing;

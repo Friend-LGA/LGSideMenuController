@@ -41,11 +41,11 @@ extension LGSideMenuController {
 
     open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
+        // TODO: Handle NavigationBar size changing
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        // TODO: Handle NavigationBar size changing
 
         self.cancelLeftViewAnimations()
         self.cancelRightViewAnimations()
