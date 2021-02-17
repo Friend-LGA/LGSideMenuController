@@ -52,8 +52,9 @@ internal extension LGSideMenuController {
         }
 
         if self.rootViewWrapperView == nil {
-            self.rootViewWrapperView = UIView()
+            self.rootViewWrapperView = LGSideMenuWrapperView()
             self.rootViewWrapperView?.clipsToBounds = true
+            self.rootViewWrapperView?.canLayoutSubviews = self.isRootViewLayoutingEnabled
             defaultRootViewSetup(self.rootViewWrapperView, true)
         }
 
@@ -89,7 +90,7 @@ internal extension LGSideMenuController {
         }
 
         if self.leftViewWrapperView == nil {
-            self.leftViewWrapperView = UIView()
+            self.leftViewWrapperView = LGSideMenuWrapperView()
             self.leftViewWrapperView?.clipsToBounds = true
             defaultLeftViewSetup(self.leftViewWrapperView, true)
         }
@@ -126,7 +127,7 @@ internal extension LGSideMenuController {
         }
 
         if self.rightViewWrapperView == nil {
-            self.rightViewWrapperView = UIView()
+            self.rightViewWrapperView = LGSideMenuWrapperView()
             self.rightViewWrapperView?.clipsToBounds = true
             defaultRightViewSetup(self.rightViewWrapperView, true)
         }

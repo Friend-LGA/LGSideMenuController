@@ -41,7 +41,10 @@ extension LGSideMenuController {
 
     open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        // TODO: Handle NavigationBar size changing
+
+        if !self.isRootViewShowing {
+            self.isRotationInvalidatedLayout = true
+        }
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -55,26 +58,26 @@ extension LGSideMenuController {
             self.shouldUpdateVisibility = false
         }
 
+        if self.state == .leftViewWillShow {
+            if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+                self.showLeftViewDone()
+            }
+        }
+        else if self.state == .leftViewWillHide {
+            self.hideLeftViewDone(updateStatusBar: true)
+        }
+
+        if self.state == .rightViewWillShow {
+            if self.isRightViewAlwaysVisibleForCurrentOrientation {
+                self.showRightViewDone()
+            }
+        }
+        else if self.state == .rightViewWillHide {
+            self.hideRightViewDone(updateStatusBar: true)
+        }
+
         coordinator.animate(alongsideTransition: { [weak self] (context: UIViewControllerTransitionCoordinatorContext) in
             guard let self = self else { return }
-
-            if self.state == .leftViewWillShow {
-                if self.isLeftViewAlwaysVisibleForCurrentOrientation {
-                    self.showLeftViewDone()
-                }
-            }
-            else if self.state == .leftViewWillHide {
-                self.hideLeftViewDone(withGesture: self.leftViewGestureStartX != nil)
-            }
-
-            if self.state == .rightViewWillShow {
-                if self.isRightViewAlwaysVisibleForCurrentOrientation {
-                    self.showRightViewDone()
-                }
-            }
-            else if self.state == .rightViewWillHide {
-                self.hideRightViewDone(withGesture: self.rightViewGestureStartX != nil)
-            }
 
             if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewHidden {
                 self.shouldUpdateVisibility = false

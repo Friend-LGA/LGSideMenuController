@@ -46,12 +46,18 @@ internal struct LGSideMenuHelper {
                        completion: completion)
     }
 
-    static func statusBarAppearanceUpdate(viewController: UIViewController, duration: TimeInterval) {
+    static func statusBarAppearanceUpdate(viewController: UIViewController, duration: TimeInterval, animations: (() -> Void)?) {
         if viewController.preferredStatusBarUpdateAnimation == .none || duration == .zero {
+            if let animations = animations {
+                animations()
+            }
             viewController.setNeedsStatusBarAppearanceUpdate()
         }
         else {
             UIView.animate(withDuration: duration, animations: {
+                if let animations = animations {
+                    animations()
+                }
                 viewController.setNeedsStatusBarAppearanceUpdate()
             })
         }

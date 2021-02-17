@@ -193,7 +193,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             guard let rootViewController = rootViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rootViewController)
             rootViewController.removeFromParent()
-            if isRootViewShowing {
+            if isRootViewControllerLayoutingEnabled {
                 addChild(rootViewController)
             }
             self.rootView = rootViewController.view
@@ -208,9 +208,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             guard let leftViewController = leftViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
             leftViewController.removeFromParent()
-            if isLeftViewVisible {
-                addChild(leftViewController)
-            }
+            addChild(leftViewController)
             self.leftView = leftViewController.view
         }
     }
@@ -223,9 +221,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             guard let rightViewController = rightViewController else { return }
             LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
             rightViewController.removeFromParent()
-            if isRightViewVisible {
-                addChild(rightViewController)
-            }
+            addChild(rightViewController)
             self.rightView = rightViewController.view
         }
     }
@@ -882,19 +878,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open internal(set) var rootContainerView: UIView?
     open internal(set) var rootViewBorderView: LGSideMenuBorderView?
-    open internal(set) var rootViewWrapperView: UIView?
+    open internal(set) var rootViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
     open internal(set) var leftContainerView: UIView?
     open internal(set) var leftViewBorderView: LGSideMenuBorderView?
     open internal(set) var leftViewEffectView: UIVisualEffectView?
-    open internal(set) var leftViewWrapperView: UIView?
+    open internal(set) var leftViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
 
     open internal(set) var rightContainerView: UIView?
     open internal(set) var rightViewBorderView: LGSideMenuBorderView?
     open internal(set) var rightViewEffectView: UIVisualEffectView?
-    open internal(set) var rightViewWrapperView: UIView?
+    open internal(set) var rightViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rightViewCoverView: UIVisualEffectView?
 
     internal var savedSize: CGSize = .zero
@@ -907,6 +903,11 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     internal var shouldUpdateVisibility: Bool = true
 
+    internal var isRotationInvalidatedLayout: Bool = false
+
+    internal var isRootViewLayoutingEnabled: Bool = true
+    internal var isRootViewControllerLayoutingEnabled: Bool = true
+
     // MARK: - Initialization
 
     public init() {
@@ -915,6 +916,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.panGestureForRightView = UIPanGestureRecognizer()
 
         super.init(nibName: nil, bundle: nil)
+
+        self.automaticallyAdjustsScrollViewInsets = false
 
         self.tapGesture.addTarget(self, action: #selector(handleTapGesture))
         self.tapGesture.delegate = self
