@@ -69,12 +69,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     }
 
-    public struct SegueIdentifier {
-        public static let root  = "root"
-        public static let left  = "left"
-        public static let right = "right"
-    }
-
     public struct AlwaysVisibleOptions: OptionSet {
         public let rawValue: Int
 
@@ -912,32 +906,24 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Initialization
 
-    public init() {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.tapGesture = UITapGestureRecognizer()
         self.panGestureForLeftView = UIPanGestureRecognizer()
         self.panGestureForRightView = UIPanGestureRecognizer()
 
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
 
-        self.automaticallyAdjustsScrollViewInsets = false
+    required public init?(coder: NSCoder) {
+        self.tapGesture = UITapGestureRecognizer()
+        self.panGestureForLeftView = UIPanGestureRecognizer()
+        self.panGestureForRightView = UIPanGestureRecognizer()
 
-        self.tapGesture.addTarget(self, action: #selector(handleTapGesture))
-        self.tapGesture.delegate = self
-        self.tapGesture.numberOfTapsRequired = 1
-        self.tapGesture.numberOfTouchesRequired = 1
-        self.view.addGestureRecognizer(self.tapGesture)
+        super.init(coder: coder)
+    }
 
-        self.panGestureForLeftView.addTarget(self, action: #selector(handlePanGestureForLeftView))
-        self.panGestureForLeftView.delegate = self
-        self.panGestureForLeftView.minimumNumberOfTouches = 1
-        self.panGestureForLeftView.maximumNumberOfTouches = 1
-        self.view.addGestureRecognizer(self.panGestureForLeftView)
-
-        self.panGestureForRightView.addTarget(self, action: #selector(handlePanGestureForRightView))
-        self.panGestureForRightView.delegate = self
-        self.panGestureForRightView.minimumNumberOfTouches = 1
-        self.panGestureForRightView.maximumNumberOfTouches = 1
-        self.view.addGestureRecognizer(self.panGestureForRightView)
+    convenience public init() {
+        self.init(nibName: nil, bundle: nil)
     }
 
     convenience public init(rootViewController: UIViewController? = nil, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {
@@ -956,10 +942,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.rightView = rightView
     }
 
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     open override class func awakeFromNib() {
         super.awakeFromNib()
         // TODO: Check if this needs to be overriden
@@ -968,30 +950,30 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tapGesture.addTarget(self, action: #selector(handleTapGesture))
+        self.tapGesture.delegate = self
+        self.tapGesture.numberOfTapsRequired = 1
+        self.tapGesture.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(self.tapGesture)
+
+        self.panGestureForLeftView.addTarget(self, action: #selector(handlePanGestureForLeftView))
+        self.panGestureForLeftView.delegate = self
+        self.panGestureForLeftView.minimumNumberOfTouches = 1
+        self.panGestureForLeftView.maximumNumberOfTouches = 1
+        self.view.addGestureRecognizer(self.panGestureForLeftView)
+
+        self.panGestureForRightView.addTarget(self, action: #selector(handlePanGestureForRightView))
+        self.panGestureForRightView.delegate = self
+        self.panGestureForRightView.minimumNumberOfTouches = 1
+        self.panGestureForRightView.maximumNumberOfTouches = 1
+        self.view.addGestureRecognizer(self.panGestureForRightView)
+
         // Try to initialize root, left and right view controllers from storyboard by segues
         // TODO: Check if this needs to be wrapped into try - catch block
         if self.storyboard != nil {
-            self.performSegue(withIdentifier: SegueIdentifier.root, sender: self)
-            self.performSegue(withIdentifier: SegueIdentifier.left, sender: self)
-            self.performSegue(withIdentifier: SegueIdentifier.right, sender: self)
-        }
-    }
-
-    // TODO: Check if this method is appropriate
-    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-
-        guard let sender = sender as? LGSideMenuController, sender === self else { return }
-        guard let source = segue.source as? LGSideMenuController else { return }
-
-        if segue.identifier == SegueIdentifier.root {
-            source.rootViewController = segue.destination
-        }
-        else if segue.identifier == SegueIdentifier.left {
-            source.leftViewController = segue.destination
-        }
-        else if segue.identifier == SegueIdentifier.right {
-            source.rightViewController = segue.destination
+            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.root, sender: self)
+            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.left, sender: self)
+            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
         }
     }
 

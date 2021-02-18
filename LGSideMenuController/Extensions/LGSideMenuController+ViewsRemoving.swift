@@ -32,6 +32,10 @@ import UIKit
 
 internal extension LGSideMenuController {
 
+    // Note:
+    // We don't nullify any of rootView, rootViewController, leftView, leftViewController, rightView, rightViewController
+    // because we don't manage their lifecycle, they should be assigned from the outside.
+
     // MARK: - Root View
 
     func removeRootViews() {
@@ -39,7 +43,6 @@ internal extension LGSideMenuController {
 
         if let rootView = self.rootView {
             rootView.removeFromSuperview()
-            self.rootView = nil
         }
 
         if let rootContainerView = self.rootContainerView {
@@ -61,9 +64,7 @@ internal extension LGSideMenuController {
     func removeRootViewController() {
         if let rootViewController = self.rootViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: rootViewController)
-            rootViewController.view.removeFromSuperview()
             rootViewController.removeFromParent()
-            self.rootViewController = nil
         }
     }
 
@@ -74,7 +75,6 @@ internal extension LGSideMenuController {
 
         if let leftView = self.leftView {
             leftView.removeFromSuperview()
-            self.leftView = nil
         }
 
         if let leftContainerView = self.leftContainerView {
@@ -106,9 +106,7 @@ internal extension LGSideMenuController {
     func removeLeftViewController() {
         if let leftViewController = self.leftViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: leftViewController)
-            leftViewController.view.removeFromSuperview()
             leftViewController.removeFromParent()
-            self.leftViewController = nil
         }
     }
 
@@ -119,7 +117,6 @@ internal extension LGSideMenuController {
 
         if let rightView = self.rightView {
             rightView.removeFromSuperview()
-            self.rightView = nil
         }
 
         if let rightContainerView = self.rightContainerView {
@@ -151,9 +148,7 @@ internal extension LGSideMenuController {
     func removeRightViewController() {
         if let rightViewController = self.rightViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: rightViewController)
-            rightViewController.view.removeFromSuperview()
             rightViewController.removeFromParent()
-            self.rightViewController = nil
         }
     }
 
