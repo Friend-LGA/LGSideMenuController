@@ -34,7 +34,7 @@ extension LGSideMenuController {
 
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let size = self.view.bounds.size;
+        let size = self.view.bounds.size
         if self.isNeedsUpdateLayoutsAndStyles || self.savedSize != size {
             self.savedSize = size
             self.updateLayoutsAndStyles()

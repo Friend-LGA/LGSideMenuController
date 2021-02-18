@@ -71,7 +71,20 @@ extension LGSideMenuController {
     }
 
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // 1. We need to hande swipeGestureArea == .full
+        // 2. For some reason UINavigationController interactivePopGestureRecognizer behaviour is unpredictable,
+        // sometimes it is failing and sometimes it is not. Better we will have it with higher priority but predictable.
+        if otherGestureRecognizer == self.panGestureForLeftView ||
+            otherGestureRecognizer == self.panGestureForRightView ||
+            otherGestureRecognizer is UIScreenEdgePanGestureRecognizer {
+            return false
+        }
         return true
+    }
+
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // We need to hande swipeGestureArea == .full
+        return otherGestureRecognizer == self.panGestureForLeftView || otherGestureRecognizer == self.panGestureForRightView
     }
 
     // MARK: - UIGestureRecognizer Targets
@@ -90,6 +103,9 @@ extension LGSideMenuController {
 
     @objc
     open func handlePanGestureForLeftView(gesture: UIPanGestureRecognizer) {
+        // Both pan gestures can be recognized in case of swipeGestureArea == .full
+        guard self.isRightViewHidden else { return }
+
         let location = gesture.location(in: self.view)
         let velocity = gesture.velocity(in: self.view)
 
@@ -153,6 +169,9 @@ extension LGSideMenuController {
 
     @objc
     open func handlePanGestureForRightView(gesture: UIPanGestureRecognizer) {
+        // Both pan gestures can be recognized in case of swipeGestureArea == .full
+        guard self.isLeftViewHidden else { return }
+
         let location = gesture.location(in: self.view)
         let velocity = gesture.velocity(in: self.view)
 

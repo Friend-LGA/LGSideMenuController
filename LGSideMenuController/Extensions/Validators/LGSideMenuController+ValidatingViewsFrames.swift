@@ -49,12 +49,12 @@ internal extension LGSideMenuController {
         var containerViewFrame = self.view.bounds
 
         if self.leftView != nil && self.isLeftViewAlwaysVisibleForCurrentOrientation {
-            containerViewFrame.origin.x += self.leftViewWidth;
-            containerViewFrame.size.width -= self.leftViewWidth;
+            containerViewFrame.origin.x += self.leftViewWidth
+            containerViewFrame.size.width -= self.leftViewWidth
         }
 
         if self.rightView != nil && self.isRightViewAlwaysVisibleForCurrentOrientation {
-            containerViewFrame.size.width -= self.rightViewWidth;
+            containerViewFrame.size.width -= self.rightViewWidth
         }
 
         rootContainerView.transform = .identity
