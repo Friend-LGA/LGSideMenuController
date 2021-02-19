@@ -959,6 +959,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     convenience public init(rootViewController: UIViewController? = nil, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {
         self.init()
 
+        // We need to use defer here to trigger willSet and didSet callbacks
         defer {
             self.rootViewController = rootViewController
             self.leftViewController = leftViewController
@@ -969,6 +970,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     convenience public init(rootView: UIView? = nil, leftView: UIView? = nil, rightView: UIView? = nil) {
         self.init()
 
+        // We need to use defer here to trigger willSet and didSet callbacks
         defer {
             self.rootView = rootView
             self.leftView = leftView
