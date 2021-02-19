@@ -78,11 +78,11 @@ public init()
 
 public init(rootViewController: UIViewController?,
             leftViewController: UIViewController?,
-           rightViewController: UIViewController?)
+            rightViewController: UIViewController?)
 
 public init(rootView: UIView?,
             leftView: UIView?,
-           rightView: UIView?)
+            rightView: UIView?)
 ```
 
 ## Setup
@@ -116,7 +116,7 @@ let rightViewController = UITableViewController()
 
 let sideMenuController = LGSideMenuController(rootViewController: rootViewController,
                                               leftViewController: leftViewController,
-                                             rightViewController: rightViewController)
+                                              rightViewController: rightViewController)
 
 sideMenuController.leftViewWidth = 250.0
 sideMenuController.leftViewPresentationStyle = .slideAbove
