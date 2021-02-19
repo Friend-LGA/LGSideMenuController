@@ -15,34 +15,18 @@ iOS view controller, shows left and right views by pressing button or gesture.
 
 # Installation
 
-| LGSideMenuController Version | Min iOS Version |
-|------------------------------|-----------------|
-| 1.0.0 - 1.0.10               | 6.0             |
-| 1.1.0 - 2.2.0                | 8.0             |
-| Current                      | 9.0             |
+| LGSideMenuController Version | Min iOS Version | Language    |
+|------------------------------|-----------------|-------------|
+| 1.0.0 - 1.0.10               | 6.0             | Objective-C |
+| 1.1.0 - 2.2.0                | 8.0             | Objective-C |
+| 2.3.0                        | 9.0             | Objective-C |
+| 2.4.0                        | 9.0             | Swift       |
 
 ## With Source Code
 
 1. [Download repository](https://github.com/Friend-LGA/LGSideMenuController/archive/master.zip)
 2. Add [LGSideMenuController directory](https://github.com/Friend-LGA/LGSideMenuController/blob/master/LGSideMenuController/) to your project
-3. Import header files where you need to use the library
-
-#### Objective-C
-
-```objective-c
-#import "LGSideMenuController.h"
-#import "UIViewController+LGSideMenuController.h"
-```
-
-#### Swift
-
-For swift you need to create [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html)
-
-```objective-c
-// BridgingHeader.h
-#import "LGSideMenuController.h"
-#import "UIViewController+LGSideMenuController.h"
-```
+3. Enjoy!
 
 ## With Swift Package Manager
 
@@ -63,25 +47,8 @@ pod 'LGSideMenuController'
 
 Then import framework where you need to use the library
 
-#### Objective-C
-
-```objective-c
-#import <LGSideMenuController/LGSideMenuController.h>
-#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
-// OR
-@import LGSideMenuController;
-// OR
-@import LGSideMenuController.LGSideMenuController;
-@import LGSideMenuController.UIViewController_LGSideMenuController;
-```
-
-#### Swift
-
 ```swift
 import LGSideMenuController
-// OR
-import LGSideMenuController.LGSideMenuController
-import LGSideMenuController.UIViewController_LGSideMenuController
 ```
 
 ## With Carthage
@@ -96,25 +63,8 @@ github "Friend-LGA/LGSideMenuController"
 
 Then import framework where you need to use the library
 
-#### Objective-C
-
-```objective-c
-#import <LGSideMenuController/LGSideMenuController.h>
-#import <LGSideMenuController/UIViewController+LGSideMenuController.h>
-// OR
-@import LGSideMenuController;
-// OR
-@import LGSideMenuController.LGSideMenuController;
-@import LGSideMenuController.UIViewController_LGSideMenuController;
-```
-
-#### Swift
-
 ```swift
 import LGSideMenuController
-// OR
-import LGSideMenuController.LGSideMenuController
-import LGSideMenuController.UIViewController_LGSideMenuController
 ```
 
 # Usage
@@ -123,32 +73,12 @@ import LGSideMenuController.UIViewController_LGSideMenuController
 
 You can use view controllers or views to initialize LGSideMenuController:
 
-#### Objective-C
-
-```objective-c
-- (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController;
-
-- (nonnull instancetype)initWithRootViewController:(nullable UIViewController *)rootViewController
-                                leftViewController:(nullable UIViewController *)leftViewController
-                               rightViewController:(nullable UIViewController *)rightViewController;
-
-- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView;
-
-- (nonnull instancetype)initWithRootView:(nullable UIView *)rootView
-                                leftView:(nullable UIView *)leftView
-                               rightView:(nullable UIView *)rightView;
-```
-
-#### Swift
-
 ```swift
-public init(rootViewController: UIViewController?)
+public init()
 
 public init(rootViewController: UIViewController?,
             leftViewController: UIViewController?,
            rightViewController: UIViewController?)
-
-public init(rootView: UIView?)
 
 public init(rootView: UIView?,
             leftView: UIView?,
@@ -169,61 +99,39 @@ sideMenuController.leftView = leftView
 sideMenuController.rightView = rightView
 ```
 
-If you set, for example, `sideMenuController.rootViewController = rootViewController`,
-then `sideMenuController.rootView == rootViewController.view`.    
-If you have, for example, `sideMenuController.rootViewController != nil` and you set `sideMenuController.rootView = rootView`, then `sideMenuController.rootViewController == nil`.
-
 ## Quick Example
 
 ### Without Storyboard
 
-#### Objective-C
-
-```objective-c
-UIViewController *rootViewController = [UIViewController new];
-UITableViewController *leftViewController = [UITableViewController new];
-UITableViewController *rightViewController = [UITableViewController new];
-
-UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-
-LGSideMenuController *sideMenuController = [LGSideMenuController sideMenuControllerWithRootViewController:navigationController
-                                                                                       leftViewController:leftViewController
-                                                                                      rightViewController:rightViewController];
-
-sideMenuController.leftViewWidth = 250.0;
-sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleScaleFromBig;
-
-sideMenuController.rightViewWidth = 100.0;
-sideMenuController.leftViewPresentationStyle = LGSideMenuPresentationStyleSlideBelow;
-```
-
-#### Swift
+1. Create root view controller (for example UINavigationController)
+2. Create left view controller (for example UITableViewController)
+3. Create right view controller (for example UITableViewController)
+4. Create instance of LGSideMenuController with these controllers
+5. Configure
 
 ```swift
-let rootViewController = UIViewController()
+let rootViewController = UINavigationController()
 let leftViewController = UITableViewController()
 let rightViewController = UITableViewController()
 
-let navigationController = UINavigationController(rootViewController: rootViewController)
-
-let sideMenuController = LGSideMenuController(rootViewController: navigationController,
+let sideMenuController = LGSideMenuController(rootViewController: rootViewController,
                                               leftViewController: leftViewController,
                                              rightViewController: rightViewController)
 
-sideMenuController.leftViewWidth = 250.0;
-sideMenuController.leftViewPresentationStyle = .scaleFromBig;
+sideMenuController.leftViewWidth = 250.0
+sideMenuController.leftViewPresentationStyle = .slideAbove
 
-sideMenuController.rightViewWidth = 100.0;
-sideMenuController.leftViewPresentationStyle = .slideBelow;
+sideMenuController.rightViewWidth = 100.0
+sideMenuController.leftViewPresentationStyle = .slideBelow
 ```
 
 ### With Storyboard
 
 1. Create instance of LGSideMenuController
-2. Create some root view controller (for example UINavigationController)
-3. Create some left view controller (for example UITableViewController)
-4. Create some right view controller (for example UITableViewController)
-5. Now you need to connect them all using segues of class `LGSideMenuSegue` and with identifiers: `root`, `left`, `right`.
+2. Create root view controller (for example UINavigationController)
+3. Create left view controller (for example UITableViewController)
+4. Create right view controller (for example UITableViewController)
+5. Now you need to connect them all using segues of class `LGSideMenuSegue` with identifiers: `root`, `left`, `right`.
 
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root1.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root2.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Root3.png" height="300"/>
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left1.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left2.png" height="300"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/dcb1aa9f4ce0fc1e7ded0ab595f6d346b1698e43/LGSideMenuController/Storyboard_Instructions/Segues/Left3.png" height="300"/>
@@ -239,26 +147,18 @@ For better examples check [demo projects](https://github.com/Friend-LGA/LGSideMe
 
 You can use UIBlurEffect with next properties:
 
-```objective-c
-UIBlurEffect *leftViewBackgroundBlurEffect;
-UIBlurEffect *rightViewBackgroundBlurEffect;
+```swift
+leftViewBackgroundBlurEffect: UIBlurEffect
+rightViewBackgroundBlurEffect: UIBlurEffect
 
-UIBlurEffect *rootViewCoverBlurEffectForLeftView;
-UIBlurEffect *rootViewCoverBlurEffectForRightView;
+rootViewCoverBlurEffectForLeftView: UIBlurEffect
+rootViewCoverBlurEffectForRightView: UIBlurEffect
 
-UIBlurEffect *leftViewCoverBlurEffect;
-UIBlurEffect *rightViewCoverBlurEffect;
+leftViewCoverBlurEffect: UIBlurEffect
+rightViewCoverBlurEffect: UIBlurEffect
 ```
 
 For example:
-
-#### Objective-C
-
-```objective-c
-sideMenuController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-```
-
-#### Swift
 
 ```swift
 sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
@@ -267,25 +167,17 @@ sideMenuController.leftViewBackgroundBlurEffect = UIBlurEffect(style: .regular)
 If you want to change color of blurred view, use:
 
 ```objective-c
-UIColor *leftViewBackgroundColor;
-UIColor *rightViewBackgroundColor;
+leftViewBackgroundColor: UIColor
+rightViewBackgroundColor: UIColor
 
-UIColor *rootViewCoverColorForLeftView;
-UIColor *rootViewCoverColorForRightView;
+rootViewCoverColorForLeftView: UIColor
+rootViewCoverColorForRightView: UIColor
 
-UIColor *leftViewCoverColor;
-UIColor *rightViewCoverColor;
+leftViewCoverColor: UIColor
+rightViewCoverColor: UIColor
 ```
 
 For example:
-
-#### Objective-C
-
-```objective-c
-sideMenuController.leftViewBackgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:0.1];
-```
-
-#### Swift
 
 ```swift
 sideMenuController.leftViewBackgroundColor = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 0.1)
@@ -293,86 +185,45 @@ sideMenuController.leftViewBackgroundColor = UIColor(red: 0.0, green: 0.5, blue:
 
 If you want to change intensity of blurred view, use:
 
-```objective-c
-CGFloat leftViewBackgroundAlpha;
-CGFloat rightViewBackgroundAlpha;
+```swift
+leftViewBackgroundAlpha: CGFloat
+rightViewBackgroundAlpha: CGFloat
 
-CGFloat rootViewCoverAlphaForLeftView;
-CGFloat rootViewCoverAlphaForRightView;
+rootViewCoverAlphaForLeftView: CGFloat
+rootViewCoverAlphaForRightView: CGFloat
 
-CGFloat CGFloatleftViewCoverAlpha;
-CGFloat rightViewCoverAlpha;
+CGFloatleftViewCoverAlpha: CGFloat
+rightViewCoverAlpha: CGFloat
 ```
 
 For example:
 
-```objective-c
-sideMenuController.leftViewBackgroundAlpha = 0.9;
+```swift
+sideMenuController.leftViewBackgroundAlpha = 0.9
 ```
 
 ## Status Bar
 
-You can't use `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`,
-instead you need to override all these methods for each controller separated, or use properties of sideMenuController:
+If you want to have different status bar styles for root, left and right views, then you need to override `prefersStatusBarHidden`, `preferredStatusBarStyle` and `preferredStatusBarUpdateAnimation` in corresponding view controller or instead you can use these properties:
 
-```objective-c
-BOOL rootViewStatusBarHidden;
-UIStatusBarStyle rootViewStatusBarStyle;
-UIStatusBarAnimation rootViewStatusBarUpdateAnimation;
+```swift
+rootViewStatusBarHidden: BOOL
+rootViewStatusBarStyle: UIStatusBarStyle
+rootViewStatusBarUpdateAnimation: UIStatusBarAnimation
 
-BOOL leftViewStatusBarHidden;
-UIStatusBarStyle leftViewStatusBarStyle;
-UIStatusBarAnimation leftViewStatusBarUpdateAnimation;
+leftViewStatusBarHidden: BOOL
+leftViewStatusBarStyle: UIStatusBarStyle
+leftViewStatusBarUpdateAnimation: UIStatusBarAnimation
 
-BOOL rightViewStatusBarHidden;
-UIStatusBarStyle rightViewStatusBarStyle;
-UIStatusBarAnimation rightViewStatusBarUpdateAnimation;
+rightViewStatusBarHidden: BOOL
+rightViewStatusBarStyle: UIStatusBarStyle
+rightViewStatusBarUpdateAnimation: UIStatusBarAnimation
 ```
 
-And these properties have greater priority then overridden `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
+These properties have greater priority than overridden inside controllers `prefersStatusBarHidden, preferredStatusBarStyle, preferredStatusBarUpdateAnimation`.
 
 For example, you had sideMenuController with rootViewController, leftViewController and rightViewController.
 For rootViewController, you can override it's default methods or use sideMenuController's properties:
-
-#### Objective-C
-
-```objective-c
-// In RootViewController.m
-
-- (BOOL)prefersStatusBarHidden {
-    return NO;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
-}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationNone;
-}
-
-// OR in SideMenuController.m
-
-self.rootViewStatusBarHidden = NO;
-self.rootViewStatusBarStyle = UIStatusBarStyleDefault;
-self.rootViewStatusBarUpdateAnimation = UIStatusBarAnimationNone;
-
-// OR
-
-- (BOOL)isRootViewStatusBarHidden {
-    return NO;
-}
-
-- (UIStatusBarStyle)rootViewStatusBarStyle {
-    return UIStatusBarStyleDefault;
-}
-
-- (UIStatusBarAnimation)rootViewStatusBarUpdateAnimation {
-    return UIStatusBarAnimationNone;
-}
-```
-
-#### Swift
 
 ```swift
 // In RootViewController.swift
@@ -391,207 +242,70 @@ override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
 
 // OR in SideMenuController.swift
 
-rootViewStatusBarHidden = false
+isRootViewStatusBarHidden = false
 rootViewStatusBarStyle = .default
 rootViewStatusBarUpdateAnimation = .none
 
-// OR
+// OR in SideMenuController.swift
 
-override var isRootViewStatusBarHidden : Bool {
+override var isRootViewStatusBarHidden: Bool {
     get { return false }
     set { super.isRootViewStatusBarHidden = newValue }
 }
 
-override var rootViewStatusBarStyle : UIStatusBarStyle {
+override var rootViewStatusBarStyle: UIStatusBarStyle {
     get { return .default }
     set { super.rootViewStatusBarStyle = newValue }
 }
 
-override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
+override var rootViewStatusBarUpdateAnimation: UIStatusBarAnimation {
     get { return .none }
     set { super.rootViewStatusBarUpdateAnimation = newValue }
 }
 ```
 
-For `leftViewController and rightViewController` principe the same, but lets look at situation, when animations are different for each viewController.    
-* When side views are hidden, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.    
-* When left view is going to show, then `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation`.    
-* When left view is going to hide and root view is going to show, then `statusBarUpdateAnimation == rootViewController.statusBarUpdateAnimation`.
-
-But may be you want to `statusBarUpdateAnimation == leftViewController.statusBarUpdateAnimation` also when left view is going to hide.    
-Then you can do next:
-
-#### Objective-C
-
-```objective-c
-// In RootViewController.m
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    if (self.sideMenuController.isLeftViewVisible) {
-        return UIStatusBarAnimationFade;
-    }
-    else if (self.sideMenuController.isRightViewVisible) {
-        return UIStatusBarAnimationSlide;
-    }
-    else {
-        return UIStatusBarAnimationNone;
-    }
-}
-
-// OR in SideMenuController.m
-
-- (UIStatusBarAnimation)rootViewStatusBarUpdateAnimation {
-    if (self.isLeftViewVisible) {
-        return UIStatusBarAnimationFade;
-    }
-    else if (self.isRightViewVisible) {
-        return UIStatusBarAnimationSlide;
-    }
-    else {
-        return UIStatusBarAnimationNone;
-    }
-}
-```
-
-#### Swift
-
-```swift
-// In RootViewController.swift
-
-override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
-    if sideMenuController.isLeftViewVisible {
-        return UIStatusBarAnimationFade
-    }
-    else if sideMenuController.isRightViewVisible {
-        return UIStatusBarAnimationSlide
-    }
-    else {
-        return UIStatusBarAnimationNone
-    }
-}
-
-// OR in SideMenuController.swift
-
-override var rootViewStatusBarUpdateAnimation : UIStatusBarAnimation {
-    get {
-        if isLeftViewVisible {
-            return UIStatusBarAnimationFade
-        }
-        else if isRightViewVisible {
-            return UIStatusBarAnimationSlide
-        }
-        else {
-            return UIStatusBarAnimationNone
-        }
-    }
-
-    set { super.rootViewStatusBarUpdateAnimation = newValue }
-}
-```
+For `leftViewController and rightViewController` approach is the same.
 
 ## Always Visible Options
 
 Sometimes, for example on iPad, you need to have toggleable side menu on portrait orientation and always visible side menu on landscape orientation
 
-You can get it with properties:
+You can achieve it with properties:
 
-```objective-c
-LGSideMenuAlwaysVisibleOptions leftViewAlwaysVisibleOptions;
-LGSideMenuAlwaysVisibleOptions rightViewAlwaysVisibleOptions;
-```
-
-LGSideMenuAlwaysVisibleOptions has values:
-
-```
-LGSideMenuAlwaysVisibleOnNone
-LGSideMenuAlwaysVisibleOnLandscape
-LGSideMenuAlwaysVisibleOnPortrait
-LGSideMenuAlwaysVisibleOnPad
-LGSideMenuAlwaysVisibleOnPhone
-LGSideMenuAlwaysVisibleOnPadLandscape
-LGSideMenuAlwaysVisibleOnPadPortrait
-LGSideMenuAlwaysVisibleOnPhoneLandscape
-LGSideMenuAlwaysVisibleOnPhonePortrait
-LGSideMenuAlwaysVisibleOnAll
+```swift
+leftViewAlwaysVisibleOptions: LGSideMenuController.AlwaysVisibleOptions
+rightViewAlwaysVisibleOptions: LGSideMenuController.AlwaysVisibleOptions
 ```
 
 You can choose multiple values like this:
 
-#### Objective-C
-
-```objective-c
-sideMenuController.leftViewAlwaysVisibleOptions = LGSideMenuAlwaysVisibleOnPadLandscape|LGSideMenuAlwaysVisibleOnPhoneLandscape;
-```
-
-#### Swift
-
 ```swift
-sideMenuController.leftViewAlwaysVisibleOptions = [.onPadLandscape, .onPhoneLandscape]
+sideMenuController.leftViewAlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+// or
+sideMenuController.leftViewAlwaysVisibleOptions = [.landscape]
 ```
 
 ## NavigationController's Back Gesture
 
 Back gesture for UINavigationController has greater priority then swipe gesture for LGSideMenuController.
-But if you want, you can disable `interactivePopGestureRecognizer`, or change `swipeGestureArea`, or increase `leftViewSwipeGestureRange, rightViewSwipeGestureRange`.
-
-#### Objective-C
-
-```objective-c
-navigationController.interactivePopGestureRecognizer.enabled = NO;
-
-// OR
-
-sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaFull;
-
-// OR
-
-sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 88.0);
-sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0);
-```
-
-#### Swift
+But if you want different behaviour, you can disable `interactivePopGestureRecognizer`
 
 ```swift
 navigationController.interactivePopGestureRecognizer.isEnabled = false
-
-// OR
-
-sideMenuController.swipeGestureArea = .full
-
-// OR
-
-sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 88.0)
-sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(88.0, 44.0)
 ```
 
-## Editable Table View
+## ScrollView
 
-If you have editable table view inside sideMenuController, then it will work fine if you swipe rows not inside `swipeGestureArea` for sideMenuController.
-If you need more place for swipe inside table view, then you can decrease `leftViewSwipeGestureRange, rightViewSwipeGestureRange` or disable it.
-
-#### Objective-C
-
-```objective-c
-sideMenuController.swipeGestureArea = LGSideMenuSwipeGestureAreaBorders; // Default
-
-sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 32.0);
-sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(32.0, 44.0);
-
-// OR
-
-sideMenuController.leftViewSwipeGestureEnabled = NO;
-sideMenuController.rightViewSwipeGestureEnabled = NO;
-```
-
-#### Swift
+If you have scroll view, or any interactable elements inside sideMenuController, they will work until you swipe outside of `swipeGestureArea` for sideMenuController.
+If you need more place to interact with your view then you can decrease `leftViewSwipeGestureRange, rightViewSwipeGestureRange` or disable it.
 
 ```swift
 sideMenuController.swipeGestureArea = .borders // Default
 
-sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(44.0, 32.0)
-sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(32.0, 44.0)
+sideMenuController.leftViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(0.0, 22.0)
+sideMenuController.rightViewSwipeGestureRange = LGSideMenuSwipeGestureRangeMake(22.0, 0.0)
 
-// OR
+// OR disable gestures completely
 
 sideMenuController.leftViewSwipeGestureEnabled = false
 sideMenuController.rightViewSwipeGestureEnabled = false
@@ -599,140 +313,81 @@ sideMenuController.rightViewSwipeGestureEnabled = false
 
 ## Handle Actions
 
-To handle actions you can use delegate, blocks or notifications:
+To handle actions you can use delegate, closures or notifications:
 
 ### Delegate
 
-#### Objective-C
+```swift
+// LGSideMenuDelegate.swift
 
-```objective-c
-<LGSideMenuDelegate>
+func willShowLeftView(sideMenuController: LGSideMenuController)
+func didShowLeftView(sideMenuController: LGSideMenuController)
 
-@optional
+func willHideLeftView(sideMenuController: LGSideMenuController)
+func didHideLeftView(sideMenuController: LGSideMenuController)
 
-- (void)willShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
-- (void)didShowLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+func willShowRightView(sideMenuController: LGSideMenuController)
+func didShowRightView(sideMenuController: LGSideMenuController)
 
-- (void)willHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
-- (void)didHideLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+func willHideRightView(sideMenuController: LGSideMenuController)
+func didHideRightView(sideMenuController: LGSideMenuController)
 
-- (void)willShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
-- (void)didShowRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
+func showAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+func hideAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
 
-- (void)willHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
-- (void)didHideRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController;
-
-- (void)showAnimationsForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
-- (void)hideAnimationsForLeftView:(nonnull UIView *)leftView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
-
-- (void)showAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
-- (void)hideAnimationsForRightView:(nonnull UIView *)rightView sideMenuController:(nonnull LGSideMenuController *)sideMenuController duration:(NSTimeInterval)duration;
+func showAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+func hideAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
 ```
 
-#### Swift
+### Closures
 
 ```swift
-<LGSideMenuDelegate>
+var willShowLeftView: (sideMenuController: LGSideMenuController) -> Void
+var didShowLeftView: (sideMenuController: LGSideMenuController) -> Void
 
-optional public func willShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
-optional public func didShowLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+var willHideLeftView: (sideMenuController: LGSideMenuController) -> Void
+var didHideLeftView: (sideMenuController: LGSideMenuController) -> Void
 
-optional public func willHideLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
-optional public func didHideLeftView(_ leftView: UIView, sideMenuController: LGSideMenuController)
+var willShowRightView: (sideMenuController: LGSideMenuController) -> Void
+var didShowRightView: (sideMenuController: LGSideMenuController) -> Void
 
-optional public func willShowRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
-optional public func didShowRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+var willHideRightView: (sideMenuController: LGSideMenuController) -> Void
+var didHideRightView: (sideMenuController: LGSideMenuController) -> Void
 
-optional public func willHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
-optional public func didHideRightView(_ rightView: UIView, sideMenuController: LGSideMenuController)
+var showAnimationsForLeftView: (sideMenuController: LGSideMenuController, duration: TimeInterval) -> Void
+var hideAnimationsForLeftView: (sideMenuController: LGSideMenuController, duration: TimeInterval) -> Void
 
-optional public func showAnimations(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-optional public func hideAnimations(forLeftView leftView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-
-optional public func showAnimations(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-optional public func hideAnimations(forRightView rightView: UIView, sideMenuController: LGSideMenuController, duration: TimeInterval)
-```
-
-### Blocks
-
-#### Objective-C
-
-```objective-c
-void(^ _Nullable willShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-void(^ _Nullable didShowLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-
-void(^ _Nullable willHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-void(^ _Nullable didHideLeftView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-
-void(^ _Nullable willShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-void(^ _Nullable didShowRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-
-void(^ _Nullable willHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-void(^ _Nullable didHideRightView)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view);
-
-void(^ _Nullable showLeftViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
-void(^ _Nullable hideLeftViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
-
-void(^ _Nullable showRightViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
-void(^ _Nullable hideRightViewAnimations)(LGSideMenuController * _Nonnull sideMenuController, UIView * _Nonnull view, NSTimeInterval duration);
-```
-
-#### Swift
-
-```swift
-open var willShowLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-open var didShowLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-
-open var willHideLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-open var didHideLeftView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-
-open var willShowRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-open var didShowRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-
-open var willHideRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-open var didHideRightView: ((sideMenuController: LGSideMenuController, view: UIView) -> Swift.Void)?
-
-open var showLeftViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
-open var hideLeftViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
-
-open var showRightViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
-open var hideRightViewAnimations: ((sideMenuController: LGSideMenuController, view: UIView, duration: TimeInterval) -> Swift.Void)?
+var showAnimationsForRightView: (sideMenuController: LGSideMenuController, duration: TimeInterval) -> Void
+var hideAnimationsForRightView: (sideMenuController: LGSideMenuController, duration: TimeInterval) -> Void
 ```
 
 ### Notifications
 
-```
-LGSideMenuWillShowLeftViewNotification
-LGSideMenuDidShowLeftViewNotification
+```swift
+let LGSideMenuController.Notification.willShowLeftView
+let LGSideMenuController.Notification.didShowLeftView
 
-LGSideMenuWillHideLeftViewNotification
-LGSideMenuDidHideLeftViewNotification
+let LGSideMenuController.Notification.willHideLeftView
+let LGSideMenuController.Notification.didHideLeftView
 
-LGSideMenuWillShowRightViewNotification
-LGSideMenuDidShowRightViewNotification
+let LGSideMenuController.Notification.willShowRightView
+let LGSideMenuController.Notification.didShowRightView
 
-LGSideMenuWillHideRightViewNotification
-LGSideMenuDidHideRightViewNotification
+let LGSideMenuController.Notification.willHideRightView
+let LGSideMenuController.Notification.didHideRightView
 
-LGSideMenuShowLeftViewAnimationsNotification
-LGSideMenuHideLeftViewAnimationsNotification
+let LGSideMenuController.Notification.showAnimationsForLeftView
+let LGSideMenuController.Notification.hideAnimationsForLeftView
 
-LGSideMenuShowRightViewAnimationsNotification
-LGSideMenuHideRightViewAnimationsNotification
+let LGSideMenuController.Notification.showAnimationsForRightView
+let LGSideMenuController.Notification.hideAnimationsForRightView
 ```
 
 ## More
 
-For more details see [header files](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
-* [Objective-C](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Objective-C)
-* [Objective-C + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Objective-C_Storyboard)
-* [Swift](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift)
-* [Swift + Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Swift_Storyboard)
-
-# Xamarin
-
-If you use Xamarin, look at this repository:
-* https://github.com/yahavgb/LGSideMenuController-Xamarin
+For more details see [files itself](https://github.com/Friend-LGA/LGSideMenuController/tree/master/LGSideMenuController) and try Xcode [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
+* [Without Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/NonStoryboard)
+* [With Storyboard](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo/Storyboard)
 
 # Frameworks
 
