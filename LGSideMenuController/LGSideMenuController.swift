@@ -929,22 +929,21 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     convenience public init(rootViewController: UIViewController? = nil, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {
         self.init()
 
-        self.rootViewController = rootViewController
-        self.leftViewController = leftViewController
-        self.rightViewController = rightViewController
+        defer {
+            self.rootViewController = rootViewController
+            self.leftViewController = leftViewController
+            self.rightViewController = rightViewController
+        }
     }
 
     convenience public init(rootView: UIView? = nil, leftView: UIView? = nil, rightView: UIView? = nil) {
         self.init()
 
-        self.rootView = rootView
-        self.leftView = leftView
-        self.rightView = rightView
-    }
-
-    open override class func awakeFromNib() {
-        super.awakeFromNib()
-        // TODO: Check if this needs to be overriden
+        defer {
+            self.rootView = rootView
+            self.leftView = leftView
+            self.rightView = rightView
+        }
     }
 
     open override func viewDidLoad() {
