@@ -34,17 +34,24 @@ internal extension LGSideMenuController {
 
     // Note:
     // We don't nullify any of rootView, rootViewController, leftView, leftViewController, rightView, rightViewController
-    // because we don't manage their lifecycle, they should be assigned from the outside.
+    // because we don't manage their lifecycle from here, they should be assigned from the outside.
 
     // MARK: - Root View
 
-    func removeRootViews() {
-        self.removeRootViewController()
+    func removeRootViewController() {
+        if let rootViewController = self.rootViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: rootViewController)
+            rootViewController.removeFromParent()
+        }
+    }
 
+    func removeRootView() {
         if let rootView = self.rootView {
             rootView.removeFromSuperview()
         }
+    }
 
+    func removeRootDependentViews() {
         if let rootContainerView = self.rootContainerView {
             rootContainerView.removeFromSuperview()
             self.rootContainerView = nil
@@ -61,22 +68,22 @@ internal extension LGSideMenuController {
         }
     }
 
-    func removeRootViewController() {
-        if let rootViewController = self.rootViewController {
-            LGSideMenuHelper.setSideMenuController(nil, to: rootViewController)
-            rootViewController.removeFromParent()
+    // MARK: - Left View
+
+    func removeLeftViewController() {
+        if let leftViewController = self.leftViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: leftViewController)
+            leftViewController.removeFromParent()
         }
     }
 
-    // MARK: - Left View
-
-    func removeLeftViews() {
-        self.removeLeftViewController()
-
+    func removeLeftView() {
         if let leftView = self.leftView {
             leftView.removeFromSuperview()
         }
+    }
 
+    func removeLeftDependentViews() {
         if let leftContainerView = self.leftContainerView {
             leftContainerView.removeFromSuperview()
             self.leftContainerView = nil
@@ -103,22 +110,22 @@ internal extension LGSideMenuController {
         }
     }
 
-    func removeLeftViewController() {
-        if let leftViewController = self.leftViewController {
-            LGSideMenuHelper.setSideMenuController(nil, to: leftViewController)
-            leftViewController.removeFromParent()
+    // MARK: - Right View
+
+    func removeRightViewController() {
+        if let rightViewController = self.rightViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: rightViewController)
+            rightViewController.removeFromParent()
         }
     }
 
-    // MARK: - Right View
-
-    func removeRightViews() {
-        self.removeRightViewController()
-
+    func removeRightView() {
         if let rightView = self.rightView {
             rightView.removeFromSuperview()
         }
+    }
 
+    func removeRightDependentViews() {
         if let rightContainerView = self.rightContainerView {
             rightContainerView.removeFromSuperview()
             self.rightContainerView = nil
@@ -142,13 +149,6 @@ internal extension LGSideMenuController {
         if let rightViewBackgroundView = self.rightViewBackgroundView {
             rightViewBackgroundView.removeFromSuperview()
             self.rightViewBackgroundView = nil
-        }
-    }
-
-    func removeRightViewController() {
-        if let rightViewController = self.rightViewController {
-            LGSideMenuHelper.setSideMenuController(nil, to: rightViewController)
-            rightViewController.removeFromParent()
         }
     }
 

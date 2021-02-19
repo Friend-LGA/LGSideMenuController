@@ -184,13 +184,17 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             removeRootViewController()
         }
         didSet {
-            guard let rootViewController = rootViewController else { return }
+            guard let rootViewController = rootViewController else {
+                if self.rootView != nil {
+                    self.rootView = nil
+                }
+                return
+            }
+            self.rootView = rootViewController.view
             LGSideMenuHelper.setSideMenuController(self, to: rootViewController)
-            rootViewController.removeFromParent()
             if isRootViewControllerLayoutingEnabled {
                 addChild(rootViewController)
             }
-            self.rootView = rootViewController.view
         }
     }
 
@@ -199,11 +203,15 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             removeLeftViewController()
         }
         didSet {
-            guard let leftViewController = leftViewController else { return }
-            LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
-            leftViewController.removeFromParent()
-            addChild(leftViewController)
+            guard let leftViewController = leftViewController else {
+                if self.leftView != nil {
+                    self.leftView = nil
+                }
+                return
+            }
             self.leftView = leftViewController.view
+            LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
+            addChild(leftViewController)
         }
     }
 
@@ -212,46 +220,68 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             removeRightViewController()
         }
         didSet {
-            guard let rightViewController = rightViewController else { return }
-            LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
-            rightViewController.removeFromParent()
-            addChild(rightViewController)
+            guard let rightViewController = rightViewController else {
+                if self.rightView != nil {
+                    self.rightView = nil
+                }
+                return
+            }
             self.rightView = rightViewController.view
+            LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
+            addChild(rightViewController)
         }
     }
 
     open var rootView: UIView? {
         willSet {
+            removeRootView()
             if newValue == nil {
-                removeRootViews()
+                removeRootDependentViews()
             }
         }
         didSet {
-            guard rootView != nil else { return }
+            guard rootView != nil else {
+                if self.rootViewController != nil {
+                    self.rootViewController = nil
+                }
+                return
+            }
             setNeedsUpdateRootViewLayoutsAndStyles()
         }
     }
 
     open var leftView: UIView? {
         willSet {
+            removeLeftView()
             if newValue == nil {
-                removeLeftViews()
+                removeLeftDependentViews()
             }
         }
         didSet {
-            guard leftView != nil else { return }
+            guard leftView != nil else {
+                if self.leftViewController != nil {
+                    self.leftViewController = nil
+                }
+                return
+            }
             setNeedsUpdateLeftViewLayoutsAndStyles()
         }
     }
 
     open var rightView: UIView? {
         willSet {
+            removeRightView()
             if newValue == nil {
-                removeRightViews()
+                removeRightDependentViews()
             }
         }
         didSet {
-            guard rightView != nil else { return }
+            guard rightView != nil else {
+                if self.rightViewController != nil {
+                    self.rightViewController = nil
+                }
+                return
+            }
             setNeedsUpdateRightViewLayoutsAndStyles()
         }
     }
