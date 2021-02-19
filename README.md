@@ -20,7 +20,7 @@ iOS view controller, shows left and right views by pressing button or gesture.
 | 1.0.0 - 1.0.10               | 6.0             | Objective-C |
 | 1.1.0 - 2.2.0                | 8.0             | Objective-C |
 | 2.3.0                        | 9.0             | Objective-C |
-| 2.4.0                        | 9.0             | Swift       |
+| 3.0.0                        | 9.0             | Swift       |
 
 ## With Source Code
 
