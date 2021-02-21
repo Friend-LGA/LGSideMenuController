@@ -62,9 +62,9 @@ internal extension LGSideMenuController {
             self.rootViewCoverView = nil
         }
 
-        if let rootViewBorderView = self.rootViewBorderView {
-            rootViewBorderView.removeFromSuperview()
-            self.rootViewBorderView = nil
+        if let rootViewBackgroundView = self.rootViewBackgroundView {
+            rootViewBackgroundView.removeFromSuperview()
+            self.rootViewBackgroundView = nil
         }
     }
 
@@ -99,14 +99,14 @@ internal extension LGSideMenuController {
             self.leftViewEffectView = nil
         }
 
-        if let leftViewBorderView = self.leftViewBorderView {
-            leftViewBorderView.removeFromSuperview()
-            self.leftViewBorderView = nil
+        if let leftViewBackgroundImageView = self.leftViewBackgroundImageView {
+            leftViewBackgroundImageView.removeFromSuperview()
+            self.leftViewBackgroundImageView = nil
         }
 
-        if let leftViewBackgroundView = self.leftViewBackgroundView {
-            leftViewBackgroundView.removeFromSuperview()
-            self.leftViewBackgroundView = nil
+        if let leftViewBackgroundImageView = self.leftViewBackgroundImageView {
+            leftViewBackgroundImageView.removeFromSuperview()
+            self.leftViewBackgroundImageView = nil
         }
     }
 
@@ -141,14 +141,14 @@ internal extension LGSideMenuController {
             self.rightViewEffectView = nil
         }
 
-        if let rightViewBorderView = self.rightViewBorderView {
-            rightViewBorderView.removeFromSuperview()
-            self.rightViewBorderView = nil
+        if let rightViewBackgroundImageView = self.rightViewBackgroundImageView {
+            rightViewBackgroundImageView.removeFromSuperview()
+            self.rightViewBackgroundImageView = nil
         }
 
-        if let rightViewBackgroundView = self.rightViewBackgroundView {
-            rightViewBackgroundView.removeFromSuperview()
-            self.rightViewBackgroundView = nil
+        if let rightViewBackgroundImageView = self.rightViewBackgroundImageView {
+            rightViewBackgroundImageView.removeFromSuperview()
+            self.rightViewBackgroundImageView = nil
         }
     }
 

@@ -64,4 +64,20 @@ internal extension LGSideMenuController {
         self.isRootViewControllerLayoutingEnabled = true
     }
 
+    var leftViewWidthTotal: CGFloat {
+        self.leftViewWidth + self.leftViewLayerBorderWidth
+    }
+
+    var rightViewWidthTotal: CGFloat {
+        self.rightViewWidth + self.rightViewLayerBorderWidth
+    }
+
+    var isRootViewShouldMoveForLeftView: Bool {
+        return self.leftViewPresentationStyle != .slideAbove
+    }
+
+    var isRootViewShouldMoveForRightView: Bool {
+        return self.rightViewPresentationStyle != .slideAbove
+    }
+
 }

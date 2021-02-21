@@ -120,6 +120,18 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public init() {
             self = .slideAbove
         }
+
+        public var isAbove: Bool {
+            return self == .slideAbove
+        }
+
+        public var isBelow: Bool {
+            return self == .slideBelow || self == .scaleFromBig || self == .scaleFromLittle
+        }
+
+        public var isAside: Bool {
+            return self == .slideAbove
+        }
     }
 
     public enum SwipeGestureArea {
@@ -314,28 +326,24 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var leftViewPresentationStyle: PresentationStyle = .slideAbove {
         didSet {
-            validateAlwaysVisibleConflict()
             setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var rightViewPresentationStyle: PresentationStyle = .slideAbove {
         didSet {
-            validateAlwaysVisibleConflict()
             setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var leftViewAlwaysVisibleOptions: AlwaysVisibleOptions = [] {
         didSet {
-            validateAlwaysVisibleConflict()
             setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     open var rightViewAlwaysVisibleOptions: AlwaysVisibleOptions = [] {
         didSet {
-            validateAlwaysVisibleConflict()
             setNeedsUpdateLayoutsAndStyles()
         }
     }
@@ -457,12 +465,84 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     @IBInspectable open var rightViewLayerBorderWidth: CGFloat = 0.0
 
     @IBInspectable open var rootViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
-    @IBInspectable open var leftViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
-    @IBInspectable open var rightViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
+
+    /// Default:
+    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var leftViewLayerShadowColor: UIColor {
+        set {
+            _leftViewLayerShadowColor = newValue
+        }
+        get {
+            if let leftViewLayerShadowColor = _leftViewLayerShadowColor {
+                return leftViewLayerShadowColor
+            }
+            if leftViewPresentationStyle == .slideAbove {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _leftViewLayerShadowColor: UIColor?
+
+    /// Default:
+    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var rightViewLayerShadowColor: UIColor {
+        set {
+            _rightViewLayerShadowColor = newValue
+        }
+        get {
+            if let rightViewLayerShadowColor = _rightViewLayerShadowColor {
+                return rightViewLayerShadowColor
+            }
+            if rightViewPresentationStyle == .slideAbove {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _rightViewLayerShadowColor: UIColor?
 
     @IBInspectable open var rootViewLayerShadowRadius: CGFloat = 8.0
-    @IBInspectable open var leftViewLayerShadowRadius: CGFloat = 8.0
-    @IBInspectable open var rightViewLayerShadowRadius: CGFloat = 8.0
+
+    /// Default:
+    /// if presentationStyle == .slideAbove then 8.0
+    /// else 0.0
+    @IBInspectable open var leftViewLayerShadowRadius: CGFloat {
+        set {
+            _leftViewLayerShadowRadius = newValue
+        }
+        get {
+            if let leftViewLayerShadowRadius = _leftViewLayerShadowRadius {
+                return leftViewLayerShadowRadius
+            }
+            if leftViewPresentationStyle == .slideAbove {
+                return 8.0
+            }
+            return .zero
+        }
+    }
+    private var _leftViewLayerShadowRadius: CGFloat?
+
+    /// Default:
+    /// if presentationStyle == .slideAbove then 8.0
+    /// else 0.0
+    @IBInspectable open var rightViewLayerShadowRadius: CGFloat {
+        set {
+            _rightViewLayerShadowRadius = newValue
+        }
+        get {
+            if let rightViewLayerShadowRadius = _rightViewLayerShadowRadius {
+                return rightViewLayerShadowRadius
+            }
+            if rightViewPresentationStyle == .slideAbove {
+                return 8.0
+            }
+            return .zero
+        }
+    }
+    private var _rightViewLayerShadowRadius: CGFloat?
 
     @IBInspectable open var rootViewCoverBlurEffectForLeftView: UIBlurEffect?
     @IBInspectable open var rootViewCoverBlurEffectForRightView: UIBlurEffect?
@@ -892,28 +972,30 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open internal(set) var isAnimating = false
 
-    open internal(set) var leftViewBackgroundView: UIImageView?
-    open internal(set) var rightViewBackgroundView: UIImageView?
-
     open internal(set) var isNeedsUpdateLayoutsAndStyles: Bool = false
     open internal(set) var isNeedsUpdateRootViewLayoutsAndStyles: Bool = false
     open internal(set) var isNeedsUpdateLeftViewLayoutsAndStyles: Bool = false
     open internal(set) var isNeedsUpdateRightViewLayoutsAndStyles: Bool = false
 
     open internal(set) var rootContainerView: UIView?
-    open internal(set) var rootViewBorderView: LGSideMenuBorderView?
+    open internal(set) var rootViewShadowView: LGSideMenuShadowView?
+    open internal(set) var rootViewBackgroundView: LGSideMenuBackgroundView?
     open internal(set) var rootViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
     open internal(set) var leftContainerView: UIView?
-    open internal(set) var leftViewBorderView: LGSideMenuBorderView?
+    open internal(set) var leftViewShadowView: LGSideMenuShadowView?
+    open internal(set) var leftViewBackgroundView: LGSideMenuBackgroundView?
+    open internal(set) var leftViewBackgroundImageView: UIImageView?
     open internal(set) var leftViewEffectView: UIVisualEffectView?
     open internal(set) var leftViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
     // TODO: Add leftViewStatusBarBackgroundView
 
     open internal(set) var rightContainerView: UIView?
-    open internal(set) var rightViewBorderView: LGSideMenuBorderView?
+    open internal(set) var rightViewShadowView: LGSideMenuShadowView?
+    open internal(set) var rightViewBackgroundView: LGSideMenuBackgroundView?
+    open internal(set) var rightViewBackgroundImageView: UIImageView?
     open internal(set) var rightViewEffectView: UIVisualEffectView?
     open internal(set) var rightViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rightViewCoverView: UIVisualEffectView?

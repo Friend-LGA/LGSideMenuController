@@ -141,6 +141,7 @@ extension LGSideMenuController {
 
                 self.validateRootViewsTransforms(percentage: percentage)
                 self.validateLeftViewsTransforms(percentage: percentage)
+                self.validateRightViewsTransforms(percentage: percentage)
             }
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
@@ -207,6 +208,7 @@ extension LGSideMenuController {
 
                 self.validateRootViewsTransforms(percentage: percentage)
                 self.validateRightViewsTransforms(percentage: percentage)
+                self.validateLeftViewsTransforms(percentage: percentage)
             }
             else if gesture.state == .ended || gesture.state == .cancelled {
                 if percentage == 1.0 {
@@ -245,7 +247,7 @@ extension LGSideMenuController {
         let width: CGFloat = {
             if self.leftViewSwipeGestureArea == .full || self.isLeftViewVisible {
                 var result = self.view.bounds.width - originX
-                if self.isRightViewAlwaysVisibleForCurrentOrientation {
+                if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRootViewShouldMoveForLeftView {
                     result -= self.rightViewWidth
                 }
                 return result
@@ -272,7 +274,7 @@ extension LGSideMenuController {
         let originX: CGFloat = {
             if self.rightViewSwipeGestureArea == .full || self.isRightViewVisible {
                 var result: CGFloat = 0.0
-                if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+                if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRootViewShouldMoveForRightView {
                     result += self.leftViewWidth
                 }
                 return result

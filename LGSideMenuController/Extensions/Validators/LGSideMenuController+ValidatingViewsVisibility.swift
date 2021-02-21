@@ -40,10 +40,10 @@ internal extension LGSideMenuController {
 
     func validateRootViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
-              let rootViewBorderView = self.rootViewBorderView,
+              let rootViewShadowView = self.rootViewShadowView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
-        rootViewBorderView.isHidden = self.isRootViewShowing && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRightViewAlwaysVisibleForCurrentOrientation
+        rootViewShadowView.isHidden = self.isRootViewShowing && !self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRightViewAlwaysVisibleForCurrentOrientation
         rootViewCoverView.isHidden = self.isRootViewShowing
     }
 
@@ -52,8 +52,8 @@ internal extension LGSideMenuController {
               let leftContainerView = self.leftContainerView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
-        leftContainerView.isHidden = !(self.isLeftViewVisible || self.isLeftViewAlwaysVisibleForCurrentOrientation)
-        leftViewCoverView.isHidden = self.isLeftViewShowing || self.isLeftViewAlwaysVisibleForCurrentOrientation
+        leftContainerView.isHidden = !self.isLeftViewVisibleToUser
+        leftViewCoverView.isHidden = self.isLeftViewVisibleToUser
     }
 
     func validateRightViewsVisibility() {
@@ -61,8 +61,8 @@ internal extension LGSideMenuController {
               let rightContainerView = self.rightContainerView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
-        rightContainerView.isHidden = !(self.isRightViewVisible || self.isRightViewAlwaysVisibleForCurrentOrientation)
-        rightViewCoverView.isHidden = self.isRightViewShowing || self.isRightViewAlwaysVisibleForCurrentOrientation
+        rightContainerView.isHidden = !self.isRightViewVisibleToUser
+        rightViewCoverView.isHidden = self.isRightViewVisibleToUser
     }
 
 }

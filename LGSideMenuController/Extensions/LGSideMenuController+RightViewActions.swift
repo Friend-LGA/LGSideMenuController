@@ -142,6 +142,7 @@ extension LGSideMenuController {
 
                 self.validateRootViewsTransforms(percentage: 1.0)
                 self.validateRightViewsTransforms(percentage: 1.0)
+                self.validateLeftViewsTransforms(percentage: 1.0)
 
                 self.setNeedsStatusBarAppearanceUpdate()
 
@@ -164,6 +165,7 @@ extension LGSideMenuController {
 
             self.validateRootViewsTransforms(percentage: 1.0)
             self.validateRightViewsTransforms(percentage: 1.0)
+            self.validateLeftViewsTransforms(percentage: 1.0)
 
             self.setNeedsStatusBarAppearanceUpdate()
 
@@ -217,6 +219,7 @@ extension LGSideMenuController {
 
                 self.validateRootViewsTransforms(percentage: 0.0)
                 self.validateRightViewsTransforms(percentage: 0.0)
+                self.validateLeftViewsTransforms(percentage: 0.0)
 
                 self.setNeedsStatusBarAppearanceUpdate()
 
@@ -239,6 +242,7 @@ extension LGSideMenuController {
 
             self.validateRootViewsTransforms(percentage: 0.0)
             self.validateRightViewsTransforms(percentage: 0.0)
+            self.validateLeftViewsTransforms(percentage: 0.0)
 
             self.setNeedsStatusBarAppearanceUpdate()
 
@@ -281,12 +285,12 @@ extension LGSideMenuController {
 
     internal func cancelRightViewAnimations() {
         guard let rightContainerView = self.rightContainerView,
-              let rightViewBorderView = self.rightViewBorderView,
+              let rightViewBackgroundImageView = self.rightViewBackgroundImageView,
               let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
         rightContainerView.layer.removeAllAnimations()
-        rightViewBorderView.layer.removeAllAnimations()
+        rightViewBackgroundImageView.layer.removeAllAnimations()
         rightViewWrapperView.layer.removeAllAnimations()
         rightViewCoverView.layer.removeAllAnimations()
     }

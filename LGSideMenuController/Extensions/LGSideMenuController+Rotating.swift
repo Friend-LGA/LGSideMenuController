@@ -80,13 +80,11 @@ extension LGSideMenuController {
             guard let self = self else { return }
 
             if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewHidden {
-                self.shouldUpdateVisibility = false
                 self.hideLeftViewPrepare()
                 self.hideLeftViewActions(animated: true, duration: context.transitionDuration)
             }
 
             if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRightViewHidden {
-                self.shouldUpdateVisibility = false
                 self.hideRightViewPrepare()
                 self.hideRightViewActions(animated: true, duration: context.transitionDuration)
             }

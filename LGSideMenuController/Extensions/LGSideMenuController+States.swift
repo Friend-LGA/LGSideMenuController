@@ -47,14 +47,24 @@ extension LGSideMenuController {
         return self.state == .rightViewIsShowing
     }
 
-    /// Is left view showing or going to show or going to hide right now
+    /// Is either left or right view fully opened
+    open var isSideViewShowing: Bool {
+        return self.isLeftViewShowing || self.isRightViewShowing
+    }
+
+    /// Is left view showing or will show or will hide right now
     open var isLeftViewVisible: Bool {
         return self.state.isLeftViewVisible
     }
 
-    /// Is right view showing or going to show or going to hide right now
+    /// Is right view showing or will show or will hide right now
     open var isRightViewVisible: Bool {
         return self.state.isRightViewVisible
+    }
+
+    /// Is either left or right view showing or will show or will hide right now
+    open var isSideViewVisible: Bool {
+        return self.isLeftViewVisible || self.isRightViewVisible
     }
 
     /// Is left view fully closed
@@ -72,6 +82,11 @@ extension LGSideMenuController {
         return self.state.isRightViewHidden
     }
 
+    /// Is either left or right view fully closed
+    open var isSideViewHidden: Bool {
+        return self.isLeftViewHidden || self.isRightViewHidden
+    }
+
     /// Is left view currently will show or hide
     open var isLeftViewVisibilityChanging: Bool {
         return self.state == .leftViewWillShow || self.state == .leftViewWillHide
@@ -80,6 +95,11 @@ extension LGSideMenuController {
     /// Is right view currently will show or hide
     open var isRightViewVisibilityChanging: Bool {
         return self.state == .rightViewWillShow || self.state == .rightViewWillHide
+    }
+
+    /// Is either left or right view currently will show or hide
+    open var isSideViewVisibilityChanging: Bool {
+        return self.isLeftViewVisibilityChanging || self.isRightViewVisibilityChanging
     }
 
     /// Is left view currently fully open or close
@@ -92,6 +112,11 @@ extension LGSideMenuController {
         return self.state != .rightViewWillShow && self.state != .rightViewWillHide
     }
 
+    /// Is either left or right view currently fully open or close
+    open var isSideViewVisibilityStable: Bool {
+        return self.isLeftViewVisibilityStable || self.isRightViewVisibilityStable
+    }
+
     /// Is left view suppose to be "always visible" for current orientation
     open var isLeftViewAlwaysVisibleForCurrentOrientation: Bool {
         return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
@@ -102,6 +127,12 @@ extension LGSideMenuController {
         return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
     }
 
+    /// Is any of side views suppose to be "always visible" for current orientation
+    open var isSideViewAlwaysVisibleForCurrentOrientation: Bool {
+        return self.isLeftViewAlwaysVisibleForCurrentOrientation ||
+            self.isRightViewAlwaysVisibleForCurrentOrientation
+    }
+
     /// Is left view suppose to be "always visible" for given orientation
     open func isLeftViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
         return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
@@ -110,6 +141,22 @@ extension LGSideMenuController {
     /// Is right view suppose to be "always visible" for given orientation
     open func isRightViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
         return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
+    }
+
+    /// Is any of side views suppose to be "always visible" for given orientation
+    open func isSideViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
+        return self.isLeftViewAlwaysVisibleForOrientation(orientation) ||
+            self.isRightViewAlwaysVisibleForOrientation(orientation)
+    }
+
+    /// Is left view showing or always showing or will show or will hide right now
+    open var isLeftViewVisibleToUser: Bool {
+        return self.isLeftViewVisible || self.isLeftViewAlwaysVisibleForCurrentOrientation
+    }
+
+    /// Is right view showing or always showing or will show or will hide right now
+    open var isRightViewVisibleToUser: Bool {
+        return self.isRightViewVisible || self.isRightViewAlwaysVisibleForCurrentOrientation
     }
 
 }
