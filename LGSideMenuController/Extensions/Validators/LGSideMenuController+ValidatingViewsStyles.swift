@@ -87,8 +87,14 @@ internal extension LGSideMenuController {
 
         leftViewStyleView.effect = self.leftViewBackgroundBlurEffect
 
-        leftViewCoverView.backgroundColor = self.leftViewCoverColor
-        leftViewCoverView.effect = self.leftViewCoverBlurEffect
+        if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            leftViewCoverView.backgroundColor = self.leftViewCoverColorWhenAlwaysVisible
+            leftViewCoverView.effect = self.leftViewCoverBlurEffectWhenAlwaysVisible
+        }
+        else {
+            leftViewCoverView.backgroundColor = self.leftViewCoverColor
+            leftViewCoverView.effect = self.leftViewCoverBlurEffect
+        }
     }
 
     func validateRightViewsStyles() {
@@ -112,8 +118,14 @@ internal extension LGSideMenuController {
 
         rightViewStyleView.effect = self.rightViewBackgroundBlurEffect
 
-        rightViewCoverView.backgroundColor = self.rightViewCoverColor
-        rightViewCoverView.effect = self.rightViewCoverBlurEffect
+        if self.isRightViewAlwaysVisibleForCurrentOrientation {
+            rightViewCoverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
+            rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
+        }
+        else {
+            rightViewCoverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
+            rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
+        }
     }
     
 }

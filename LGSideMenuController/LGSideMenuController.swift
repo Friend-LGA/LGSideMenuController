@@ -546,13 +546,191 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBInspectable open var rootViewCoverBlurEffectForLeftView: UIBlurEffect?
     @IBInspectable open var rootViewCoverBlurEffectForRightView: UIBlurEffect?
+
     @IBInspectable open var leftViewCoverBlurEffect: UIBlurEffect?
+
+    /// This cover is only visible if left view is always visible for current orientation
+    /// Default: rootViewCoverBlurEffectForRightView
+    @IBInspectable open var leftViewCoverBlurEffectWhenAlwaysVisible: UIBlurEffect? {
+        set {
+            _leftViewCoverBlurEffectWhenAlwaysVisible = newValue
+            _isLeftViewCoverBlurEffectWhenAlwaysVisibleAssigned = true
+        }
+        get {
+            if _isLeftViewCoverBlurEffectWhenAlwaysVisibleAssigned {
+                return _leftViewCoverBlurEffectWhenAlwaysVisible
+            }
+            return rootViewCoverBlurEffectForRightView
+        }
+    }
+    private var _leftViewCoverBlurEffectWhenAlwaysVisible: UIBlurEffect?
+    private var _isLeftViewCoverBlurEffectWhenAlwaysVisibleAssigned: Bool = false
+
     @IBInspectable open var rightViewCoverBlurEffect: UIBlurEffect?
+
+    /// This cover is only visible if right view is always visible for current orientation
+    /// Default: rootViewCoverBlurEffectForLeftView
+    @IBInspectable open var rightViewCoverBlurEffectWhenAlwaysVisible: UIBlurEffect? {
+        set {
+            _rightViewCoverBlurEffectWhenAlwaysVisible = newValue
+            _isRightViewCoverBlurEffectWhenAlwaysVisibleAssigned = true
+        }
+        get {
+            if _isRightViewCoverBlurEffectWhenAlwaysVisibleAssigned {
+                return _rightViewCoverBlurEffectWhenAlwaysVisible
+            }
+            return rootViewCoverBlurEffectForLeftView
+        }
+    }
+    private var _rightViewCoverBlurEffectWhenAlwaysVisible: UIBlurEffect?
+    private var _isRightViewCoverBlurEffectWhenAlwaysVisibleAssigned: Bool = false
 
     @IBInspectable open var rootViewCoverAlphaForLeftView: CGFloat = 1.0
     @IBInspectable open var rootViewCoverAlphaForRightView: CGFloat = 1.0
+
     @IBInspectable open var leftViewCoverAlpha: CGFloat = 1.0
+
+    /// This cover is only visible if left view is always visible for current orientation
+    /// Default: rootViewCoverAlphaForRightView
+    @IBInspectable open var leftViewCoverAlphaWhenAlwaysVisible: CGFloat {
+        set {
+            _leftViewCoverAlphaWhenAlwaysVisible = newValue
+        }
+        get {
+            if let leftViewCoverAlphaWhenAlwaysVisible = _leftViewCoverAlphaWhenAlwaysVisible {
+                return leftViewCoverAlphaWhenAlwaysVisible
+            }
+            return rootViewCoverAlphaForRightView
+        }
+    }
+    private var _leftViewCoverAlphaWhenAlwaysVisible: CGFloat?
+
     @IBInspectable open var rightViewCoverAlpha: CGFloat = 1.0
+
+    /// This cover is only visible if right view is always visible for current orientation
+    /// Default: rootViewCoverAlphaForLeftView
+    @IBInspectable open var rightViewCoverAlphaWhenAlwaysVisible: CGFloat {
+        set {
+            _rightViewCoverAlphaWhenAlwaysVisible = newValue
+        }
+        get {
+            if let rightViewCoverAlphaWhenAlwaysVisible = _rightViewCoverAlphaWhenAlwaysVisible {
+                return rightViewCoverAlphaWhenAlwaysVisible
+            }
+            return rootViewCoverAlphaForLeftView
+        }
+    }
+    private var _rightViewCoverAlphaWhenAlwaysVisible: CGFloat?
+
+    /// Color that hides root view, when left view is showing
+    /// Default:
+    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var rootViewCoverColorForLeftView: UIColor {
+        set {
+            _rootViewCoverColorForLeftView = newValue
+        }
+        get {
+            if let rootViewCoverColorForLeftView = _rootViewCoverColorForLeftView {
+                return rootViewCoverColorForLeftView
+            }
+            if leftViewPresentationStyle == .slideAbove {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _rootViewCoverColorForLeftView: UIColor?
+
+    /// Color that hides root view, when right view is showing
+    /// Default:
+    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var rootViewCoverColorForRightView: UIColor {
+        set {
+            _rootViewCoverColorForRightView = newValue
+        }
+        get {
+            if let rootViewCoverColorForRightView = _rootViewCoverColorForRightView {
+                return rootViewCoverColorForRightView
+            }
+            if rightViewPresentationStyle == .slideAbove {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _rootViewCoverColorForRightView: UIColor?
+
+    /// Color that hides left view, when it is not showing
+    /// Default:
+    /// if presentationStyle == .slideAbove then .clear
+    /// else UIColor(white: 0.0, alpha: 0.5)
+    @IBInspectable open var leftViewCoverColor: UIColor {
+        set {
+            _leftViewCoverColor = newValue
+        }
+        get {
+            if let leftViewCoverColor = _leftViewCoverColor {
+                return leftViewCoverColor
+            }
+            if leftViewPresentationStyle == .slideAbove {
+                return .clear
+            }
+            return UIColor(white: 0.0, alpha: 0.5)
+        }
+    }
+    private var _leftViewCoverColor: UIColor?
+
+    /// This cover is only visible if left view is always visible for current orientation
+    /// Default: rootViewCoverColorForRightView
+    @IBInspectable open var leftViewCoverColorWhenAlwaysVisible: UIColor {
+        set {
+            _leftViewCoverColorWhenAlwaysVisible = newValue
+        }
+        get {
+            if let leftViewCoverColorWhenAlwaysVisible = _leftViewCoverColorWhenAlwaysVisible {
+                return leftViewCoverColorWhenAlwaysVisible
+            }
+            return rootViewCoverColorForRightView
+        }
+    }
+    private var _leftViewCoverColorWhenAlwaysVisible: UIColor?
+
+    /// Color that hides right view, when it is not showing
+    /// Default:
+    /// if presentationStyle == .slideAbove then .clear
+    /// else UIColor(white: 0.0, alpha: 0.5)
+    @IBInspectable open var rightViewCoverColor: UIColor {
+        set {
+            _rightViewCoverColor = newValue
+        }
+        get {
+            if let rightViewCoverColor = _rightViewCoverColor {
+                return rightViewCoverColor
+            }
+            if rightViewPresentationStyle == .slideAbove {
+                return .clear
+            }
+            return UIColor(white: 0.0, alpha: 0.5)
+        }
+    }
+    private var _rightViewCoverColor: UIColor?
+
+    /// This cover is only visible if right view is always visible for current orientation
+    /// Default: rootViewCoverColorForLeftView
+    @IBInspectable open var rightViewCoverColorWhenAlwaysVisible: UIColor {
+        set {
+            _rightViewCoverColorWhenAlwaysVisible = newValue
+        }
+        get {
+            if let rightViewCoverColorWhenAlwaysVisible = _rightViewCoverColorWhenAlwaysVisible {
+                return rightViewCoverColorWhenAlwaysVisible
+            }
+            return rootViewCoverColorForLeftView
+        }
+    }
+    private var _rightViewCoverColorWhenAlwaysVisible: UIColor?
 
     /// Duration with which status bar will update its style while swipe gesture
     @IBInspectable open var statusBarAnimationDuration: TimeInterval = 0.2
@@ -657,86 +835,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     private var _rightViewStatusBarUpdateAnimation: UIStatusBarAnimation?
-
-    /// Color that hides root view, when left view is showing
-    /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
-    /// else .clear
-    @IBInspectable open var rootViewCoverColorForLeftView: UIColor {
-        set {
-            _rootViewCoverColorForLeftView = newValue
-        }
-        get {
-            if let rootViewCoverColorForLeftView = _rootViewCoverColorForLeftView {
-                return rootViewCoverColorForLeftView
-            }
-            if leftViewPresentationStyle == .slideAbove {
-                return UIColor(white: 0.0, alpha: 0.5)
-            }
-            return .clear
-        }
-    }
-    private var _rootViewCoverColorForLeftView: UIColor?
-
-    /// Color that hides root view, when right view is showing
-    /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
-    /// else .clear
-    @IBInspectable open var rootViewCoverColorForRightView: UIColor {
-        set {
-            _rootViewCoverColorForRightView = newValue
-        }
-        get {
-            if let rootViewCoverColorForRightView = _rootViewCoverColorForRightView {
-                return rootViewCoverColorForRightView
-            }
-            if rightViewPresentationStyle == .slideAbove {
-                return UIColor(white: 0.0, alpha: 0.5)
-            }
-            return .clear
-        }
-    }
-    private var _rootViewCoverColorForRightView: UIColor?
-
-    /// Color that hides left view, when it is not showing
-    /// Default:
-    /// if presentationStyle == .slideAbove then .clear
-    /// else UIColor(white: 0.0, alpha: 0.5)
-    @IBInspectable open var leftViewCoverColor: UIColor {
-        set {
-            _leftViewCoverColor = newValue
-        }
-        get {
-            if let leftViewCoverColor = _leftViewCoverColor {
-                return leftViewCoverColor
-            }
-            if leftViewPresentationStyle == .slideAbove {
-                return .clear
-            }
-            return UIColor(white: 0.0, alpha: 0.5)
-        }
-    }
-    private var _leftViewCoverColor: UIColor?
-
-    /// Color that hides right view, when it is not showing
-    /// Default:
-    /// if presentationStyle == .slideAbove then .clear
-    /// else UIColor(white: 0.0, alpha: 0.5)
-    @IBInspectable open var rightViewCoverColor: UIColor {
-        set {
-            _rightViewCoverColor = newValue
-        }
-        get {
-            if let rightViewCoverColor = _rightViewCoverColor {
-                return rightViewCoverColor
-            }
-            if rightViewPresentationStyle == .slideAbove {
-                return .clear
-            }
-            return UIColor(white: 0.0, alpha: 0.5)
-        }
-    }
-    private var _rightViewCoverColor: UIColor?
 
     /// Default:
     /// if presentationStyle == .scaleFromBig then 0.8

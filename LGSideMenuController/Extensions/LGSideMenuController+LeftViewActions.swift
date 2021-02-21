@@ -122,10 +122,8 @@ extension LGSideMenuController {
         self.validateLeftViewsFrames()
         self.validateLeftViewsTransforms(percentage: 0.0)
 
-        self.validateRootViewsStyles()
-        self.validateLeftViewsStyles()
-        self.validateRootViewsVisibility()
-        self.validateLeftViewsVisibility()
+        self.validateViewsStyles()
+        self.validateViewsVisibility()
 
         self.willShowLeftViewCallbacks()
     }
@@ -183,6 +181,9 @@ extension LGSideMenuController {
         guard self.state == .leftViewWillShow else { return }
 
         self.state = .leftViewIsShowing
+
+        self.validateViewsVisibility()
+
         self.didShowLeftViewCallbacks()
     }
 
@@ -204,6 +205,9 @@ extension LGSideMenuController {
         }
 
         self.state = .leftViewWillHide
+
+        self.validateViewsVisibility()
+
         self.willHideLeftViewCallbacks()
     }
 
@@ -273,8 +277,7 @@ extension LGSideMenuController {
 
         self.state = .rootViewIsShowing
 
-        self.validateRootViewsVisibility()
-        self.validateLeftViewsVisibility()
+        self.validateViewsVisibility()
 
         self.rootViewWrapperView?.isUserInteractionEnabled = true
 
