@@ -96,6 +96,7 @@ extension LGSideMenuController {
             if !self.shouldUpdateVisibility {
                 self.shouldUpdateVisibility = true
                 self.validateLeftViewsVisibility()
+                self.validateRightViewsVisibility()
             }
         })
     }
