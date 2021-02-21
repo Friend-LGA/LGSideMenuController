@@ -246,11 +246,7 @@ extension LGSideMenuController {
 
         let width: CGFloat = {
             if self.leftViewSwipeGestureArea == .full || self.isLeftViewVisible {
-                var result = self.view.bounds.width - originX
-                if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRootViewShouldMoveForLeftView {
-                    result -= self.rightViewWidth
-                }
-                return result
+                return self.view.bounds.width - originX
             }
             else {
                 return self.leftViewSwipeGestureRange.left + self.leftViewSwipeGestureRange.right
@@ -273,11 +269,7 @@ extension LGSideMenuController {
 
         let originX: CGFloat = {
             if self.rightViewSwipeGestureArea == .full || self.isRightViewVisible {
-                var result: CGFloat = 0.0
-                if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isRootViewShouldMoveForRightView {
-                    result += self.leftViewWidth
-                }
-                return result
+                return 0.0
             }
             else {
                 return borderX - self.rightViewSwipeGestureRange.left

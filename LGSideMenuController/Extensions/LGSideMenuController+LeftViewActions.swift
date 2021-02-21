@@ -110,6 +110,7 @@ extension LGSideMenuController {
         self.state = .leftViewWillShow
 
         self.rootViewWrapperView?.isUserInteractionEnabled = false
+        self.rightViewWrapperView?.isUserInteractionEnabled = false
 
         if updateStatusBar {
             LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.statusBarAnimationDuration, animations: { [weak self] in
@@ -280,6 +281,7 @@ extension LGSideMenuController {
         self.validateViewsVisibility()
 
         self.rootViewWrapperView?.isUserInteractionEnabled = true
+        self.rightViewWrapperView?.isUserInteractionEnabled = true
 
         self.didHideLeftViewCallbacks()
     }
