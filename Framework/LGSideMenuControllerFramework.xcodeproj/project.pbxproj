@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9201F7225DF015F00E49A71 /* LGSideMenuBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5825DF015F00E49A71 /* LGSideMenuBorderView.swift */; };
 		D9201F7325DF015F00E49A71 /* LGSideMenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5925DF015F00E49A71 /* LGSideMenuHelper.swift */; };
 		D9201F7425DF015F00E49A71 /* LGSideMenuSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */; };
 		D9201F7525DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5C25DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift */; };
@@ -23,7 +22,6 @@
 		D9201F7E25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6625DF015F00E49A71 /* LGSideMenuController+ValidatingViewsHierarchy.swift */; };
 		D9201F7F25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6725DF015F00E49A71 /* LGSideMenuController+ValidatingViewsStyles.swift */; };
 		D9201F8025DF015F00E49A71 /* LGSideMenuController+ValidatingViewsVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6825DF015F00E49A71 /* LGSideMenuController+ValidatingViewsVisibility.swift */; };
-		D9201F8125DF015F00E49A71 /* LGSideMenuController+Validating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6925DF015F00E49A71 /* LGSideMenuController+Validating.swift */; };
 		D9201F8225DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6A25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift */; };
 		D9201F8325DF016000E49A71 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6B25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsInit.swift */; };
 		D9201F8425DF016000E49A71 /* LGSideMenuController+ValidatingViewsTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6C25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsTransforms.swift */; };
@@ -32,6 +30,8 @@
 		D9201F8725DF016000E49A71 /* UIViewController+LGSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F6F25DF015F00E49A71 /* UIViewController+LGSideMenuController.swift */; };
 		D9201F8825DF016000E49A71 /* LGSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F7025DF015F00E49A71 /* LGSideMenuController.swift */; };
 		D9201F8925DF016000E49A71 /* LGSideMenuWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */; };
+		D935344025E25DC800F79637 /* LGSideMenuBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343E25E25DC800F79637 /* LGSideMenuBackgroundView.swift */; };
+		D935344125E25DC800F79637 /* LGSideMenuShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343F25E25DC800F79637 /* LGSideMenuShadowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerFramework.h; sourceTree = "<group>"; };
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D9201F5825DF015F00E49A71 /* LGSideMenuBorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBorderView.swift; sourceTree = "<group>"; };
 		D9201F5925DF015F00E49A71 /* LGSideMenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuHelper.swift; sourceTree = "<group>"; };
 		D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuSegue.swift; sourceTree = "<group>"; };
 		D9201F5C25DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+LeftViewActions.swift"; sourceTree = "<group>"; };
@@ -54,7 +53,6 @@
 		D9201F6625DF015F00E49A71 /* LGSideMenuController+ValidatingViewsHierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsHierarchy.swift"; sourceTree = "<group>"; };
 		D9201F6725DF015F00E49A71 /* LGSideMenuController+ValidatingViewsStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsStyles.swift"; sourceTree = "<group>"; };
 		D9201F6825DF015F00E49A71 /* LGSideMenuController+ValidatingViewsVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsVisibility.swift"; sourceTree = "<group>"; };
-		D9201F6925DF015F00E49A71 /* LGSideMenuController+Validating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+Validating.swift"; sourceTree = "<group>"; };
 		D9201F6A25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsFrames.swift"; sourceTree = "<group>"; };
 		D9201F6B25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsInit.swift"; sourceTree = "<group>"; };
 		D9201F6C25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingViewsTransforms.swift"; sourceTree = "<group>"; };
@@ -63,6 +61,8 @@
 		D9201F6F25DF015F00E49A71 /* UIViewController+LGSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LGSideMenuController.swift"; sourceTree = "<group>"; };
 		D9201F7025DF015F00E49A71 /* LGSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuController.swift; sourceTree = "<group>"; };
 		D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuWrapperView.swift; sourceTree = "<group>"; };
+		D935343E25E25DC800F79637 /* LGSideMenuBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundView.swift; sourceTree = "<group>"; };
+		D935343F25E25DC800F79637 /* LGSideMenuShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuShadowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,8 @@
 				D9201F7025DF015F00E49A71 /* LGSideMenuController.swift */,
 				D9201F5925DF015F00E49A71 /* LGSideMenuHelper.swift */,
 				D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */,
-				D9201F5825DF015F00E49A71 /* LGSideMenuBorderView.swift */,
+				D935343E25E25DC800F79637 /* LGSideMenuBackgroundView.swift */,
+				D935343F25E25DC800F79637 /* LGSideMenuShadowView.swift */,
 				D9201F6E25DF015F00E49A71 /* LGSideMenuDelegate.swift */,
 				D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */,
 				D9201F6F25DF015F00E49A71 /* UIViewController+LGSideMenuController.swift */,
@@ -140,7 +141,6 @@
 		D9201F6525DF015F00E49A71 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				D9201F6925DF015F00E49A71 /* LGSideMenuController+Validating.swift */,
 				D9201F6B25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsInit.swift */,
 				D9201F6625DF015F00E49A71 /* LGSideMenuController+ValidatingViewsHierarchy.swift */,
 				D9201F6A25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift */,
@@ -245,14 +245,14 @@
 				D9201F7A25DF015F00E49A71 /* LGSideMenuController+Layouting.swift in Sources */,
 				D9201F8325DF016000E49A71 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */,
 				D9201F7B25DF015F00E49A71 /* LGSideMenuController+Helpers.swift in Sources */,
+				D935344025E25DC800F79637 /* LGSideMenuBackgroundView.swift in Sources */,
 				D9201F7D25DF015F00E49A71 /* LGSideMenuController+ViewsRemoving.swift in Sources */,
 				D9201F8825DF016000E49A71 /* LGSideMenuController.swift in Sources */,
-				D9201F7225DF015F00E49A71 /* LGSideMenuBorderView.swift in Sources */,
 				D9201F7425DF015F00E49A71 /* LGSideMenuSegue.swift in Sources */,
 				D9201F7625DF015F00E49A71 /* LGSideMenuController+Callbacks.swift in Sources */,
 				D9201F8525DF016000E49A71 /* LGSideMenuController+StatusBarHandler.swift in Sources */,
 				D9201F8225DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift in Sources */,
-				D9201F8125DF015F00E49A71 /* LGSideMenuController+Validating.swift in Sources */,
+				D935344125E25DC800F79637 /* LGSideMenuShadowView.swift in Sources */,
 				D9201F8925DF016000E49A71 /* LGSideMenuWrapperView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

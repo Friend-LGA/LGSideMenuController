@@ -25,7 +25,7 @@ class LeftViewController: UITableViewController {
     }
 
     override var prefersStatusBarHidden: Bool {
-        if self.type == .statusBarIsAlwaysVisisble {
+        if self.type == .statusBarIsAlwaysVisible {
             return UIApplication.shared.statusBarOrientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
         }
 

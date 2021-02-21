@@ -15,7 +15,7 @@ public enum DemoType: Int {
     case blurredCoversOfSideViews
     case blurredBackgroundsOfSideViews
     case landscapeIsAlwaysVisible
-    case statusBarIsAlwaysVisisble
+    case statusBarIsAlwaysVisible
     case gestureAreaIsFullScreen
     case concurrentTouchActions
     case customStyleExample
@@ -138,7 +138,7 @@ class MainViewController: LGSideMenuController {
             rightViewPresentationStyle = .slideBelow
             rightViewAlwaysVisibleOptions = .landscape
             rightViewBackgroundImage = UIImage(named: "imageRight")
-        case .statusBarIsAlwaysVisisble:
+        case .statusBarIsAlwaysVisible:
             leftViewPresentationStyle = .scaleFromBig
             leftViewStatusBarStyle = .lightContent
             leftViewBackgroundImage = UIImage(named: "imageLeft")
