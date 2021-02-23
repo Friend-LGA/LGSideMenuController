@@ -123,8 +123,8 @@ internal extension LGSideMenuController {
             rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
         }
         else {
-            rightViewCoverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
-            rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
+            rightViewCoverView.backgroundColor = self.rightViewCoverColor
+            rightViewCoverView.effect = self.rightViewCoverBlurEffect
         }
     }
     
