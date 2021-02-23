@@ -40,7 +40,7 @@ public final class LGSideMenuBackgroundView: UIView {
     public internal(set) var fillColor: UIColor = .clear
 
     public init() {
-        super.init(frame: CGRect.zero)
+        super.init(frame: .zero)
         self.backgroundColor = .clear
     }
 
@@ -53,8 +53,7 @@ public final class LGSideMenuBackgroundView: UIView {
 
         context.clear(rect)
 
-        var drawRect = rect
-        var path = UIBezierPath(roundedRect: drawRect,
+        let path = UIBezierPath(roundedRect: rect,
                                 byRoundingCorners: self.roundedCorners,
                                 cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
         path.close()
@@ -66,14 +65,11 @@ public final class LGSideMenuBackgroundView: UIView {
             context.setFillColor(strokeColor.cgColor)
             context.fillPath()
 
-            drawRect = rect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth)
-            path = UIBezierPath(roundedRect: drawRect,
-                                         byRoundingCorners: self.roundedCorners,
-                                         cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
-            path.close()
+            let strokePath = getStrokedPath(rect: rect)
+            strokePath.close()
 
             context.beginPath()
-            context.addPath(path.cgPath)
+            context.addPath(strokePath.cgPath)
             context.setFillColor(UIColor.clear.cgColor)
             context.setBlendMode(.clear)
             context.fillPath()
@@ -82,11 +78,20 @@ public final class LGSideMenuBackgroundView: UIView {
 
         // Fill smaller rect
         if self.fillColor != .clear {
+            let strokePath = getStrokedPath(rect: rect)
+            strokePath.close()
+
             context.beginPath()
-            context.addPath(path.cgPath)
+            context.addPath(strokePath.cgPath)
             context.setFillColor(fillColor.cgColor)
             context.fillPath()
         }
+    }
+
+    private func getStrokedPath(rect: CGRect) -> UIBezierPath {
+        return UIBezierPath(roundedRect: rect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth),
+                            byRoundingCorners: self.roundedCorners,
+                            cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
     }
 
 }

@@ -67,7 +67,7 @@ internal extension LGSideMenuController {
               let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
 
-        if self.leftViewPresentationStyle == .slideAbove {
+        if self.leftViewPresentationStyle.isAbove {
             self.view.insertSubview(leftContainerView, aboveSubview: rootContainerView)
         }
         else {
@@ -96,7 +96,7 @@ internal extension LGSideMenuController {
               let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
 
-        if self.rightViewPresentationStyle == .slideAbove {
+        if self.rightViewPresentationStyle.isAbove {
             self.view.insertSubview(rightContainerView, aboveSubview: rootContainerView)
         }
         else {

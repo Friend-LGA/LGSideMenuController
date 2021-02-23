@@ -43,13 +43,31 @@ internal extension LGSideMenuController {
               let rootViewBackgroundView = self.rootViewBackgroundView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
-        rootViewShadowView.shadowColor = self.rootViewLayerShadowColor
-        rootViewShadowView.shadowBlur = self.rootViewLayerShadowRadius
-        rootViewShadowView.setNeedsDisplay()
-
         rootViewBackgroundView.fillColor = self.rootViewBackgroundColor
-        rootViewBackgroundView.strokeColor = self.rootViewLayerBorderColor
-        rootViewBackgroundView.strokeWidth = self.rootViewLayerBorderWidth
+
+        if self.leftView != nil && self.isLeftViewVisibleToUser {
+            rootViewShadowView.shadowColor = self.rootViewLayerShadowColorForLeftView
+            rootViewShadowView.shadowBlur = self.rootViewLayerShadowRadiusForLeftView
+
+            rootViewBackgroundView.strokeColor = self.rootViewLayerBorderColorForLeftView
+            rootViewBackgroundView.strokeWidth = self.rootViewLayerBorderWidthForLeftView
+        }
+        else if self.rightView != nil && self.isRightViewVisibleToUser {
+            rootViewShadowView.shadowColor = self.rootViewLayerShadowColorForRightView
+            rootViewShadowView.shadowBlur = self.rootViewLayerShadowRadiusForRightView
+
+            rootViewBackgroundView.strokeColor = self.rootViewLayerBorderColorForRightView
+            rootViewBackgroundView.strokeWidth = self.rootViewLayerBorderWidthForRightView
+        }
+        else {
+            rootViewShadowView.shadowColor = .clear
+            rootViewShadowView.shadowBlur = 0.0
+
+            rootViewBackgroundView.strokeColor = .clear
+            rootViewBackgroundView.strokeWidth = 0.0
+        }
+
+        rootViewShadowView.setNeedsDisplay()
         rootViewBackgroundView.setNeedsDisplay()
 
         if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {

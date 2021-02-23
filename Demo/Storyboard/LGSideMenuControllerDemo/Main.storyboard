@@ -175,10 +175,10 @@
                             <real key="value" value="100"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForLeftView">
-                            <color key="value" red="0.0" green="1" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                            <color key="value" name="rootViewCoverColorForLeftView"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="rootViewCoverColorForRightView">
-                            <color key="value" red="1" green="0.0" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                            <color key="value" name="rootViewCoverColorForRightView"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -353,6 +353,12 @@
         </namedColor>
         <namedColor name="navigationBarTintColor">
             <color red="1" green="1" blue="1" alpha="0.89999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="rootViewCoverColorForLeftView">
+            <color red="0.0" green="1" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="rootViewCoverColorForRightView">
+            <color red="1" green="0.0" blue="1" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="tableViewBackgroundColor">
             <color red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>

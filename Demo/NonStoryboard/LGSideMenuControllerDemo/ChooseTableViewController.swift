@@ -10,19 +10,6 @@ private let cellIdentifier = "cell"
 
 class ChooseTableViewController: UITableViewController {
 
-    private let titlesArray = ["Style \"Scale From Big\"",
-                               "Style \"Slide Above\"",
-                               "Style \"Slide Below\"",
-                               "Style \"Scale From Little\"",
-                               "Blurred root view cover",
-                               "Blurred covers of side views",
-                               "Blurred backgrounds side views",
-                               "Landscape is always visible",
-                               "Status bar is always visible",
-                               "Gesture area is full screen",
-                               "Concurrent touch actions",
-                               "Custom style example"]
-    
     init() {
         super.init(style: .plain)
         
@@ -42,15 +29,15 @@ class ChooseTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.titlesArray.count
+        return DemoType.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel!.font = UIFont.systemFont(ofSize: 16.0)
-        cell.textLabel!.text = titlesArray[indexPath.row]
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 16.0)
+        cell.textLabel?.text = DemoType(rawValue: indexPath.row)?.description
         
         return cell
     }

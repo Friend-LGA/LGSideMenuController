@@ -6,10 +6,11 @@
 import Foundation
 import UIKit
 
-public enum DemoType: Int {
+public enum DemoType: Int, CaseIterable {
     case styleScaleFromBig
     case styleSlideAbove
     case styleSlideBelow
+    case styleSlideAside
     case styleScaleFromLittle
     case blurredRootViewCover
     case blurredCoversOfSideViews
@@ -19,10 +20,42 @@ public enum DemoType: Int {
     case gestureAreaIsFullScreen
     case concurrentTouchActions
     case customStyleExample
+
+    var description: String {
+        switch self {
+        case .styleScaleFromBig:
+            return "Style \"Scale From Big\""
+        case .styleSlideAbove:
+            return "Style \"Slide Above\""
+        case .styleSlideBelow:
+            return "Style \"Slide Below\""
+        case .styleSlideAside:
+            return "Style \"Slide Aside\""
+        case .styleScaleFromLittle:
+            return "Style \"Scale From Little\""
+        case .blurredRootViewCover:
+            return "Blurred root view cover"
+        case .blurredCoversOfSideViews:
+            return "Blurred covers of side views"
+        case .blurredBackgroundsOfSideViews:
+            return "Blurred backgrounds side views"
+        case .landscapeIsAlwaysVisible:
+            return "Landscape is always visible"
+        case .statusBarIsAlwaysVisible:
+            return "Status bar is always visible"
+        case .gestureAreaIsFullScreen:
+            return "Gesture area is full screen"
+        case .concurrentTouchActions:
+            return "Concurrent touch actions"
+        case .customStyleExample:
+            return "Custom style example"
+        }
+    }
 }
 
 class MainViewController: LGSideMenuController {
-    
+
+    private var isInitialized: Bool = false
     private var type: DemoType?
 
     // We need this "setup" method here just to share code with storyboard-based demo.
@@ -41,7 +74,9 @@ class MainViewController: LGSideMenuController {
 
             // LGSideMenuController fully customizable from storyboard
         }
-        else {
+        else if !self.isInitialized {
+            self.isInitialized = true
+
             let rootViewController = RootNavigationController()
             self.rootViewController = rootViewController
 
@@ -94,6 +129,18 @@ class MainViewController: LGSideMenuController {
 
             rightViewPresentationStyle = .slideBelow
             rightViewBackgroundImage = UIImage(named: "imageRight")
+        case .styleSlideAside:
+            leftViewPresentationStyle = .slideAside
+            leftViewBackgroundImage = UIImage(named: "imageLeft")
+            leftViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            leftViewLayerBorderWidth = 1.0
+            leftViewLayerBorderColor = isLightTheme() ? .white : .black
+
+            rightViewPresentationStyle = .slideAside
+            rightViewBackgroundImage = UIImage(named: "imageRight")
+            rightViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            rightViewLayerBorderWidth = 1.0
+            rightViewLayerBorderColor = isLightTheme() ? .white : .black
         case .styleScaleFromLittle:
             leftViewPresentationStyle = .scaleFromLittle
             leftViewBackgroundImage = UIImage(named: "imageLeft")
@@ -131,13 +178,18 @@ class MainViewController: LGSideMenuController {
             rightViewBackgroundColor = UIColor(red: 1.0, green: 0.0, blue: 1.0, alpha: 0.05)
             rootViewCoverColorForRightView = purpleCoverColor
         case .landscapeIsAlwaysVisible:
-            leftViewPresentationStyle = .slideAbove
-            leftViewBackgroundColor = UIColor(red: 0.5, green: 0.65, blue: 0.5, alpha: 0.95)
-            rootViewCoverColorForLeftView = greenCoverColor
+            leftViewPresentationStyle = .slideAside
+            leftViewBackgroundImage = UIImage(named: "imageLeft")
+            leftViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            leftViewLayerBorderWidth = 1.0
+            leftViewLayerBorderColor = isLightTheme() ? .white : .black
 
-            rightViewPresentationStyle = .slideBelow
             rightViewAlwaysVisibleOptions = .landscape
+            rightViewPresentationStyle = .slideAside
             rightViewBackgroundImage = UIImage(named: "imageRight")
+            rightViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            rightViewLayerBorderWidth = 1.0
+            rightViewLayerBorderColor = isLightTheme() ? .white : .black
         case .statusBarIsAlwaysVisible:
             leftViewPresentationStyle = .scaleFromBig
             leftViewStatusBarStyle = .lightContent
@@ -161,9 +213,13 @@ class MainViewController: LGSideMenuController {
             rightViewPresentationStyle = .scaleFromBig
             rightViewBackgroundImage = UIImage(named: "imageRight")
         case .customStyleExample:
-            rootViewLayerBorderWidth = 5.0
-            rootViewLayerBorderColor = .white
-            rootViewLayerShadowRadius = 10.0
+            rootViewLayerBorderWidthForLeftView = 5.0
+            rootViewLayerBorderColorForLeftView = .white
+            rootViewLayerShadowRadiusForLeftView = 10.0
+
+            rootViewLayerBorderWidthForRightView = 5.0
+            rootViewLayerBorderColorForRightView = .white
+            rootViewLayerShadowRadiusForRightView = 10.0
 
             leftViewSwipeGestureRange = SwipeGestureRange(left: 0.0, right: 88.0)
             leftViewPresentationStyle = .scaleFromBig
@@ -230,6 +286,13 @@ class MainViewController: LGSideMenuController {
         if let rightViewController = self.rightViewController as? RightViewController,
            let type = self.type {
             rightViewController.setup(type: type)
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if let type = self.type {
+            self.setup(type: type)
         }
     }
 

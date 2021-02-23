@@ -123,6 +123,9 @@ extension LGSideMenuController {
         self.validateLeftViewsFrames()
         self.validateLeftViewsTransforms(percentage: 0.0)
 
+        self.validateRootViewsFrames()
+        self.validateRootViewsTransforms(percentage: 0.0)
+
         self.validateViewsStyles()
         self.validateViewsVisibility()
 

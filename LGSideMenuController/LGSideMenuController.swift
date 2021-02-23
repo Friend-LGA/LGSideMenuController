@@ -83,6 +83,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public static let phone: AlwaysVisibleOptions     = [.phoneLandscape, .phonePortrait]
         public static let all: AlwaysVisibleOptions       = [.padLandscape, .padPortrait, .phoneLandscape, .phonePortrait]
 
+        // TODO: Add options for different trait collections
+
         public init(rawValue: Int = 0) {
             self.rawValue = rawValue
         }
@@ -113,9 +115,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     public enum PresentationStyle {
         case slideAbove
         case slideBelow
+        case slideAside
         case scaleFromBig
         case scaleFromLittle
-        // TODO: Add slideAside
 
         public init() {
             self = .slideAbove
@@ -129,8 +131,24 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return self == .slideBelow || self == .scaleFromBig || self == .scaleFromLittle
         }
 
-        public var isAside: Bool {
-            return self == .slideAbove
+        public var isHiddenAside: Bool {
+            return self == .slideAbove || self == .slideAside
+        }
+
+        public var isWidthFull: Bool {
+            return self == .slideBelow || self == .scaleFromBig || self == .scaleFromLittle
+        }
+
+        public var isWidthCompact: Bool {
+            return self == .slideAbove || self == .slideAside
+        }
+
+        public var shouldRootViewMove: Bool {
+            return self == .slideBelow || self == .slideAside || self == .scaleFromBig || self == .scaleFromLittle
+        }
+
+        public var shouldRootViewScale: Bool {
+            return self == .scaleFromBig || self == .scaleFromLittle
         }
     }
 
@@ -456,18 +474,56 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     @IBInspectable open var leftViewBackgroundAlpha: CGFloat = 1.0
     @IBInspectable open var rightViewBackgroundAlpha: CGFloat = 1.0
 
-    @IBInspectable open var rootViewLayerBorderColor: UIColor = .clear
+    @IBInspectable open var rootViewLayerBorderColorForLeftView: UIColor = .clear
+    @IBInspectable open var rootViewLayerBorderColorForRightView: UIColor = .clear
     @IBInspectable open var leftViewLayerBorderColor: UIColor = .clear
     @IBInspectable open var rightViewLayerBorderColor: UIColor = .clear
 
-    @IBInspectable open var rootViewLayerBorderWidth: CGFloat = 0.0
+    @IBInspectable open var rootViewLayerBorderWidthForLeftView: CGFloat = 0.0
+    @IBInspectable open var rootViewLayerBorderWidthForRightView: CGFloat = 0.0
     @IBInspectable open var leftViewLayerBorderWidth: CGFloat = 0.0
     @IBInspectable open var rightViewLayerBorderWidth: CGFloat = 0.0
 
-    @IBInspectable open var rootViewLayerShadowColor = UIColor(white: 0.0, alpha: 0.5)
+    /// Default:
+    /// if presentationStyle.isBelow then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var rootViewLayerShadowColorForLeftView: UIColor {
+        set {
+            _rootViewLayerShadowColorForLeftView = newValue
+        }
+        get {
+            if let rootViewLayerShadowColorForLeftView = _rootViewLayerShadowColorForLeftView {
+                return rootViewLayerShadowColorForLeftView
+            }
+            if leftViewPresentationStyle.isBelow {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _rootViewLayerShadowColorForLeftView: UIColor?
 
     /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isBelow then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
+    @IBInspectable open var rootViewLayerShadowColorForRightView: UIColor {
+        set {
+            _rootViewLayerShadowColorForRightView = newValue
+        }
+        get {
+            if let rootViewLayerShadowColorForRightView = _rootViewLayerShadowColorForRightView {
+                return rootViewLayerShadowColorForRightView
+            }
+            if rightViewPresentationStyle.isBelow {
+                return UIColor(white: 0.0, alpha: 0.5)
+            }
+            return .clear
+        }
+    }
+    private var _rootViewLayerShadowColorForRightView: UIColor?
+
+    /// Default:
+    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable open var leftViewLayerShadowColor: UIColor {
         set {
@@ -477,7 +533,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewLayerShadowColor = _leftViewLayerShadowColor {
                 return leftViewLayerShadowColor
             }
-            if leftViewPresentationStyle == .slideAbove {
+            if leftViewPresentationStyle.isAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -486,7 +542,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _leftViewLayerShadowColor: UIColor?
 
     /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable open var rightViewLayerShadowColor: UIColor {
         set {
@@ -496,7 +552,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewLayerShadowColor = _rightViewLayerShadowColor {
                 return rightViewLayerShadowColor
             }
-            if rightViewPresentationStyle == .slideAbove {
+            if rightViewPresentationStyle.isAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -504,10 +560,46 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewLayerShadowColor: UIColor?
 
-    @IBInspectable open var rootViewLayerShadowRadius: CGFloat = 8.0
+    /// Default:
+    /// if presentationStyle.isBelow then 8.0
+    /// else 0.0
+    @IBInspectable open var rootViewLayerShadowRadiusForLeftView: CGFloat {
+        set {
+            _rootViewLayerShadowRadiusForLeftView = newValue
+        }
+        get {
+            if let rootViewLayerShadowRadiusForLeftView = _rootViewLayerShadowRadiusForLeftView {
+                return rootViewLayerShadowRadiusForLeftView
+            }
+            if leftViewPresentationStyle.isBelow {
+                return 8.0
+            }
+            return .zero
+        }
+    }
+    private var _rootViewLayerShadowRadiusForLeftView: CGFloat?
 
     /// Default:
-    /// if presentationStyle == .slideAbove then 8.0
+    /// if presentationStyle.isBelow then 8.0
+    /// else 0.0
+    @IBInspectable open var rootViewLayerShadowRadiusForRightView: CGFloat {
+        set {
+            _rootViewLayerShadowRadiusForRightView = newValue
+        }
+        get {
+            if let rootViewLayerShadowRadiusForRightView = _rootViewLayerShadowRadiusForRightView {
+                return rootViewLayerShadowRadiusForRightView
+            }
+            if rightViewPresentationStyle.isBelow {
+                return 8.0
+            }
+            return .zero
+        }
+    }
+    private var _rootViewLayerShadowRadiusForRightView: CGFloat?
+
+    /// Default:
+    /// if presentationStyle.isAbove then 8.0
     /// else 0.0
     @IBInspectable open var leftViewLayerShadowRadius: CGFloat {
         set {
@@ -517,7 +609,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewLayerShadowRadius = _leftViewLayerShadowRadius {
                 return leftViewLayerShadowRadius
             }
-            if leftViewPresentationStyle == .slideAbove {
+            if leftViewPresentationStyle.isAbove {
                 return 8.0
             }
             return .zero
@@ -526,7 +618,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _leftViewLayerShadowRadius: CGFloat?
 
     /// Default:
-    /// if presentationStyle == .slideAbove then 8.0
+    /// if presentationStyle.isAbove then 8.0
     /// else 0.0
     @IBInspectable open var rightViewLayerShadowRadius: CGFloat {
         set {
@@ -536,7 +628,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewLayerShadowRadius = _rightViewLayerShadowRadius {
                 return rightViewLayerShadowRadius
             }
-            if rightViewPresentationStyle == .slideAbove {
+            if rightViewPresentationStyle.isAbove {
                 return 8.0
             }
             return .zero
@@ -624,7 +716,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Color that hides root view, when left view is showing
     /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable open var rootViewCoverColorForLeftView: UIColor {
         set {
@@ -634,7 +726,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewCoverColorForLeftView = _rootViewCoverColorForLeftView {
                 return rootViewCoverColorForLeftView
             }
-            if leftViewPresentationStyle == .slideAbove {
+            if leftViewPresentationStyle.isAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -644,7 +736,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Color that hides root view, when right view is showing
     /// Default:
-    /// if presentationStyle == .slideAbove then UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable open var rootViewCoverColorForRightView: UIColor {
         set {
@@ -654,7 +746,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewCoverColorForRightView = _rootViewCoverColorForRightView {
                 return rootViewCoverColorForRightView
             }
-            if rightViewPresentationStyle == .slideAbove {
+            if rightViewPresentationStyle.isAbove {
                 return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
@@ -664,8 +756,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Color that hides left view, when it is not showing
     /// Default:
-    /// if presentationStyle == .slideAbove then .clear
-    /// else UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isBelow then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
     @IBInspectable open var leftViewCoverColor: UIColor {
         set {
             _leftViewCoverColor = newValue
@@ -674,10 +766,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewCoverColor = _leftViewCoverColor {
                 return leftViewCoverColor
             }
-            if leftViewPresentationStyle == .slideAbove {
-                return .clear
+            if leftViewPresentationStyle.isBelow {
+                return UIColor(white: 0.0, alpha: 0.5)
             }
-            return UIColor(white: 0.0, alpha: 0.5)
+            return .clear
         }
     }
     private var _leftViewCoverColor: UIColor?
@@ -699,8 +791,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Color that hides right view, when it is not showing
     /// Default:
-    /// if presentationStyle == .slideAbove then .clear
-    /// else UIColor(white: 0.0, alpha: 0.5)
+    /// if presentationStyle.isBelow then UIColor(white: 0.0, alpha: 0.5)
+    /// else .clear
     @IBInspectable open var rightViewCoverColor: UIColor {
         set {
             _rightViewCoverColor = newValue
@@ -709,10 +801,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewCoverColor = _rightViewCoverColor {
                 return rightViewCoverColor
             }
-            if rightViewPresentationStyle == .slideAbove {
-                return .clear
+            if rightViewPresentationStyle.isBelow {
+                return UIColor(white: 0.0, alpha: 0.5)
             }
-            return UIColor(white: 0.0, alpha: 0.5)
+            return .clear
         }
     }
     private var _rightViewCoverColor: UIColor?
@@ -837,8 +929,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _rightViewStatusBarUpdateAnimation: UIStatusBarAnimation?
 
     /// Default:
-    /// if presentationStyle == .scaleFromBig then 0.8
-    /// if presentationStyle == .scaleFromLittle then 0.8
+    /// if presentationStyle.shouldRootViewScale then 0.8
     /// else 1.0
     @IBInspectable open var rootViewScaleForLeftView: CGFloat {
         set {
@@ -848,7 +939,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewScaleForLeftView = _rootViewScaleForLeftView {
                 return rootViewScaleForLeftView
             }
-            if leftViewPresentationStyle == .scaleFromBig || leftViewPresentationStyle == .scaleFromLittle {
+            if leftViewPresentationStyle.shouldRootViewScale {
                 return 0.8
             }
             return 1.0
@@ -857,8 +948,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _rootViewScaleForLeftView: CGFloat?
 
     /// Default:
-    /// if presentationStyle == .scaleFromBig then 0.8
-    /// if presentationStyle == .scaleFromLittle then 0.8
+    /// if presentationStyle.shouldRootViewScale then 0.8
     /// else 1.0
     @IBInspectable open var rootViewScaleForRightView: CGFloat {
         set {
@@ -868,7 +958,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewScaleForRightView = _rootViewScaleForRightView {
                 return rootViewScaleForRightView
             }
-            if rightViewPresentationStyle == .scaleFromBig || rightViewPresentationStyle == .scaleFromLittle {
+            if rightViewPresentationStyle.shouldRootViewScale {
                 return 0.8
             }
             return 1.0
