@@ -56,6 +56,10 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
+        // TODO: Add callback
+
+        // TODO: Add option to change alpha of the view itself
+
         let isLeftViewMoving = self.leftView != nil && self.isLeftViewVisible
         let isRightViewMoving = self.rightView != nil && self.isRightViewVisible
 
@@ -116,6 +120,8 @@ internal extension LGSideMenuController {
               let leftViewStyleView = self.leftViewEffectView,
               let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
+
+        // TODO: Add callback
 
         // TODO: Add option to change alpha of the view itself
 
@@ -189,6 +195,8 @@ internal extension LGSideMenuController {
               let rightViewStyleView = self.rightViewEffectView,
               let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
+
+        // TODO: Add callback
 
         // TODO: Add option to change alpha of the view itself
 
