@@ -1452,11 +1452,16 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(self.panGestureForRightView)
 
         // Try to initialize root, left and right view controllers from storyboard by segues
-        // TODO: Check if this needs to be wrapped into try - catch block
         if self.storyboard != nil {
-            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.root, sender: self)
-            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.left, sender: self)
-            self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
+            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.root) {
+                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.root, sender: self)
+            }
+            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.left) {
+                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.left, sender: self)
+            }
+            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.right) {
+                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
+            }
         }
     }
 

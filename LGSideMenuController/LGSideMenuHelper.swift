@@ -79,4 +79,15 @@ internal struct LGSideMenuHelper {
         return objc_getAssociatedObject(viewController, &Keys.sideMenuController) as? LGSideMenuController
     }
 
+    static func canPerformSegue(_ viewController: UIViewController, withIdentifier identifier: String) -> Bool {
+        guard let identifiers = viewController.value(forKey: "storyboardSegueTemplates") as? [NSObject] else { return false }
+        return identifiers.contains { (object: NSObject) -> Bool in
+            if let id = object.value(forKey: "_identifier") as? String {
+                return id == identifier
+            } else {
+                return false
+            }
+        }
+    }
+
 }
