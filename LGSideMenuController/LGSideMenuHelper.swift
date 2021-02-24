@@ -36,14 +36,15 @@ internal struct LGSideMenuHelper {
         static var sideMenuController = "sideMenuController"
     }
 
-    static func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
-        // TODO: Why spring animations???
-        UIView.animate(withDuration: duration,
-                       delay: .zero,
-                       usingSpringWithDamping: 1.0,
-                       initialSpringVelocity: 0.5,
-                       animations: animations,
-                       completion: completion)
+    static func animate(duration: TimeInterval, timingFunction: CAMediaTimingFunction, animations: @escaping () -> Void, completion: @escaping () -> Void) {
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        CATransaction.setAnimationTimingFunction(timingFunction)
+        animations()
+        CATransaction.commit()
+        UIView.commitAnimations()
     }
 
     static func statusBarAppearanceUpdate(viewController: UIViewController, duration: TimeInterval, animations: (() -> Void)?) {

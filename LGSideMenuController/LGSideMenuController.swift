@@ -412,8 +412,11 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// If rightSwipeGestureArea == .full then left part is ignored
     open var rightViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 0.0)
 
-    @IBInspectable open var leftViewAnimationDuration: TimeInterval = 0.5
-    @IBInspectable open var rightViewAnimationDuration: TimeInterval = 0.5
+    @IBInspectable open var leftViewAnimationDuration: TimeInterval = 0.45
+    @IBInspectable open var rightViewAnimationDuration: TimeInterval = 0.45
+
+    @IBInspectable open var leftViewAnimationTimingFunction = CAMediaTimingFunction(controlPoints: 0.33333, 0.66667, 0.33333, 1.0)
+    @IBInspectable open var rightViewAnimationTimingFunction = CAMediaTimingFunction(controlPoints: 0.33333, 0.66667, 0.33333, 1.0)
 
     // TODO: Add custom timing function
 

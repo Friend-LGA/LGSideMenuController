@@ -41,6 +41,7 @@
 		D942388525DEE94600534976 /* LGSideMenuSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D942388425DEE94600534976 /* LGSideMenuSegue.swift */; };
 		D942388925DEED1600534976 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9FEF65D25C93E7C00FDD4FD /* Main.storyboard */; };
 		D95BFD5F25DF533400923CA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D95BFD5E25DF533400923CA3 /* Assets.xcassets */; };
+		D9E57C1425E6FBB000E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E57C1325E6FBAF00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */; };
 		D9FEF65B25C93E7700FDD4FD /* Choose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9FEF65A25C93E7700FDD4FD /* Choose.storyboard */; };
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
 		EDE795291D45B879002930CA /* ChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795281D45B879002930CA /* ChooseTableViewController.swift */; };
@@ -86,6 +87,7 @@
 		D93CB7B925DEDF6200DFD5A7 /* LGSideMenuWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuWrapperView.swift; sourceTree = "<group>"; };
 		D942388425DEE94600534976 /* LGSideMenuSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSideMenuSegue.swift; sourceTree = "<group>"; };
 		D95BFD5E25DF533400923CA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D9E57C1325E6FBAF00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingUserInteraction.swift"; sourceTree = "<group>"; };
 		D9FEF65A25C93E7700FDD4FD /* Choose.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Choose.storyboard; sourceTree = "<group>"; };
 		D9FEF65D25C93E7C00FDD4FD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		EDE7950C1D45B7A1002930CA /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				D93CB7B325DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsInit.swift */,
+				D9E57C1325E6FBAF00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */,
 				D93CB7AE25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsHierarchy.swift */,
 				D93CB7B225DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsFrames.swift */,
 				D93CB7AF25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsStyles.swift */,
@@ -337,6 +340,7 @@
 				4A7BF8F41E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift in Sources */,
 				D93CB7CF25DEDF6200DFD5A7 /* LGSideMenuController.swift in Sources */,
 				D93CB7C725DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsVisibility.swift in Sources */,
+				D9E57C1425E6FBB000E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */,
 				EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */,
 				D93CB7CA25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */,
 				D93CB7BB25DEDF6200DFD5A7 /* LGSideMenuHelper.swift in Sources */,

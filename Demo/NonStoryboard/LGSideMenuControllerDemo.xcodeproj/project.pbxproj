@@ -39,6 +39,7 @@
 		D958DFA425D3F47100E6741D /* LGSideMenuController+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = D958DFA325D3F47100E6741D /* LGSideMenuController+States.swift */; };
 		D97928DB25DD38FB000BCD88 /* LGSideMenuWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97928DA25DD38FB000BCD88 /* LGSideMenuWrapperView.swift */; };
 		D97928DF25DD67F6000BCD88 /* LGSideMenuController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97928DE25DD67F6000BCD88 /* LGSideMenuController+Helpers.swift */; };
+		D9E57C0D25E6EA2400E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E57C0C25E6EA2400E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */; };
 		EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE7950F1D45B7A1002930CA /* AppDelegate.swift */; };
 		EDE795171D45B7A1002930CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE795161D45B7A1002930CA /* Assets.xcassets */; };
 		EDE795291D45B879002930CA /* ChooseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE795281D45B879002930CA /* ChooseTableViewController.swift */; };
@@ -83,6 +84,7 @@
 		D958DFA325D3F47100E6741D /* LGSideMenuController+States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+States.swift"; sourceTree = "<group>"; };
 		D97928DA25DD38FB000BCD88 /* LGSideMenuWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSideMenuWrapperView.swift; sourceTree = "<group>"; };
 		D97928DE25DD67F6000BCD88 /* LGSideMenuController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+Helpers.swift"; sourceTree = "<group>"; };
+		D9E57C0C25E6EA2400E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingUserInteraction.swift"; sourceTree = "<group>"; };
 		EDE7950C1D45B7A1002930CA /* LGSideMenuControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LGSideMenuControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE7950F1D45B7A1002930CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDE795161D45B7A1002930CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D9174B3F25D1717000DB01B5 /* LGSideMenuController+ValidatingViewsInit.swift */,
+				D9E57C0C25E6EA2400E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */,
 				D9174B4325D171AD00DB01B5 /* LGSideMenuController+ValidatingViewsHierarchy.swift */,
 				D9174B4625D171ED00DB01B5 /* LGSideMenuController+ValidatingViewsFrames.swift */,
 				D9174B4925D1720400DB01B5 /* LGSideMenuController+ValidatingViewsStyles.swift */,
@@ -352,6 +355,7 @@
 				D9174B4025D1717000DB01B5 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */,
 				EDE7953A1D45BACB002930CA /* RootNavigationController.swift in Sources */,
 				EDE795381D45BAB4002930CA /* LeftViewController.swift in Sources */,
+				D9E57C0D25E6EA2400E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */,
 				D9174B6A25D180A000DB01B5 /* LGSideMenuController+LeftViewActions.swift in Sources */,
 				D9174B6425D17F6B00DB01B5 /* LGSideMenuController+Rotating.swift in Sources */,
 				D935343025E2430300F79637 /* LGSideMenuShadowView.swift in Sources */,

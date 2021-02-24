@@ -109,9 +109,6 @@ extension LGSideMenuController {
 
         self.state = .leftViewWillShow
 
-        self.rootViewWrapperView?.isUserInteractionEnabled = false
-        self.rightViewWrapperView?.isUserInteractionEnabled = false
-
         if updateStatusBar {
             LGSideMenuHelper.statusBarAppearanceUpdate(viewController: self, duration: self.statusBarAnimationDuration, animations: { [weak self] in
                 guard let self = self else { return }
@@ -119,6 +116,8 @@ extension LGSideMenuController {
                 self.disableRootViewControllerLayouting()
             })
         }
+
+        self.validateViewsUserInteraction()
 
         self.validateLeftViewsFrames()
         self.validateLeftViewsTransforms(percentage: 0.0)
@@ -138,28 +137,30 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
-                self.disableRootViewLayouting()
-                self.disableRootViewControllerLayouting()
+            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration,
+                                     timingFunction: self.leftViewAnimationTimingFunction,
+                                     animations: {
+                                        self.disableRootViewLayouting()
+                                        self.disableRootViewControllerLayouting()
 
-                self.validateRootViewsTransforms(percentage: 1.0)
-                self.validateLeftViewsTransforms(percentage: 1.0)
-                self.validateRightViewsTransforms(percentage: 1.0)
+                                        self.validateRootViewsTransforms(percentage: 1.0)
+                                        self.validateLeftViewsTransforms(percentage: 1.0)
+                                        self.validateRightViewsTransforms(percentage: 1.0)
 
-                self.setNeedsStatusBarAppearanceUpdate()
+                                        self.setNeedsStatusBarAppearanceUpdate()
 
-                self.showAnimationsForLeftViewCallbacks()
-            },
-            completion: { [weak self] (finished: Bool) in
-                guard let self = self else { return }
+                                        self.showAnimationsForLeftViewCallbacks()
+                                     },
+                                     completion: { [weak self] in
+                                        guard let self = self else { return }
 
-                self.showLeftViewDone()
-                self.isAnimating = false
+                                        self.showLeftViewDone()
+                                        self.isAnimating = false
 
-                if let completion = completion {
-                    completion()
-                }
-            })
+                                        if let completion = completion {
+                                            completion()
+                                        }
+                                     })
         }
         else {
             self.disableRootViewLayouting()
@@ -186,6 +187,7 @@ extension LGSideMenuController {
 
         self.state = .leftViewIsShowing
 
+        self.validateViewsUserInteraction()
         self.validateViewsVisibility()
 
         self.didShowLeftViewCallbacks()
@@ -210,6 +212,7 @@ extension LGSideMenuController {
 
         self.state = .leftViewWillHide
 
+        self.validateViewsUserInteraction()
         self.validateViewsVisibility()
 
         self.willHideLeftViewCallbacks()
@@ -221,28 +224,30 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration, animations: {
-                self.enableRootViewLayouting()
-                self.enableRootViewControllerLayouting()
+            LGSideMenuHelper.animate(duration: duration ?? self.leftViewAnimationDuration,
+                                     timingFunction: self.leftViewAnimationTimingFunction,
+                                     animations: {
+                                        self.enableRootViewLayouting()
+                                        self.enableRootViewControllerLayouting()
 
-                self.validateRootViewsTransforms(percentage: 0.0)
-                self.validateLeftViewsTransforms(percentage: 0.0)
-                self.validateRightViewsTransforms(percentage: 0.0)
+                                        self.validateRootViewsTransforms(percentage: 0.0)
+                                        self.validateLeftViewsTransforms(percentage: 0.0)
+                                        self.validateRightViewsTransforms(percentage: 0.0)
 
-                self.setNeedsStatusBarAppearanceUpdate()
+                                        self.setNeedsStatusBarAppearanceUpdate()
 
-                self.hideAnimationsForLeftViewCallbacks()
-            },
-            completion: { [weak self] (finished: Bool) in
-                guard let self = self else { return }
+                                        self.hideAnimationsForLeftViewCallbacks()
+                                     },
+                                     completion: { [weak self] in
+                                        guard let self = self else { return }
 
-                self.hideLeftViewDone(updateStatusBar: false)
-                self.isAnimating = false
+                                        self.hideLeftViewDone(updateStatusBar: false)
+                                        self.isAnimating = false
 
-                if let completion = completion {
-                    completion()
-                }
-            })
+                                        if let completion = completion {
+                                            completion()
+                                        }
+                                     })
         }
         else {
             self.enableRootViewLayouting()
@@ -281,10 +286,8 @@ extension LGSideMenuController {
 
         self.state = .rootViewIsShowing
 
+        self.validateViewsUserInteraction()
         self.validateViewsVisibility()
-
-        self.rootViewWrapperView?.isUserInteractionEnabled = true
-        self.rightViewWrapperView?.isUserInteractionEnabled = true
 
         self.didHideLeftViewCallbacks()
     }

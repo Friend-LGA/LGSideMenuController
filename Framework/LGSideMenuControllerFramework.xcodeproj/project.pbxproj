@@ -32,6 +32,7 @@
 		D9201F8925DF016000E49A71 /* LGSideMenuWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */; };
 		D935344025E25DC800F79637 /* LGSideMenuBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343E25E25DC800F79637 /* LGSideMenuBackgroundView.swift */; };
 		D935344125E25DC800F79637 /* LGSideMenuShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343F25E25DC800F79637 /* LGSideMenuShadowView.swift */; };
+		D9E57C1725E6FBCC00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E57C1625E6FBCC00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuWrapperView.swift; sourceTree = "<group>"; };
 		D935343E25E25DC800F79637 /* LGSideMenuBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundView.swift; sourceTree = "<group>"; };
 		D935343F25E25DC800F79637 /* LGSideMenuShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuShadowView.swift; sourceTree = "<group>"; };
+		D9E57C1625E6FBCC00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+ValidatingUserInteraction.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D9201F6B25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsInit.swift */,
+				D9E57C1625E6FBCC00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift */,
 				D9201F6625DF015F00E49A71 /* LGSideMenuController+ValidatingViewsHierarchy.swift */,
 				D9201F6A25DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift */,
 				D9201F6725DF015F00E49A71 /* LGSideMenuController+ValidatingViewsStyles.swift */,
@@ -250,6 +253,7 @@
 				D9201F8825DF016000E49A71 /* LGSideMenuController.swift in Sources */,
 				D9201F7425DF015F00E49A71 /* LGSideMenuSegue.swift in Sources */,
 				D9201F7625DF015F00E49A71 /* LGSideMenuController+Callbacks.swift in Sources */,
+				D9E57C1725E6FBCC00E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */,
 				D9201F8525DF016000E49A71 /* LGSideMenuController+StatusBarHandler.swift in Sources */,
 				D9201F8225DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift in Sources */,
 				D935344125E25DC800F79637 /* LGSideMenuShadowView.swift in Sources */,
