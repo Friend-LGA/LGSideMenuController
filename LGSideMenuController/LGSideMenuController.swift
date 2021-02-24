@@ -418,8 +418,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     @IBInspectable open var leftViewAnimationTimingFunction = CAMediaTimingFunction(controlPoints: 0.33333, 0.66667, 0.33333, 1.0)
     @IBInspectable open var rightViewAnimationTimingFunction = CAMediaTimingFunction(controlPoints: 0.33333, 0.66667, 0.33333, 1.0)
 
-    // TODO: Add custom timing function
-
     @IBInspectable open var isLeftViewEnabled: Bool = true
     @IBInspectable open var isRightViewEnabled: Bool = true
 
