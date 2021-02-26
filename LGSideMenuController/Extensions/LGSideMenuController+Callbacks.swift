@@ -32,6 +32,22 @@ import UIKit
 
 internal extension LGSideMenuController {
 
+    // MARK: - Root View
+
+    func didTransformRootViewCallbacks(percentage: CGFloat) {
+        NotificationCenter.default.post(name: Notification.didTransformRootView,
+                                        object: self,
+                                        userInfo: [Notification.Key.percentage: percentage])
+
+        if let callback = self.didTransformRootView {
+            callback(self, percentage)
+        }
+
+        if let delegate = self.delegate {
+            delegate.didTransformRootView(sideMenuController: self, percentage: percentage)
+        }
+    }
+
     // MARK: - Left View
 
     func willShowLeftViewCallbacks() {
@@ -82,6 +98,8 @@ internal extension LGSideMenuController {
         }
     }
 
+    // TODO: Pass actual duration
+
     func showAnimationsForLeftViewCallbacks() {
         NotificationCenter.default.post(name: Notification.showAnimationsForLeftView,
                                         object: self,
@@ -107,6 +125,20 @@ internal extension LGSideMenuController {
 
         if let delegate = self.delegate {
             delegate.hideAnimationsForLeftView(sideMenuController: self, duration: self.leftViewAnimationDuration)
+        }
+    }
+
+    func didTransformLeftViewCallbacks(percentage: CGFloat) {
+        NotificationCenter.default.post(name: Notification.didTransformLeftView,
+                                        object: self,
+                                        userInfo: [Notification.Key.percentage: percentage])
+
+        if let callback = self.didTransformLeftView {
+            callback(self, percentage)
+        }
+
+        if let delegate = self.delegate {
+            delegate.didTransformLeftView(sideMenuController: self, percentage: percentage)
         }
     }
 
@@ -160,6 +192,8 @@ internal extension LGSideMenuController {
         }
     }
 
+    // TODO: Pass actual duration
+
     func showAnimationsForRightViewCallbacks() {
         NotificationCenter.default.post(name: Notification.showAnimationsForRightView,
                                         object: self,
@@ -185,6 +219,20 @@ internal extension LGSideMenuController {
 
         if let delegate = self.delegate {
             delegate.hideAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
+        }
+    }
+
+    func didTransformRightViewCallbacks(percentage: CGFloat) {
+        NotificationCenter.default.post(name: Notification.didTransformRightView,
+                                        object: self,
+                                        userInfo: [Notification.Key.percentage: percentage])
+
+        if let callback = self.didTransformRightView {
+            callback(self, percentage)
+        }
+
+        if let delegate = self.delegate {
+            delegate.didTransformRightView(sideMenuController: self, percentage: percentage)
         }
     }
 

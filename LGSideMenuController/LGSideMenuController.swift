@@ -36,6 +36,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     public typealias Completion = () -> Void
     public typealias Callback = (LGSideMenuController) -> Void
     public typealias AnimationsCallback = (LGSideMenuController, TimeInterval) -> Void
+    public typealias TransformCallback = (LGSideMenuController, CGFloat) -> Void
 
     /// Notification names and keys to observe behaviour of LGSideMenuController
     public struct Notification {
@@ -52,19 +53,46 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public static let willHideRightView = NSNotification.Name("LGSideMenuController.Notification.willHideRightView")
         public static let didHideRightView  = NSNotification.Name("LGSideMenuController.Notification.didHideRightView")
 
-        /// You can use this notification to add some custom animations
+        /// This notification is posted inside animation block for showing left view.
+        /// You can use it to add some custom animations.
         public static let showAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForLeftView")
-        /// You can use this notification to add some custom animations
+
+        /// This notification is posted inside animation block for hiding left view.
+        /// You can use it to add some custom animations
         public static let hideAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForLeftView")
 
+        /// This notification is posted inside animation block for showing right view.
         /// You can use this notification to add some custom animations
         public static let showAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForRightView")
+
+        /// This notification is posted inside animation block for hiding right view.
         /// You can use this notification to add some custom animations
         public static let hideAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForRightView")
+
+        /// This notification is posted on every transformation of root view during showing/hiding of side views
+        /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+        /// 0.0 - view is fully shown
+        /// 1.0 - view is fully hidden
+        public static let didTransformRootView = NSNotification.Name("LGSideMenuController.Notification.didTransformRootView")
+
+        /// This notification is posted on every transformation of left view during showing/hiding
+        /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+        /// 0.0 - view is fully hidden
+        /// 1.0 - view is fully shown
+        public static let didTransformLeftView = NSNotification.Name("LGSideMenuController.Notification.didTransformLeftView")
+
+        /// This notification is posted on every transformation of right view during showing/hiding
+        /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+        /// 0.0 - view is fully hidden
+        /// 1.0 - view is fully shown
+        public static let didTransformRightView  = NSNotification.Name("LGSideMenuController.Notification.didTransformRightView")
 
         public struct Key {
             /// Key for userInfo dictionary which represents duration of the animation
             static let duration = "duration"
+
+            /// Key for userInfo dictionary which represents current transformation percentage
+            static let percentage = "percentage"
         }
 
     }
@@ -1323,15 +1351,39 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open var willHideRightView: Callback?
     open var didHideRightView: Callback?
 
-    /// You can use this callback to add some custom animations
+    /// This callback is executed inside animation block for showing left view.
+    /// You can use it to add some custom animations.
     open var showAnimationsForLeftView: AnimationsCallback?
-    /// You can use this callback to add some custom animations
+
+    /// This callback is executed inside animation block for hiding left view.
+    /// You can use it to add some custom animations
     open var hideAnimationsForLeftView: AnimationsCallback?
 
-    /// You can use this callback to add some custom animations
+    /// This callback is executed inside animation block for showing right view.
+    /// You can use this notification to add some custom animations
     open var showAnimationsForRightView: AnimationsCallback?
-    /// You can use this callback to add some custom animations
+
+    /// This callback is executed inside animation block for hiding right view.
+    /// You can use this notification to add some custom animations
     open var hideAnimationsForRightView: AnimationsCallback?
+
+    /// This callback is executed on every transformation of root view during showing/hiding of side views
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully shown
+    /// 1.0 - view is fully hidden
+    open var didTransformRootView: TransformCallback?
+
+    /// This callback is executed on every transformation of left view during showing/hiding
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully hidden
+    /// 1.0 - view is fully shown
+    open var didTransformLeftView: TransformCallback?
+
+    /// This callback is executed on every transformation of right view during showing/hiding
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully hidden
+    /// 1.0 - view is fully shown
+    open var didTransformRightView: TransformCallback?
 
     // MARK: - Delegate
 

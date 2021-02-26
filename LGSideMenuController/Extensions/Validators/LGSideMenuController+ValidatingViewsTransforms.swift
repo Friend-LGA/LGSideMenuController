@@ -56,8 +56,6 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rootViewCoverView = self.rootViewCoverView else { return }
 
-        // TODO: Add callback
-
         // TODO: Add option to change alpha of the view itself
 
         let isLeftViewMoving = self.leftView != nil && self.isLeftViewVisible
@@ -110,6 +108,8 @@ internal extension LGSideMenuController {
         let transform = transformScale.concatenating(transfromTranslate)
 
         rootContainerView.transform = transform
+
+        self.didTransformRootViewCallbacks(percentage: percentage)
     }
 
     func validateLeftViewsTransforms(percentage: CGFloat) {
@@ -120,8 +120,6 @@ internal extension LGSideMenuController {
               let leftViewStyleView = self.leftViewEffectView,
               let leftViewWrapperView = self.leftViewWrapperView,
               let leftViewCoverView = self.leftViewCoverView else { return }
-
-        // TODO: Add callback
 
         // TODO: Add option to change alpha of the view itself
 
@@ -185,6 +183,8 @@ internal extension LGSideMenuController {
         leftViewBackgroundView.transform = backgroundViewTransform
         leftViewStyleView.transform = wrapperViewTransform
         leftViewWrapperView.transform = wrapperViewTransform
+
+        self.didTransformLeftViewCallbacks(percentage: percentage)
     }
 
     func validateRightViewsTransforms(percentage: CGFloat) {
@@ -195,8 +195,6 @@ internal extension LGSideMenuController {
               let rightViewStyleView = self.rightViewEffectView,
               let rightViewWrapperView = self.rightViewWrapperView,
               let rightViewCoverView = self.rightViewCoverView else { return }
-
-        // TODO: Add callback
 
         // TODO: Add option to change alpha of the view itself
 
@@ -260,6 +258,8 @@ internal extension LGSideMenuController {
         rightViewBackgroundView.transform = backgroundViewTransform
         rightViewStyleView.transform = wrapperViewTransform
         rightViewWrapperView.transform = wrapperViewTransform
+
+        self.didTransformRightViewCallbacks(percentage: percentage)
     }
     
 }

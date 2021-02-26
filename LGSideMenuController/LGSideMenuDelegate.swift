@@ -44,16 +44,41 @@ public protocol LGSideMenuDelegate {
     func willHideRightView(sideMenuController: LGSideMenuController)
     func didHideRightView(sideMenuController: LGSideMenuController)
 
-    /// You can use this method to add some custom animations
+    // TODO: Add timing function to animation methods
+
+    /// This method is executed inside animation block for showing left view.
+    /// You can use it to add some custom animations.
     func showAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
-    /// You can use this method to add some custom animations
+
+    /// This method is executed inside animation block for hiding left view.
+    /// You can use it to add some custom animations
     func hideAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
 
-    /// You can use this method to add some custom animations
+    /// This method is executed inside animation block for showing right view.
+    /// You can use this notification to add some custom animations
     func showAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
-    /// You can use this method to add some custom animations
+
+    /// This method is executed inside animation block for hiding right view.
+    /// You can use this notification to add some custom animations
     func hideAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
 
+    /// This method is executed on every transformation of root view during showing/hiding of side views
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully shown
+    /// 1.0 - view is fully hidden
+    func didTransformRootView(sideMenuController: LGSideMenuController, percentage: CGFloat)
+
+    /// This method is executed on every transformation of left view during showing/hiding
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully hidden
+    /// 1.0 - view is fully shown
+    func didTransformLeftView(sideMenuController: LGSideMenuController, percentage: CGFloat)
+
+    /// This method is executed on every transformation of right view during showing/hiding
+    /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
+    /// 0.0 - view is fully hidden
+    /// 1.0 - view is fully shown
+    func didTransformRightView(sideMenuController: LGSideMenuController, percentage: CGFloat)
 }
 
 // As swift doesn't support optional methods,
@@ -77,5 +102,9 @@ extension LGSideMenuDelegate {
 
     func showAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
     func hideAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
+
+    func rootViewIsTransforming(sideMenuController: LGSideMenuController, percentage: CGFloat) {}
+    func leftViewIsTransforming(sideMenuController: LGSideMenuController, percentage: CGFloat) {}
+    func rightViewIsTransforming(sideMenuController: LGSideMenuController, percentage: CGFloat) {}
 
 }
