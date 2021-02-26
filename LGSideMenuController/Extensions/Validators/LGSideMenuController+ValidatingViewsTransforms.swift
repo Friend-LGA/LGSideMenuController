@@ -76,7 +76,7 @@ internal extension LGSideMenuController {
         let scale: CGFloat = {
             // If any of side views is visible, we can't change the scale of root view
             if !self.leftViewPresentationStyle.shouldRootViewScale ||
-                self.isSideViewAlwaysVisibleForCurrentOrientation {
+                self.isSideViewAlwaysVisible {
                 return 1.0
             }
             var rootViewScale: CGFloat = 1.0
@@ -126,21 +126,21 @@ internal extension LGSideMenuController {
         leftContainerView.transform = {
             var translateX: CGFloat = 0.0
             if self.rightView != nil && self.isRightViewVisible {
-                if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+                if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisible {
                     translateX -= self.leftViewWidthTotal
                 }
                 if self.isRootViewShouldMoveForRightView {
                     translateX -= self.rootViewOffsetTotalForRightView * percentage
                 }
             }
-            else if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            else if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisible {
                 translateX -= self.leftViewWidthTotal * (1.0 - percentage)
             }
             return CGAffineTransform(translationX: translateX, y: 0.0)
         }()
 
         leftViewShadowView.alpha = {
-            if self.leftViewPresentationStyle.isAbove && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if self.leftViewPresentationStyle.isAbove && !self.isLeftViewAlwaysVisible {
                 let pointsPerPercent = self.leftViewWidthTotal / 100.0
                 let percentsNeeded = pointsNeededForShadow / pointsPerPercent / 100.0
                 return percentage / percentsNeeded
@@ -149,7 +149,7 @@ internal extension LGSideMenuController {
         }()
 
         leftViewCoverView.alpha = {
-            if !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if !self.isLeftViewAlwaysVisible {
                 return self.leftViewCoverAlpha - (self.leftViewCoverAlpha * percentage)
             }
             else if self.rightView != nil && self.isRightViewVisible {
@@ -159,7 +159,7 @@ internal extension LGSideMenuController {
         }()
 
         let backgroundViewTransform: CGAffineTransform = {
-            if !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if !self.isLeftViewAlwaysVisible {
                 let scale = self.leftViewBackgroundImageFinalScale + ((self.leftViewBackgroundImageInitialScale - self.leftViewBackgroundImageFinalScale) * (1.0 - percentage))
                 return CGAffineTransform(scaleX: scale, y: scale)
             }
@@ -167,7 +167,7 @@ internal extension LGSideMenuController {
         }()
 
         let wrapperViewTransform: CGAffineTransform = {
-            if !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if !self.isLeftViewAlwaysVisible {
                 let scale = 1.0 + (self.leftViewInitialScale - 1.0) * (1.0 - percentage)
                 let offset = self.leftViewInitialOffsetX * (1.0 - percentage)
 
@@ -201,21 +201,21 @@ internal extension LGSideMenuController {
         rightContainerView.transform = {
             var translateX: CGFloat = 0.0
             if self.leftView != nil && self.isLeftViewVisible {
-                if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+                if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisible {
                     translateX += self.rightViewWidthTotal
                 }
                 if self.isRootViewShouldMoveForLeftView {
                     translateX += self.rootViewOffsetTotalForLeftView * percentage
                 }
             }
-            else if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            else if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisible {
                 translateX += self.rightViewWidthTotal * (1.0 - percentage)
             }
             return CGAffineTransform(translationX: translateX, y: 0.0)
         }()
 
         rightViewShadowView.alpha = {
-            if self.rightViewPresentationStyle.isAbove && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            if self.rightViewPresentationStyle.isAbove && !self.isRightViewAlwaysVisible {
                 let pointsPerPercent = self.rightViewWidthTotal / 100.0
                 let percentsNeeded = pointsNeededForShadow / pointsPerPercent / 100.0
                 return percentage / percentsNeeded
@@ -224,7 +224,7 @@ internal extension LGSideMenuController {
         }()
 
         rightViewCoverView.alpha = {
-            if !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            if !self.isRightViewAlwaysVisible {
                 return self.rightViewCoverAlpha - (self.rightViewCoverAlpha * percentage)
             }
             else if self.leftView != nil && self.isLeftViewVisible {
@@ -234,7 +234,7 @@ internal extension LGSideMenuController {
         }()
 
         let backgroundViewTransform: CGAffineTransform = {
-            if !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            if !self.isRightViewAlwaysVisible {
                 let scale = self.rightViewBackgroundImageFinalScale + ((self.rightViewBackgroundImageInitialScale - self.rightViewBackgroundImageFinalScale) * (1.0 - percentage))
                 return CGAffineTransform(scaleX: scale, y: scale)
             }
@@ -242,7 +242,7 @@ internal extension LGSideMenuController {
         }()
 
         let wrapperViewTransform: CGAffineTransform = {
-            if !self.isRightViewAlwaysVisibleForCurrentOrientation {
+            if !self.isRightViewAlwaysVisible {
                 let scale = 1.0 + (self.rightViewInitialScale - 1.0) * (1.0 - percentage)
                 let offset = self.rightViewInitialOffsetX * (1.0 - percentage)
 

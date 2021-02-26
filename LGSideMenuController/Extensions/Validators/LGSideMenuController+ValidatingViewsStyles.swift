@@ -70,11 +70,11 @@ internal extension LGSideMenuController {
         rootViewShadowView.setNeedsDisplay()
         rootViewBackgroundView.setNeedsDisplay()
 
-        if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisible {
             rootViewCoverView.backgroundColor = self.rootViewCoverColorForLeftView
             rootViewCoverView.effect = self.rootViewCoverBlurEffectForLeftView
         }
-        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisibleForCurrentOrientation {
+        else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisible {
             rootViewCoverView.backgroundColor = self.rootViewCoverColorForRightView
             rootViewCoverView.effect = self.rootViewCoverBlurEffectForRightView
         }
@@ -105,7 +105,7 @@ internal extension LGSideMenuController {
 
         leftViewStyleView.effect = self.leftViewBackgroundBlurEffect
 
-        if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+        if self.isLeftViewAlwaysVisible {
             leftViewCoverView.backgroundColor = self.leftViewCoverColorWhenAlwaysVisible
             leftViewCoverView.effect = self.leftViewCoverBlurEffectWhenAlwaysVisible
         }
@@ -136,7 +136,7 @@ internal extension LGSideMenuController {
 
         rightViewStyleView.effect = self.rightViewBackgroundBlurEffect
 
-        if self.isRightViewAlwaysVisibleForCurrentOrientation {
+        if self.isRightViewAlwaysVisible {
             rightViewCoverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
             rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
         }

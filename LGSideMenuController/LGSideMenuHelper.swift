@@ -73,6 +73,14 @@ internal struct LGSideMenuHelper {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
 
+    static func isPortrait() -> Bool {
+        return UIApplication.shared.statusBarOrientation.isPortrait
+    }
+
+    static func isLandscape() -> Bool {
+        return UIApplication.shared.statusBarOrientation.isLandscape
+    }
+
     static func setSideMenuController(_ sideMenuController: LGSideMenuController?, to viewController: UIViewController) {
         objc_setAssociatedObject(viewController, &Keys.sideMenuController, sideMenuController, .OBJC_ASSOCIATION_ASSIGN)
     }

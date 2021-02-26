@@ -113,13 +113,24 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public static let phoneLandscape = AlwaysVisibleOptions(rawValue: 1 << 2)
         public static let phonePortrait  = AlwaysVisibleOptions(rawValue: 1 << 3)
 
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let padRegular   = AlwaysVisibleOptions(rawValue: 1 << 4)
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let padCompact   = AlwaysVisibleOptions(rawValue: 1 << 5)
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let phoneRegular = AlwaysVisibleOptions(rawValue: 1 << 6)
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let phoneCompact = AlwaysVisibleOptions(rawValue: 1 << 7)
+
         public static let landscape: AlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
         public static let portrait: AlwaysVisibleOptions  = [.padPortrait, .phonePortrait]
-        public static let pad: AlwaysVisibleOptions       = [.padLandscape, .padPortrait]
-        public static let phone: AlwaysVisibleOptions     = [.phoneLandscape, .phonePortrait]
-        public static let all: AlwaysVisibleOptions       = [.padLandscape, .padPortrait, .phoneLandscape, .phonePortrait]
-
-        // TODO: Add options for different trait collections
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let regular: AlwaysVisibleOptions   = [.padRegular, .phoneRegular]
+        /// Based on horizontalSizeClass of current traitCollection
+        public static let compact: AlwaysVisibleOptions   = [.padCompact, .phoneCompact]
+        public static let pad: AlwaysVisibleOptions       = [.padLandscape, .padPortrait, .padRegular, .padCompact]
+        public static let phone: AlwaysVisibleOptions     = [.phoneLandscape, .phonePortrait, .phoneRegular, .phoneCompact]
+        public static let all: AlwaysVisibleOptions       = [.pad, .phone]
 
         public init(rawValue: Int = 0) {
             self.rawValue = rawValue
@@ -129,22 +140,36 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return self == []
         }
 
-        public var isAlwaysVisibleForCurrentOrientation: Bool {
-            return isAlwaysVisibleForOrientation(UIApplication.shared.statusBarOrientation)
-        }
-
-        public func isAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-            return contains(.all) ||
-                (orientation.isPortrait && contains(.portrait)) ||
-                (orientation.isLandscape && contains(.landscape)) ||
-                (LGSideMenuHelper.isPhone() &&
-                    (contains(.phone) ||
-                        (orientation.isPortrait && contains(.phonePortrait)) ||
-                        (orientation.isLandscape && contains(.phoneLandscape)))) ||
-                (LGSideMenuHelper.isPad() &&
-                    (contains(.pad) ||
-                        (orientation.isPortrait && contains(.padPortrait)) ||
-                        (orientation.isLandscape && contains(.padLandscape))))
+        public func isCurrentlyAlwaysVisible(sizeClass: UIUserInterfaceSizeClass) -> Bool {
+            if LGSideMenuHelper.isPad() {
+                if LGSideMenuHelper.isLandscape() && contains(.padLandscape) {
+                    return true
+                }
+                if LGSideMenuHelper.isPortrait() && contains(.padPortrait) {
+                    return true
+                }
+                if sizeClass == .regular && contains(.padRegular) {
+                    return true
+                }
+                if sizeClass == .compact && contains(.padCompact) {
+                    return true
+                }
+            }
+            if LGSideMenuHelper.isPhone() {
+                if LGSideMenuHelper.isLandscape() && contains(.phoneLandscape) {
+                    return true
+                }
+                if LGSideMenuHelper.isPortrait() && contains(.phonePortrait) {
+                    return true
+                }
+                if sizeClass == .regular && contains(.phoneRegular) {
+                    return true
+                }
+                if sizeClass == .compact && contains(.phoneCompact) {
+                    return true
+                }
+            }
+            return false
         }
     }
 

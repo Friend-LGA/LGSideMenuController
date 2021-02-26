@@ -118,45 +118,28 @@ extension LGSideMenuController {
     }
 
     /// Is left view suppose to be "always visible" for current orientation
-    open var isLeftViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
+    open var isLeftViewAlwaysVisible: Bool {
+        return self.leftViewAlwaysVisibleOptions.isCurrentlyAlwaysVisible(sizeClass: self.traitCollection.horizontalSizeClass)
     }
 
     /// Is right view suppose to be "always visible" for current orientation
-    open var isRightViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForCurrentOrientation
+    open var isRightViewAlwaysVisible: Bool {
+        return self.rightViewAlwaysVisibleOptions.isCurrentlyAlwaysVisible(sizeClass: self.traitCollection.horizontalSizeClass)
     }
 
     /// Is any of side views suppose to be "always visible" for current orientation
-    open var isSideViewAlwaysVisibleForCurrentOrientation: Bool {
-        return self.isLeftViewAlwaysVisibleForCurrentOrientation ||
-            self.isRightViewAlwaysVisibleForCurrentOrientation
-    }
-
-    /// Is left view suppose to be "always visible" for given orientation
-    open func isLeftViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        return self.leftViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
-    }
-
-    /// Is right view suppose to be "always visible" for given orientation
-    open func isRightViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        return self.rightViewAlwaysVisibleOptions.isAlwaysVisibleForOrientation(orientation)
-    }
-
-    /// Is any of side views suppose to be "always visible" for given orientation
-    open func isSideViewAlwaysVisibleForOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        return self.isLeftViewAlwaysVisibleForOrientation(orientation) ||
-            self.isRightViewAlwaysVisibleForOrientation(orientation)
+    open var isSideViewAlwaysVisible: Bool {
+        return self.isLeftViewAlwaysVisible || self.isRightViewAlwaysVisible
     }
 
     /// Is left view showing or always showing or will show or will hide right now
     open var isLeftViewVisibleToUser: Bool {
-        return self.isLeftViewVisible || self.isLeftViewAlwaysVisibleForCurrentOrientation
+        return self.isLeftViewVisible || self.isLeftViewAlwaysVisible
     }
 
     /// Is right view showing or always showing or will show or will hide right now
     open var isRightViewVisibleToUser: Bool {
-        return self.isRightViewVisible || self.isRightViewAlwaysVisibleForCurrentOrientation
+        return self.isRightViewVisible || self.isRightViewAlwaysVisible
     }
 
 }

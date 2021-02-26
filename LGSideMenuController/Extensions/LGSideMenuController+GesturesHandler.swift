@@ -40,8 +40,8 @@ extension LGSideMenuController {
               self.leftView != nil || self.rightView != nil else { return false }
         // TODO: Make animations interraptable with this gesture
 
-        let isLeftViewActive = self.leftView != nil && self.isLeftViewEnabled && !self.isLeftViewAlwaysVisibleForCurrentOrientation
-        let isRightViewActive = self.rightView != nil && self.isRightViewEnabled && !self.isRightViewAlwaysVisibleForCurrentOrientation
+        let isLeftViewActive = self.leftView != nil && self.isLeftViewEnabled && !self.isLeftViewAlwaysVisible
+        let isRightViewActive = self.rightView != nil && self.isRightViewEnabled && !self.isRightViewAlwaysVisible
 
         if gesture == self.tapGesture {
             guard !self.isRootViewShowing,

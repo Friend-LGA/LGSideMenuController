@@ -46,13 +46,13 @@ internal extension LGSideMenuController {
     func validateLeftViewsUserInteraction() {
         guard let leftViewWrapperView = self.leftViewWrapperView else { return }
         leftViewWrapperView.isUserInteractionEnabled =
-            (self.isLeftViewShowing || self.isLeftViewAlwaysVisibleForCurrentOrientation) && self.isRightViewHidden
+            (self.isLeftViewShowing || self.isLeftViewAlwaysVisible) && self.isRightViewHidden
     }
 
     func validateRightViewsUserInteraction() {
         guard let rightViewWrapperView = self.rightViewWrapperView else { return }
         rightViewWrapperView.isUserInteractionEnabled =
-            (self.isRightViewShowing || self.isRightViewAlwaysVisibleForCurrentOrientation) && self.isLeftViewHidden
+            (self.isRightViewShowing || self.isRightViewAlwaysVisible) && self.isLeftViewHidden
     }
 
 }

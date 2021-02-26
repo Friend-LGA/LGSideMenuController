@@ -53,13 +53,13 @@ extension LGSideMenuController {
         self.cancelLeftViewAnimations()
         self.cancelRightViewAnimations()
 
-        if (self.leftView != nil && self.isLeftViewAlwaysVisibleForCurrentOrientation) ||
-            (self.rightView != nil && self.isRightViewAlwaysVisibleForCurrentOrientation) {
+        if (self.leftView != nil && self.isLeftViewAlwaysVisible) ||
+            (self.rightView != nil && self.isRightViewAlwaysVisible) {
             self.shouldUpdateVisibility = false
         }
 
         if self.state == .leftViewWillShow {
-            if self.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if self.isLeftViewAlwaysVisible {
                 self.showLeftViewDone()
             }
         }
@@ -68,7 +68,7 @@ extension LGSideMenuController {
         }
 
         if self.state == .rightViewWillShow {
-            if self.isRightViewAlwaysVisibleForCurrentOrientation {
+            if self.isRightViewAlwaysVisible {
                 self.showRightViewDone()
             }
         }
@@ -79,12 +79,12 @@ extension LGSideMenuController {
         coordinator.animate(alongsideTransition: { [weak self] (context: UIViewControllerTransitionCoordinatorContext) in
             guard let self = self else { return }
 
-            if self.isLeftViewAlwaysVisibleForCurrentOrientation && !self.isLeftViewHidden {
+            if self.isLeftViewAlwaysVisible && !self.isLeftViewHidden {
                 self.hideLeftViewPrepare()
                 self.hideLeftViewActions(animated: true, duration: context.transitionDuration)
             }
 
-            if self.isRightViewAlwaysVisibleForCurrentOrientation && !self.isRightViewHidden {
+            if self.isRightViewAlwaysVisible && !self.isRightViewHidden {
                 self.hideRightViewPrepare()
                 self.hideRightViewActions(animated: true, duration: context.transitionDuration)
             }
