@@ -98,7 +98,7 @@ class RightViewController: UITableViewController {
         guard let sideMenuController = self.sideMenuController else { return }
 
         if indexPath.row == 0 {
-            if sideMenuController.isRightViewAlwaysVisibleForCurrentOrientation {
+            if sideMenuController.isRightViewAlwaysVisible {
                 sideMenuController.showLeftView(animated: true)
             }
             else {

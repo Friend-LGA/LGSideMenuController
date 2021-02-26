@@ -62,7 +62,7 @@ class LeftViewController: UITableViewController {
         guard let sideMenuController = sideMenuController else { return }
         
         if indexPath.row == 0 {
-            if sideMenuController.isLeftViewAlwaysVisibleForCurrentOrientation {
+            if sideMenuController.isLeftViewAlwaysVisible {
                 sideMenuController.showRightView(animated: true, completion: nil)
             }
             else {
