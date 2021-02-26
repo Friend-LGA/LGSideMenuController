@@ -1210,6 +1210,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rootViewScaleForRightView: CGFloat?
 
+    // TODO: Add property for rootView offset
+    // TODO: Add property for backgroundImageView offset
+
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.2
     /// if presentationStyle == .scaleFromLittle then 0.8
