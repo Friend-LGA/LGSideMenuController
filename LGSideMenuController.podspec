@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
     s.platform = :ios, '9.0'
     s.swift_version = '5.0'
     s.source_files = 'LGSideMenuController/**/*.swift'
-    s.framework = 'Foundation', 'CoreGraphics', 'UIKit'
+    s.framework = 'Foundation', 'CoreGraphics', 'QuartzCore', 'UIKit'
 
 end
