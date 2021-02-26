@@ -137,30 +137,31 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: duration ?? self.rightViewAnimationDuration,
-                                     timingFunction: self.rightViewAnimationTimingFunction,
-                                     animations: {
-                                        self.disableRootViewLayouting()
-                                        self.disableRootViewControllerLayouting()
+            let duration = duration ?? self.rightViewAnimationDuration
 
-                                        self.validateRootViewsTransforms(percentage: 1.0)
-                                        self.validateRightViewsTransforms(percentage: 1.0)
-                                        self.validateLeftViewsTransforms(percentage: 1.0)
+            LGSideMenuHelper.animate(duration: duration, timingFunction: self.rightViewAnimationTimingFunction, animations: {
+                self.disableRootViewLayouting()
+                self.disableRootViewControllerLayouting()
 
-                                        self.setNeedsStatusBarAppearanceUpdate()
+                self.validateRootViewsTransforms(percentage: 1.0)
+                self.validateRightViewsTransforms(percentage: 1.0)
+                self.validateLeftViewsTransforms(percentage: 1.0)
 
-                                        self.showAnimationsForRightViewCallbacks()
-                                     },
-                                     completion: { [weak self] in
-                                        guard let self = self else { return }
+                self.setNeedsStatusBarAppearanceUpdate()
 
-                                        self.showRightViewDone()
-                                        self.isAnimating = false
+                self.showAnimationsForRightViewCallbacks(duration: duration,
+                                                         timingFunction: self.rightViewAnimationTimingFunction)
+            },
+            completion: { [weak self] in
+                guard let self = self else { return }
 
-                                        if let completion = completion {
-                                            completion()
-                                        }
-                                     })
+                self.showRightViewDone()
+                self.isAnimating = false
+
+                if let completion = completion {
+                    completion()
+                }
+            })
         }
         else {
             self.disableRootViewLayouting()
@@ -172,7 +173,8 @@ extension LGSideMenuController {
 
             self.setNeedsStatusBarAppearanceUpdate()
 
-            self.showAnimationsForRightViewCallbacks()
+            self.showAnimationsForRightViewCallbacks(duration: 0.0,
+                                                     timingFunction: self.rightViewAnimationTimingFunction)
 
             self.showRightViewDone()
 
@@ -224,30 +226,31 @@ extension LGSideMenuController {
         if (animated) {
             self.isAnimating = true
 
-            LGSideMenuHelper.animate(duration: duration ?? self.rightViewAnimationDuration,
-                                     timingFunction: self.rightViewAnimationTimingFunction,
-                                     animations: {
-                                        self.enableRootViewLayouting()
-                                        self.enableRootViewControllerLayouting()
+            let duration = duration ?? self.rightViewAnimationDuration
 
-                                        self.validateRootViewsTransforms(percentage: 0.0)
-                                        self.validateRightViewsTransforms(percentage: 0.0)
-                                        self.validateLeftViewsTransforms(percentage: 0.0)
+            LGSideMenuHelper.animate(duration: duration, timingFunction: self.rightViewAnimationTimingFunction, animations: {
+                self.enableRootViewLayouting()
+                self.enableRootViewControllerLayouting()
 
-                                        self.setNeedsStatusBarAppearanceUpdate()
+                self.validateRootViewsTransforms(percentage: 0.0)
+                self.validateRightViewsTransforms(percentage: 0.0)
+                self.validateLeftViewsTransforms(percentage: 0.0)
 
-                                        self.hideAnimationsForRightViewCallbacks()
-                                     },
-                                     completion: { [weak self] in
-                                        guard let self = self else { return }
+                self.setNeedsStatusBarAppearanceUpdate()
 
-                                        self.hideRightViewDone(updateStatusBar: false)
-                                        self.isAnimating = false
+                self.hideAnimationsForRightViewCallbacks(duration: duration,
+                                                         timingFunction: self.rightViewAnimationTimingFunction)
+            },
+            completion: { [weak self] in
+                guard let self = self else { return }
 
-                                        if let completion = completion {
-                                            completion()
-                                        }
-                                     })
+                self.hideRightViewDone(updateStatusBar: false)
+                self.isAnimating = false
+
+                if let completion = completion {
+                    completion()
+                }
+            })
         }
         else {
             self.enableRootViewLayouting()
@@ -259,7 +262,8 @@ extension LGSideMenuController {
 
             self.setNeedsStatusBarAppearanceUpdate()
 
-            self.hideAnimationsForRightViewCallbacks()
+            self.hideAnimationsForRightViewCallbacks(duration: 0.0,
+                                                     timingFunction: self.rightViewAnimationTimingFunction)
 
             self.hideRightViewDone(updateStatusBar: false)
 

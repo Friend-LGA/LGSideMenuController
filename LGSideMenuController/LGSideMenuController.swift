@@ -29,13 +29,14 @@
 
 import Foundation
 import CoreGraphics
+import QuartzCore
 import UIKit
 
 open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     public typealias Completion = () -> Void
     public typealias Callback = (LGSideMenuController) -> Void
-    public typealias AnimationsCallback = (LGSideMenuController, TimeInterval) -> Void
+    public typealias AnimationsCallback = (LGSideMenuController, TimeInterval, CAMediaTimingFunction) -> Void
     public typealias TransformCallback = (LGSideMenuController, CGFloat) -> Void
 
     /// Notification names and keys to observe behaviour of LGSideMenuController
@@ -54,19 +55,23 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public static let didHideRightView  = NSNotification.Name("LGSideMenuController.Notification.didHideRightView")
 
         /// This notification is posted inside animation block for showing left view.
-        /// You can use it to add some custom animations.
+        /// You can retrieve duration and timing function of the animation from userInfo dictionary.
+        /// Use it to add some custom animations.
         public static let showAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForLeftView")
 
         /// This notification is posted inside animation block for hiding left view.
-        /// You can use it to add some custom animations
+        /// You can retrieve duration and timing function of the animation from userInfo dictionary.
+        /// Use it to add some custom animations.
         public static let hideAnimationsForLeftView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForLeftView")
 
         /// This notification is posted inside animation block for showing right view.
-        /// You can use this notification to add some custom animations
+        /// You can retrieve duration and timing function of the animation from userInfo dictionary.
+        /// Use it to add some custom animations.
         public static let showAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.showAnimationsForRightView")
 
         /// This notification is posted inside animation block for hiding right view.
-        /// You can use this notification to add some custom animations
+        /// You can retrieve duration and timing function of the animation from userInfo dictionary.
+        /// Use it to add some custom animations.
         public static let hideAnimationsForRightView = NSNotification.Name("LGSideMenuController.Notification.hideAnimationsForRightView")
 
         /// This notification is posted on every transformation of root view during showing/hiding of side views
@@ -90,6 +95,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         public struct Key {
             /// Key for userInfo dictionary which represents duration of the animation
             static let duration = "duration"
+
+            /// Key for userInfo dictionary which represents timing function of the animation
+            static let timigFunction = "timigFunction"
 
             /// Key for userInfo dictionary which represents current transformation percentage
             static let percentage = "percentage"

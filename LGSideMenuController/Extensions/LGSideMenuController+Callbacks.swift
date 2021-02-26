@@ -98,33 +98,37 @@ internal extension LGSideMenuController {
         }
     }
 
-    // TODO: Pass actual duration
-
-    func showAnimationsForLeftViewCallbacks() {
+    func showAnimationsForLeftViewCallbacks(duration: TimeInterval, timingFunction: CAMediaTimingFunction) {
         NotificationCenter.default.post(name: Notification.showAnimationsForLeftView,
                                         object: self,
-                                        userInfo: [Notification.Key.duration: self.leftViewAnimationDuration])
+                                        userInfo: [Notification.Key.duration: duration,
+                                                   Notification.Key.timigFunction: timingFunction])
 
-        if let showAnimationsForLeftView = self.showAnimationsForLeftView {
-            showAnimationsForLeftView(self, self.leftViewAnimationDuration)
+        if let callback = self.showAnimationsForLeftView {
+            callback(self, duration, timingFunction)
         }
 
         if let delegate = self.delegate {
-            delegate.showAnimationsForLeftView(sideMenuController: self, duration: self.leftViewAnimationDuration)
+            delegate.showAnimationsForLeftView(sideMenuController: self,
+                                               duration: duration,
+                                               timingFunction: timingFunction)
         }
     }
 
-    func hideAnimationsForLeftViewCallbacks() {
+    func hideAnimationsForLeftViewCallbacks(duration: TimeInterval, timingFunction: CAMediaTimingFunction) {
         NotificationCenter.default.post(name: Notification.hideAnimationsForLeftView,
                                         object: self,
-                                        userInfo: [Notification.Key.duration: self.leftViewAnimationDuration])
+                                        userInfo: [Notification.Key.duration: duration,
+                                                   Notification.Key.timigFunction: timingFunction])
 
-        if let hideAnimationsForLeftView = self.hideAnimationsForLeftView {
-            hideAnimationsForLeftView(self, self.leftViewAnimationDuration)
+        if let callback = self.hideAnimationsForLeftView {
+            callback(self, duration, timingFunction)
         }
 
         if let delegate = self.delegate {
-            delegate.hideAnimationsForLeftView(sideMenuController: self, duration: self.leftViewAnimationDuration)
+            delegate.hideAnimationsForLeftView(sideMenuController: self,
+                                               duration: duration,
+                                               timingFunction: timingFunction)
         }
     }
 
@@ -192,33 +196,37 @@ internal extension LGSideMenuController {
         }
     }
 
-    // TODO: Pass actual duration
-
-    func showAnimationsForRightViewCallbacks() {
+    func showAnimationsForRightViewCallbacks(duration: TimeInterval, timingFunction: CAMediaTimingFunction) {
         NotificationCenter.default.post(name: Notification.showAnimationsForRightView,
                                         object: self,
-                                        userInfo: [Notification.Key.duration: self.rightViewAnimationDuration])
+                                        userInfo: [Notification.Key.duration: duration,
+                                                   Notification.Key.timigFunction: timingFunction])
 
-        if let showAnimationsForRightView = self.showAnimationsForRightView {
-            showAnimationsForRightView(self, self.rightViewAnimationDuration)
+        if let callback = self.showAnimationsForRightView {
+            callback(self, duration, timingFunction)
         }
 
         if let delegate = self.delegate {
-            delegate.showAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
+            delegate.showAnimationsForRightView(sideMenuController: self,
+                                                duration: duration,
+                                                timingFunction: timingFunction)
         }
     }
 
-    func hideAnimationsForRightViewCallbacks() {
+    func hideAnimationsForRightViewCallbacks(duration: TimeInterval, timingFunction: CAMediaTimingFunction) {
         NotificationCenter.default.post(name: Notification.hideAnimationsForRightView,
                                         object: self,
-                                        userInfo: [Notification.Key.duration: self.rightViewAnimationDuration])
+                                        userInfo: [Notification.Key.duration: duration,
+                                                   Notification.Key.timigFunction: timingFunction])
 
-        if let hideAnimationsForRightView = self.hideAnimationsForRightView {
-            hideAnimationsForRightView(self, self.rightViewAnimationDuration)
+        if let callback = self.hideAnimationsForRightView {
+            callback(self, duration, timingFunction)
         }
 
         if let delegate = self.delegate {
-            delegate.hideAnimationsForRightView(sideMenuController: self, duration: self.rightViewAnimationDuration)
+            delegate.hideAnimationsForRightView(sideMenuController: self,
+                                                duration: duration,
+                                                timingFunction: timingFunction)
         }
     }
 

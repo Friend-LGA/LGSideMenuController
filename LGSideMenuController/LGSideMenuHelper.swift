@@ -28,8 +28,9 @@
 //
 
 import Foundation
-import UIKit
 import ObjectiveC
+import QuartzCore
+import UIKit
 
 internal struct LGSideMenuHelper {
     private struct Keys {

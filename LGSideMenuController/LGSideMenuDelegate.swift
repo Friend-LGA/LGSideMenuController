@@ -28,6 +28,7 @@
 //
 
 import Foundation
+import QuartzCore
 import UIKit
 
 public protocol LGSideMenuDelegate {
@@ -44,23 +45,29 @@ public protocol LGSideMenuDelegate {
     func willHideRightView(sideMenuController: LGSideMenuController)
     func didHideRightView(sideMenuController: LGSideMenuController)
 
-    // TODO: Add timing function to animation methods
-
     /// This method is executed inside animation block for showing left view.
-    /// You can use it to add some custom animations.
-    func showAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+    /// Use it to add some custom animations.
+    func showAnimationsForLeftView(sideMenuController: LGSideMenuController,
+                                   duration: TimeInterval,
+                                   timingFunction: CAMediaTimingFunction)
 
     /// This method is executed inside animation block for hiding left view.
-    /// You can use it to add some custom animations
-    func hideAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+    /// Use it to add some custom animations.
+    func hideAnimationsForLeftView(sideMenuController: LGSideMenuController,
+                                   duration: TimeInterval,
+                                   timingFunction: CAMediaTimingFunction)
 
     /// This method is executed inside animation block for showing right view.
-    /// You can use this notification to add some custom animations
-    func showAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+    /// Use it to add some custom animations.
+    func showAnimationsForRightView(sideMenuController: LGSideMenuController,
+                                    duration: TimeInterval,
+                                    timingFunction: CAMediaTimingFunction)
 
     /// This method is executed inside animation block for hiding right view.
-    /// You can use this notification to add some custom animations
-    func hideAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval)
+    /// Use it to add some custom animations.
+    func hideAnimationsForRightView(sideMenuController: LGSideMenuController,
+                                    duration: TimeInterval,
+                                    timingFunction: CAMediaTimingFunction)
 
     /// This method is executed on every transformation of root view during showing/hiding of side views
     /// You can retrieve percentage between 0.0 and 1.0 from userInfo dictionary, where
@@ -97,11 +104,21 @@ extension LGSideMenuDelegate {
     func willHideRightView(sideMenuController: LGSideMenuController) {}
     func didHideRightView(sideMenuController: LGSideMenuController) {}
 
-    func showAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
-    func hideAnimationsForLeftView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
+    func showAnimationsForLeftView(sideMenuController: LGSideMenuController,
+                                   duration: TimeInterval,
+                                   timingFunction: CAMediaTimingFunction) {}
 
-    func showAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
-    func hideAnimationsForRightView(sideMenuController: LGSideMenuController, duration: TimeInterval) {}
+    func hideAnimationsForLeftView(sideMenuController: LGSideMenuController,
+                                   duration: TimeInterval,
+                                   timingFunction: CAMediaTimingFunction) {}
+
+    func showAnimationsForRightView(sideMenuController: LGSideMenuController,
+                                    duration: TimeInterval,
+                                    timingFunction: CAMediaTimingFunction) {}
+
+    func hideAnimationsForRightView(sideMenuController: LGSideMenuController,
+                                    duration: TimeInterval,
+                                    timingFunction: CAMediaTimingFunction) {}
 
     func rootViewIsTransforming(sideMenuController: LGSideMenuController, percentage: CGFloat) {}
     func leftViewIsTransforming(sideMenuController: LGSideMenuController, percentage: CGFloat) {}
