@@ -1293,6 +1293,48 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Offset -
 
+    open var rootViewOffsetWhenHidden: CGPoint?
+
+    /// Default:
+    /// rootViewOffsetWhenHidden if assigned
+    /// else .zero
+    @IBInspectable
+    open var rootViewOffsetWhenHiddenForLeftView: CGPoint {
+        set {
+            _rootViewOffsetWhenHiddenForLeftView = newValue
+        }
+        get {
+            if let rootViewOffsetWhenHiddenForLeftView = _rootViewOffsetWhenHiddenForLeftView {
+                return rootViewOffsetWhenHiddenForLeftView
+            }
+            if let rootViewOffsetWhenHiddenForLeftView = rootViewOffsetWhenHidden {
+                return rootViewOffsetWhenHiddenForLeftView
+            }
+            return .zero
+        }
+    }
+    private var _rootViewOffsetWhenHiddenForLeftView: CGPoint?
+
+    /// Default:
+    /// rootViewOffsetWhenHidden if assigned
+    /// else .zero
+    @IBInspectable
+    open var rootViewOffsetWhenHiddenForRightView: CGPoint {
+        set {
+            _rootViewOffsetWhenHiddenForRightView = newValue
+        }
+        get {
+            if let rootViewOffsetWhenHiddenForRightView = _rootViewOffsetWhenHiddenForRightView {
+                return rootViewOffsetWhenHiddenForRightView
+            }
+            if let rootViewOffsetWhenHiddenForRightView = rootViewOffsetWhenHidden {
+                return rootViewOffsetWhenHiddenForRightView
+            }
+            return .zero
+        }
+    }
+    private var _rootViewOffsetWhenHiddenForRightView: CGPoint?
+
     /// Default:
     /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
     /// else 0.0
@@ -1332,6 +1374,12 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     private var _rightViewOffsetWhenHidden: CGPoint?
+
+    @IBInspectable
+    open var leftViewOffsetWhenShowing: CGPoint = .zero
+
+    @IBInspectable
+    open var rightViewOffsetWhenShowing: CGPoint = .zero
 
     // MARK: - Scale -
 
@@ -1385,8 +1433,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rootViewScaleWhenHiddenForRightView: CGFloat?
 
-    // TODO: Add property for backgroundImageView offset
-
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.2
     /// if presentationStyle == .scaleFromLittle then 0.8
@@ -1436,6 +1482,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _rightViewScaleWhenHidden: CGFloat?
 
     // MARK: - Background Image Scale -
+
+    // TODO: Add property for background image offset
 
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4

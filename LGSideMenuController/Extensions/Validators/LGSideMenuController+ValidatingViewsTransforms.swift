@@ -89,22 +89,30 @@ internal extension LGSideMenuController {
             return 1.0 + (rootViewScale - 1.0) * percentage
         }()
 
-        let translateX: CGFloat = {
-            if !self.leftViewPresentationStyle.shouldRootViewMove {
-                return 0.0
-            }
-            let shift = self.view.bounds.width * (1.0 - scale) / 2.0
+        let translate: CGPoint = {
+            var result: CGPoint = .zero
             if isLeftViewMoving {
-                return (self.rootViewOffsetTotalForLeftView - shift) * percentage
+                result = CGPoint(x: self.rootViewOffsetTotalForLeftView.x * percentage,
+                                 y: self.rootViewOffsetTotalForLeftView.y * percentage)
             }
             else if isRightViewMoving {
-                return -(self.rootViewOffsetTotalForRightView - shift) * percentage
+                result = CGPoint(x: -(self.rootViewOffsetTotalForRightView.x * percentage),
+                                 y: self.rootViewOffsetTotalForRightView.y * percentage)
             }
-            return 0.0
+            if scale != 1.0 {
+                let shift = rootContainerView.bounds.width * (1.0 - scale) / 2.0
+                if isLeftViewMoving {
+                    result.x -= shift * percentage
+                }
+                else if isRightViewMoving {
+                    result.x += shift * percentage
+                }
+            }
+            return result
         }()
 
         let transformScale = CGAffineTransform(scaleX: scale, y: scale)
-        let transfromTranslate = CGAffineTransform(translationX: translateX, y: 0.0)
+        let transfromTranslate = CGAffineTransform(translationX: translate.x, y: translate.y)
         let transform = transformScale.concatenating(transfromTranslate)
 
         rootContainerView.transform = transform
@@ -126,11 +134,9 @@ internal extension LGSideMenuController {
         leftContainerView.transform = {
             var translateX: CGFloat = 0.0
             if self.rightView != nil && self.isRightViewVisible {
+                translateX -= self.rootViewOffsetTotalForRightView.x * percentage
                 if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisible {
                     translateX -= self.leftViewWidthTotal
-                }
-                if self.isRootViewShouldMoveForRightView {
-                    translateX -= self.rootViewOffsetTotalForRightView * percentage
                 }
             }
             else if self.leftViewPresentationStyle.isHiddenAside && !self.isLeftViewAlwaysVisible {
@@ -167,17 +173,26 @@ internal extension LGSideMenuController {
         }()
 
         let wrapperViewTransform: CGAffineTransform = {
-            if !self.isLeftViewAlwaysVisible {
+            if self.isLeftViewAlwaysVisible {
+                return CGAffineTransform(translationX: self.leftViewOffsetWhenShowing.x,
+                                         y: self.leftViewOffsetWhenShowing.y)
+            }
+            else {
                 let scale = 1.0 + (self.leftViewScaleWhenHidden - 1.0) * (1.0 - percentage)
-                let offsetX = self.leftViewOffsetWhenHidden.x * (1.0 - percentage)
-                let offsetY = self.leftViewOffsetWhenHidden.y * (1.0 - percentage)
+
+                let offsetX =
+                    (self.leftViewOffsetWhenHidden.x * (1.0 - percentage)) +
+                    (self.leftViewOffsetWhenShowing.x * percentage)
+
+                let offsetY =
+                    (self.leftViewOffsetWhenHidden.y * (1.0 - percentage)) +
+                    (self.leftViewOffsetWhenShowing.y * percentage)
 
                 let transformTranslate = CGAffineTransform(translationX: offsetX, y: offsetY)
                 let transformScale = CGAffineTransform(scaleX: scale, y: scale)
 
                 return transformTranslate.concatenating(transformScale)
             }
-            return .identity
         }()
 
         leftViewShadowView.transform = backgroundViewTransform
@@ -202,11 +217,9 @@ internal extension LGSideMenuController {
         rightContainerView.transform = {
             var translateX: CGFloat = 0.0
             if self.leftView != nil && self.isLeftViewVisible {
+                translateX += self.rootViewOffsetTotalForLeftView.x * percentage
                 if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisible {
                     translateX += self.rightViewWidthTotal
-                }
-                if self.isRootViewShouldMoveForLeftView {
-                    translateX += self.rootViewOffsetTotalForLeftView * percentage
                 }
             }
             else if self.rightViewPresentationStyle.isHiddenAside && !self.isRightViewAlwaysVisible {
@@ -243,17 +256,26 @@ internal extension LGSideMenuController {
         }()
 
         let wrapperViewTransform: CGAffineTransform = {
-            if !self.isRightViewAlwaysVisible {
+            if self.isRightViewAlwaysVisible {
+                return CGAffineTransform(translationX: self.rightViewOffsetWhenShowing.x,
+                                         y: self.rightViewOffsetWhenShowing.y)
+            }
+            else {
                 let scale = 1.0 + (self.rightViewScaleWhenHidden - 1.0) * (1.0 - percentage)
-                let offsetX = self.rightViewOffsetWhenHidden.x * (1.0 - percentage)
-                let offsetY = self.rightViewOffsetWhenHidden.y * (1.0 - percentage)
+
+                let offsetX =
+                    (self.rightViewOffsetWhenHidden.x * (1.0 - percentage)) +
+                    (self.rightViewOffsetWhenShowing.x * percentage)
+
+                let offsetY =
+                    (self.rightViewOffsetWhenHidden.y * (1.0 - percentage)) +
+                    (self.rightViewOffsetWhenShowing.y * percentage)
 
                 let transformTranslate = CGAffineTransform(translationX: offsetX, y: offsetY)
                 let transformScale = CGAffineTransform(scaleX: scale, y: scale)
 
                 return transformTranslate.concatenating(transformScale)
             }
-            return .identity
         }()
 
         rightViewShadowView.transform = backgroundViewTransform

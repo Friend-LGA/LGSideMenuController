@@ -72,20 +72,20 @@ internal extension LGSideMenuController {
         self.rightViewWidth + self.rightViewLayerBorderWidth
     }
 
-    var rootViewOffsetTotalForLeftView: CGFloat {
-        self.leftViewWidthTotal + self.rootViewLayerBorderWidthForLeftView
+    var rootViewOffsetTotalForLeftView: CGPoint {
+        var result = self.rootViewOffsetWhenHiddenForLeftView
+        if self.leftViewPresentationStyle.shouldRootViewMove {
+            result.x += self.leftViewWidthTotal + self.rootViewLayerBorderWidthForLeftView
+        }
+        return result
     }
 
-    var rootViewOffsetTotalForRightView: CGFloat {
-        self.rightViewWidthTotal + self.rootViewLayerBorderWidthForRightView
-    }
-
-    var isRootViewShouldMoveForLeftView: Bool {
-        return self.leftViewPresentationStyle != .slideAbove
-    }
-
-    var isRootViewShouldMoveForRightView: Bool {
-        return self.rightViewPresentationStyle != .slideAbove
+    var rootViewOffsetTotalForRightView: CGPoint {
+        var result = self.rootViewOffsetWhenHiddenForRightView
+        if self.rightViewPresentationStyle.shouldRootViewMove {
+            result.x += self.rightViewWidthTotal + self.rootViewLayerBorderWidthForRightView
+        }
+        return result
     }
 
 }

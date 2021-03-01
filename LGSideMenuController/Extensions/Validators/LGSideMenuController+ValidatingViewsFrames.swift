@@ -53,11 +53,11 @@ internal extension LGSideMenuController {
         let containerViewFrame: CGRect = {
             var result: CGRect = self.view.bounds
             if self.leftView != nil && self.isLeftViewAlwaysVisible {
-                result.origin.x += self.rootViewOffsetTotalForLeftView
-                result.size.width -= self.rootViewOffsetTotalForLeftView
+                result.origin.x += self.rootViewOffsetTotalForLeftView.x
+                result.size.width -= self.rootViewOffsetTotalForLeftView.x
             }
             if self.rightView != nil && self.isRightViewAlwaysVisible {
-                result.size.width -= self.rootViewOffsetTotalForRightView
+                result.size.width -= self.rootViewOffsetTotalForRightView.x
             }
             return result
         }()
