@@ -225,12 +225,12 @@ class MainViewController: LGSideMenuController {
             leftViewPresentationStyle = .scaleFromBig
             leftViewAnimationDuration = 1.0
             leftViewBackgroundColor = UIColor(red: 0.5, green: 0.75, blue: 0.5, alpha: 1.0)
-            leftViewBackgroundImageInitialScale = 1.5
-            leftViewInitialOffsetX = -200.0
-            leftViewInitialScale = 1.5
+            leftViewBackgroundImageScaleWhenHidden = 1.5
+            leftViewOffsetWhenHidden.x = -200.0
+            leftViewScaleWhenHidden = 1.5
             leftViewCoverBlurEffect = UIBlurEffect(style: .dark)
 
-            rootViewScaleForLeftView = 0.6
+            rootViewScaleWhenHiddenForLeftView = 0.6
             rootViewCoverColorForLeftView = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.3)
             rootViewCoverBlurEffectForLeftView = UIBlurEffect(style: blurStyle)
             rootViewCoverAlphaForLeftView = 0.9
