@@ -56,10 +56,20 @@ internal extension LGSideMenuController {
         guard let containerView = self.rootContainerView,
               let coverView = self.rootViewCoverView else { return }
 
-        // TODO: Add option to change alpha of the view itself
-
         let isLeftViewMoving = self.leftView != nil && self.isLeftViewVisible
         let isRightViewMoving = self.rightView != nil && self.isRightViewVisible
+
+        containerView.alpha = {
+            if isLeftViewMoving {
+                return 1.0 - (1.0 - self.rootViewAlphaWhenHiddenForLeftView) * percentage
+            }
+            else if isRightViewMoving {
+                return 1.0 - (1.0 - self.rootViewAlphaWhenHiddenForRightView) * percentage
+            }
+            else {
+                return 1.0
+            }
+        }()
 
         coverView.alpha = {
             if isLeftViewMoving {
@@ -69,7 +79,7 @@ internal extension LGSideMenuController {
                 return self.rootViewCoverAlphaForRightView * percentage
             }
             else {
-                return percentage
+                return 0.0
             }
         }()
 
@@ -128,7 +138,13 @@ internal extension LGSideMenuController {
               let wrapperView = self.leftViewWrapperView,
               let coverView = self.leftViewCoverView else { return }
 
-        // TODO: Add option to change alpha of the view itself
+        let viewAlpha = 1.0 - (1.0 - self.leftViewAlphaWhenHidden) * (1.0 - percentage)
+        if self.leftViewPresentationStyle.isAbove {
+            containerView.alpha = viewAlpha
+        }
+        else {
+            wrapperView.alpha = viewAlpha
+        }
 
         containerView.transform = {
             var translateX: CGFloat = 0.0
@@ -222,7 +238,13 @@ internal extension LGSideMenuController {
               let wrapperView = self.rightViewWrapperView,
               let coverView = self.rightViewCoverView else { return }
 
-        // TODO: Add option to change alpha of the view itself
+        let viewAlpha = 1.0 - (1.0 - self.rightViewAlphaWhenHidden) * (1.0 - percentage)
+        if self.rightViewPresentationStyle.isAbove {
+            containerView.alpha = viewAlpha
+        }
+        else {
+            wrapperView.alpha = viewAlpha
+        }
 
         containerView.transform = {
             var translateX: CGFloat = 0.0

@@ -1347,6 +1347,94 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewStatusBarUpdateAnimation: UIStatusBarAnimation?
 
+    // MARK: - Alpha -
+
+    open var rootViewAlphaWhenHidden: CGFloat?
+
+    /// Default:
+    /// rootViewAlphaWhenHidden if assigned
+    /// else 1.0
+    @IBInspectable
+    open var rootViewAlphaWhenHiddenForLeftView: CGFloat {
+        set {
+            _rootViewAlphaWhenHiddenForLeftView = newValue
+        }
+        get {
+            if let rootViewAlphaWhenHiddenForLeftView = _rootViewAlphaWhenHiddenForLeftView {
+                return rootViewAlphaWhenHiddenForLeftView
+            }
+            if let rootViewAlphaWhenHiddenForLeftView = rootViewAlphaWhenHidden {
+                return rootViewAlphaWhenHiddenForLeftView
+            }
+            return 1.0
+        }
+    }
+    private var _rootViewAlphaWhenHiddenForLeftView: CGFloat?
+
+    /// Default:
+    /// rootViewAlphaWhenHidden if assigned
+    /// else 1.0
+    @IBInspectable
+    open var rootViewAlphaWhenHiddenForRightView: CGFloat {
+        set {
+            _rootViewAlphaWhenHiddenForRightView = newValue
+        }
+        get {
+            if let rootViewAlphaWhenHiddenForRightView = _rootViewAlphaWhenHiddenForRightView {
+                return rootViewAlphaWhenHiddenForRightView
+            }
+            if let rootViewAlphaWhenHiddenForRightView = rootViewAlphaWhenHidden {
+                return rootViewAlphaWhenHiddenForRightView
+            }
+            return 1.0
+        }
+    }
+    private var _rootViewAlphaWhenHiddenForRightView: CGFloat?
+
+    /// Default:
+    /// if presentationStyle == .scaleFromBig then 0.0
+    /// if presentationStyle == .scaleFromLittle then 0.0
+    /// else 1.0
+    @IBInspectable
+    open var leftViewAlphaWhenHidden: CGFloat {
+        set {
+            _leftViewAlphaWhenHidden = newValue
+        }
+        get {
+            if let leftViewAlphaWhenHidden = _leftViewAlphaWhenHidden {
+                return leftViewAlphaWhenHidden
+            }
+            if leftViewPresentationStyle == .scaleFromBig ||
+                leftViewPresentationStyle == .scaleFromLittle {
+                return 0.0
+            }
+            return 1.0
+        }
+    }
+    private var _leftViewAlphaWhenHidden: CGFloat?
+
+    /// Default:
+    /// if presentationStyle == .scaleFromBig then 0.0
+    /// if presentationStyle == .scaleFromLittle then 0.0
+    /// else 1.0
+    @IBInspectable
+    open var rightViewAlphaWhenHidden: CGFloat {
+        set {
+            _rightViewAlphaWhenHidden = newValue
+        }
+        get {
+            if let rightViewAlphaWhenHidden = _rightViewAlphaWhenHidden {
+                return rightViewAlphaWhenHidden
+            }
+            if rightViewPresentationStyle == .scaleFromBig ||
+                rightViewPresentationStyle == .scaleFromLittle {
+                return 0.0
+            }
+            return 1.0
+        }
+    }
+    private var _rightViewAlphaWhenHidden: CGFloat?
+
     // MARK: - Offset -
 
     open var rootViewOffsetWhenHidden: CGPoint?
