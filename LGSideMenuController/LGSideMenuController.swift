@@ -1642,6 +1642,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var leftViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
     // TODO: Add leftViewStatusBarBackgroundView
+    // TODO: Add custom backgroundView
 
     open internal(set) var rightContainerView: UIView?
     open internal(set) var rightViewShadowView: LGSideMenuShadowView?
@@ -1651,6 +1652,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var rightViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rightViewCoverView: UIVisualEffectView?
     // TODO: Add rightViewStatusBarBackgroundView
+    // TODO: Add custom backgroundView
 
     internal var savedSize: CGSize = .zero
 
