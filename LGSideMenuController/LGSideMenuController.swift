@@ -1337,7 +1337,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Default:
     /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
-    /// else 0.0
+    /// else .zero
     @IBInspectable
     open var leftViewOffsetWhenHidden: CGPoint {
         set {
@@ -1357,7 +1357,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Default:
     /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
-    /// else 0.0
+    /// else .zero
     @IBInspectable
     open var rightViewOffsetWhenHidden: CGPoint {
         set {
@@ -1483,8 +1483,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Background Image Scale -
 
-    // TODO: Add property for background image offset
-
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
@@ -1564,6 +1562,54 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     private var _rightViewBackgroundImageScaleWhenShowing: CGFloat?
+
+    // MARK: - Background Image Offset -
+
+    /// Default:
+    /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
+    /// else .zero
+    @IBInspectable
+    open var leftViewBackgroundImageOffsetWhenHidden: CGPoint {
+        set {
+            _leftViewBackgroundImageOffsetWhenHidden = newValue
+        }
+        get {
+            if let leftViewBackgroundImageOffsetWhenHidden = _leftViewBackgroundImageOffsetWhenHidden {
+                return leftViewBackgroundImageOffsetWhenHidden
+            }
+            if leftViewPresentationStyle == .slideBelow {
+                return CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
+            }
+            return .zero
+        }
+    }
+    private var _leftViewBackgroundImageOffsetWhenHidden: CGPoint?
+
+    /// Default:
+    /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
+    /// else .zero
+    @IBInspectable
+    open var rightViewBackgroundImageOffsetWhenHidden: CGPoint {
+        set {
+            _rightViewBackgroundImageOffsetWhenHidden = newValue
+        }
+        get {
+            if let rightViewBackgroundImageOffsetWhenHidden = _rightViewBackgroundImageOffsetWhenHidden {
+                return rightViewBackgroundImageOffsetWhenHidden
+            }
+            if rightViewPresentationStyle == .slideBelow {
+                return CGPoint(x: rightViewWidth / 2.0, y: 0.0)
+            }
+            return .zero
+        }
+    }
+    private var _rightViewBackgroundImageOffsetWhenHidden: CGPoint?
+
+    @IBInspectable
+    open var leftViewBackgroundImageOffsetWhenShowing: CGPoint = .zero
+
+    @IBInspectable
+    open var rightViewBackgroundImageOffsetWhenShowing: CGPoint = .zero
 
     // MARK: - Callbacks -
 
