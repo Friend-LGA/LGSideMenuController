@@ -39,110 +39,112 @@ internal extension LGSideMenuController {
     }
 
     func validateRootViewsStyles() {
-        guard let rootViewShadowView = self.rootViewShadowView,
-              let rootViewBackgroundView = self.rootViewBackgroundView,
-              let rootViewCoverView = self.rootViewCoverView else { return }
+        guard let backgroundDecorationView = self.rootViewBackgroundDecorationView,
+              let backgroundShadowView = self.rootViewBackgroundShadowView,
+              let coverView = self.rootViewCoverView else { return }
 
-        rootViewBackgroundView.fillColor = self.rootViewBackgroundColor
+        backgroundDecorationView.fillColor = self.rootViewBackgroundColor
 
         if self.leftView != nil && self.isLeftViewVisibleToUser {
-            rootViewShadowView.shadowColor = self.rootViewLayerShadowColorForLeftView
-            rootViewShadowView.shadowBlur = self.rootViewLayerShadowRadiusForLeftView
+            backgroundDecorationView.strokeColor = self.rootViewLayerBorderColorForLeftView
+            backgroundDecorationView.strokeWidth = self.rootViewLayerBorderWidthForLeftView
 
-            rootViewBackgroundView.strokeColor = self.rootViewLayerBorderColorForLeftView
-            rootViewBackgroundView.strokeWidth = self.rootViewLayerBorderWidthForLeftView
+            backgroundShadowView.shadowColor = self.rootViewLayerShadowColorForLeftView
+            backgroundShadowView.shadowBlur = self.rootViewLayerShadowRadiusForLeftView
         }
         else if self.rightView != nil && self.isRightViewVisibleToUser {
-            rootViewShadowView.shadowColor = self.rootViewLayerShadowColorForRightView
-            rootViewShadowView.shadowBlur = self.rootViewLayerShadowRadiusForRightView
+            backgroundDecorationView.strokeColor = self.rootViewLayerBorderColorForRightView
+            backgroundDecorationView.strokeWidth = self.rootViewLayerBorderWidthForRightView
 
-            rootViewBackgroundView.strokeColor = self.rootViewLayerBorderColorForRightView
-            rootViewBackgroundView.strokeWidth = self.rootViewLayerBorderWidthForRightView
+            backgroundShadowView.shadowColor = self.rootViewLayerShadowColorForRightView
+            backgroundShadowView.shadowBlur = self.rootViewLayerShadowRadiusForRightView
         }
         else {
-            rootViewShadowView.shadowColor = .clear
-            rootViewShadowView.shadowBlur = 0.0
+            backgroundDecorationView.strokeColor = .clear
+            backgroundDecorationView.strokeWidth = 0.0
 
-            rootViewBackgroundView.strokeColor = .clear
-            rootViewBackgroundView.strokeWidth = 0.0
+            backgroundShadowView.shadowColor = .clear
+            backgroundShadowView.shadowBlur = 0.0
         }
 
-        rootViewShadowView.setNeedsDisplay()
-        rootViewBackgroundView.setNeedsDisplay()
+        backgroundDecorationView.setNeedsDisplay()
+        backgroundShadowView.setNeedsDisplay()
 
         if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisible {
-            rootViewCoverView.backgroundColor = self.rootViewCoverColorForLeftView
-            rootViewCoverView.effect = self.rootViewCoverBlurEffectForLeftView
+            coverView.backgroundColor = self.rootViewCoverColorForLeftView
+            coverView.effect = self.rootViewCoverBlurEffectForLeftView
         }
         else if self.rightView != nil && self.isRightViewVisible && !self.isRightViewAlwaysVisible {
-            rootViewCoverView.backgroundColor = self.rootViewCoverColorForRightView
-            rootViewCoverView.effect = self.rootViewCoverBlurEffectForRightView
+            coverView.backgroundColor = self.rootViewCoverColorForRightView
+            coverView.effect = self.rootViewCoverBlurEffectForRightView
         }
         else {
-            rootViewCoverView.backgroundColor = nil
-            rootViewCoverView.effect = nil
+            coverView.backgroundColor = nil
+            coverView.effect = nil
         }
     }
 
     func validateLeftViewsStyles() {
-        guard let leftViewShadowView = self.leftViewShadowView,
-              let leftViewBackgroundView = self.leftViewBackgroundView,
-              let leftViewBackgroundImageView = self.leftViewBackgroundImageView,
-              let leftViewStyleView = self.leftViewEffectView,
-              let leftViewCoverView = self.leftViewCoverView else { return }
+        guard let backgroundDecorationView = self.leftViewBackgroundDecorationView,
+              let backgroundShadowView = self.leftViewBackgroundShadowView,
+              let backgroundEffectView = self.leftViewBackgroundEffectView,
+              let coverView = self.leftViewCoverView else { return }
 
-        leftViewShadowView.shadowColor = self.leftViewLayerShadowColor
-        leftViewShadowView.shadowBlur = self.leftViewLayerShadowRadius
-        leftViewShadowView.setNeedsDisplay()
+        backgroundDecorationView.fillColor = self.leftViewBackgroundColor
+        backgroundDecorationView.strokeColor = self.leftViewLayerBorderColor
+        backgroundDecorationView.strokeWidth = self.leftViewLayerBorderWidth
+        backgroundDecorationView.alpha = self.leftViewBackgroundAlpha
+        backgroundDecorationView.setNeedsDisplay()
 
-        leftViewBackgroundView.fillColor = self.leftViewBackgroundColor
-        leftViewBackgroundView.strokeColor = self.leftViewLayerBorderColor
-        leftViewBackgroundView.strokeWidth = self.leftViewLayerBorderWidth
-        leftViewBackgroundView.alpha = self.leftViewBackgroundAlpha
-        leftViewBackgroundView.setNeedsDisplay()
+        backgroundShadowView.shadowColor = self.leftViewLayerShadowColor
+        backgroundShadowView.shadowBlur = self.leftViewLayerShadowRadius
+        backgroundShadowView.setNeedsDisplay()
 
-        leftViewBackgroundImageView.image = self.leftViewBackgroundImage
+        backgroundEffectView.effect = self.leftViewBackgroundBlurEffect
 
-        leftViewStyleView.effect = self.leftViewBackgroundBlurEffect
+        if let backgroundImageView = self.leftViewBackgroundImageView {
+            backgroundImageView.image = self.leftViewBackgroundImage
+        }
 
         if self.isLeftViewAlwaysVisible {
-            leftViewCoverView.backgroundColor = self.leftViewCoverColorWhenAlwaysVisible
-            leftViewCoverView.effect = self.leftViewCoverBlurEffectWhenAlwaysVisible
+            coverView.backgroundColor = self.leftViewCoverColorWhenAlwaysVisible
+            coverView.effect = self.leftViewCoverBlurEffectWhenAlwaysVisible
         }
         else {
-            leftViewCoverView.backgroundColor = self.leftViewCoverColor
-            leftViewCoverView.effect = self.leftViewCoverBlurEffect
+            coverView.backgroundColor = self.leftViewCoverColor
+            coverView.effect = self.leftViewCoverBlurEffect
         }
     }
 
     func validateRightViewsStyles() {
-        guard let rightViewShadowView = self.rightViewShadowView,
-              let rightViewBackgroundView = self.rightViewBackgroundView,
-              let rightViewBackgroundImageView = self.rightViewBackgroundImageView,
-              let rightViewStyleView = self.rightViewEffectView,
-              let rightViewCoverView = self.rightViewCoverView else { return }
+        guard let backgroundDecorationView = self.rightViewBackgroundDecorationView,
+              let backgroundShadowView = self.rightViewBackgroundShadowView,
+              let backgroundEffectView = self.rightViewBackgroundEffectView,
+              let coverView = self.rightViewCoverView else { return }
 
-        rightViewShadowView.shadowColor = self.rightViewLayerShadowColor
-        rightViewShadowView.shadowBlur = self.rightViewLayerShadowRadius
-        rightViewShadowView.setNeedsDisplay()
+        backgroundDecorationView.fillColor = self.rightViewBackgroundColor
+        backgroundDecorationView.strokeColor = self.rightViewLayerBorderColor
+        backgroundDecorationView.strokeWidth = self.rightViewLayerBorderWidth
+        backgroundDecorationView.alpha = self.rightViewBackgroundAlpha
+        backgroundDecorationView.setNeedsDisplay()
 
-        rightViewBackgroundView.fillColor = self.rightViewBackgroundColor
-        rightViewBackgroundView.strokeColor = self.rightViewLayerBorderColor
-        rightViewBackgroundView.strokeWidth = self.rightViewLayerBorderWidth
-        rightViewBackgroundView.alpha = self.rightViewBackgroundAlpha
-        rightViewBackgroundView.setNeedsDisplay()
+        backgroundShadowView.shadowColor = self.rightViewLayerShadowColor
+        backgroundShadowView.shadowBlur = self.rightViewLayerShadowRadius
+        backgroundShadowView.setNeedsDisplay()
 
-        rightViewBackgroundImageView.image = self.rightViewBackgroundImage
+        backgroundEffectView.effect = self.rightViewBackgroundBlurEffect
 
-        rightViewStyleView.effect = self.rightViewBackgroundBlurEffect
+        if let backgroundImageView = self.rightViewBackgroundImageView {
+            backgroundImageView.image = self.rightViewBackgroundImage
+        }
 
         if self.isRightViewAlwaysVisible {
-            rightViewCoverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
-            rightViewCoverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
+            coverView.backgroundColor = self.rightViewCoverColorWhenAlwaysVisible
+            coverView.effect = self.rightViewCoverBlurEffectWhenAlwaysVisible
         }
         else {
-            rightViewCoverView.backgroundColor = self.rightViewCoverColor
-            rightViewCoverView.effect = self.rightViewCoverBlurEffect
+            coverView.backgroundColor = self.rightViewCoverColor
+            coverView.effect = self.rightViewCoverBlurEffect
         }
     }
     

@@ -46,14 +46,14 @@ internal extension LGSideMenuController {
             defaultRootViewSetup(self.rootContainerView, true)
         }
 
-        if self.rootViewShadowView == nil {
-            self.rootViewShadowView = LGSideMenuShadowView()
-            defaultRootViewSetup(self.rootViewShadowView)
+        if self.rootViewBackgroundDecorationView == nil {
+            self.rootViewBackgroundDecorationView = LGSideMenuBackgroundDecorationView()
+            defaultRootViewSetup(self.rootViewBackgroundDecorationView)
         }
 
-        if self.rootViewBackgroundView == nil {
-            self.rootViewBackgroundView = LGSideMenuBackgroundView()
-            defaultRootViewSetup(self.rootViewBackgroundView)
+        if self.rootViewBackgroundShadowView == nil {
+            self.rootViewBackgroundShadowView = LGSideMenuBackgroundShadowView()
+            defaultRootViewSetup(self.rootViewBackgroundShadowView)
         }
 
         if self.rootViewWrapperView == nil {
@@ -77,26 +77,31 @@ internal extension LGSideMenuController {
             defaultLeftViewSetup(self.leftContainerView, true)
         }
 
-        if self.leftViewShadowView == nil {
-            self.leftViewShadowView = LGSideMenuShadowView()
-            defaultLeftViewSetup(self.leftViewShadowView)
+        if self.leftViewBackgroundDecorationView == nil {
+            self.leftViewBackgroundDecorationView = LGSideMenuBackgroundDecorationView()
+            defaultLeftViewSetup(self.leftViewBackgroundDecorationView)
         }
 
-        if self.leftViewBackgroundView == nil {
-            self.leftViewBackgroundView = LGSideMenuBackgroundView()
-            defaultLeftViewSetup(self.leftViewBackgroundView)
+        if self.leftViewBackgroundShadowView == nil {
+            self.leftViewBackgroundShadowView = LGSideMenuBackgroundShadowView()
+            defaultLeftViewSetup(self.leftViewBackgroundShadowView)
         }
 
-        if self.leftViewBackgroundImageView == nil {
+        if self.leftViewBackgroundEffectView == nil {
+            self.leftViewBackgroundEffectView = UIVisualEffectView()
+            defaultLeftViewSetup(self.leftViewBackgroundEffectView)
+        }
+
+        if self.leftViewBackgroundWrapperView == nil {
+            self.leftViewBackgroundWrapperView = UIView()
+            self.leftViewBackgroundWrapperView?.clipsToBounds = true
+            defaultLeftViewSetup(self.leftViewBackgroundWrapperView)
+        }
+
+        if self.leftViewBackgroundImage != nil && self.leftViewBackgroundImageView == nil {
             self.leftViewBackgroundImageView = UIImageView()
-            self.leftViewBackgroundImageView?.clipsToBounds = true
             self.leftViewBackgroundImageView?.contentMode = .scaleAspectFill
             defaultLeftViewSetup(self.leftViewBackgroundImageView)
-        }
-
-        if self.leftViewEffectView == nil {
-            self.leftViewEffectView = UIVisualEffectView()
-            defaultLeftViewSetup(self.leftViewEffectView)
         }
 
         if self.leftViewWrapperView == nil {
@@ -119,26 +124,31 @@ internal extension LGSideMenuController {
             defaultRightViewSetup(self.rightContainerView, true)
         }
 
-        if self.rightViewShadowView == nil {
-            self.rightViewShadowView = LGSideMenuShadowView()
-            defaultRightViewSetup(self.rightViewShadowView)
+        if self.rightViewBackgroundDecorationView == nil {
+            self.rightViewBackgroundDecorationView = LGSideMenuBackgroundDecorationView()
+            defaultRightViewSetup(self.rightViewBackgroundDecorationView)
         }
 
-        if self.rightViewBackgroundView == nil {
-            self.rightViewBackgroundView = LGSideMenuBackgroundView()
-            defaultRightViewSetup(self.rightViewBackgroundView)
+        if self.rightViewBackgroundShadowView == nil {
+            self.rightViewBackgroundShadowView = LGSideMenuBackgroundShadowView()
+            defaultRightViewSetup(self.rightViewBackgroundShadowView)
         }
 
-        if self.rightViewBackgroundImageView == nil {
+        if self.rightViewBackgroundEffectView == nil {
+            self.rightViewBackgroundEffectView = UIVisualEffectView()
+            defaultRightViewSetup(self.rightViewBackgroundEffectView)
+        }
+
+        if self.rightViewBackgroundWrapperView == nil {
+            self.rightViewBackgroundWrapperView = UIView()
+            self.rightViewBackgroundWrapperView?.clipsToBounds = true
+            defaultRightViewSetup(self.rightViewBackgroundWrapperView)
+        }
+
+        if self.rightViewBackgroundImage != nil && self.rightViewBackgroundImageView == nil {
             self.rightViewBackgroundImageView = UIImageView()
-            self.rightViewBackgroundImageView?.clipsToBounds = true
             self.rightViewBackgroundImageView?.contentMode = .scaleAspectFill
             defaultRightViewSetup(self.rightViewBackgroundImageView)
-        }
-
-        if self.rightViewEffectView == nil {
-            self.rightViewEffectView = UIVisualEffectView()
-            defaultRightViewSetup(self.rightViewEffectView)
         }
 
         if self.rightViewWrapperView == nil {

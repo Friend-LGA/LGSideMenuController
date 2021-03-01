@@ -41,11 +41,11 @@ internal extension LGSideMenuController {
 
     func validateRootViewsFrames() {
         guard let rootView = self.rootView,
-              let rootContainerView = self.rootContainerView,
-              let rootViewShadowView = self.rootViewShadowView,
-              let rootViewBackgroundView = self.rootViewBackgroundView,
-              let rootViewWrapperView = self.rootViewWrapperView,
-              let rootViewCoverView = self.rootViewCoverView else { return }
+              let containerView = self.rootContainerView,
+              let backgroundDecorationView = self.rootViewBackgroundDecorationView,
+              let backgroundShadowView = self.rootViewBackgroundShadowView,
+              let wrapperView = self.rootViewWrapperView,
+              let coverView = self.rootViewCoverView else { return }
 
         let isLeftViewVisible = self.leftView != nil && self.isLeftViewVisibleToUser
         let isRightViewVisible = self.rightView != nil && self.isRightViewVisibleToUser
@@ -62,54 +62,56 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        rootContainerView.transform = .identity
-        rootContainerView.frame = containerViewFrame
+        containerView.transform = .identity
+        containerView.frame = containerViewFrame
 
-        rootViewShadowView.transform = .identity
-        rootViewShadowView.frame = {
-            var inset: CGFloat = 0.0
+        let borderWidth: CGFloat = {
             if isLeftViewVisible {
-                inset = self.rootViewLayerBorderWidthForLeftView + self.rootViewLayerShadowRadiusForLeftView
+                return self.rootViewLayerBorderWidthForLeftView
             }
             else if isRightViewVisible {
-                inset = self.rootViewLayerBorderWidthForRightView + self.rootViewLayerShadowRadiusForRightView
+                return self.rootViewLayerBorderWidthForRightView
             }
-            return containerViewFrame.insetBy(dx: -inset, dy: -inset)
+            return 0.0
         }()
 
-        rootViewBackgroundView.transform = .identity
-        rootViewBackgroundView.frame = {
-            var borderWidth: CGFloat = 0.0
+        backgroundDecorationView.transform = .identity
+        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -borderWidth, dy: -borderWidth)
+
+        backgroundShadowView.transform = .identity
+        backgroundShadowView.frame = {
+            var shadowRadius: CGFloat = 0.0
             if isLeftViewVisible {
-                borderWidth = self.rootViewLayerBorderWidthForLeftView
+                shadowRadius = self.rootViewLayerShadowRadiusForLeftView
             }
             else if isRightViewVisible {
-                borderWidth = self.rootViewLayerBorderWidthForRightView
+                shadowRadius = self.rootViewLayerShadowRadiusForRightView
             }
-            return containerViewFrame.insetBy(dx: -borderWidth, dy: -borderWidth)
+            return backgroundDecorationView.bounds.insetBy(dx: -shadowRadius, dy: -shadowRadius)
         }()
 
-        rootViewWrapperView.transform = .identity
-        rootViewWrapperView.frame = rootContainerView.bounds
+        wrapperView.transform = .identity
+        wrapperView.frame = containerView.bounds
 
         rootView.transform = .identity
-        rootView.frame = rootViewWrapperView.bounds
+        rootView.frame = wrapperView.bounds
 
-        rootViewCoverView.transform = .identity
-        rootViewCoverView.frame = rootContainerView.bounds
+        coverView.transform = .identity
+        coverView.frame = containerView.bounds
     }
 
     func validateLeftViewsFrames() {
         guard let leftView = self.leftView,
-              let leftContainerView = self.leftContainerView,
-              let leftViewShadowView = self.leftViewShadowView,
-              let leftViewBackgroundView = self.leftViewBackgroundView,
-              let leftViewBackgroundImageView = self.leftViewBackgroundImageView,
-              let leftViewStyleView = self.leftViewEffectView,
-              let leftViewWrapperView = self.leftViewWrapperView,
-              let leftViewCoverView = self.leftViewCoverView else { return }
+              let containerView = self.leftContainerView,
+              let backgroundDecorationView = self.leftViewBackgroundDecorationView,
+              let backgroundShadowView = self.leftViewBackgroundShadowView,
+              let backgroundEffectView = self.leftViewBackgroundEffectView,
+              let backgroundWrapperView = self.leftViewBackgroundWrapperView,
+              let wrapperView = self.leftViewWrapperView,
+              let coverView = self.leftViewCoverView else { return }
 
-        let containerViewFrame: CGRect = {
+        containerView.transform = .identity
+        containerView.frame = {
             var result = self.view.bounds
             if self.leftViewPresentationStyle.isWidthCompact {
                 result.size.width = self.leftViewWidth
@@ -120,48 +122,53 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        leftContainerView.transform = .identity
-        leftContainerView.frame = containerViewFrame
+        backgroundDecorationView.transform = .identity
+        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
+                                                                      dy: -self.leftViewLayerBorderWidth)
 
-        leftViewShadowView.transform = .identity
-        leftViewShadowView.frame = leftContainerView.bounds.insetBy(dx: -(self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius),
-                                                                    dy: -(self.leftViewLayerBorderWidth + self.leftViewLayerShadowRadius))
+        backgroundShadowView.transform = .identity
+        backgroundShadowView.frame = backgroundDecorationView.bounds.insetBy(dx: -self.leftViewLayerShadowRadius,
+                                                                             dy: -self.leftViewLayerShadowRadius)
 
-        leftViewBackgroundView.transform = .identity
-        leftViewBackgroundView.frame = leftContainerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
-                                                                        dy: -self.leftViewLayerBorderWidth)
+        backgroundEffectView.transform = .identity
+        backgroundEffectView.frame = backgroundDecorationView.bounds.insetBy(dx: self.leftViewLayerBorderWidth,
+                                                                             dy: self.leftViewLayerBorderWidth)
 
-        let backgroundSafeFrame = leftViewBackgroundView.bounds.insetBy(dx: self.leftViewLayerBorderWidth,
-                                                                        dy: self.leftViewLayerBorderWidth)
+        backgroundWrapperView.transform = .identity
+        backgroundWrapperView.frame = backgroundEffectView.frame
 
-        leftViewBackgroundImageView.transform = .identity
-        leftViewBackgroundImageView.frame = backgroundSafeFrame
+        if let backgroundImageView = self.leftViewBackgroundImageView {
+            backgroundImageView.transform = .identity
+            backgroundImageView.frame = backgroundWrapperView.bounds
+        }
+        else if let backgroundView = self.leftViewBackgroundView {
+            backgroundView.transform = .identity
+            backgroundView.frame = backgroundWrapperView.bounds
+        }
 
-        leftViewStyleView.transform = .identity
-        leftViewStyleView.frame = backgroundSafeFrame
-
-        leftViewWrapperView.transform = .identity
-        leftViewWrapperView.frame = CGRect(origin: .zero,
-                                           size: CGSize(width: self.leftViewWidth, height: containerViewFrame.height))
+        wrapperView.transform = .identity
+        wrapperView.frame = CGRect(origin: .zero,
+                                   size: CGSize(width: self.leftViewWidth, height: containerView.bounds.height))
 
         leftView.transform = .identity
-        leftView.frame = leftViewWrapperView.bounds
+        leftView.frame = wrapperView.bounds
 
-        leftViewCoverView.transform = .identity
-        leftViewCoverView.frame = leftContainerView.bounds
+        coverView.transform = .identity
+        coverView.frame = containerView.bounds
     }
 
     func validateRightViewsFrames() {
         guard let rightView = self.rightView,
-              let rightContainerView = self.rightContainerView,
-              let rightViewShadowView = self.rightViewShadowView,
-              let rightViewBackgroundView = self.rightViewBackgroundView,
-              let rightViewBackgroundImageView = self.rightViewBackgroundImageView,
-              let rightViewStyleView = self.rightViewEffectView,
-              let rightViewWrapperView = self.rightViewWrapperView,
-              let rightViewCoverView = self.rightViewCoverView else { return }
+              let containerView = self.rightContainerView,
+              let backgroundDecorationView = self.rightViewBackgroundDecorationView,
+              let backgroundShadowView = self.rightViewBackgroundShadowView,
+              let backgroundEffectView = self.rightViewBackgroundEffectView,
+              let backgroundWrapperView = self.rightViewBackgroundWrapperView,
+              let wrapperView = self.rightViewWrapperView,
+              let coverView = self.rightViewCoverView else { return }
 
-        let containerViewFrame: CGRect = {
+        containerView.transform = .identity
+        containerView.frame = {
             var result = self.view.bounds
             if self.rightViewPresentationStyle.isWidthCompact {
                 result.size.width = self.rightViewWidth
@@ -174,35 +181,38 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        rightContainerView.transform = .identity
-        rightContainerView.frame = containerViewFrame
+        backgroundDecorationView.transform = .identity
+        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
+                                                                      dy: -self.rightViewLayerBorderWidth)
 
-        rightViewShadowView.transform = .identity
-        rightViewShadowView.frame = rightContainerView.bounds.insetBy(dx: -(self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius),
-                                                                      dy: -(self.rightViewLayerBorderWidth + self.rightViewLayerShadowRadius))
+        backgroundShadowView.transform = .identity
+        backgroundShadowView.frame = backgroundDecorationView.bounds.insetBy(dx: -self.rightViewLayerShadowRadius,
+                                                                             dy: -self.rightViewLayerShadowRadius)
 
-        rightViewBackgroundView.transform = .identity
-        rightViewBackgroundView.frame = rightContainerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
-                                                                          dy: -self.rightViewLayerBorderWidth)
+        backgroundEffectView.transform = .identity
+        backgroundEffectView.frame = backgroundDecorationView.bounds.insetBy(dx: self.rightViewLayerBorderWidth,
+                                                                             dy: self.rightViewLayerBorderWidth)
 
-        let backgroundSafeFrame = rightViewBackgroundView.bounds.insetBy(dx: self.rightViewLayerBorderWidth,
-                                                                         dy: self.rightViewLayerBorderWidth)
+        backgroundWrapperView.transform = .identity
+        backgroundWrapperView.frame = backgroundEffectView.frame
 
-        rightViewBackgroundImageView.transform = .identity
-        rightViewBackgroundImageView.frame = backgroundSafeFrame
+        if let backgroundImageView = self.rightViewBackgroundImageView {
+            backgroundImageView.transform = .identity
+            backgroundImageView.frame = backgroundWrapperView.bounds
+        }
+        else if let backgroundView = self.rightViewBackgroundView {
+            backgroundView.transform = .identity
+            backgroundView.frame = backgroundWrapperView.bounds
+        }
 
-        rightViewStyleView.transform = .identity
-        rightViewStyleView.frame = backgroundSafeFrame
-
-        rightViewWrapperView.transform = .identity
-        rightViewWrapperView.frame = CGRect(origin: CGPoint(x: containerViewFrame.width - self.rightViewWidth, y: 0.0),
-                                            size: CGSize(width: self.rightViewWidth, height: containerViewFrame.height))
+        wrapperView.transform = .identity
+        wrapperView.frame = CGRect(origin: CGPoint(x: containerView.bounds.width - self.rightViewWidth, y: 0.0),
+                                   size: CGSize(width: self.rightViewWidth, height: containerView.bounds.height))
 
         rightView.transform = .identity
-        rightView.frame = rightViewWrapperView.bounds
+        rightView.frame = wrapperView.bounds
 
-        rightViewCoverView.transform = .identity
-        rightViewCoverView.frame = rightContainerView.bounds
+        coverView.transform = .identity
+        coverView.frame = containerView.bounds
     }
-    
 }

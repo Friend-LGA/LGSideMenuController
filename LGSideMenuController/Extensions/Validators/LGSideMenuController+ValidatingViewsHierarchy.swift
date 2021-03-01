@@ -40,78 +40,93 @@ internal extension LGSideMenuController {
 
     func validateRootViewsHierarchy() {
         guard let rootView = self.rootView,
-              let rootContainerView = self.rootContainerView,
-              let rootViewShadowView = self.rootViewShadowView,
-              let rootViewBackgroundView = self.rootViewBackgroundView,
-              let rootViewWrapperView = self.rootViewWrapperView,
-              let rootViewCoverView = self.rootViewCoverView else { return }
+              let containerView = self.rootContainerView,
+              let backgroundDecorationView = self.rootViewBackgroundDecorationView,
+              let backgroundShadowView = self.rootViewBackgroundShadowView,
+              let wrapperView = self.rootViewWrapperView,
+              let coverView = self.rootViewCoverView else { return }
 
-        self.view.insertSubview(rootContainerView, at: 0)
+        self.view.insertSubview(containerView, at: 0)
 
-        rootContainerView.insertSubview(rootViewShadowView, at: 0)
-        rootContainerView.insertSubview(rootViewBackgroundView, at: 1)
-        rootContainerView.insertSubview(rootViewWrapperView, at: 2)
-        rootContainerView.insertSubview(rootViewCoverView, at: 3)
+        containerView.insertSubview(backgroundDecorationView, at: 0)
+        containerView.insertSubview(wrapperView, at: 1)
+        containerView.insertSubview(coverView, at: 2)
 
-        rootViewWrapperView.insertSubview(rootView, at: 0)
+        backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
+
+        wrapperView.insertSubview(rootView, at: 0)
     }
 
     func validateLeftViewsHierarchy() {
         guard let rootContainerView = self.rootContainerView,
               let leftView = self.leftView,
-              let leftContainerView = self.leftContainerView,
-              let leftViewShadowView = self.leftViewShadowView,
-              let leftViewBackgroundView = self.leftViewBackgroundView,
-              let leftViewBackgroundImageView = self.leftViewBackgroundImageView,
-              let leftViewStyleView = self.leftViewEffectView,
-              let leftViewWrapperView = self.leftViewWrapperView,
-              let leftViewCoverView = self.leftViewCoverView else { return }
+              let containerView = self.leftContainerView,
+              let backgroundDecorationView = self.leftViewBackgroundDecorationView,
+              let backgroundShadowView = self.leftViewBackgroundShadowView,
+              let backgroundWrapperView = self.leftViewBackgroundWrapperView,
+              let backgroundEffectView = self.leftViewBackgroundEffectView,
+              let wrapperView = self.leftViewWrapperView,
+              let coverView = self.leftViewCoverView else { return }
 
         if self.leftViewPresentationStyle.isAbove {
-            self.view.insertSubview(leftContainerView, aboveSubview: rootContainerView)
+            self.view.insertSubview(containerView, aboveSubview: rootContainerView)
         }
         else {
-            self.view.insertSubview(leftContainerView, belowSubview: rootContainerView)
+            self.view.insertSubview(containerView, belowSubview: rootContainerView)
         }
 
-        leftContainerView.insertSubview(leftViewShadowView, at: 0)
-        leftContainerView.insertSubview(leftViewBackgroundView, at: 1)
-        leftContainerView.insertSubview(leftViewWrapperView, at: 2)
-        leftContainerView.insertSubview(leftViewCoverView, at: 3)
+        containerView.insertSubview(backgroundDecorationView, at: 0)
+        containerView.insertSubview(wrapperView, at: 1)
+        containerView.insertSubview(coverView, at: 2)
 
-        leftViewBackgroundView.insertSubview(leftViewBackgroundImageView, at: 0)
-        leftViewBackgroundView.insertSubview(leftViewStyleView, at: 1)
+        backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
+        backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
+        backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
 
-        leftViewWrapperView.insertSubview(leftView, at: 0)
+        if let backgroundImageView = self.leftViewBackgroundImageView {
+            backgroundWrapperView.insertSubview(backgroundImageView, at: 0)
+        }
+        else if let backgroundView = self.leftViewBackgroundView {
+            backgroundWrapperView.insertSubview(backgroundView, at: 0)
+        }
+
+        wrapperView.insertSubview(leftView, at: 0)
     }
 
     func validateRightViewsHierarchy() {
         guard let rootContainerView = self.rootContainerView,
               let rightView = self.rightView,
-              let rightContainerView = self.rightContainerView,
-              let rightViewShadowView = self.rightViewShadowView,
-              let rightViewBackgroundView = self.rightViewBackgroundView,
-              let rightViewBackgroundImageView = self.rightViewBackgroundImageView,
-              let rightViewStyleView = self.rightViewEffectView,
-              let rightViewWrapperView = self.rightViewWrapperView,
-              let rightViewCoverView = self.rightViewCoverView else { return }
+              let containerView = self.rightContainerView,
+              let backgroundDecorationView = self.rightViewBackgroundDecorationView,
+              let backgroundShadowView = self.rightViewBackgroundShadowView,
+              let backgroundWrapperView = self.rightViewBackgroundWrapperView,
+              let backgroundEffectView = self.rightViewBackgroundEffectView,
+              let wrapperView = self.rightViewWrapperView,
+              let coverView = self.rightViewCoverView else { return }
 
         if self.rightViewPresentationStyle.isAbove {
-            self.view.insertSubview(rightContainerView, aboveSubview: rootContainerView)
+            self.view.insertSubview(containerView, aboveSubview: rootContainerView)
         }
         else {
-            self.view.insertSubview(rightContainerView, belowSubview: rootContainerView)
+            self.view.insertSubview(containerView, belowSubview: rootContainerView)
         }
 
-        rightContainerView.insertSubview(rightViewShadowView, at: 0)
-        rightContainerView.insertSubview(rightViewBackgroundView, at: 1)
-        rightContainerView.insertSubview(rightViewWrapperView, at: 2)
-        rightContainerView.insertSubview(rightViewCoverView, at: 3)
+        containerView.insertSubview(backgroundDecorationView, at: 0)
+        containerView.insertSubview(wrapperView, at: 1)
+        containerView.insertSubview(coverView, at: 2)
 
-        rightViewBackgroundView.insertSubview(rightViewBackgroundImageView, at: 0)
-        rightViewBackgroundView.insertSubview(rightViewStyleView, at: 1)
+        backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
+        backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
+        backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
 
-        rightViewWrapperView.insertSubview(rightView, at: 0)
+        if let backgroundImageView = self.rightViewBackgroundImageView {
+            backgroundWrapperView.insertSubview(backgroundImageView, at: 0)
+        }
+        else if let backgroundView = self.rightViewBackgroundView {
+            backgroundWrapperView.insertSubview(backgroundView, at: 0)
+        }
+
+        wrapperView.insertSubview(rightView, at: 0)
     }
     
 }

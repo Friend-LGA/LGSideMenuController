@@ -1,5 +1,5 @@
 //
-//  LGSideMenuBackgroundView.swift
+//  LGSideMenuBackgroundShadowView.swift
 //  LGSideMenuController
 //
 //
@@ -31,16 +31,15 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-public final class LGSideMenuBackgroundView: UIView {
+public final class LGSideMenuBackgroundShadowView: UIView {
 
     public internal(set) var roundedCorners = UIRectCorner()
     public internal(set) var cornerRadius: CGFloat = .zero
-    public internal(set) var strokeColor: UIColor = .clear
-    public internal(set) var strokeWidth: CGFloat = .zero
-    public internal(set) var fillColor: UIColor = .clear
+    public internal(set) var shadowColor: UIColor = .clear
+    public internal(set) var shadowBlur: CGFloat = .zero
 
     public init() {
-        super.init(frame: .zero)
+        super.init(frame: CGRect.zero)
         self.backgroundColor = .clear
     }
 
@@ -51,47 +50,31 @@ public final class LGSideMenuBackgroundView: UIView {
     public override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
-        context.clear(rect)
+        let drawRect = rect.insetBy(dx: self.shadowBlur, dy: self.shadowBlur)
 
-        let path = UIBezierPath(roundedRect: rect,
+        let path = UIBezierPath(roundedRect: drawRect,
                                 byRoundingCorners: self.roundedCorners,
                                 cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
         path.close()
 
-        // To have inner stroke we need to fill rect and erase smaller rect from inside of it
-        if self.strokeColor != .clear && self.strokeWidth > 0 {
+        context.clear(rect)
+        context.beginPath()
+        context.addPath(path.cgPath)
+
+        // Fill it black to draw proper shadow, then erase black internals and keep only shadow
+        if shadowColor != .clear && self.shadowBlur > 0 {
+            context.setShadow(offset: .zero, blur: self.shadowBlur, color: shadowColor.cgColor)
+            context.setFillColor(UIColor.black.cgColor)
+            context.fillPath()
+            context.setShadow(offset: .zero, blur: .zero, color: nil)
+
             context.beginPath()
             context.addPath(path.cgPath)
-            context.setFillColor(strokeColor.cgColor)
-            context.fillPath()
-
-            let strokePath = getStrokedPath(rect: rect)
-            strokePath.close()
-
-            context.beginPath()
-            context.addPath(strokePath.cgPath)
             context.setFillColor(UIColor.clear.cgColor)
             context.setBlendMode(.clear)
             context.fillPath()
             context.setBlendMode(.normal)
         }
-
-        // Fill smaller rect
-        if self.fillColor != .clear {
-            let strokePath = getStrokedPath(rect: rect)
-            strokePath.close()
-
-            context.beginPath()
-            context.addPath(strokePath.cgPath)
-            context.setFillColor(fillColor.cgColor)
-            context.fillPath()
-        }
-    }
-
-    private func getStrokedPath(rect: CGRect) -> UIBezierPath {
-        return UIBezierPath(roundedRect: rect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth),
-                            byRoundingCorners: self.roundedCorners,
-                            cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
     }
 
 }

@@ -563,18 +563,74 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
+    // MARK: - Background View -
+
+    @IBInspectable
+    open var leftViewBackgroundView: UIView? {
+        willSet {
+            if newValue == nil {
+                leftViewBackgroundView?.removeFromSuperview()
+            }
+        }
+        didSet {
+            if leftViewBackgroundView != nil {
+                leftViewBackgroundImage = nil
+            }
+            setNeedsUpdateLayoutsAndStyles()
+        }
+    }
+
+    @IBInspectable
+    open var rightViewBackgroundView: UIView? {
+        willSet {
+            if newValue == nil {
+                rightViewBackgroundView?.removeFromSuperview()
+            }
+        }
+        didSet {
+            if rightViewBackgroundView != nil {
+                rightViewBackgroundImage = nil
+            }
+            setNeedsUpdateLayoutsAndStyles()
+        }
+    }
+
     // MARK: - Background Image -
 
     @IBInspectable
     open var leftViewBackgroundImage: UIImage? {
+        willSet {
+            if newValue == nil,
+               let leftViewBackgroundImageView = self.leftViewBackgroundImageView {
+                leftViewBackgroundImageView.removeFromSuperview()
+                self.leftViewBackgroundImageView = nil
+            }
+        }
         didSet {
+            if leftViewBackgroundImage != nil,
+               let leftViewBackgroundView = self.leftViewBackgroundView {
+                leftViewBackgroundView.removeFromSuperview()
+                self.leftViewBackgroundView = nil
+            }
             setNeedsUpdateLayoutsAndStyles()
         }
     }
 
     @IBInspectable
     open var rightViewBackgroundImage: UIImage? {
+        willSet {
+            if newValue == nil,
+               let rightViewBackgroundImageView = self.rightViewBackgroundImageView {
+                rightViewBackgroundImageView.removeFromSuperview()
+                self.rightViewBackgroundImageView = nil
+            }
+        }
         didSet {
+            if rightViewBackgroundImage != nil,
+               let rightViewBackgroundView = self.rightViewBackgroundView {
+                rightViewBackgroundView.removeFromSuperview()
+                self.rightViewBackgroundView = nil
+            }
             setNeedsUpdateLayoutsAndStyles()
         }
     }
@@ -1487,13 +1543,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
     @IBInspectable
-    open var leftViewBackgroundImageScaleWhenHidden: CGFloat {
+    open var leftViewBackgroundScaleWhenHidden: CGFloat {
         set {
-            _leftViewBackgroundImageScaleWhenHidden = newValue
+            _leftViewBackgroundScaleWhenHidden = newValue
         }
         get {
-            if let leftViewBackgroundImageScaleWhenHidden = _leftViewBackgroundImageScaleWhenHidden {
-                return leftViewBackgroundImageScaleWhenHidden
+            if let leftViewBackgroundScaleWhenHidden = _leftViewBackgroundScaleWhenHidden {
+                return leftViewBackgroundScaleWhenHidden
             }
             if leftViewPresentationStyle == .scaleFromBig {
                 return 1.4
@@ -1501,19 +1557,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _leftViewBackgroundImageScaleWhenHidden: CGFloat?
+    private var _leftViewBackgroundScaleWhenHidden: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
     @IBInspectable
-    open var rightViewBackgroundImageScaleWhenHidden: CGFloat {
+    open var rightViewBackgroundScaleWhenHidden: CGFloat {
         set {
-            _rightViewBackgroundImageScaleWhenHidden = newValue
+            _rightViewBackgroundScaleWhenHidden = newValue
         }
         get {
-            if let rightViewBackgroundImageScaleWhenHidden = _rightViewBackgroundImageScaleWhenHidden {
-                return rightViewBackgroundImageScaleWhenHidden
+            if let rightViewBackgroundScaleWhenHidden = _rightViewBackgroundScaleWhenHidden {
+                return rightViewBackgroundScaleWhenHidden
             }
             if rightViewPresentationStyle == .scaleFromBig {
                 return 1.4
@@ -1521,19 +1577,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rightViewBackgroundImageScaleWhenHidden: CGFloat?
+    private var _rightViewBackgroundScaleWhenHidden: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
     @IBInspectable
-    open var leftViewBackgroundImageScaleWhenShowing: CGFloat {
+    open var leftViewBackgroundScaleWhenShowing: CGFloat {
         set {
-            _leftViewBackgroundImageScaleWhenShowing = newValue
+            _leftViewBackgroundScaleWhenShowing = newValue
         }
         get {
-            if let leftViewBackgroundImageScaleWhenShowing = _leftViewBackgroundImageScaleWhenShowing {
-                return leftViewBackgroundImageScaleWhenShowing
+            if let leftViewBackgroundScaleWhenShowing = _leftViewBackgroundScaleWhenShowing {
+                return leftViewBackgroundScaleWhenShowing
             }
             if leftViewPresentationStyle == .scaleFromLittle {
                 return 1.4
@@ -1541,19 +1597,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _leftViewBackgroundImageScaleWhenShowing: CGFloat?
+    private var _leftViewBackgroundScaleWhenShowing: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
     @IBInspectable
-    open var rightViewBackgroundImageScaleWhenShowing: CGFloat {
+    open var rightViewBackgroundScaleWhenShowing: CGFloat {
         set {
-            _rightViewBackgroundImageScaleWhenShowing = newValue
+            _rightViewBackgroundScaleWhenShowing = newValue
         }
         get {
-            if let rightViewBackgroundImageScaleWhenShowing = _rightViewBackgroundImageScaleWhenShowing {
-                return rightViewBackgroundImageScaleWhenShowing
+            if let rightViewBackgroundScaleWhenShowing = _rightViewBackgroundScaleWhenShowing {
+                return rightViewBackgroundScaleWhenShowing
             }
             if rightViewPresentationStyle == .scaleFromLittle {
                 return 1.4
@@ -1561,7 +1617,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rightViewBackgroundImageScaleWhenShowing: CGFloat?
+    private var _rightViewBackgroundScaleWhenShowing: CGFloat?
 
     // MARK: - Background Image Offset -
 
@@ -1569,13 +1625,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
     /// else .zero
     @IBInspectable
-    open var leftViewBackgroundImageOffsetWhenHidden: CGPoint {
+    open var leftViewBackgroundOffsetWhenHidden: CGPoint {
         set {
-            _leftViewBackgroundImageOffsetWhenHidden = newValue
+            _leftViewBackgroundOffsetWhenHidden = newValue
         }
         get {
-            if let leftViewBackgroundImageOffsetWhenHidden = _leftViewBackgroundImageOffsetWhenHidden {
-                return leftViewBackgroundImageOffsetWhenHidden
+            if let leftViewBackgroundOffsetWhenHidden = _leftViewBackgroundOffsetWhenHidden {
+                return leftViewBackgroundOffsetWhenHidden
             }
             if leftViewPresentationStyle == .slideBelow {
                 return CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
@@ -1583,19 +1639,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return .zero
         }
     }
-    private var _leftViewBackgroundImageOffsetWhenHidden: CGPoint?
+    private var _leftViewBackgroundOffsetWhenHidden: CGPoint?
 
     /// Default:
     /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
     /// else .zero
     @IBInspectable
-    open var rightViewBackgroundImageOffsetWhenHidden: CGPoint {
+    open var rightViewBackgroundOffsetWhenHidden: CGPoint {
         set {
-            _rightViewBackgroundImageOffsetWhenHidden = newValue
+            _rightViewBackgroundOffsetWhenHidden = newValue
         }
         get {
-            if let rightViewBackgroundImageOffsetWhenHidden = _rightViewBackgroundImageOffsetWhenHidden {
-                return rightViewBackgroundImageOffsetWhenHidden
+            if let rightViewBackgroundOffsetWhenHidden = _rightViewBackgroundOffsetWhenHidden {
+                return rightViewBackgroundOffsetWhenHidden
             }
             if rightViewPresentationStyle == .slideBelow {
                 return CGPoint(x: rightViewWidth / 2.0, y: 0.0)
@@ -1603,13 +1659,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return .zero
         }
     }
-    private var _rightViewBackgroundImageOffsetWhenHidden: CGPoint?
+    private var _rightViewBackgroundOffsetWhenHidden: CGPoint?
 
     @IBInspectable
-    open var leftViewBackgroundImageOffsetWhenShowing: CGPoint = .zero
+    open var leftViewBackgroundOffsetWhenShowing: CGPoint = .zero
 
     @IBInspectable
-    open var rightViewBackgroundImageOffsetWhenShowing: CGPoint = .zero
+    open var rightViewBackgroundOffsetWhenShowing: CGPoint = .zero
 
     // MARK: - Callbacks -
 
@@ -1675,30 +1731,30 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var isNeedsUpdateRightViewLayoutsAndStyles: Bool = false
 
     open internal(set) var rootContainerView: UIView?
-    open internal(set) var rootViewShadowView: LGSideMenuShadowView?
-    open internal(set) var rootViewBackgroundView: LGSideMenuBackgroundView?
+    open internal(set) var rootViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
+    open internal(set) var rootViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
     open internal(set) var rootViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
     open internal(set) var leftContainerView: UIView?
-    open internal(set) var leftViewShadowView: LGSideMenuShadowView?
-    open internal(set) var leftViewBackgroundView: LGSideMenuBackgroundView?
+    open internal(set) var leftViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
+    open internal(set) var leftViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
+    open internal(set) var leftViewBackgroundWrapperView: UIView?
     open internal(set) var leftViewBackgroundImageView: UIImageView?
-    open internal(set) var leftViewEffectView: UIVisualEffectView?
+    open internal(set) var leftViewBackgroundEffectView: UIVisualEffectView?
     open internal(set) var leftViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
     // TODO: Add leftViewStatusBarBackgroundView
-    // TODO: Add custom backgroundView
 
     open internal(set) var rightContainerView: UIView?
-    open internal(set) var rightViewShadowView: LGSideMenuShadowView?
-    open internal(set) var rightViewBackgroundView: LGSideMenuBackgroundView?
+    open internal(set) var rightViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
+    open internal(set) var rightViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
+    open internal(set) var rightViewBackgroundWrapperView: UIView?
     open internal(set) var rightViewBackgroundImageView: UIImageView?
-    open internal(set) var rightViewEffectView: UIVisualEffectView?
+    open internal(set) var rightViewBackgroundEffectView: UIVisualEffectView?
     open internal(set) var rightViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rightViewCoverView: UIVisualEffectView?
     // TODO: Add rightViewStatusBarBackgroundView
-    // TODO: Add custom backgroundView
 
     internal var savedSize: CGSize = .zero
 

@@ -36,7 +36,7 @@ internal extension LGSideMenuController {
     // We don't nullify any of rootView, rootViewController, leftView, leftViewController, rightView, rightViewController
     // because we don't manage their lifecycle from here, they should be assigned from the outside.
 
-    // MARK: - Root View
+    // MARK: - Root View -
 
     func removeRootViewController() {
         if let rootViewController = self.rootViewController {
@@ -52,23 +52,33 @@ internal extension LGSideMenuController {
     }
 
     func removeRootDependentViews() {
-        if let rootContainerView = self.rootContainerView {
-            rootContainerView.removeFromSuperview()
+        if let containerView = self.rootContainerView {
+            containerView.removeFromSuperview()
             self.rootContainerView = nil
         }
 
-        if let rootViewCoverView = self.rootViewCoverView {
-            rootViewCoverView.removeFromSuperview()
-            self.rootViewCoverView = nil
+        if let backgroundDecorationView = self.rootViewBackgroundDecorationView {
+            backgroundDecorationView.removeFromSuperview()
+            self.rootViewBackgroundDecorationView = nil
         }
 
-        if let rootViewBackgroundView = self.rootViewBackgroundView {
-            rootViewBackgroundView.removeFromSuperview()
-            self.rootViewBackgroundView = nil
+        if let backgroundShadowView = self.rootViewBackgroundShadowView {
+            backgroundShadowView.removeFromSuperview()
+            self.rootViewBackgroundShadowView = nil
+        }
+
+        if let wrapperView = self.rootViewWrapperView {
+            wrapperView.removeFromSuperview()
+            self.rootViewWrapperView = nil
+        }
+
+        if let coverView = self.rootViewCoverView {
+            coverView.removeFromSuperview()
+            self.rootViewCoverView = nil
         }
     }
 
-    // MARK: - Left View
+    // MARK: - Left View -
 
     func removeLeftViewController() {
         if let leftViewController = self.leftViewController {
@@ -84,33 +94,53 @@ internal extension LGSideMenuController {
     }
 
     func removeLeftDependentViews() {
-        if let leftContainerView = self.leftContainerView {
-            leftContainerView.removeFromSuperview()
+        if let containerView = self.leftContainerView {
+            containerView.removeFromSuperview()
             self.leftContainerView = nil
         }
 
-        if let leftViewCoverView = self.leftViewCoverView {
-            leftViewCoverView.removeFromSuperview()
+        if let backgroundDecorationView = self.leftViewBackgroundDecorationView {
+            backgroundDecorationView.removeFromSuperview()
+            self.leftViewBackgroundDecorationView = nil
+        }
+
+        if let backgroundShadowView = self.leftViewBackgroundShadowView {
+            backgroundShadowView.removeFromSuperview()
+            self.leftViewBackgroundShadowView = nil
+        }
+
+        if let backgroundImageView = self.leftViewBackgroundImageView {
+            backgroundImageView.removeFromSuperview()
+            self.leftViewBackgroundImageView = nil
+        }
+
+        if let backgroundView = self.leftViewBackgroundView {
+            backgroundView.removeFromSuperview()
+            // We don't nullify it because it is custom property
+        }
+
+        if let backgroundEffectView = self.leftViewBackgroundEffectView {
+            backgroundEffectView.removeFromSuperview()
+            self.leftViewBackgroundEffectView = nil
+        }
+
+        if let backgroundWrapperView = self.leftViewBackgroundWrapperView {
+            backgroundWrapperView.removeFromSuperview()
+            self.leftViewBackgroundWrapperView = nil
+        }
+
+        if let wrapperView = self.leftViewWrapperView {
+            wrapperView.removeFromSuperview()
+            self.leftViewWrapperView = nil
+        }
+
+        if let coverView = self.leftViewCoverView {
+            coverView.removeFromSuperview()
             self.leftViewCoverView = nil
-        }
-
-        if let leftViewStyleView = self.leftViewEffectView {
-            leftViewStyleView.removeFromSuperview()
-            self.leftViewEffectView = nil
-        }
-
-        if let leftViewBackgroundImageView = self.leftViewBackgroundImageView {
-            leftViewBackgroundImageView.removeFromSuperview()
-            self.leftViewBackgroundImageView = nil
-        }
-
-        if let leftViewBackgroundImageView = self.leftViewBackgroundImageView {
-            leftViewBackgroundImageView.removeFromSuperview()
-            self.leftViewBackgroundImageView = nil
         }
     }
 
-    // MARK: - Right View
+    // MARK: - Right View -
 
     func removeRightViewController() {
         if let rightViewController = self.rightViewController {
@@ -126,29 +156,49 @@ internal extension LGSideMenuController {
     }
 
     func removeRightDependentViews() {
-        if let rightContainerView = self.rightContainerView {
-            rightContainerView.removeFromSuperview()
+        if let containerView = self.rightContainerView {
+            containerView.removeFromSuperview()
             self.rightContainerView = nil
         }
 
-        if let rightViewCoverView = self.rightViewCoverView {
-            rightViewCoverView.removeFromSuperview()
+        if let backgroundDecorationView = self.rightViewBackgroundDecorationView {
+            backgroundDecorationView.removeFromSuperview()
+            self.rightViewBackgroundDecorationView = nil
+        }
+
+        if let backgroundShadowView = self.rightViewBackgroundShadowView {
+            backgroundShadowView.removeFromSuperview()
+            self.rightViewBackgroundShadowView = nil
+        }
+
+        if let backgroundImageView = self.rightViewBackgroundImageView {
+            backgroundImageView.removeFromSuperview()
+            self.rightViewBackgroundImageView = nil
+        }
+
+        if let backgroundView = self.rightViewBackgroundView {
+            backgroundView.removeFromSuperview()
+            // We don't nullify it because it is custom property
+        }
+
+        if let backgroundEffectView = self.rightViewBackgroundEffectView {
+            backgroundEffectView.removeFromSuperview()
+            self.rightViewBackgroundEffectView = nil
+        }
+
+        if let backgroundWrapperView = self.rightViewBackgroundWrapperView {
+            backgroundWrapperView.removeFromSuperview()
+            self.rightViewBackgroundWrapperView = nil
+        }
+
+        if let wrapperView = self.rightViewWrapperView {
+            wrapperView.removeFromSuperview()
+            self.rightViewWrapperView = nil
+        }
+
+        if let coverView = self.rightViewCoverView {
+            coverView.removeFromSuperview()
             self.rightViewCoverView = nil
-        }
-
-        if let rightViewStyleView = self.rightViewEffectView {
-            rightViewStyleView.removeFromSuperview()
-            self.rightViewEffectView = nil
-        }
-
-        if let rightViewBackgroundImageView = self.rightViewBackgroundImageView {
-            rightViewBackgroundImageView.removeFromSuperview()
-            self.rightViewBackgroundImageView = nil
-        }
-
-        if let rightViewBackgroundImageView = self.rightViewBackgroundImageView {
-            rightViewBackgroundImageView.removeFromSuperview()
-            self.rightViewBackgroundImageView = nil
         }
     }
 

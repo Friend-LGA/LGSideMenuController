@@ -40,29 +40,29 @@ internal extension LGSideMenuController {
 
     func validateRootViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
-              let rootViewShadowView = self.rootViewShadowView,
-              let rootViewCoverView = self.rootViewCoverView else { return }
+              let backgroundDecorationView = self.rootViewBackgroundDecorationView,
+              let coverView = self.rootViewCoverView else { return }
 
-        rootViewShadowView.isHidden = self.isRootViewShowing && !self.isLeftViewAlwaysVisible && !self.isRightViewAlwaysVisible
-        rootViewCoverView.isHidden = self.isRootViewShowing
+        backgroundDecorationView.isHidden = self.isRootViewShowing && !self.isLeftViewAlwaysVisible && !self.isRightViewAlwaysVisible
+        coverView.isHidden = self.isRootViewShowing
     }
 
     func validateLeftViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
-              let leftContainerView = self.leftContainerView,
-              let leftViewCoverView = self.leftViewCoverView else { return }
+              let containerView = self.leftContainerView,
+              let coverView = self.leftViewCoverView else { return }
 
-        leftContainerView.isHidden = !self.isLeftViewVisibleToUser
-        leftViewCoverView.isHidden = self.isLeftViewShowing || (self.isLeftViewAlwaysVisible && !self.isRightViewVisible)
+        containerView.isHidden = !self.isLeftViewVisibleToUser
+        coverView.isHidden = self.isLeftViewShowing || (self.isLeftViewAlwaysVisible && !self.isRightViewVisible)
     }
 
     func validateRightViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
-              let rightContainerView = self.rightContainerView,
-              let rightViewCoverView = self.rightViewCoverView else { return }
+              let containerView = self.rightContainerView,
+              let coverView = self.rightViewCoverView else { return }
 
-        rightContainerView.isHidden = !self.isRightViewVisibleToUser
-        rightViewCoverView.isHidden = self.isRightViewShowing || (self.isRightViewAlwaysVisible && !self.isLeftViewVisible)
+        containerView.isHidden = !self.isRightViewVisibleToUser
+        coverView.isHidden = self.isRightViewShowing || (self.isRightViewAlwaysVisible && !self.isLeftViewVisible)
     }
 
 }
