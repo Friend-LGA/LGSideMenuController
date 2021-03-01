@@ -130,15 +130,31 @@ class MainViewController: LGSideMenuController {
             rightViewPresentationStyle = .slideBelow
             rightViewBackgroundImage = UIImage(named: "imageRight")
         case .styleSlideAside:
+            let leftImageView = UIImageView(image: UIImage(named: "imageLeft"))
+            leftImageView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let leftBackgroundEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
+            leftBackgroundEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let leftBackgroundView = UIView()
+            leftBackgroundView.addSubview(leftImageView)
+            leftBackgroundView.addSubview(leftBackgroundEffectView)
+            leftBackgroundView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+
             leftViewPresentationStyle = .slideAside
-            leftViewBackgroundImage = UIImage(named: "imageLeft")
-            leftViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            leftViewBackgroundView = leftBackgroundView
             leftViewLayerBorderWidth = 1.0
             leftViewLayerBorderColor = isLightTheme() ? .white : .black
 
+            let rightImageView = UIImageView(image: UIImage(named: "imageRight"))
+            rightImageView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let rightBackgroundEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
+            rightBackgroundEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let rightBackgroundView = UIView()
+            rightBackgroundView.addSubview(rightImageView)
+            rightBackgroundView.addSubview(rightBackgroundEffectView)
+            rightBackgroundView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+
             rightViewPresentationStyle = .slideAside
-            rightViewBackgroundImage = UIImage(named: "imageRight")
-            rightViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            rightViewBackgroundView = rightBackgroundView
             rightViewLayerBorderWidth = 1.0
             rightViewLayerBorderColor = isLightTheme() ? .white : .black
         case .styleScaleFromLittle:
@@ -178,16 +194,32 @@ class MainViewController: LGSideMenuController {
             rightViewBackgroundColor = UIColor(red: 1.0, green: 0.0, blue: 1.0, alpha: 0.05)
             rootViewCoverColorForRightView = purpleCoverColor
         case .landscapeIsAlwaysVisible:
+            let leftImageView = UIImageView(image: UIImage(named: "imageLeft"))
+            leftImageView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let leftBackgroundEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
+            leftBackgroundEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let leftBackgroundView = UIView()
+            leftBackgroundView.addSubview(leftImageView)
+            leftBackgroundView.addSubview(leftBackgroundEffectView)
+            leftBackgroundView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+
             leftViewPresentationStyle = .slideAside
-            leftViewBackgroundImage = UIImage(named: "imageLeft")
-            leftViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            leftViewBackgroundView = leftBackgroundView
             leftViewLayerBorderWidth = 1.0
             leftViewLayerBorderColor = isLightTheme() ? .white : .black
 
+            let rightImageView = UIImageView(image: UIImage(named: "imageRight"))
+            rightImageView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let rightBackgroundEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
+            rightBackgroundEffectView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            let rightBackgroundView = UIView()
+            rightBackgroundView.addSubview(rightImageView)
+            rightBackgroundView.addSubview(rightBackgroundEffectView)
+            rightBackgroundView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+
             rightViewAlwaysVisibleOptions = .landscape
             rightViewPresentationStyle = .slideAside
-            rightViewBackgroundImage = UIImage(named: "imageRight")
-            rightViewBackgroundBlurEffect = UIBlurEffect(style: blurStyle)
+            rightViewBackgroundView = rightBackgroundView
             rightViewLayerBorderWidth = 1.0
             rightViewLayerBorderColor = isLightTheme() ? .white : .black
         case .statusBarIsAlwaysVisible:
@@ -225,7 +257,7 @@ class MainViewController: LGSideMenuController {
             leftViewPresentationStyle = .scaleFromBig
             leftViewAnimationDuration = 1.0
             leftViewBackgroundColor = UIColor(red: 0.5, green: 0.75, blue: 0.5, alpha: 1.0)
-            leftViewBackgroundImageScaleWhenHidden = 1.5
+            leftViewBackgroundScaleWhenHidden = 1.5
             leftViewOffsetWhenHidden.x = -200.0
             leftViewScaleWhenHidden = 1.5
             leftViewCoverBlurEffect = UIBlurEffect(style: .dark)

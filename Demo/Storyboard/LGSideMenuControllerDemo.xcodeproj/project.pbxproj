@@ -15,8 +15,8 @@
 		4A7BF8F41E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7BF8F31E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift */; };
 		D9201FEE25DF2D3500E49A71 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201FED25DF2D3500E49A71 /* Helper.swift */; };
 		D9201FF125DF2D3E00E49A71 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201FF025DF2D3E00E49A71 /* MainViewController.swift */; };
-		D935343A25E25DAE00F79637 /* LGSideMenuBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343825E25DAE00F79637 /* LGSideMenuBackgroundView.swift */; };
-		D935343B25E25DAE00F79637 /* LGSideMenuShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935343925E25DAE00F79637 /* LGSideMenuShadowView.swift */; };
+		D938FAEC25ED497200887D87 /* LGSideMenuBackgroundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */; };
+		D938FAED25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938FAEB25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift */; };
 		D93CB7BB25DEDF6200DFD5A7 /* LGSideMenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93CB7A225DEDF6200DFD5A7 /* LGSideMenuHelper.swift */; };
 		D93CB7BC25DEDF6200DFD5A7 /* LGSideMenuController+LeftViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93CB7A425DEDF6200DFD5A7 /* LGSideMenuController+LeftViewActions.swift */; };
 		D93CB7BD25DEDF6200DFD5A7 /* LGSideMenuController+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93CB7A525DEDF6200DFD5A7 /* LGSideMenuController+Callbacks.swift */; };
@@ -62,8 +62,8 @@
 		4A7BF8F31E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewControllerWithTableView.swift; sourceTree = "<group>"; };
 		D9201FED25DF2D3500E49A71 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = ../../_shared_files/Helper.swift; sourceTree = "<group>"; };
 		D9201FF025DF2D3E00E49A71 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../../_shared_files/MainViewController.swift; sourceTree = "<group>"; };
-		D935343825E25DAE00F79637 /* LGSideMenuBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundView.swift; sourceTree = "<group>"; };
-		D935343925E25DAE00F79637 /* LGSideMenuShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuShadowView.swift; sourceTree = "<group>"; };
+		D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundShadowView.swift; sourceTree = "<group>"; };
+		D938FAEB25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		D93CB7A225DEDF6200DFD5A7 /* LGSideMenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuHelper.swift; sourceTree = "<group>"; };
 		D93CB7A425DEDF6200DFD5A7 /* LGSideMenuController+LeftViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+LeftViewActions.swift"; sourceTree = "<group>"; };
 		D93CB7A525DEDF6200DFD5A7 /* LGSideMenuController+Callbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+Callbacks.swift"; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 				D93CB7B825DEDF6200DFD5A7 /* LGSideMenuController.swift */,
 				D93CB7A225DEDF6200DFD5A7 /* LGSideMenuHelper.swift */,
 				D93CB7B925DEDF6200DFD5A7 /* LGSideMenuWrapperView.swift */,
-				D935343825E25DAE00F79637 /* LGSideMenuBackgroundView.swift */,
-				D935343925E25DAE00F79637 /* LGSideMenuShadowView.swift */,
+				D938FAEB25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift */,
+				D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */,
 				D93CB7B625DEDF6200DFD5A7 /* LGSideMenuDelegate.swift */,
 				D942388425DEE94600534976 /* LGSideMenuSegue.swift */,
 				D93CB7B725DEDF6200DFD5A7 /* UIViewController+LGSideMenuController.swift */,
@@ -332,7 +332,6 @@
 			files = (
 				D93CB7C625DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsStyles.swift in Sources */,
 				EDE795361D45BAAD002930CA /* LeftViewCell.swift in Sources */,
-				D935343A25E25DAE00F79637 /* LGSideMenuBackgroundView.swift in Sources */,
 				EDE795321D45BA9B002930CA /* RightViewController.swift in Sources */,
 				D93CB7C525DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsHierarchy.swift in Sources */,
 				EDE795341D45BAA7002930CA /* RightViewCell.swift in Sources */,
@@ -340,7 +339,9 @@
 				4A7BF8F41E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift in Sources */,
 				D93CB7CF25DEDF6200DFD5A7 /* LGSideMenuController.swift in Sources */,
 				D93CB7C725DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsVisibility.swift in Sources */,
+				D938FAED25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift in Sources */,
 				D9E57C1425E6FBB000E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */,
+				D938FAEC25ED497200887D87 /* LGSideMenuBackgroundShadowView.swift in Sources */,
 				EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */,
 				D93CB7CA25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */,
 				D93CB7BB25DEDF6200DFD5A7 /* LGSideMenuHelper.swift in Sources */,
@@ -360,7 +361,6 @@
 				D942388525DEE94600534976 /* LGSideMenuSegue.swift in Sources */,
 				D93CB7CB25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsTransforms.swift in Sources */,
 				D93CB7CE25DEDF6200DFD5A7 /* UIViewController+LGSideMenuController.swift in Sources */,
-				D935343B25E25DAE00F79637 /* LGSideMenuShadowView.swift in Sources */,
 				D93CB7CD25DEDF6200DFD5A7 /* LGSideMenuDelegate.swift in Sources */,
 				D93CB7C025DEDF6200DFD5A7 /* LGSideMenuController+RightViewActions.swift in Sources */,
 				D93CB7C225DEDF6200DFD5A7 /* LGSideMenuController+Helpers.swift in Sources */,
