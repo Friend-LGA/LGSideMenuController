@@ -81,10 +81,10 @@ internal extension LGSideMenuController {
             }
             var rootViewScale: CGFloat = 1.0
             if isLeftViewMoving {
-                rootViewScale = self.rootViewScaleForLeftView
+                rootViewScale = self.rootViewScaleWhenHiddenForLeftView
             }
             if isRightViewMoving {
-                rootViewScale = self.rootViewScaleForRightView
+                rootViewScale = self.rootViewScaleWhenHiddenForRightView
             }
             return 1.0 + (rootViewScale - 1.0) * percentage
         }()
@@ -160,7 +160,7 @@ internal extension LGSideMenuController {
 
         let backgroundViewTransform: CGAffineTransform = {
             if !self.isLeftViewAlwaysVisible {
-                let scale = self.leftViewBackgroundImageFinalScale + ((self.leftViewBackgroundImageInitialScale - self.leftViewBackgroundImageFinalScale) * (1.0 - percentage))
+                let scale = self.leftViewBackgroundImageScaleWhenShowing + ((self.leftViewBackgroundImageScaleWhenHidden - self.leftViewBackgroundImageScaleWhenShowing) * (1.0 - percentage))
                 return CGAffineTransform(scaleX: scale, y: scale)
             }
             return .identity
@@ -168,10 +168,11 @@ internal extension LGSideMenuController {
 
         let wrapperViewTransform: CGAffineTransform = {
             if !self.isLeftViewAlwaysVisible {
-                let scale = 1.0 + (self.leftViewInitialScale - 1.0) * (1.0 - percentage)
-                let offset = self.leftViewInitialOffsetX * (1.0 - percentage)
+                let scale = 1.0 + (self.leftViewScaleWhenHidden - 1.0) * (1.0 - percentage)
+                let offsetX = self.leftViewOffsetWhenHidden.x * (1.0 - percentage)
+                let offsetY = self.leftViewOffsetWhenHidden.y * (1.0 - percentage)
 
-                let transformTranslate = CGAffineTransform(translationX: offset, y: 0.0)
+                let transformTranslate = CGAffineTransform(translationX: offsetX, y: offsetY)
                 let transformScale = CGAffineTransform(scaleX: scale, y: scale)
 
                 return transformTranslate.concatenating(transformScale)
@@ -235,7 +236,7 @@ internal extension LGSideMenuController {
 
         let backgroundViewTransform: CGAffineTransform = {
             if !self.isRightViewAlwaysVisible {
-                let scale = self.rightViewBackgroundImageFinalScale + ((self.rightViewBackgroundImageInitialScale - self.rightViewBackgroundImageFinalScale) * (1.0 - percentage))
+                let scale = self.rightViewBackgroundImageScaleWhenShowing + ((self.rightViewBackgroundImageScaleWhenHidden - self.rightViewBackgroundImageScaleWhenShowing) * (1.0 - percentage))
                 return CGAffineTransform(scaleX: scale, y: scale)
             }
             return .identity
@@ -243,10 +244,11 @@ internal extension LGSideMenuController {
 
         let wrapperViewTransform: CGAffineTransform = {
             if !self.isRightViewAlwaysVisible {
-                let scale = 1.0 + (self.rightViewInitialScale - 1.0) * (1.0 - percentage)
-                let offset = self.rightViewInitialOffsetX * (1.0 - percentage)
+                let scale = 1.0 + (self.rightViewScaleWhenHidden - 1.0) * (1.0 - percentage)
+                let offsetX = self.rightViewOffsetWhenHidden.x * (1.0 - percentage)
+                let offsetY = self.rightViewOffsetWhenHidden.y * (1.0 - percentage)
 
-                let transformTranslate = CGAffineTransform(translationX: offset, y: 0.0)
+                let transformTranslate = CGAffineTransform(translationX: offsetX, y: offsetY)
                 let transformScale = CGAffineTransform(scaleX: scale, y: scale)
 
                 return transformTranslate.concatenating(transformScale)

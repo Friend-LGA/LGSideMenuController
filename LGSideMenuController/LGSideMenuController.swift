@@ -1294,64 +1294,64 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Offset -
 
     /// Default:
-    /// if presentationStyle == .slideBelow then -(leftViewWidth / 2.0)
+    /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
     /// else 0.0
     @IBInspectable
-    open var leftViewInitialOffsetX: CGFloat {
+    open var leftViewOffsetWhenHidden: CGPoint {
         set {
-            _leftViewInitialOffsetX = newValue
+            _leftViewOffsetWhenHidden = newValue
         }
         get {
-            if let leftViewInitialOffsetX = _leftViewInitialOffsetX {
-                return leftViewInitialOffsetX
+            if let leftViewOffsetWhenHidden = _leftViewOffsetWhenHidden {
+                return leftViewOffsetWhenHidden
             }
             if leftViewPresentationStyle == .slideBelow {
-                return -(leftViewWidth / 2.0)
+                return CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
             }
-            return 0.0
+            return .zero
         }
     }
-    private var _leftViewInitialOffsetX: CGFloat?
+    private var _leftViewOffsetWhenHidden: CGPoint?
 
     /// Default:
-    /// if presentationStyle == .slideBelow then rightViewWidth / 2.0
+    /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
     /// else 0.0
     @IBInspectable
-    open var rightViewInitialOffsetX: CGFloat {
+    open var rightViewOffsetWhenHidden: CGPoint {
         set {
-            _rightViewInitialOffsetX = newValue
+            _rightViewOffsetWhenHidden = newValue
         }
         get {
-            if let rightViewInitialOffsetX = _rightViewInitialOffsetX {
-                return rightViewInitialOffsetX
+            if let rightViewOffsetWhenHidden = _rightViewOffsetWhenHidden {
+                return rightViewOffsetWhenHidden
             }
             if rightViewPresentationStyle == .slideBelow {
-                return rightViewWidth / 2.0
+                return CGPoint(x: rightViewWidth / 2.0, y: 0.0)
             }
-            return 0.0
+            return .zero
         }
     }
-    private var _rightViewInitialOffsetX: CGFloat?
+    private var _rightViewOffsetWhenHidden: CGPoint?
 
     // MARK: - Scale -
 
-    open var rootViewScale: CGFloat?
+    open var rootViewScaleWhenHidden: CGFloat?
 
     /// Default:
-    /// rootViewScale if assigned
+    /// rootViewScaleWhenHidden if assigned
     /// if presentationStyle.shouldRootViewScale then 0.8
     /// else 1.0
     @IBInspectable
-    open var rootViewScaleForLeftView: CGFloat {
+    open var rootViewScaleWhenHiddenForLeftView: CGFloat {
         set {
-            _rootViewScaleForLeftView = newValue
+            _rootViewScaleWhenHiddenForLeftView = newValue
         }
         get {
-            if let rootViewScaleForLeftView = _rootViewScaleForLeftView {
-                return rootViewScaleForLeftView
+            if let rootViewScaleWhenHiddenForLeftView = _rootViewScaleWhenHiddenForLeftView {
+                return rootViewScaleWhenHiddenForLeftView
             }
-            if let rootViewScaleForLeftView = rootViewScale {
-                return rootViewScaleForLeftView
+            if let rootViewScaleWhenHiddenForLeftView = rootViewScaleWhenHidden {
+                return rootViewScaleWhenHiddenForLeftView
             }
             if leftViewPresentationStyle.shouldRootViewScale {
                 return 0.8
@@ -1359,23 +1359,23 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rootViewScaleForLeftView: CGFloat?
+    private var _rootViewScaleWhenHiddenForLeftView: CGFloat?
 
     /// Default:
-    /// rootViewScale if assigned
+    /// rootViewScaleWhenHidden if assigned
     /// if presentationStyle.shouldRootViewScale then 0.8
     /// else 1.0
     @IBInspectable
-    open var rootViewScaleForRightView: CGFloat {
+    open var rootViewScaleWhenHiddenForRightView: CGFloat {
         set {
-            _rootViewScaleForRightView = newValue
+            _rootViewScaleWhenHiddenForRightView = newValue
         }
         get {
-            if let rootViewScaleForRightView = _rootViewScaleForRightView {
-                return rootViewScaleForRightView
+            if let rootViewScaleWhenHiddenForRightView = _rootViewScaleWhenHiddenForRightView {
+                return rootViewScaleWhenHiddenForRightView
             }
-            if let rootViewScaleForRightView = rootViewScale {
-                return rootViewScaleForRightView
+            if let rootViewScaleWhenHiddenForRightView = rootViewScaleWhenHidden {
+                return rootViewScaleWhenHiddenForRightView
             }
             if rightViewPresentationStyle.shouldRootViewScale {
                 return 0.8
@@ -1383,7 +1383,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rootViewScaleForRightView: CGFloat?
+    private var _rootViewScaleWhenHiddenForRightView: CGFloat?
 
     // TODO: Add property for backgroundImageView offset
 
@@ -1392,13 +1392,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// if presentationStyle == .scaleFromLittle then 0.8
     /// else 1.0
     @IBInspectable
-    open var leftViewInitialScale: CGFloat {
+    open var leftViewScaleWhenHidden: CGFloat {
         set {
-            _leftViewInitialScale = newValue
+            _leftViewScaleWhenHidden = newValue
         }
         get {
-            if let leftViewInitialScale = _leftViewInitialScale {
-                return leftViewInitialScale
+            if let leftViewScaleWhenHidden = _leftViewScaleWhenHidden {
+                return leftViewScaleWhenHidden
             }
             if leftViewPresentationStyle == .scaleFromBig {
                 return 1.2
@@ -1409,20 +1409,20 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _leftViewInitialScale: CGFloat?
+    private var _leftViewScaleWhenHidden: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.2
     /// if presentationStyle == .scaleFromLittle then 0.8
     /// else 1.0
     @IBInspectable
-    open var rightViewInitialScale: CGFloat {
+    open var rightViewScaleWhenHidden: CGFloat {
         set {
-            _rightViewInitialScale = newValue
+            _rightViewScaleWhenHidden = newValue
         }
         get {
-            if let rightViewInitialScale = _rightViewInitialScale {
-                return rightViewInitialScale
+            if let rightViewScaleWhenHidden = _rightViewScaleWhenHidden {
+                return rightViewScaleWhenHidden
             }
             if rightViewPresentationStyle == .scaleFromBig {
                 return 1.2
@@ -1433,7 +1433,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rightViewInitialScale: CGFloat?
+    private var _rightViewScaleWhenHidden: CGFloat?
 
     // MARK: - Background Image Scale -
 
@@ -1441,13 +1441,13 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
     @IBInspectable
-    open var leftViewBackgroundImageInitialScale: CGFloat {
+    open var leftViewBackgroundImageScaleWhenHidden: CGFloat {
         set {
-            _leftViewBackgroundImageInitialScale = newValue
+            _leftViewBackgroundImageScaleWhenHidden = newValue
         }
         get {
-            if let leftViewBackgroundImageInitialScale = _leftViewBackgroundImageInitialScale {
-                return leftViewBackgroundImageInitialScale
+            if let leftViewBackgroundImageScaleWhenHidden = _leftViewBackgroundImageScaleWhenHidden {
+                return leftViewBackgroundImageScaleWhenHidden
             }
             if leftViewPresentationStyle == .scaleFromBig {
                 return 1.4
@@ -1455,19 +1455,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _leftViewBackgroundImageInitialScale: CGFloat?
+    private var _leftViewBackgroundImageScaleWhenHidden: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromBig then 1.4
     /// else 1.0
     @IBInspectable
-    open var rightViewBackgroundImageInitialScale: CGFloat {
+    open var rightViewBackgroundImageScaleWhenHidden: CGFloat {
         set {
-            _rightViewBackgroundImageInitialScale = newValue
+            _rightViewBackgroundImageScaleWhenHidden = newValue
         }
         get {
-            if let rightViewBackgroundImageInitialScale = _rightViewBackgroundImageInitialScale {
-                return rightViewBackgroundImageInitialScale
+            if let rightViewBackgroundImageScaleWhenHidden = _rightViewBackgroundImageScaleWhenHidden {
+                return rightViewBackgroundImageScaleWhenHidden
             }
             if rightViewPresentationStyle == .scaleFromBig {
                 return 1.4
@@ -1475,19 +1475,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rightViewBackgroundImageInitialScale: CGFloat?
+    private var _rightViewBackgroundImageScaleWhenHidden: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
     @IBInspectable
-    open var leftViewBackgroundImageFinalScale: CGFloat {
+    open var leftViewBackgroundImageScaleWhenShowing: CGFloat {
         set {
-            _leftViewBackgroundImageFinalScale = newValue
+            _leftViewBackgroundImageScaleWhenShowing = newValue
         }
         get {
-            if let leftViewBackgroundImageFinalScale = _leftViewBackgroundImageFinalScale {
-                return leftViewBackgroundImageFinalScale
+            if let leftViewBackgroundImageScaleWhenShowing = _leftViewBackgroundImageScaleWhenShowing {
+                return leftViewBackgroundImageScaleWhenShowing
             }
             if leftViewPresentationStyle == .scaleFromLittle {
                 return 1.4
@@ -1495,19 +1495,19 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _leftViewBackgroundImageFinalScale: CGFloat?
+    private var _leftViewBackgroundImageScaleWhenShowing: CGFloat?
 
     /// Default:
     /// if presentationStyle == .scaleFromLittle then 1.4
     /// else 1.0
     @IBInspectable
-    open var rightViewBackgroundImageFinalScale: CGFloat {
+    open var rightViewBackgroundImageScaleWhenShowing: CGFloat {
         set {
-            _rightViewBackgroundImageFinalScale = newValue
+            _rightViewBackgroundImageScaleWhenShowing = newValue
         }
         get {
-            if let rightViewBackgroundImageFinalScale = _rightViewBackgroundImageFinalScale {
-                return rightViewBackgroundImageFinalScale
+            if let rightViewBackgroundImageScaleWhenShowing = _rightViewBackgroundImageScaleWhenShowing {
+                return rightViewBackgroundImageScaleWhenShowing
             }
             if rightViewPresentationStyle == .scaleFromLittle {
                 return 1.4
@@ -1515,7 +1515,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return 1.0
         }
     }
-    private var _rightViewBackgroundImageFinalScale: CGFloat?
+    private var _rightViewBackgroundImageScaleWhenShowing: CGFloat?
 
     // MARK: - Callbacks -
 
