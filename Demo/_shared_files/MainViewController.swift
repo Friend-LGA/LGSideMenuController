@@ -8,7 +8,9 @@ import UIKit
 
 public enum DemoType: Int, CaseIterable {
     case styleScaleFromBig
+    case styleSlideAboveBlurred
     case styleSlideAbove
+    case styleSlideBelowShifted
     case styleSlideBelow
     case styleSlideAside
     case styleScaleFromLittle
@@ -25,8 +27,12 @@ public enum DemoType: Int, CaseIterable {
         switch self {
         case .styleScaleFromBig:
             return "Style \"Scale From Big\""
+        case .styleSlideAboveBlurred:
+            return "Style \"Slide Above Blurred\""
         case .styleSlideAbove:
             return "Style \"Slide Above\""
+        case .styleSlideBelowShifted:
+            return "Style \"Slide Below Shifted\""
         case .styleSlideBelow:
             return "Style \"Slide Below\""
         case .styleSlideAside:
@@ -115,14 +121,28 @@ class MainViewController: LGSideMenuController {
 
             rightViewPresentationStyle = .scaleFromBig
             rightViewBackgroundImage = UIImage(named: "imageRight")
+        case .styleSlideAboveBlurred:
+            leftViewPresentationStyle = .slideAboveBlurred
+            leftViewBackgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.05)
+            rootViewCoverColorForLeftView = greenCoverColor
+
+            rightViewPresentationStyle = .slideAboveBlurred
+            rightViewBackgroundColor = UIColor(red: 1.0, green: 0.0, blue: 1.0, alpha: 0.05)
+            rootViewCoverColorForRightView = purpleCoverColor
         case .styleSlideAbove:
             leftViewPresentationStyle = .slideAbove
-            leftViewBackgroundColor = UIColor(red: 0.5, green: 0.65, blue: 0.5, alpha: 0.95)
+            leftViewBackgroundColor = UIColor(red: 0.45, green: 0.6, blue: 0.45, alpha: 1.0)
             rootViewCoverColorForLeftView = greenCoverColor
 
             rightViewPresentationStyle = .slideAbove
-            rightViewBackgroundColor = UIColor(red: 0.65, green: 0.5, blue: 0.65, alpha: 0.95)
+            rightViewBackgroundColor = UIColor(red: 0.6, green: 0.45, blue: 0.6, alpha: 1.0)
             rootViewCoverColorForRightView = purpleCoverColor
+        case .styleSlideBelowShifted:
+            leftViewPresentationStyle = .slideBelowShifted
+            leftViewBackgroundImage = UIImage(named: "imageLeft")
+
+            rightViewPresentationStyle = .slideBelowShifted
+            rightViewBackgroundImage = UIImage(named: "imageRight")
         case .styleSlideBelow:
             leftViewPresentationStyle = .slideBelow
             leftViewBackgroundImage = UIImage(named: "imageLeft")
