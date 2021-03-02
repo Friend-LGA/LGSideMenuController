@@ -177,7 +177,9 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     public enum PresentationStyle {
         case slideAbove
+        case slideAboveBlurred
         case slideBelow
+        case slideBelowShifted
         case slideAside
         case scaleFromBig
         case scaleFromLittle
@@ -188,31 +190,54 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
 
         public var isAbove: Bool {
-            return self == .slideAbove
+            return
+                self == .slideAbove ||
+                self == .slideAboveBlurred
         }
 
         public var isBelow: Bool {
-            return self == .slideBelow || self == .scaleFromBig || self == .scaleFromLittle
+            return
+                self == .slideBelow ||
+                self == .slideBelowShifted ||
+                self == .scaleFromBig ||
+                self == .scaleFromLittle
         }
 
         public var isHiddenAside: Bool {
-            return self == .slideAbove || self == .slideAside
+            return
+                self == .slideAbove ||
+                self == .slideAboveBlurred ||
+                self == .slideAside
         }
 
         public var isWidthFull: Bool {
-            return self == .slideBelow || self == .scaleFromBig || self == .scaleFromLittle
+            return
+                self == .slideBelow ||
+                self == .slideBelowShifted ||
+                self == .scaleFromBig ||
+                self == .scaleFromLittle
         }
 
         public var isWidthCompact: Bool {
-            return self == .slideAbove || self == .slideAside
+            return
+                self == .slideAbove ||
+                self == .slideAboveBlurred ||
+                self == .slideAside
         }
 
         public var shouldRootViewMove: Bool {
-            return self == .slideBelow || self == .slideAside || self == .scaleFromBig || self == .scaleFromLittle
+            return
+                self == .slideBelow ||
+                self == .slideBelowShifted ||
+                self == .slideAside ||
+                self == .scaleFromBig ||
+                self == .scaleFromLittle
         }
 
         public var shouldRootViewScale: Bool {
-            return self == .scaleFromBig || self == .scaleFromLittle
+            return
+                self == .scaleFromBig ||
+                self == .scaleFromLittle
         }
     }
 
@@ -638,11 +663,57 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Background Blur Effect -
 
+    /// Default:
+    /// if presentationStyle == .slideAboveBlurred then .regular
+    /// else nil
     @IBInspectable
-    open var leftViewBackgroundBlurEffect: UIBlurEffect?
+    open var leftViewBackgroundBlurEffect: UIBlurEffect? {
+        set {
+            _leftViewBackgroundBlurEffect = newValue
+            _isLeftViewBackgroundBlurEffectAssigned = true
+        }
+        get {
+            if _isLeftViewBackgroundBlurEffectAssigned {
+                return _leftViewBackgroundBlurEffect
+            }
+            if leftViewPresentationStyle == .slideAboveBlurred {
+                if #available(iOS 10.0, *) {
+                    return UIBlurEffect(style: .regular)
+                } else {
+                    return UIBlurEffect(style: .light)
+                }
+            }
+            return nil
+        }
+    }
+    open var _leftViewBackgroundBlurEffect: UIBlurEffect?
+    open var _isLeftViewBackgroundBlurEffectAssigned: Bool = false
 
+    /// Default:
+    /// if presentationStyle == .slideAboveBlurred then .regular
+    /// else nil
     @IBInspectable
-    open var rightViewBackgroundBlurEffect: UIBlurEffect?
+    open var rightViewBackgroundBlurEffect: UIBlurEffect? {
+        set {
+            _rightViewBackgroundBlurEffect = newValue
+            _isRightViewBackgroundBlurEffectAssigned = true
+        }
+        get {
+            if _isRightViewBackgroundBlurEffectAssigned {
+                return _rightViewBackgroundBlurEffect
+            }
+            if rightViewPresentationStyle == .slideAboveBlurred {
+                if #available(iOS 10.0, *) {
+                    return UIBlurEffect(style: .regular)
+                } else {
+                    return UIBlurEffect(style: .light)
+                }
+            }
+            return nil
+        }
+    }
+    open var _rightViewBackgroundBlurEffect: UIBlurEffect?
+    open var _isRightViewBackgroundBlurEffectAssigned: Bool = false
 
     // MARK: - Background Alpha -
 
@@ -1385,13 +1456,14 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Status Bar Background Blur Effect -
 
     @IBInspectable
-    open var leftViewStatusBarBackgroundBlurEffect: UIBlurEffect {
+    open var leftViewStatusBarBackgroundBlurEffect: UIBlurEffect? {
         set {
             _leftViewStatusBarBackgroundBlurEffect = newValue
+            _isLeftViewStatusBarBackgroundBlurEffectAssigned = true
         }
         get {
-            if let leftViewStatusBarBackgroundBlurEffect = _leftViewStatusBarBackgroundBlurEffect {
-                return leftViewStatusBarBackgroundBlurEffect
+            if _isLeftViewStatusBarBackgroundBlurEffectAssigned {
+                return _leftViewStatusBarBackgroundBlurEffect
             }
             if leftViewStatusBarStyle == .lightContent {
                 return UIBlurEffect(style: .dark)
@@ -1408,15 +1480,17 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     open var _leftViewStatusBarBackgroundBlurEffect: UIBlurEffect?
+    open var _isLeftViewStatusBarBackgroundBlurEffectAssigned: Bool = false
 
     @IBInspectable
-    open var rightViewStatusBarBackgroundBlurEffect: UIBlurEffect {
+    open var rightViewStatusBarBackgroundBlurEffect: UIBlurEffect? {
         set {
             _rightViewStatusBarBackgroundBlurEffect = newValue
+            _isRightViewStatusBarBackgroundBlurEffectAssigned = true
         }
         get {
-            if let rightViewStatusBarBackgroundBlurEffect = _rightViewStatusBarBackgroundBlurEffect {
-                return rightViewStatusBarBackgroundBlurEffect
+            if _isRightViewStatusBarBackgroundBlurEffectAssigned {
+                return _rightViewStatusBarBackgroundBlurEffect
             }
             if rightViewStatusBarStyle == .lightContent {
                 return UIBlurEffect(style: .dark)
@@ -1433,6 +1507,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     open var _rightViewStatusBarBackgroundBlurEffect: UIBlurEffect?
+    open var _isRightViewStatusBarBackgroundBlurEffectAssigned: Bool = false
 
     // MARK: - Status Bar Background Alpha -
 
@@ -1591,7 +1666,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _rootViewOffsetWhenHiddenForRightView: CGPoint?
 
     /// Default:
-    /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
+    /// if presentationStyle == .slideBelowShifted then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
     /// else .zero
     @IBInspectable
     open var leftViewOffsetWhenHidden: CGPoint {
@@ -1602,7 +1677,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewOffsetWhenHidden = _leftViewOffsetWhenHidden {
                 return leftViewOffsetWhenHidden
             }
-            if leftViewPresentationStyle == .slideBelow {
+            if leftViewPresentationStyle == .slideBelowShifted {
                 return CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
             }
             return .zero
@@ -1611,7 +1686,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _leftViewOffsetWhenHidden: CGPoint?
 
     /// Default:
-    /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
+    /// if presentationStyle == .slideBelowShifted then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
     /// else .zero
     @IBInspectable
     open var rightViewOffsetWhenHidden: CGPoint {
@@ -1622,7 +1697,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewOffsetWhenHidden = _rightViewOffsetWhenHidden {
                 return rightViewOffsetWhenHidden
             }
-            if rightViewPresentationStyle == .slideBelow {
+            if rightViewPresentationStyle == .slideBelowShifted {
                 return CGPoint(x: rightViewWidth / 2.0, y: 0.0)
             }
             return .zero
@@ -1821,7 +1896,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Background Image Offset -
 
     /// Default:
-    /// if presentationStyle == .slideBelow then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
+    /// if presentationStyle == .slideBelowShifted then CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
     /// else .zero
     @IBInspectable
     open var leftViewBackgroundOffsetWhenHidden: CGPoint {
@@ -1832,7 +1907,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let leftViewBackgroundOffsetWhenHidden = _leftViewBackgroundOffsetWhenHidden {
                 return leftViewBackgroundOffsetWhenHidden
             }
-            if leftViewPresentationStyle == .slideBelow {
+            if leftViewPresentationStyle == .slideBelowShifted {
                 return CGPoint(x: -(leftViewWidth / 2.0), y: 0.0)
             }
             return .zero
@@ -1841,7 +1916,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     private var _leftViewBackgroundOffsetWhenHidden: CGPoint?
 
     /// Default:
-    /// if presentationStyle == .slideBelow then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
+    /// if presentationStyle == .slideBelowShifted then CGPoint(x: rightViewWidth / 2.0, y: 0.0)
     /// else .zero
     @IBInspectable
     open var rightViewBackgroundOffsetWhenHidden: CGPoint {
@@ -1852,7 +1927,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rightViewBackgroundOffsetWhenHidden = _rightViewBackgroundOffsetWhenHidden {
                 return rightViewBackgroundOffsetWhenHidden
             }
-            if rightViewPresentationStyle == .slideBelow {
+            if rightViewPresentationStyle == .slideBelowShifted {
                 return CGPoint(x: rightViewWidth / 2.0, y: 0.0)
             }
             return .zero
