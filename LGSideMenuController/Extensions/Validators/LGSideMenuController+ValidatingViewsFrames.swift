@@ -162,7 +162,7 @@ internal extension LGSideMenuController {
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
                                size: CGSize(width: containerView.bounds.width,
-                                            height: UIApplication.shared.statusBarFrame.height))
+                                            height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.leftViewStatusBarBackgroundShadowRadius,
                                  dy: -self.leftViewStatusBarBackgroundShadowRadius)
         }()
@@ -237,7 +237,7 @@ internal extension LGSideMenuController {
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
                                size: CGSize(width: containerView.bounds.width,
-                                            height: UIApplication.shared.statusBarFrame.height))
+                                            height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.rightViewStatusBarBackgroundShadowRadius,
                                  dy: -self.rightViewStatusBarBackgroundShadowRadius)
         }()

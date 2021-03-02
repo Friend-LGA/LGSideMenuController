@@ -73,12 +73,36 @@ internal struct LGSideMenuHelper {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
 
+    static func getKeyWindow() -> UIWindow? {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+
+    static func getStatusBarFrame() -> CGRect {
+        if #available(iOS 13.0, *) {
+            return getKeyWindow()?.windowScene?.statusBarManager?.statusBarFrame ?? .zero
+        } else {
+            return UIApplication.shared.statusBarFrame
+        }
+    }
+
+    static func getInterfaceOrientation() -> UIInterfaceOrientation? {
+        if #available(iOS 13.0, *) {
+            return getKeyWindow()?.windowScene?.interfaceOrientation
+        } else {
+            return UIApplication.shared.statusBarOrientation
+        }
+    }
+
     static func isPortrait() -> Bool {
-        return UIApplication.shared.statusBarOrientation.isPortrait
+        return getInterfaceOrientation()?.isPortrait ?? true
     }
 
     static func isLandscape() -> Bool {
-        return UIApplication.shared.statusBarOrientation.isLandscape
+        return getInterfaceOrientation()?.isLandscape ?? false
     }
 
     static func setSideMenuController(_ sideMenuController: LGSideMenuController?, to viewController: UIViewController) {
