@@ -181,6 +181,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         case slideAside
         case scaleFromBig
         case scaleFromLittle
+        // TODO: Add more
 
         public init() {
             self = .slideAbove
@@ -1347,6 +1348,116 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     private var _rightViewStatusBarUpdateAnimation: UIStatusBarAnimation?
 
+    // MARK: - Status Bar Background Visibility -
+
+    @IBInspectable
+    open var isLeftViewStatusBarBackgroundVisible: Bool = true
+
+    open var isLeftViewStatusBarBackgroundHidden: Bool {
+        set {
+            isLeftViewStatusBarBackgroundVisible = !newValue
+        }
+        get {
+            return !isLeftViewStatusBarBackgroundVisible
+        }
+    }
+
+    @IBInspectable
+    open var isRightViewStatusBarBackgroundVisible: Bool = true
+
+    open var isRightViewStatusBarBackgroundHidden: Bool {
+        set {
+            isRightViewStatusBarBackgroundVisible = !newValue
+        }
+        get {
+            return !isRightViewStatusBarBackgroundVisible
+        }
+    }
+
+    // MARK: - Status Bar Background Color -
+
+    @IBInspectable
+    open var leftViewStatusBarBackgroundColor: UIColor = .clear
+
+    @IBInspectable
+    open var rightViewStatusBarBackgroundColor: UIColor = .clear
+
+    // MARK: - Status Bar Background Blur Effect -
+
+    @IBInspectable
+    open var leftViewStatusBarBackgroundBlurEffect: UIBlurEffect {
+        set {
+            _leftViewStatusBarBackgroundBlurEffect = newValue
+        }
+        get {
+            if let leftViewStatusBarBackgroundBlurEffect = _leftViewStatusBarBackgroundBlurEffect {
+                return leftViewStatusBarBackgroundBlurEffect
+            }
+            if leftViewStatusBarStyle == .lightContent {
+                return UIBlurEffect(style: .dark)
+            }
+            if #available(iOS 13.0, *) {
+                if leftViewStatusBarStyle == .darkContent {
+                    return UIBlurEffect(style: .light)
+                }
+            }
+            if #available(iOS 10.0, *) {
+                return UIBlurEffect(style: .regular)
+            }
+            return UIBlurEffect(style: .dark)
+        }
+    }
+    open var _leftViewStatusBarBackgroundBlurEffect: UIBlurEffect?
+
+    @IBInspectable
+    open var rightViewStatusBarBackgroundBlurEffect: UIBlurEffect {
+        set {
+            _rightViewStatusBarBackgroundBlurEffect = newValue
+        }
+        get {
+            if let rightViewStatusBarBackgroundBlurEffect = _rightViewStatusBarBackgroundBlurEffect {
+                return rightViewStatusBarBackgroundBlurEffect
+            }
+            if rightViewStatusBarStyle == .lightContent {
+                return UIBlurEffect(style: .dark)
+            }
+            if #available(iOS 13.0, *) {
+                if rightViewStatusBarStyle == .darkContent {
+                    return UIBlurEffect(style: .light)
+                }
+            }
+            if #available(iOS 10.0, *) {
+                return UIBlurEffect(style: .regular)
+            }
+            return UIBlurEffect(style: .dark)
+        }
+    }
+    open var _rightViewStatusBarBackgroundBlurEffect: UIBlurEffect?
+
+    // MARK: - Status Bar Background Alpha -
+
+    @IBInspectable
+    open var leftViewStatusBarBackgroundAlpha: CGFloat = 1.0
+
+    @IBInspectable
+    open var rightViewStatusBarBackgroundAlpha: CGFloat = 1.0
+
+    // MARK: - Status Bar Background Shadow Color -
+
+    @IBInspectable
+    open var leftViewStatusBarBackgroundShadowColor: UIColor = .clear
+
+    @IBInspectable
+    open var rightViewStatusBarBackgroundShadowColor: UIColor = .clear
+
+    // MARK: - Status Bar Background Shadow Radius -
+
+    @IBInspectable
+    open var leftViewStatusBarBackgroundShadowRadius: CGFloat = 0.0
+
+    @IBInspectable
+    open var rightViewStatusBarBackgroundShadowRadius: CGFloat = 0.0
+
     // MARK: - Alpha -
 
     open var rootViewAlphaWhenHidden: CGFloat?
@@ -1832,7 +1943,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var leftViewBackgroundEffectView: UIVisualEffectView?
     open internal(set) var leftViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var leftViewCoverView: UIVisualEffectView?
-    // TODO: Add leftViewStatusBarBackgroundView
+    open internal(set) var leftViewStatusBarBackgroundView: LGSideMenuStatusBarBackgroundView?
+    open internal(set) var leftViewStatusBarBackgroundEffectView: UIVisualEffectView?
 
     open internal(set) var rightContainerView: UIView?
     open internal(set) var rightViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
@@ -1842,7 +1954,8 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var rightViewBackgroundEffectView: UIVisualEffectView?
     open internal(set) var rightViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rightViewCoverView: UIVisualEffectView?
-    // TODO: Add rightViewStatusBarBackgroundView
+    open internal(set) var rightViewStatusBarBackgroundView: LGSideMenuStatusBarBackgroundView?
+    open internal(set) var rightViewStatusBarBackgroundEffectView: UIVisualEffectView?
 
     internal var savedSize: CGSize = .zero
 

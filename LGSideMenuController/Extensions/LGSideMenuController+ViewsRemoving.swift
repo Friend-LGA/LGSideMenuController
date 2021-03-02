@@ -138,6 +138,16 @@ internal extension LGSideMenuController {
             coverView.removeFromSuperview()
             self.leftViewCoverView = nil
         }
+
+        if let statusBarBackgroundView = self.leftViewStatusBarBackgroundView {
+            statusBarBackgroundView.removeFromSuperview()
+            self.leftViewStatusBarBackgroundView = nil
+        }
+
+        if let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView {
+            statusBarBackgroundEffectView.removeFromSuperview()
+            self.leftViewStatusBarBackgroundEffectView = nil
+        }
     }
 
     // MARK: - Right View -
@@ -199,6 +209,16 @@ internal extension LGSideMenuController {
         if let coverView = self.rightViewCoverView {
             coverView.removeFromSuperview()
             self.rightViewCoverView = nil
+        }
+
+        if let statusBarBackgroundView = self.rightViewStatusBarBackgroundView {
+            statusBarBackgroundView.removeFromSuperview()
+            self.rightViewStatusBarBackgroundView = nil
+        }
+
+        if let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView {
+            statusBarBackgroundEffectView.removeFromSuperview()
+            self.rightViewStatusBarBackgroundEffectView = nil
         }
     }
 

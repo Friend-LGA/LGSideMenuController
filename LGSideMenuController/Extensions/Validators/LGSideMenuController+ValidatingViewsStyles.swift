@@ -88,7 +88,9 @@ internal extension LGSideMenuController {
         guard let backgroundDecorationView = self.leftViewBackgroundDecorationView,
               let backgroundShadowView = self.leftViewBackgroundShadowView,
               let backgroundEffectView = self.leftViewBackgroundEffectView,
-              let coverView = self.leftViewCoverView else { return }
+              let coverView = self.leftViewCoverView,
+              let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
 
         backgroundDecorationView.fillColor = self.leftViewBackgroundColor
         backgroundDecorationView.strokeColor = self.leftViewLayerBorderColor
@@ -114,13 +116,21 @@ internal extension LGSideMenuController {
             coverView.backgroundColor = self.leftViewCoverColor
             coverView.effect = self.leftViewCoverBlurEffect
         }
+
+        statusBarBackgroundView.fillColor = self.leftViewStatusBarBackgroundColor
+        statusBarBackgroundView.shadowColor = self.leftViewStatusBarBackgroundShadowColor
+        statusBarBackgroundView.shadowBlur = self.leftViewStatusBarBackgroundShadowRadius
+
+        statusBarBackgroundEffectView.effect = self.leftViewStatusBarBackgroundBlurEffect
     }
 
     func validateRightViewsStyles() {
         guard let backgroundDecorationView = self.rightViewBackgroundDecorationView,
               let backgroundShadowView = self.rightViewBackgroundShadowView,
               let backgroundEffectView = self.rightViewBackgroundEffectView,
-              let coverView = self.rightViewCoverView else { return }
+              let coverView = self.rightViewCoverView,
+              let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
 
         backgroundDecorationView.fillColor = self.rightViewBackgroundColor
         backgroundDecorationView.strokeColor = self.rightViewLayerBorderColor
@@ -146,6 +156,12 @@ internal extension LGSideMenuController {
             coverView.backgroundColor = self.rightViewCoverColor
             coverView.effect = self.rightViewCoverBlurEffect
         }
+
+        statusBarBackgroundView.fillColor = self.rightViewStatusBarBackgroundColor
+        statusBarBackgroundView.shadowColor = self.rightViewStatusBarBackgroundShadowColor
+        statusBarBackgroundView.shadowBlur = self.rightViewStatusBarBackgroundShadowRadius
+
+        statusBarBackgroundEffectView.effect = self.rightViewStatusBarBackgroundBlurEffect
     }
     
 }

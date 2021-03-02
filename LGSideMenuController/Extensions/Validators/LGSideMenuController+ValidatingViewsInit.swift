@@ -114,6 +114,16 @@ internal extension LGSideMenuController {
             self.leftViewCoverView = UIVisualEffectView()
             defaultLeftViewSetup(self.leftViewCoverView)
         }
+
+        if self.leftViewStatusBarBackgroundView == nil {
+            self.leftViewStatusBarBackgroundView = LGSideMenuStatusBarBackgroundView()
+            defaultLeftViewSetup(self.leftViewStatusBarBackgroundView)
+        }
+
+        if self.leftViewStatusBarBackgroundEffectView == nil {
+            self.leftViewStatusBarBackgroundEffectView = UIVisualEffectView()
+            defaultLeftViewSetup(self.leftViewStatusBarBackgroundEffectView)
+        }
     }
 
     func validateRightViewsInit() {
@@ -160,6 +170,16 @@ internal extension LGSideMenuController {
         if self.rightViewCoverView == nil {
             self.rightViewCoverView = UIVisualEffectView()
             defaultRightViewSetup(self.rightViewCoverView)
+        }
+
+        if self.rightViewStatusBarBackgroundView == nil {
+            self.rightViewStatusBarBackgroundView = LGSideMenuStatusBarBackgroundView()
+            defaultRightViewSetup(self.rightViewStatusBarBackgroundView)
+        }
+
+        if self.rightViewStatusBarBackgroundEffectView == nil {
+            self.rightViewStatusBarBackgroundEffectView = UIVisualEffectView()
+            defaultRightViewSetup(self.rightViewStatusBarBackgroundEffectView)
         }
     }
 

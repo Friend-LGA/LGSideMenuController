@@ -66,7 +66,9 @@ internal extension LGSideMenuController {
               let backgroundWrapperView = self.leftViewBackgroundWrapperView,
               let backgroundEffectView = self.leftViewBackgroundEffectView,
               let wrapperView = self.leftViewWrapperView,
-              let coverView = self.leftViewCoverView else { return }
+              let coverView = self.leftViewCoverView,
+              let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
 
         if self.leftViewPresentationStyle.isAbove {
             self.view.insertSubview(containerView, aboveSubview: rootContainerView)
@@ -78,6 +80,7 @@ internal extension LGSideMenuController {
         containerView.insertSubview(backgroundDecorationView, at: 0)
         containerView.insertSubview(wrapperView, at: 1)
         containerView.insertSubview(coverView, at: 2)
+        containerView.insertSubview(statusBarBackgroundView, at: 3)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
@@ -91,6 +94,8 @@ internal extension LGSideMenuController {
         }
 
         wrapperView.insertSubview(leftView, at: 0)
+
+        statusBarBackgroundView.insertSubview(statusBarBackgroundEffectView, at: 0)
     }
 
     func validateRightViewsHierarchy() {
@@ -102,7 +107,9 @@ internal extension LGSideMenuController {
               let backgroundWrapperView = self.rightViewBackgroundWrapperView,
               let backgroundEffectView = self.rightViewBackgroundEffectView,
               let wrapperView = self.rightViewWrapperView,
-              let coverView = self.rightViewCoverView else { return }
+              let coverView = self.rightViewCoverView,
+              let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
 
         if self.rightViewPresentationStyle.isAbove {
             self.view.insertSubview(containerView, aboveSubview: rootContainerView)
@@ -114,6 +121,7 @@ internal extension LGSideMenuController {
         containerView.insertSubview(backgroundDecorationView, at: 0)
         containerView.insertSubview(wrapperView, at: 1)
         containerView.insertSubview(coverView, at: 2)
+        containerView.insertSubview(statusBarBackgroundView, at: 3)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
@@ -127,6 +135,8 @@ internal extension LGSideMenuController {
         }
 
         wrapperView.insertSubview(rightView, at: 0)
+
+        statusBarBackgroundView.insertSubview(statusBarBackgroundEffectView, at: 0)
     }
     
 }

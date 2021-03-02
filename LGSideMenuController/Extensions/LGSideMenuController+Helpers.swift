@@ -130,4 +130,12 @@ internal extension LGSideMenuController {
         CATransaction.commit()
     }
 
+    // MARK: - Status Bar -
+
+    var isViewLocatedUnderStatusBar: Bool {
+        guard let window = UIApplication.shared.keyWindow else { return false }
+        let statusBarOrigin = window.convert(UIApplication.shared.statusBarFrame.origin, to: self.view)
+        return statusBarOrigin == .zero
+    }
+
 }

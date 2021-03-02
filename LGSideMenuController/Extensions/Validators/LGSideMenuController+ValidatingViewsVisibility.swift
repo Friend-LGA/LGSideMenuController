@@ -50,19 +50,23 @@ internal extension LGSideMenuController {
     func validateLeftViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
               let containerView = self.leftContainerView,
-              let coverView = self.leftViewCoverView else { return }
+              let coverView = self.leftViewCoverView,
+              let statusBarBackgroundView = self.leftViewStatusBarBackgroundView else { return }
 
         containerView.isHidden = !self.isLeftViewVisibleToUser
         coverView.isHidden = self.isLeftViewShowing || (self.isLeftViewAlwaysVisible && !self.isRightViewVisible)
+        statusBarBackgroundView.isHidden = self.isLeftViewStatusBarHidden || !self.isViewLocatedUnderStatusBar
     }
 
     func validateRightViewsVisibility() {
         guard self.shouldUpdateVisibility == true,
               let containerView = self.rightContainerView,
-              let coverView = self.rightViewCoverView else { return }
+              let coverView = self.rightViewCoverView,
+              let statusBarBackgroundView = self.rightViewStatusBarBackgroundView else { return }
 
         containerView.isHidden = !self.isRightViewVisibleToUser
         coverView.isHidden = self.isRightViewShowing || (self.isRightViewAlwaysVisible && !self.isLeftViewVisible)
+        statusBarBackgroundView.isHidden = self.isRightViewStatusBarHidden || !self.isViewLocatedUnderStatusBar
     }
 
 }
