@@ -88,4 +88,46 @@ internal extension LGSideMenuController {
         return result
     }
 
+    // MARK: - Cancel Animations -
+
+    func cancelRootViewAnimations() {
+        guard let containerView = self.rootContainerView,
+              let wrapperView = self.rootViewWrapperView,
+              let coverView = self.rootViewCoverView else { return }
+
+        CATransaction.begin()
+        containerView.layer.removeAllAnimations()
+        wrapperView.layer.removeAllAnimations()
+        coverView.layer.removeAllAnimations()
+        CATransaction.commit()
+    }
+
+    func cancelLeftViewAnimations() {
+        guard let containerView = self.leftContainerView,
+              let backgroundDecorationView = self.leftViewBackgroundDecorationView,
+              let wrapperView = self.leftViewWrapperView,
+              let coverView = self.leftViewCoverView else { return }
+
+        CATransaction.begin()
+        containerView.layer.removeAllAnimations()
+        backgroundDecorationView.layer.removeAllAnimations()
+        wrapperView.layer.removeAllAnimations()
+        coverView.layer.removeAllAnimations()
+        CATransaction.commit()
+    }
+
+    func cancelRightViewAnimations() {
+        guard let containerView = self.rightContainerView,
+              let backgroundDecorationView = self.rightViewBackgroundDecorationView,
+              let wrapperView = self.rightViewWrapperView,
+              let coverView = self.rightViewCoverView else { return }
+
+        CATransaction.begin()
+        containerView.layer.removeAllAnimations()
+        backgroundDecorationView.layer.removeAllAnimations()
+        wrapperView.layer.removeAllAnimations()
+        coverView.layer.removeAllAnimations()
+        CATransaction.commit()
+    }
+
 }

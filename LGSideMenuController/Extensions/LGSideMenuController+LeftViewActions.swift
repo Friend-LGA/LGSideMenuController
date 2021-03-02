@@ -296,18 +296,4 @@ extension LGSideMenuController {
         self.didHideLeftViewCallbacks()
     }
 
-    // MARK: - Cancel Animations
-
-    internal func cancelLeftViewAnimations() {
-        guard let leftContainerView = self.leftContainerView,
-              let leftViewBackgroundImageView = self.leftViewBackgroundImageView,
-              let leftViewWrapperView = self.leftViewWrapperView,
-              let leftViewCoverView = self.leftViewCoverView else { return }
-
-        leftContainerView.layer.removeAllAnimations()
-        leftViewBackgroundImageView.layer.removeAllAnimations()
-        leftViewWrapperView.layer.removeAllAnimations()
-        leftViewCoverView.layer.removeAllAnimations()
-    }
-
 }

@@ -38,7 +38,9 @@ extension LGSideMenuController {
         guard !self.isAnimating,
               self.rootView != nil,
               self.leftView != nil || self.rightView != nil else { return false }
-        // TODO: Make animations interraptable with this gesture
+
+        // TODO: Make animations interraptable with this gesture using UIViewPropertyAnimator
+        // When min supported iOS version will be 10.0
 
         let isLeftViewActive = self.leftView != nil && self.isLeftViewEnabled && !self.isLeftViewAlwaysVisible
         let isRightViewActive = self.rightView != nil && self.isRightViewEnabled && !self.isRightViewAlwaysVisible
@@ -241,7 +243,7 @@ extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let leftContainerView = self.leftContainerView else { return false }
 
-        let borderX = (self.leftViewPresentationStyle == .slideAbove && self.isLeftViewVisible) ? leftContainerView.frame.maxX : rootContainerView.frame.minX
+        let borderX = (self.leftViewPresentationStyle.isAbove && self.isLeftViewVisible) ? leftContainerView.frame.maxX : rootContainerView.frame.minX
         let originX = borderX - self.leftViewSwipeGestureRange.left
 
         let width: CGFloat = {
@@ -265,7 +267,7 @@ extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rightContainerView = self.rightContainerView else { return false }
 
-        let borderX = (self.rightViewPresentationStyle == .slideAbove && self.isRightViewVisible) ? rightContainerView.frame.minX : rootContainerView.frame.maxX
+        let borderX = (self.rightViewPresentationStyle.isAbove && self.isRightViewVisible) ? rightContainerView.frame.minX : rootContainerView.frame.maxX
 
         let originX: CGFloat = {
             if self.rightViewSwipeGestureArea == .full || self.isRightViewVisible {

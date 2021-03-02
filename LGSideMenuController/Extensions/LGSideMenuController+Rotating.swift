@@ -50,6 +50,7 @@ extension LGSideMenuController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
+        self.cancelRootViewAnimations()
         self.cancelLeftViewAnimations()
         self.cancelRightViewAnimations()
 
