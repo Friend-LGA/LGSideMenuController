@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4AF139C41BF384DA0037B073 /* LGSideMenuControllerFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9070B4125EE82C1003F14B8 /* LGSideMenuStatusBarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9070B4025EE82C1003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */; };
 		D9201F7325DF015F00E49A71 /* LGSideMenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5925DF015F00E49A71 /* LGSideMenuHelper.swift */; };
 		D9201F7425DF015F00E49A71 /* LGSideMenuSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */; };
 		D9201F7525DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201F5C25DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift */; };
@@ -40,6 +41,7 @@
 		4AF139C01BF384DA0037B073 /* LGSideMenuController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LGSideMenuController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF139C31BF384DA0037B073 /* LGSideMenuControllerFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGSideMenuControllerFramework.h; sourceTree = "<group>"; };
 		4AF139C51BF384DA0037B073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9070B4025EE82C1003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuStatusBarBackgroundView.swift; sourceTree = "<group>"; };
 		D9201F5925DF015F00E49A71 /* LGSideMenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuHelper.swift; sourceTree = "<group>"; };
 		D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuSegue.swift; sourceTree = "<group>"; };
 		D9201F5C25DF015F00E49A71 /* LGSideMenuController+LeftViewActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+LeftViewActions.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				D9201F7125DF015F00E49A71 /* LGSideMenuWrapperView.swift */,
 				D938FAF125ED4A1000887D87 /* LGSideMenuBackgroundDecorationView.swift */,
 				D938FAF225ED4A1000887D87 /* LGSideMenuBackgroundShadowView.swift */,
+				D9070B4025EE82C1003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */,
 				D9201F6E25DF015F00E49A71 /* LGSideMenuDelegate.swift */,
 				D9201F5A25DF015F00E49A71 /* LGSideMenuSegue.swift */,
 				D9201F6F25DF015F00E49A71 /* UIViewController+LGSideMenuController.swift */,
@@ -258,6 +261,7 @@
 				D9201F8225DF015F00E49A71 /* LGSideMenuController+ValidatingViewsFrames.swift in Sources */,
 				D938FAF325ED4A1000887D87 /* LGSideMenuBackgroundDecorationView.swift in Sources */,
 				D9201F8925DF016000E49A71 /* LGSideMenuWrapperView.swift in Sources */,
+				D9070B4125EE82C1003F14B8 /* LGSideMenuStatusBarBackgroundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
