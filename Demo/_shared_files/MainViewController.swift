@@ -224,11 +224,9 @@ class MainViewController: LGSideMenuController {
             rightViewLayerBorderColor = isLightTheme() ? .white : .black
         case .statusBarIsAlwaysVisible:
             leftViewPresentationStyle = .scaleFromBig
-            leftViewStatusBarStyle = .lightContent
             leftViewBackgroundImage = UIImage(named: "imageLeft")
 
             rightViewPresentationStyle = .scaleFromBig
-            rightViewStatusBarStyle = .lightContent
             rightViewBackgroundImage = UIImage(named: "imageRight")
         case .gestureAreaIsFullScreen:
             leftViewSwipeGestureArea = .full

@@ -13,6 +13,7 @@
 		4A04FACA1E894C92000E90AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A04FAC91E894C92000E90AB /* LaunchScreen.storyboard */; };
 		4A5EB34C1DEF402A005D1DF0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5EB34B1DEF402A005D1DF0 /* RootViewController.swift */; };
 		4A7BF8F41E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7BF8F31E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift */; };
+		D9070B3E25EE8273003F14B8 /* LGSideMenuStatusBarBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9070B3D25EE8273003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */; };
 		D9201FEE25DF2D3500E49A71 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201FED25DF2D3500E49A71 /* Helper.swift */; };
 		D9201FF125DF2D3E00E49A71 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9201FF025DF2D3E00E49A71 /* MainViewController.swift */; };
 		D938FAEC25ED497200887D87 /* LGSideMenuBackgroundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */; };
@@ -60,6 +61,7 @@
 		4A04FAC91E894C92000E90AB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../_shared_files/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A5EB34B1DEF402A005D1DF0 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RootViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4A7BF8F31E01BC4700C6A9D4 /* RootViewControllerWithTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewControllerWithTableView.swift; sourceTree = "<group>"; };
+		D9070B3D25EE8273003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuStatusBarBackgroundView.swift; sourceTree = "<group>"; };
 		D9201FED25DF2D3500E49A71 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = ../../_shared_files/Helper.swift; sourceTree = "<group>"; };
 		D9201FF025DF2D3E00E49A71 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = ../../_shared_files/MainViewController.swift; sourceTree = "<group>"; };
 		D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundShadowView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				D93CB7B925DEDF6200DFD5A7 /* LGSideMenuWrapperView.swift */,
 				D938FAEB25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift */,
 				D938FAEA25ED497100887D87 /* LGSideMenuBackgroundShadowView.swift */,
+				D9070B3D25EE8273003F14B8 /* LGSideMenuStatusBarBackgroundView.swift */,
 				D93CB7B625DEDF6200DFD5A7 /* LGSideMenuDelegate.swift */,
 				D942388425DEE94600534976 /* LGSideMenuSegue.swift */,
 				D93CB7B725DEDF6200DFD5A7 /* UIViewController+LGSideMenuController.swift */,
@@ -341,6 +344,7 @@
 				D93CB7C725DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsVisibility.swift in Sources */,
 				D938FAED25ED497200887D87 /* LGSideMenuBackgroundDecorationView.swift in Sources */,
 				D9E57C1425E6FBB000E96E40 /* LGSideMenuController+ValidatingUserInteraction.swift in Sources */,
+				D9070B3E25EE8273003F14B8 /* LGSideMenuStatusBarBackgroundView.swift in Sources */,
 				D938FAEC25ED497200887D87 /* LGSideMenuBackgroundShadowView.swift in Sources */,
 				EDE795101D45B7A1002930CA /* AppDelegate.swift in Sources */,
 				D93CB7CA25DEDF6200DFD5A7 /* LGSideMenuController+ValidatingViewsInit.swift in Sources */,
