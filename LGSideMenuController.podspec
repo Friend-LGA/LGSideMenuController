@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
     s.homepage = 'https://github.com/Friend-LGA/LGSideMenuController'
     s.author = { 'Grigorii Lutkov': 'friend.lga@gmail.com' }
     s.source = { git: 'https://github.com/Friend-LGA/LGSideMenuController.git', tag: s.version }
-    s.summary = 'iOS view controller, shows left and right views by pressing button or gesture'
+    s.summary = 'iOS view controller which manages left and right side views'
     s.platform = :ios, '9.0'
     s.swift_version = '5.0'
     s.source_files = 'LGSideMenuController/**/*.swift'

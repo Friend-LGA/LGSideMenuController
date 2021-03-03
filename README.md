@@ -1,6 +1,6 @@
 # LGSideMenuController
 
-iOS view controller, shows left and right views by pressing button or gesture.
+iOS view controller which manages left and right side views.
 
 [![Platform](https://img.shields.io/cocoapods/p/LGSideMenuController.svg)](https://github.com/Friend-LGA/LGSideMenuController)
 [![CocoaPods](https://img.shields.io/cocoapods/v/LGSideMenuController.svg)](http://cocoadocs.org/docsets/LGSideMenuController)
