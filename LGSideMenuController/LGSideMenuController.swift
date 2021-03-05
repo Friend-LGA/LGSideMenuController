@@ -1211,7 +1211,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// Color that hides root view, when left view is showing
     /// Default:
     /// rootViewCoverColor if assigned
-    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable
     open var rootViewCoverColorForLeftView: UIColor {
@@ -1225,9 +1224,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             if let rootViewCoverColorForLeftView = rootViewCoverColor {
                 return rootViewCoverColorForLeftView
             }
-            if leftViewPresentationStyle.isAbove {
-                return UIColor(white: 0.0, alpha: 0.5)
-            }
             return .clear
         }
     }
@@ -1236,7 +1232,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     /// Color that hides root view, when right view is showing
     /// Default:
     /// rootViewCoverColor if assigned
-    /// if presentationStyle.isAbove then UIColor(white: 0.0, alpha: 0.5)
     /// else .clear
     @IBInspectable
     open var rootViewCoverColorForRightView: UIColor {
@@ -1249,9 +1244,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             }
             if let rootViewCoverColorForRightView = rootViewCoverColor {
                 return rootViewCoverColorForRightView
-            }
-            if rightViewPresentationStyle.isAbove {
-                return UIColor(white: 0.0, alpha: 0.5)
             }
             return .clear
         }
