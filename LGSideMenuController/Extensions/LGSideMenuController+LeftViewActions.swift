@@ -38,8 +38,17 @@ extension LGSideMenuController {
               !self.isLeftViewAlwaysVisible,
               !self.isLeftViewShowing else { return }
 
-        self.showLeftViewPrepare(updateStatusBar: false)
-        self.showLeftViewActions(animated: animated, completion: completion)
+        if self.isRightViewShowing {
+            self.hideRightView(animated: animated, completion: { [weak self] in
+                guard let self = self else { return }
+                self.showLeftViewPrepare(updateStatusBar: false)
+                self.showLeftViewActions(animated: animated, completion: completion)
+            })
+        }
+        else {
+            self.showLeftViewPrepare(updateStatusBar: false)
+            self.showLeftViewActions(animated: animated, completion: completion)
+        }
     }
 
     open func hideLeftView(animated: Bool = true, completion: Completion? = nil) {
