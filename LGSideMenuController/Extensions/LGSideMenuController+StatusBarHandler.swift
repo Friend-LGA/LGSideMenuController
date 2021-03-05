@@ -61,7 +61,7 @@ extension LGSideMenuController {
     }
 
     open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        if self.rootView != nil && (self.state == .rootViewIsShowing || self.state == .leftViewWillHide || self.state == .rightViewWillHide) {
+        if self.rootView != nil && self.state == .rootViewIsShowing {
             return self.rootViewStatusBarUpdateAnimation
         }
         else if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisible {
