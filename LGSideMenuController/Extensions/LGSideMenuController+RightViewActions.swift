@@ -66,10 +66,10 @@ extension LGSideMenuController {
               self.isRightViewEnabled,
               !self.isRightViewAlwaysVisible else { return }
 
-        if self.isRightViewShowing || self.state == .rightViewWillHide {
+        if self.isRightViewShowing {
             self.hideRightView(animated: animated, completion: completion)
         }
-        else if self.isRightViewHidden || self.state == .rightViewWillShow {
+        else if self.isRightViewHidden {
             self.showRightView(animated: animated, completion: completion)
         }
     }

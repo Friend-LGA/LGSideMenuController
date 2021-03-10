@@ -66,10 +66,10 @@ extension LGSideMenuController {
               self.isLeftViewEnabled,
               !self.isLeftViewAlwaysVisible else { return }
 
-        if self.isLeftViewShowing || self.state == .leftViewWillHide {
+        if self.isLeftViewShowing {
             self.hideLeftView(animated: animated, completion: completion)
         }
-        else if self.isLeftViewHidden || self.state == .leftViewWillShow {
+        else if self.isLeftViewHidden {
             self.showLeftView(animated: animated, completion: completion)
         }
     }
