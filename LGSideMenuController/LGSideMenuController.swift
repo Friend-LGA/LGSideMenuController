@@ -299,57 +299,90 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Base View Controllers -
 
     open var rootViewController: UIViewController? {
-        willSet {
-            removeRootViewController()
-        }
-        didSet {
-            guard let rootViewController = rootViewController else {
+        set {
+            if _rootViewController != nil {
+                removeRootViewController()
+            }
+
+            _rootViewController = newValue
+
+            guard let viewController = newValue else {
                 if self.rootView != nil {
                     self.rootView = nil
                 }
                 return
             }
-            self.rootView = rootViewController.view
-            LGSideMenuHelper.setSideMenuController(self, to: rootViewController)
+
+            self.rootView = viewController.view
+            LGSideMenuHelper.setSideMenuController(self, to: viewController)
             if isRootViewControllerLayoutingEnabled {
-                addChild(rootViewController)
+                addChild(viewController)
             }
         }
+        get {
+            if _rootViewController == nil && storyboard != nil {
+                tryPerformRootSegueIfNeeded()
+            }
+            return _rootViewController
+        }
     }
+    private var _rootViewController: UIViewController? = nil
 
     open var leftViewController: UIViewController? {
-        willSet {
-            removeLeftViewController()
-        }
-        didSet {
-            guard let leftViewController = leftViewController else {
+        set {
+            if _leftViewController != nil {
+                removeLeftViewController()
+            }
+
+            _leftViewController = newValue
+
+            guard let viewController = leftViewController else {
                 if self.leftView != nil {
                     self.leftView = nil
                 }
                 return
             }
-            self.leftView = leftViewController.view
-            LGSideMenuHelper.setSideMenuController(self, to: leftViewController)
-            addChild(leftViewController)
+
+            self.leftView = viewController.view
+            LGSideMenuHelper.setSideMenuController(self, to: viewController)
+            addChild(viewController)
+        }
+        get {
+            if _leftViewController == nil && storyboard != nil {
+                tryPerformLeftSegueIfNeeded()
+            }
+            return _leftViewController
         }
     }
+    private var _leftViewController: UIViewController? = nil
 
     open var rightViewController: UIViewController? {
-        willSet {
-            removeRightViewController()
-        }
-        didSet {
-            guard let rightViewController = rightViewController else {
+        set {
+            if _rightViewController != nil {
+                removeRightViewController()
+            }
+
+            _rightViewController = newValue
+
+            guard let viewController = rightViewController else {
                 if self.rightView != nil {
                     self.rightView = nil
                 }
                 return
             }
-            self.rightView = rightViewController.view
-            LGSideMenuHelper.setSideMenuController(self, to: rightViewController)
-            addChild(rightViewController)
+
+            self.rightView = viewController.view
+            LGSideMenuHelper.setSideMenuController(self, to: viewController)
+            addChild(viewController)
+        }
+        get {
+            if _rightViewController == nil && storyboard != nil {
+                tryPerformRightSegueIfNeeded()
+            }
+            return _rightViewController
         }
     }
+    private var _rightViewController: UIViewController? = nil
 
     // MARK: - Base Views -
 
@@ -2114,16 +2147,33 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
         // Try to initialize root, left and right view controllers from storyboard by segues
         if self.storyboard != nil {
-            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.root) {
-                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.root, sender: self)
-            }
-            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.left) {
-                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.left, sender: self)
-            }
-            if LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.right) {
-                self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
-            }
+            self.tryPerformRootSegueIfNeeded()
+            self.tryPerformLeftSegueIfNeeded()
+            self.tryPerformRightSegueIfNeeded()
         }
+    }
+
+    // MARK: - Segues -
+
+    open func tryPerformRootSegueIfNeeded() {
+        guard self.storyboard != nil,
+              _rootViewController == nil,
+              LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.root) else { return }
+        self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.root, sender: self)
+    }
+
+    open func tryPerformLeftSegueIfNeeded() {
+        guard self.storyboard != nil,
+              _leftViewController == nil,
+              LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.left) else { return }
+        self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.left, sender: self)
+    }
+
+    open func tryPerformRightSegueIfNeeded() {
+        guard self.storyboard != nil,
+              _rightViewController == nil,
+              LGSideMenuHelper.canPerformSegue(self, withIdentifier: LGSideMenuSegue.Identifier.right) else { return }
+        self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
     }
 
 }
