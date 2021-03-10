@@ -36,7 +36,8 @@ extension LGSideMenuController {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
               !self.isLeftViewAlwaysVisible,
-              !self.isLeftViewShowing else { return }
+              !self.isLeftViewShowing,
+              self.isRightViewVisibilityStable else { return }
 
         if self.isRightViewShowing {
             self.hideRightView(animated: animated, completion: { [weak self] in
@@ -55,7 +56,8 @@ extension LGSideMenuController {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
               !self.isLeftViewAlwaysVisible,
-              !self.isLeftViewHidden else { return }
+              !self.isLeftViewHidden,
+              self.isRightViewVisibilityStable else { return }
 
         self.hideLeftViewPrepare()
         self.hideLeftViewActions(animated: animated, completion: completion)
@@ -64,7 +66,8 @@ extension LGSideMenuController {
     open func toggleLeftView(animated: Bool = true, completion: Completion? = nil) {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
-              !self.isLeftViewAlwaysVisible else { return }
+              !self.isLeftViewAlwaysVisible,
+              self.isRightViewVisibilityStable else { return }
 
         if self.isLeftViewShowing {
             self.hideLeftView(animated: animated, completion: completion)
