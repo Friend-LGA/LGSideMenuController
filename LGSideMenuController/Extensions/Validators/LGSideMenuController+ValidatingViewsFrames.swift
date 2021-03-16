@@ -108,9 +108,7 @@ internal extension LGSideMenuController {
               let backgroundEffectView = self.leftViewBackgroundEffectView,
               let backgroundWrapperView = self.leftViewBackgroundWrapperView,
               let wrapperView = self.leftViewWrapperView,
-              let coverView = self.leftViewCoverView,
-              let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
-              let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
+              let coverView = self.leftViewCoverView else { return }
 
         containerView.transform = .identity
         containerView.frame = {
@@ -158,6 +156,14 @@ internal extension LGSideMenuController {
         coverView.transform = .identity
         coverView.frame = containerView.bounds
 
+        validateLeftViewStatusBarBackgroundFrames()
+    }
+
+    func validateLeftViewStatusBarBackgroundFrames() {
+        guard let containerView = self.leftContainerView,
+              let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
+
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
@@ -181,9 +187,7 @@ internal extension LGSideMenuController {
               let backgroundEffectView = self.rightViewBackgroundEffectView,
               let backgroundWrapperView = self.rightViewBackgroundWrapperView,
               let wrapperView = self.rightViewWrapperView,
-              let coverView = self.rightViewCoverView,
-              let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
-              let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
+              let coverView = self.rightViewCoverView else { return }
 
         containerView.transform = .identity
         containerView.frame = {
@@ -232,6 +236,14 @@ internal extension LGSideMenuController {
 
         coverView.transform = .identity
         coverView.frame = containerView.bounds
+
+        validateRightViewStatusBarBackgroundFrames()
+    }
+
+    func validateRightViewStatusBarBackgroundFrames() {
+        guard let containerView = self.rightContainerView,
+              let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
+              let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
 
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {

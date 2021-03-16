@@ -160,6 +160,8 @@ extension LGSideMenuController {
                 self.validateLeftViewsTransforms(percentage: 1.0)
 
                 self.setNeedsStatusBarAppearanceUpdate()
+                self.validateRightViewStatusBarBackgroundFrames()
+                self.validateLeftViewStatusBarBackgroundFrames()
 
                 self.showAnimationsForRightViewCallbacks(duration: duration,
                                                          timingFunction: self.rightViewAnimationTimingFunction)
@@ -184,6 +186,8 @@ extension LGSideMenuController {
             self.validateLeftViewsTransforms(percentage: 1.0)
 
             self.setNeedsStatusBarAppearanceUpdate()
+            self.validateRightViewStatusBarBackgroundFrames()
+            self.validateLeftViewStatusBarBackgroundFrames()
 
             self.showAnimationsForRightViewCallbacks(duration: 0.0,
                                                      timingFunction: self.rightViewAnimationTimingFunction)
