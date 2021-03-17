@@ -2029,13 +2029,31 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var isNeedsUpdateLeftViewLayoutsAndStyles: Bool = false
     open internal(set) var isNeedsUpdateRightViewLayoutsAndStyles: Bool = false
 
+    /// View that contains all root-related views
+    /// This view does not clip to bounds
     open internal(set) var rootContainerView: UIView?
+
+    /// View that contains all root-related views except background views
+    /// This view located right inside border and clips to bounds
+    open internal(set) var rootContainerClipToBorderView: UIView?
+
     open internal(set) var rootViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
     open internal(set) var rootViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
     open internal(set) var rootViewWrapperView: LGSideMenuWrapperView?
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
+    /// View that contains all left-related views
+    /// This view does not clip to bounds
     open internal(set) var leftContainerView: UIView?
+
+    /// View that contains all left-related views except background views
+    /// This view located right inside shadow and clips to bounds
+    open internal(set) var leftContainerClipToShadowView: UIView?
+
+    /// View that contains all left-related views except background and statusBarBackground views
+    /// This view located right inside border and clips to bounds
+    open internal(set) var leftContainerClipToBorderView: UIView?
+
     open internal(set) var leftViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
     open internal(set) var leftViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
     open internal(set) var leftViewBackgroundWrapperView: UIView?
@@ -2046,7 +2064,18 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var leftViewStatusBarBackgroundView: LGSideMenuStatusBarBackgroundView?
     open internal(set) var leftViewStatusBarBackgroundEffectView: UIVisualEffectView?
 
+    /// View that contains all right-related views
+    /// This view does not clip to bounds
     open internal(set) var rightContainerView: UIView?
+
+    /// View that contains all right-related views except background views
+    /// This view located right inside shadow and clips to bounds
+    open internal(set) var rightContainerClipToShadowView: UIView?
+
+    /// View that contains all right-related views except background and statusBarBackground views
+    /// This view located right inside border and clips to bounds
+    open internal(set) var rightContainerClipToBorderView: UIView?
+
     open internal(set) var rightViewBackgroundDecorationView: LGSideMenuBackgroundDecorationView?
     open internal(set) var rightViewBackgroundShadowView: LGSideMenuBackgroundShadowView?
     open internal(set) var rightViewBackgroundWrapperView: UIView?

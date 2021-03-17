@@ -46,6 +46,12 @@ internal extension LGSideMenuController {
             defaultRootViewSetup(self.rootContainerView, true)
         }
 
+        if self.rootContainerClipToBorderView == nil {
+            self.rootContainerClipToBorderView = UIView()
+            self.rootContainerClipToBorderView?.clipsToBounds = true
+            defaultRootViewSetup(self.rootContainerClipToBorderView, true)
+        }
+
         if self.rootViewBackgroundDecorationView == nil {
             self.rootViewBackgroundDecorationView = LGSideMenuBackgroundDecorationView()
             defaultRootViewSetup(self.rootViewBackgroundDecorationView)
@@ -75,6 +81,18 @@ internal extension LGSideMenuController {
         if self.leftContainerView == nil {
             self.leftContainerView = UIView()
             defaultLeftViewSetup(self.leftContainerView, true)
+        }
+
+        if self.leftContainerClipToShadowView == nil {
+            self.leftContainerClipToShadowView = UIView()
+            self.leftContainerClipToShadowView?.clipsToBounds = true
+            defaultLeftViewSetup(self.leftContainerClipToShadowView, true)
+        }
+
+        if self.leftContainerClipToBorderView == nil {
+            self.leftContainerClipToBorderView = UIView()
+            self.leftContainerClipToBorderView?.clipsToBounds = true
+            defaultLeftViewSetup(self.leftContainerClipToBorderView, true)
         }
 
         if self.leftViewBackgroundDecorationView == nil {
@@ -132,6 +150,18 @@ internal extension LGSideMenuController {
         if self.rightContainerView == nil {
             self.rightContainerView = UIView()
             defaultRightViewSetup(self.rightContainerView, true)
+        }
+
+        if self.rightContainerClipToShadowView == nil {
+            self.rightContainerClipToShadowView = UIView()
+            self.rightContainerClipToShadowView?.clipsToBounds = true
+            defaultRightViewSetup(self.rightContainerClipToShadowView, true)
+        }
+
+        if self.rightContainerClipToBorderView == nil {
+            self.rightContainerClipToBorderView = UIView()
+            self.rightContainerClipToBorderView?.clipsToBounds = true
+            defaultRightViewSetup(self.rightContainerClipToBorderView, true)
         }
 
         if self.rightViewBackgroundDecorationView == nil {

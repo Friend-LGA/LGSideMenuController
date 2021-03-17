@@ -50,9 +50,9 @@ extension LGSideMenuController {
                   (isLeftViewActive && self.shouldLeftViewHideOnTouch) ||
                     (isRightViewActive && self.shouldRightViewHideOnTouch),
                   let touchView = touch.view,
-                  let rootContainerView = self.rootContainerView else { return false }
+                  let rootContainerClipToBorderView = self.rootContainerClipToBorderView else { return false }
 
-            return touchView == rootContainerView
+            return touchView == rootContainerClipToBorderView
         }
 
         if gesture == self.panGestureForLeftView {

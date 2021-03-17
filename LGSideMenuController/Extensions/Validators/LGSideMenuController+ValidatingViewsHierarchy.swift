@@ -41,6 +41,7 @@ internal extension LGSideMenuController {
     func validateRootViewsHierarchy() {
         guard let rootView = self.rootView,
               let containerView = self.rootContainerView,
+              let containerClipToBorderView = self.rootContainerClipToBorderView,
               let backgroundDecorationView = self.rootViewBackgroundDecorationView,
               let backgroundShadowView = self.rootViewBackgroundShadowView,
               let wrapperView = self.rootViewWrapperView,
@@ -49,10 +50,12 @@ internal extension LGSideMenuController {
         self.view.insertSubview(containerView, at: 0)
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
-        containerView.insertSubview(wrapperView, at: 1)
-        containerView.insertSubview(coverView, at: 2)
+        containerView.insertSubview(containerClipToBorderView, at: 1)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
+
+        containerClipToBorderView.insertSubview(wrapperView, at: 0)
+        containerClipToBorderView.insertSubview(coverView, at: 1)
 
         wrapperView.insertSubview(rootView, at: 0)
     }
@@ -61,6 +64,8 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let leftView = self.leftView,
               let containerView = self.leftContainerView,
+              let containerClipToShadowView = self.leftContainerClipToShadowView,
+              let containerClipToBorderView = self.leftContainerClipToBorderView,
               let backgroundDecorationView = self.leftViewBackgroundDecorationView,
               let backgroundShadowView = self.leftViewBackgroundShadowView,
               let backgroundWrapperView = self.leftViewBackgroundWrapperView,
@@ -78,13 +83,17 @@ internal extension LGSideMenuController {
         }
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
-        containerView.insertSubview(wrapperView, at: 1)
-        containerView.insertSubview(coverView, at: 2)
-        containerView.insertSubview(statusBarBackgroundView, at: 3)
+        containerView.insertSubview(containerClipToShadowView, at: 1)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
         backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
+
+        containerClipToShadowView.insertSubview(containerClipToBorderView, at: 0)
+        containerClipToShadowView.insertSubview(statusBarBackgroundView, at: 1)
+
+        containerClipToBorderView.insertSubview(wrapperView, at: 0)
+        containerClipToBorderView.insertSubview(coverView, at: 1)
 
         if let backgroundImageView = self.leftViewBackgroundImageView {
             backgroundWrapperView.insertSubview(backgroundImageView, at: 0)
@@ -102,6 +111,8 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rightView = self.rightView,
               let containerView = self.rightContainerView,
+              let containerClipToShadowView = self.rightContainerClipToShadowView,
+              let containerClipToBorderView = self.rightContainerClipToBorderView,
               let backgroundDecorationView = self.rightViewBackgroundDecorationView,
               let backgroundShadowView = self.rightViewBackgroundShadowView,
               let backgroundWrapperView = self.rightViewBackgroundWrapperView,
@@ -119,13 +130,17 @@ internal extension LGSideMenuController {
         }
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
-        containerView.insertSubview(wrapperView, at: 1)
-        containerView.insertSubview(coverView, at: 2)
-        containerView.insertSubview(statusBarBackgroundView, at: 3)
+        containerView.insertSubview(containerClipToShadowView, at: 1)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
         backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
+
+        containerClipToShadowView.insertSubview(containerClipToBorderView, at: 0)
+        containerClipToShadowView.insertSubview(statusBarBackgroundView, at: 1)
+
+        containerClipToBorderView.insertSubview(wrapperView, at: 0)
+        containerClipToBorderView.insertSubview(coverView, at: 1)
 
         if let backgroundImageView = self.rightViewBackgroundImageView {
             backgroundWrapperView.insertSubview(backgroundImageView, at: 0)

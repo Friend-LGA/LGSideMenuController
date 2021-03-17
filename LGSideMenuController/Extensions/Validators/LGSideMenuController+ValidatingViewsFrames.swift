@@ -42,6 +42,7 @@ internal extension LGSideMenuController {
     func validateRootViewsFrames() {
         guard let rootView = self.rootView,
               let containerView = self.rootContainerView,
+              let containerClipToBorderView = self.rootContainerClipToBorderView,
               let backgroundDecorationView = self.rootViewBackgroundDecorationView,
               let backgroundShadowView = self.rootViewBackgroundShadowView,
               let wrapperView = self.rootViewWrapperView,
@@ -50,7 +51,8 @@ internal extension LGSideMenuController {
         let isLeftViewVisible = self.leftView != nil && self.isLeftViewVisibleToUser
         let isRightViewVisible = self.rightView != nil && self.isRightViewVisibleToUser
 
-        let containerViewFrame: CGRect = {
+        containerView.transform = .identity
+        containerView.frame = {
             var result: CGRect = self.view.bounds
             if self.leftView != nil && self.isLeftViewAlwaysVisible {
                 result.origin.x += self.rootViewOffsetTotalForLeftView.x
@@ -62,8 +64,8 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        containerView.transform = .identity
-        containerView.frame = containerViewFrame
+        containerClipToBorderView.transform = .identity
+        containerClipToBorderView.frame = containerView.bounds
 
         let borderWidth: CGFloat = {
             if isLeftViewVisible {
@@ -103,6 +105,8 @@ internal extension LGSideMenuController {
     func validateLeftViewsFrames() {
         guard let leftView = self.leftView,
               let containerView = self.leftContainerView,
+              let containerClipToShadowView = self.leftContainerClipToShadowView,
+              let containerClipToBorderView = self.leftContainerClipToBorderView,
               let backgroundDecorationView = self.leftViewBackgroundDecorationView,
               let backgroundShadowView = self.leftViewBackgroundShadowView,
               let backgroundEffectView = self.leftViewBackgroundEffectView,
@@ -121,6 +125,13 @@ internal extension LGSideMenuController {
             }
             return result
         }()
+
+        containerClipToShadowView.transform = .identity
+        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
+                                                                       dy: -self.leftViewLayerBorderWidth)
+
+        containerClipToBorderView.transform = .identity
+        containerClipToBorderView.frame = containerView.bounds
 
         backgroundDecorationView.transform = .identity
         backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
@@ -160,14 +171,14 @@ internal extension LGSideMenuController {
     }
 
     func validateLeftViewStatusBarBackgroundFrames() {
-        guard let containerView = self.leftContainerView,
+        guard let containerClipToShadowView = self.leftContainerClipToShadowView,
               let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
 
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
-                               size: CGSize(width: containerView.bounds.width,
+                               size: CGSize(width: containerClipToShadowView.bounds.width,
                                             height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.leftViewStatusBarBackgroundShadowRadius,
                                  dy: -self.leftViewStatusBarBackgroundShadowRadius)
@@ -182,6 +193,8 @@ internal extension LGSideMenuController {
     func validateRightViewsFrames() {
         guard let rightView = self.rightView,
               let containerView = self.rightContainerView,
+              let containerClipToShadowView = self.rightContainerClipToShadowView,
+              let containerClipToBorderView = self.rightContainerClipToBorderView,
               let backgroundDecorationView = self.rightViewBackgroundDecorationView,
               let backgroundShadowView = self.rightViewBackgroundShadowView,
               let backgroundEffectView = self.rightViewBackgroundEffectView,
@@ -202,6 +215,13 @@ internal extension LGSideMenuController {
             }
             return result
         }()
+
+        containerClipToShadowView.transform = .identity
+        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
+                                                                       dy: -self.rightViewLayerBorderWidth)
+
+        containerClipToBorderView.transform = .identity
+        containerClipToBorderView.frame = containerView.bounds
 
         backgroundDecorationView.transform = .identity
         backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
@@ -241,14 +261,14 @@ internal extension LGSideMenuController {
     }
 
     func validateRightViewStatusBarBackgroundFrames() {
-        guard let containerView = self.rightContainerView,
+        guard let containerClipToShadowView = self.rightContainerClipToShadowView,
               let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
 
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
-                               size: CGSize(width: containerView.bounds.width,
+                               size: CGSize(width: containerClipToShadowView.bounds.width,
                                             height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.rightViewStatusBarBackgroundShadowRadius,
                                  dy: -self.rightViewStatusBarBackgroundShadowRadius)

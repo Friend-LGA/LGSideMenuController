@@ -57,6 +57,11 @@ internal extension LGSideMenuController {
             self.rootContainerView = nil
         }
 
+        if let containerClipToBorderView = self.rootContainerClipToBorderView {
+            containerClipToBorderView.removeFromSuperview()
+            self.rootContainerClipToBorderView = nil
+        }
+
         if let backgroundDecorationView = self.rootViewBackgroundDecorationView {
             backgroundDecorationView.removeFromSuperview()
             self.rootViewBackgroundDecorationView = nil
@@ -97,6 +102,16 @@ internal extension LGSideMenuController {
         if let containerView = self.leftContainerView {
             containerView.removeFromSuperview()
             self.leftContainerView = nil
+        }
+
+        if let containerClipToShadowView = self.leftContainerClipToShadowView {
+            containerClipToShadowView.removeFromSuperview()
+            self.leftContainerClipToShadowView = nil
+        }
+
+        if let containerClipToBorderView = self.leftContainerClipToBorderView {
+            containerClipToBorderView.removeFromSuperview()
+            self.leftContainerClipToBorderView = nil
         }
 
         if let backgroundDecorationView = self.leftViewBackgroundDecorationView {
@@ -169,6 +184,16 @@ internal extension LGSideMenuController {
         if let containerView = self.rightContainerView {
             containerView.removeFromSuperview()
             self.rightContainerView = nil
+        }
+
+        if let containerClipToShadowView = self.rightContainerClipToShadowView {
+            containerClipToShadowView.removeFromSuperview()
+            self.rightContainerClipToShadowView = nil
+        }
+
+        if let containerClipToBorderView = self.rightContainerClipToBorderView {
+            containerClipToBorderView.removeFromSuperview()
+            self.rightContainerClipToBorderView = nil
         }
 
         if let backgroundDecorationView = self.rightViewBackgroundDecorationView {
