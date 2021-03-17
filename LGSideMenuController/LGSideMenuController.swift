@@ -2197,4 +2197,21 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: LGSideMenuSegue.Identifier.right, sender: self)
     }
 
+    // MARK: - Layouting -
+
+    /// Called when root view is layouting subviews
+    open func rootViewLayoutSubviews() {
+        // only for overriding
+    }
+
+    /// Called when left view is layouting subviews
+    open func leftViewLayoutSubviews() {
+        // only for overriding
+    }
+
+    /// Called when right view is layouting subviews
+    open func rightViewLayoutSubviews() {
+        // only for overriding
+    }
+
 }

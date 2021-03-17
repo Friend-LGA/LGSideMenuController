@@ -100,6 +100,8 @@ internal extension LGSideMenuController {
 
         coverView.transform = .identity
         coverView.frame = containerView.bounds
+
+        rootViewLayoutSubviews()
     }
 
     func validateLeftViewsFrames() {
@@ -168,6 +170,8 @@ internal extension LGSideMenuController {
         coverView.frame = containerView.bounds
 
         validateLeftViewStatusBarBackgroundFrames()
+
+        leftViewLayoutSubviews()
     }
 
     func validateLeftViewStatusBarBackgroundFrames() {
@@ -258,6 +262,8 @@ internal extension LGSideMenuController {
         coverView.frame = containerView.bounds
 
         validateRightViewStatusBarBackgroundFrames()
+
+        rightViewLayoutSubviews()
     }
 
     func validateRightViewStatusBarBackgroundFrames() {
