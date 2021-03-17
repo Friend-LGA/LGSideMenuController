@@ -49,7 +49,8 @@ public final class LGSideMenuStatusBarBackgroundView: UIView {
     public override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
-        let drawRect = rect.insetBy(dx: self.shadowBlur, dy: self.shadowBlur)
+        // dx: 0.0, because shadow is much lighter at the corner
+        let drawRect = rect.insetBy(dx: 0.0, dy: self.shadowBlur)
 
         let path = UIBezierPath(rect: drawRect)
         path.close()
