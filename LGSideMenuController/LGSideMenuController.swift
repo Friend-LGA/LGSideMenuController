@@ -203,6 +203,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
                 self == .scaleFromLittle
         }
 
+        public var isAside: Bool {
+            return self == .slideAside
+        }
+
         public var isHiddenAside: Bool {
             return
                 self == .slideAbove ||
