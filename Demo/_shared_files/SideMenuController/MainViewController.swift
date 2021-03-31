@@ -166,6 +166,20 @@ class MainViewController: LGSideMenuController {
         case .statusBarNoBackground:
             isLeftViewStatusBarBackgroundHidden = true
             isRightViewStatusBarBackgroundHidden = true
+        case .alwaysVisibleLandscapeLeft:
+            leftViewAlwaysVisibleOptions = [.landscape]
+        case .alwaysVisibleLandscapeRight:
+            rightViewAlwaysVisibleOptions = [.landscape]
+        case .alwaysVisibleLandscapeBoth:
+            leftViewAlwaysVisibleOptions = [.landscape]
+            rightViewAlwaysVisibleOptions = [.landscape]
+        case .alwaysVisibleRegularLeft:
+            leftViewAlwaysVisibleOptions = [.regular]
+        case .alwaysVisibleRegularRight:
+            rightViewAlwaysVisibleOptions = [.regular]
+        case .alwaysVisibleRegularBoth:
+            leftViewAlwaysVisibleOptions = [.regular]
+            rightViewAlwaysVisibleOptions = [.regular]
         default:
             break
         }
@@ -189,6 +203,11 @@ class MainViewController: LGSideMenuController {
         // RightViewController.prefersStatusBarHidden
         // RightViewController.preferredStatusBarStyle
         // RightViewController.preferredStatusBarUpdateAnimation
+        //
+        // =================================================================================
+        //
+        // For better understanding of always visible options, read more about horizontal size classes:
+        // https://developer.apple.com/documentation/uikit/uitraitcollection
         //
         // =================================================================================
         //

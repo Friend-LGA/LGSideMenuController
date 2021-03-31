@@ -159,7 +159,8 @@ class RightViewController: UITableViewController {
             }
             sideMenuController.hideRightView(animated: true)
         case .pushVC(let title):
-            let viewController = RootViewControllerWithTextLabel(title: title)
+            let viewController = RootViewControllerWithTextLabel(title: title,
+                                                                 imageName: getBackgroundImageNameRandom())
             if type?.demoRow == .usageInsideNavigationController {
                 sideMenuController.rootViewController = viewController
                 UIView.transition(with: sideMenuController.rootViewWrapperView!,

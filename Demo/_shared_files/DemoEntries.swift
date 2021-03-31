@@ -9,6 +9,7 @@ enum DemoSection: Int, CaseIterable {
     case defaultStyles
     case usage
     case conflictingGestures
+    case alwaysVisible
     case statusBar
 
     var description: String {
@@ -19,6 +20,8 @@ enum DemoSection: Int, CaseIterable {
             return "Usage"
         case .conflictingGestures:
             return "Conflicting Gestures"
+        case .alwaysVisible:
+            return "Always Visible Options"
         case .statusBar:
             return "Status Bar"
         }
@@ -40,6 +43,13 @@ enum DemoSection: Int, CaseIterable {
         case .conflictingGestures:
             return [.conflictingGesturesScrollView,
                     .conflictingGesturesTableView]
+        case .alwaysVisible:
+            return [.alwaysVisibleLandscapeLeft,
+                    .alwaysVisibleLandscapeRight,
+                    .alwaysVisibleLandscapeBoth,
+                    .alwaysVisibleRegularLeft,
+                    .alwaysVisibleRegularRight,
+                    .alwaysVisibleRegularBoth]
         case .statusBar:
             return [.statusBarRootAndSide,
                     .statusBarOnlyRoot,
@@ -66,6 +76,13 @@ enum DemoRow {
 
     case conflictingGesturesScrollView
     case conflictingGesturesTableView
+
+    case alwaysVisibleLandscapeLeft
+    case alwaysVisibleLandscapeRight
+    case alwaysVisibleLandscapeBoth
+    case alwaysVisibleRegularLeft
+    case alwaysVisibleRegularRight
+    case alwaysVisibleRegularBoth
 
     case statusBarRootAndSide
     case statusBarOnlyRoot
@@ -111,6 +128,19 @@ enum DemoRow {
         case .conflictingGesturesTableView:
             return "With UITableView inside"
 
+        case .alwaysVisibleLandscapeLeft:
+            return "Left menu, Landscape orientation"
+        case .alwaysVisibleLandscapeRight:
+            return "Right menu, Landscape orientation"
+        case .alwaysVisibleLandscapeBoth:
+            return "Both menus, Landscape orientation"
+        case .alwaysVisibleRegularLeft:
+            return "Left menu, Regular size class"
+        case .alwaysVisibleRegularRight:
+            return "Right menu, Regular size class"
+        case .alwaysVisibleRegularBoth:
+            return "Both menus, Regular size class"
+
         case .statusBarRootAndSide:
             return "Root and Side"
         case .statusBarOnlyRoot:
@@ -148,19 +178,8 @@ enum DemoRow {
         case .styleSlideAside:
             return [.slideAside]
 
-        case .usageAsWindowRootViewController,
-             .usageInsideNavigationController,
-             .statusBarRootAndSide,
-             .statusBarOnlyRoot,
-             .statusBarOnlySide,
-             .statusBarHidden,
-             .statusBarDifferentStyles,
-             .statusBarCustomBackground,
-             .statusBarNoBackground:
-            return [.scaleFromBig, .scaleFromLittle, .slideAbove, .slideAboveBlurred, .slideBelow, .slideBelowShifted, .slideAside]
-
         default:
-            return [.slideBelowShifted]
+            return [.scaleFromBig, .scaleFromLittle, .slideAbove, .slideAboveBlurred, .slideBelow, .slideBelowShifted, .slideAside]
         }
     }
 }
@@ -231,6 +250,68 @@ struct DemoType {
                 }
                 """
 
+        case .conflictingGesturesScrollView:
+            return "If you have UIScrollView as a rootView, you still able to scroll it and use gestures to open side views. Try to scroll image and open side views."
+        case .conflictingGesturesTableView:
+            return "If you have editable UITableView as a rootView, you still able to edit it and use gestures to open side views. Try to remove rows by swiping and open side views."
+
+        case .alwaysVisibleLandscapeLeft:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently left menu will be always visible on landscape orientation for iPhone and iPad:
+                leftViewAlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+        case .alwaysVisibleLandscapeRight:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently right menu will be always visible on landscape orientation for iPhone and iPad:
+                rightViewAlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+        case .alwaysVisibleLandscapeBoth:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently both menus will be always visible on landscape orientation for iPhone and iPad:
+                leftViewAlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+                rightViewAlwaysVisibleOptions = [.padLandscape, .phoneLandscape]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+        case .alwaysVisibleRegularLeft:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently left menu will be always visible for regular horizontal size class:
+                leftViewAlwaysVisibleOptions = [.regular]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+        case .alwaysVisibleRegularRight:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently right menu will be always visible for regular horizontal size class:
+                rightViewAlwaysVisibleOptions = [.regular]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+        case .alwaysVisibleRegularBoth:
+            return """
+                If you want side menu to be always visible depending on device type, orienatation or horizontal size class, you can use alwaysVisibleOptions for this.
+
+                For example currently both menus will be always visible for regular horizontal size class:
+                leftViewAlwaysVisibleOptions = [.regular]
+                rightViewAlwaysVisibleOptions = [.regular]
+
+                You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+
         case .statusBarRootAndSide:
             return "Status bar is always visible, try to open side views."
         case .statusBarOnlyRoot:
@@ -245,11 +326,6 @@ struct DemoType {
             return "By default side views have background under status bar and it can be customised, try to open side views."
         case .statusBarNoBackground:
             return "By default side views have background under status bar and it can be hidden, try to open side views."
-
-        case .conflictingGesturesScrollView:
-            return "If you have UIScrollView as a rootView, you still able to scroll it and use gestures to open side views. Try to scroll image and open side views."
-        case .conflictingGesturesTableView:
-            return "If you have editable UITableView as a rootView, you still able to edit it and use gestures to open side views. Try to remove rows by swiping and open side views."
 
         default:
             return nil
