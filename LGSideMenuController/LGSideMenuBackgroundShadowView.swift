@@ -33,14 +33,21 @@ import UIKit
 
 public final class LGSideMenuBackgroundShadowView: UIView {
 
-    public internal(set) var roundedCorners = UIRectCorner()
-    public internal(set) var cornerRadius: CGFloat = .zero
-    public internal(set) var shadowColor: UIColor = .clear
-    public internal(set) var shadowBlur: CGFloat = .zero
+    public internal(set) var shadowColor: UIColor = .clear {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    public internal(set) var shadowBlur: CGFloat = .zero {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     public init() {
-        super.init(frame: CGRect.zero)
-        self.backgroundColor = .clear
+        super.init(frame: .zero)
+        backgroundColor = .clear
     }
 
     required public init?(coder: NSCoder) {
@@ -52,9 +59,7 @@ public final class LGSideMenuBackgroundShadowView: UIView {
 
         let drawRect = rect.insetBy(dx: self.shadowBlur, dy: self.shadowBlur)
 
-        let path = UIBezierPath(roundedRect: drawRect,
-                                byRoundingCorners: self.roundedCorners,
-                                cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
+        let path = UIBezierPath(rect: drawRect)
         path.close()
 
         context.clear(rect)

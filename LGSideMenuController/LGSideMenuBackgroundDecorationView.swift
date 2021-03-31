@@ -33,15 +33,27 @@ import UIKit
 
 public final class LGSideMenuBackgroundDecorationView: UIView {
 
-    public internal(set) var roundedCorners = UIRectCorner()
-    public internal(set) var cornerRadius: CGFloat = .zero
-    public internal(set) var strokeColor: UIColor = .clear
-    public internal(set) var strokeWidth: CGFloat = .zero
-    public internal(set) var fillColor: UIColor = .clear
+    public internal(set) var strokeColor: UIColor = .clear {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    public internal(set) var strokeWidth: CGFloat = .zero {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    public internal(set) var fillColor: UIColor = .clear {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     public init() {
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+        backgroundColor = .clear
     }
 
     required public init?(coder: NSCoder) {
@@ -53,9 +65,7 @@ public final class LGSideMenuBackgroundDecorationView: UIView {
 
         context.clear(rect)
 
-        let path = UIBezierPath(roundedRect: rect,
-                                byRoundingCorners: self.roundedCorners,
-                                cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
+        let path = UIBezierPath(rect: rect)
         path.close()
 
         // To have inner stroke we need to fill rect and erase smaller rect from inside of it
@@ -89,9 +99,7 @@ public final class LGSideMenuBackgroundDecorationView: UIView {
     }
 
     private func getStrokedPath(rect: CGRect) -> UIBezierPath {
-        return UIBezierPath(roundedRect: rect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth),
-                            byRoundingCorners: self.roundedCorners,
-                            cornerRadii: CGSize(width: self.cornerRadius, height: self.cornerRadius))
+        return UIBezierPath(rect: rect.insetBy(dx: self.strokeWidth, dy: self.strokeWidth))
     }
 
 }

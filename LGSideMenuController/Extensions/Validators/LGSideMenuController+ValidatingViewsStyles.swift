@@ -67,9 +67,6 @@ internal extension LGSideMenuController {
             backgroundShadowView.shadowBlur = 0.0
         }
 
-        backgroundDecorationView.setNeedsDisplay()
-        backgroundShadowView.setNeedsDisplay()
-
         if self.leftView != nil && self.isLeftViewVisible && !self.isLeftViewAlwaysVisible {
             coverView.backgroundColor = self.rootViewCoverColorForLeftView
             coverView.effect = self.rootViewCoverBlurEffectForLeftView
@@ -96,11 +93,9 @@ internal extension LGSideMenuController {
         backgroundDecorationView.strokeColor = self.leftViewLayerBorderColor
         backgroundDecorationView.strokeWidth = self.leftViewLayerBorderWidth
         backgroundDecorationView.alpha = self.leftViewBackgroundAlpha
-        backgroundDecorationView.setNeedsDisplay()
 
         backgroundShadowView.shadowColor = self.leftViewLayerShadowColor
         backgroundShadowView.shadowBlur = self.leftViewLayerShadowRadius
-        backgroundShadowView.setNeedsDisplay()
 
         backgroundEffectView.effect = self.leftViewBackgroundBlurEffect
 
@@ -136,11 +131,9 @@ internal extension LGSideMenuController {
         backgroundDecorationView.strokeColor = self.rightViewLayerBorderColor
         backgroundDecorationView.strokeWidth = self.rightViewLayerBorderWidth
         backgroundDecorationView.alpha = self.rightViewBackgroundAlpha
-        backgroundDecorationView.setNeedsDisplay()
 
         backgroundShadowView.shadowColor = self.rightViewLayerShadowColor
         backgroundShadowView.shadowBlur = self.rightViewLayerShadowRadius
-        backgroundShadowView.setNeedsDisplay()
 
         backgroundEffectView.effect = self.rightViewBackgroundBlurEffect
 
