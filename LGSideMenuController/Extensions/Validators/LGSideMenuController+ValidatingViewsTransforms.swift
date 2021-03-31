@@ -85,8 +85,7 @@ internal extension LGSideMenuController {
 
         let scale: CGFloat = {
             // If any of side views is visible, we can't change the scale of root view
-            if !self.leftViewPresentationStyle.shouldRootViewScale ||
-                self.isSideViewAlwaysVisible {
+            if self.isSideViewAlwaysVisible {
                 return 1.0
             }
             var rootViewScale: CGFloat = 1.0
@@ -138,7 +137,13 @@ internal extension LGSideMenuController {
               let wrapperView = self.leftViewWrapperView,
               let coverView = self.leftViewCoverView else { return }
 
-        let viewAlpha = 1.0 - (1.0 - self.leftViewAlphaWhenHidden) * (1.0 - percentage)
+        let viewAlpha: CGFloat = {
+            if self.isLeftViewAlwaysVisible {
+                return 1.0
+            }
+            return 1.0 - (1.0 - self.leftViewAlphaWhenHidden) * (1.0 - percentage)
+        }()
+
         if self.leftViewPresentationStyle.isAbove {
             containerView.alpha = viewAlpha
         }
@@ -238,7 +243,13 @@ internal extension LGSideMenuController {
               let wrapperView = self.rightViewWrapperView,
               let coverView = self.rightViewCoverView else { return }
 
-        let viewAlpha = 1.0 - (1.0 - self.rightViewAlphaWhenHidden) * (1.0 - percentage)
+        let viewAlpha: CGFloat = {
+            if self.isRightViewAlwaysVisible {
+                return 1.0
+            }
+            return 1.0 - (1.0 - self.rightViewAlphaWhenHidden) * (1.0 - percentage)
+        }()
+
         if self.rightViewPresentationStyle.isAbove {
             containerView.alpha = viewAlpha
         }
