@@ -97,6 +97,8 @@ extension LGSideMenuController {
                 self.validateLeftViewsVisibility()
                 self.validateRightViewsVisibility()
             }
+
+            self.validateViewsUserInteraction()
         })
     }
 
