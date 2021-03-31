@@ -80,6 +80,7 @@ internal extension LGSideMenuController {
 
         if self.leftContainerView == nil {
             self.leftContainerView = UIView()
+            self.leftContainerView?.clipsToBounds = true
             defaultLeftViewSetup(self.leftContainerView, true)
         }
 
@@ -149,6 +150,7 @@ internal extension LGSideMenuController {
 
         if self.rightContainerView == nil {
             self.rightContainerView = UIView()
+            self.rightContainerView?.clipsToBounds = true
             defaultRightViewSetup(self.rightContainerView, true)
         }
 

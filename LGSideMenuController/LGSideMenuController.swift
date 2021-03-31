@@ -2047,7 +2047,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var rootViewCoverView: UIVisualEffectView?
 
     /// View that contains all left-related views
-    /// This view does not clip to bounds
+    /// This view clips to bounds
     open internal(set) var leftContainerView: UIView?
 
     /// View that contains all left-related views except background views
@@ -2069,7 +2069,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var leftViewStatusBarBackgroundEffectView: UIVisualEffectView?
 
     /// View that contains all right-related views
-    /// This view does not clip to bounds
+    /// This view clips to bounds
     open internal(set) var rightContainerView: UIView?
 
     /// View that contains all right-related views except background views

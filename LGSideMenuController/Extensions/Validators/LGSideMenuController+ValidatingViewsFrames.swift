@@ -55,11 +55,11 @@ internal extension LGSideMenuController {
         containerView.frame = {
             var result: CGRect = self.view.bounds
             if self.leftView != nil && self.isLeftViewAlwaysVisible {
-                result.origin.x += self.rootViewOffsetTotalForLeftView.x
-                result.size.width -= self.rootViewOffsetTotalForLeftView.x
+                result.origin.x += self.rootViewOffsetTotalForLeftViewWhenAlwaysVisible
+                result.size.width -= self.rootViewOffsetTotalForLeftViewWhenAlwaysVisible
             }
             if self.rightView != nil && self.isRightViewAlwaysVisible {
-                result.size.width -= self.rootViewOffsetTotalForRightView.x
+                result.size.width -= self.rootViewOffsetTotalForRightViewWhenAlwaysVisible
             }
             return result
         }()
@@ -119,25 +119,28 @@ internal extension LGSideMenuController {
         containerView.transform = .identity
         containerView.frame = {
             var result = self.view.bounds
+            let inset = self.leftViewLayerShadowRadius + self.leftViewLayerBorderWidth
             if self.leftViewPresentationStyle.isWidthCompact {
                 result.size.width = self.leftViewWidth
             }
             else if self.leftViewPresentationStyle.isWidthFull && self.isRightViewAlwaysVisible {
-                result.size.width -= self.rightViewWidthTotal
+                result.size.width -= self.rightViewWidthTotal + inset
             }
+            result = result.insetBy(dx: -inset, dy: -inset)
             return result
         }()
 
         containerClipToShadowView.transform = .identity
-        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
-                                                                       dy: -self.leftViewLayerBorderWidth)
+        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: self.leftViewLayerShadowRadius,
+                                                                       dy: self.leftViewLayerShadowRadius)
 
         containerClipToBorderView.transform = .identity
-        containerClipToBorderView.frame = containerView.bounds
+        containerClipToBorderView.frame = containerClipToShadowView.bounds.insetBy(dx: self.leftViewLayerBorderWidth,
+                                                                                   dy: self.leftViewLayerBorderWidth)
 
         backgroundDecorationView.transform = .identity
-        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.leftViewLayerBorderWidth,
-                                                                      dy: -self.leftViewLayerBorderWidth)
+        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: self.leftViewLayerShadowRadius,
+                                                                      dy: self.leftViewLayerShadowRadius)
 
         backgroundShadowView.transform = .identity
         backgroundShadowView.frame = backgroundDecorationView.bounds.insetBy(dx: -self.leftViewLayerShadowRadius,
@@ -161,13 +164,13 @@ internal extension LGSideMenuController {
 
         wrapperView.transform = .identity
         wrapperView.frame = CGRect(origin: .zero,
-                                   size: CGSize(width: self.leftViewWidth, height: containerView.bounds.height))
+                                   size: CGSize(width: self.leftViewWidth, height: containerClipToBorderView.bounds.height))
 
         leftView.transform = .identity
         leftView.frame = wrapperView.bounds
 
         coverView.transform = .identity
-        coverView.frame = containerView.bounds
+        coverView.frame = containerClipToBorderView.bounds
 
         validateLeftViewStatusBarBackgroundFrames()
 
@@ -209,27 +212,30 @@ internal extension LGSideMenuController {
         containerView.transform = .identity
         containerView.frame = {
             var result = self.view.bounds
+            let inset = self.rightViewLayerShadowRadius + self.rightViewLayerBorderWidth
             if self.rightViewPresentationStyle.isWidthCompact {
                 result.size.width = self.rightViewWidth
                 result.origin.x = self.view.bounds.width - self.rightViewWidth
             }
             else if self.rightViewPresentationStyle.isWidthFull && self.isLeftViewAlwaysVisible {
-                result.size.width -= self.leftViewWidthTotal
-                result.origin.x += self.leftViewWidthTotal
+                result.size.width -= self.leftViewWidthTotal + inset
+                result.origin.x += self.leftViewWidthTotal + inset
             }
+            result = result.insetBy(dx: -inset, dy: -inset)
             return result
         }()
 
         containerClipToShadowView.transform = .identity
-        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
-                                                                       dy: -self.rightViewLayerBorderWidth)
+        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: self.rightViewLayerShadowRadius,
+                                                                       dy: self.rightViewLayerShadowRadius)
 
         containerClipToBorderView.transform = .identity
-        containerClipToBorderView.frame = containerView.bounds
+        containerClipToBorderView.frame = containerClipToShadowView.bounds.insetBy(dx: self.rightViewLayerBorderWidth,
+                                                                                   dy: self.rightViewLayerBorderWidth)
 
         backgroundDecorationView.transform = .identity
-        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: -self.rightViewLayerBorderWidth,
-                                                                      dy: -self.rightViewLayerBorderWidth)
+        backgroundDecorationView.frame = containerView.bounds.insetBy(dx: self.rightViewLayerShadowRadius,
+                                                                      dy: self.rightViewLayerShadowRadius)
 
         backgroundShadowView.transform = .identity
         backgroundShadowView.frame = backgroundDecorationView.bounds.insetBy(dx: -self.rightViewLayerShadowRadius,
@@ -252,14 +258,14 @@ internal extension LGSideMenuController {
         }
 
         wrapperView.transform = .identity
-        wrapperView.frame = CGRect(origin: CGPoint(x: containerView.bounds.width - self.rightViewWidth, y: 0.0),
-                                   size: CGSize(width: self.rightViewWidth, height: containerView.bounds.height))
+        wrapperView.frame = CGRect(origin: CGPoint(x: containerClipToBorderView.bounds.width - self.rightViewWidth, y: 0.0),
+                                   size: CGSize(width: self.rightViewWidth, height: containerClipToBorderView.bounds.height))
 
         rightView.transform = .identity
         rightView.frame = wrapperView.bounds
 
         coverView.transform = .identity
-        coverView.frame = containerView.bounds
+        coverView.frame = containerClipToBorderView.bounds
 
         validateRightViewStatusBarBackgroundFrames()
 

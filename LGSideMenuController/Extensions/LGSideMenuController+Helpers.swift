@@ -80,12 +80,26 @@ internal extension LGSideMenuController {
         return result
     }
 
+    var rootViewOffsetTotalForLeftViewWhenAlwaysVisible: CGFloat {
+        return
+            self.rootViewOffsetWhenHiddenForLeftView.x +
+            self.leftViewWidthTotal +
+            self.rootViewLayerBorderWidthForLeftView
+    }
+
     var rootViewOffsetTotalForRightView: CGPoint {
         var result = self.rootViewOffsetWhenHiddenForRightView
         if self.rightViewPresentationStyle.shouldRootViewMove {
             result.x += self.rightViewWidthTotal + self.rootViewLayerBorderWidthForRightView
         }
         return result
+    }
+
+    var rootViewOffsetTotalForRightViewWhenAlwaysVisible: CGFloat {
+        return
+            self.rootViewOffsetWhenHiddenForRightView.x +
+            self.rightViewWidthTotal +
+            self.rootViewLayerBorderWidthForRightView
     }
 
     // MARK: - Cancel Animations -
