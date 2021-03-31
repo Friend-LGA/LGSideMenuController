@@ -41,16 +41,6 @@ class RootViewControllerWithTextLabel : RootViewController {
         view.addSubview(textLabel)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        struct Counter { static var count = 0 }
-        Counter.count += 1
-        print("RootViewController.viewWillAppear(\(animated)), counter: \(Counter.count)")
-
-        // Use this if you want left view be available by swipe
-        navigationController!.interactivePopGestureRecognizer!.isEnabled = false
-    }
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         struct Counter { static var count = 0 }
@@ -96,6 +86,13 @@ class RootViewControllerWithTextLabel : RootViewController {
         struct Counter { static var count = 0 }
         Counter.count += 1
         print("RootViewController.deinit(), counter: \(Counter.count)")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        struct Counter { static var count = 0 }
+        Counter.count += 1
+        print("RootViewController.viewWillAppear(\(animated)), counter: \(Counter.count)")
     }
 
     override func viewDidAppear(_ animated: Bool) {

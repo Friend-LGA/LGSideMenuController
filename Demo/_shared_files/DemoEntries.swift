@@ -10,6 +10,7 @@ enum DemoSection: Int, CaseIterable {
     case usage
     case conflictingGestures
     case alwaysVisible
+    case gestureAreaAndRange
     case statusBar
 
     var description: String {
@@ -22,6 +23,8 @@ enum DemoSection: Int, CaseIterable {
             return "Conflicting Gestures"
         case .alwaysVisible:
             return "Always Visible Options"
+        case .gestureAreaAndRange:
+            return "Gesture Area and Range"
         case .statusBar:
             return "Status Bar"
         }
@@ -50,6 +53,11 @@ enum DemoSection: Int, CaseIterable {
                     .alwaysVisibleRegularLeft,
                     .alwaysVisibleRegularRight,
                     .alwaysVisibleRegularBoth]
+        case .gestureAreaAndRange:
+            return [.gestureAreaAndRangeBordersDefault,
+                    .gestureAreaAndRangeBordersCustom,
+                    .gestureAreaAndRangeFull,
+                    .gestureAreaAndRangeDisabled]
         case .statusBar:
             return [.statusBarRootAndSide,
                     .statusBarOnlyRoot,
@@ -84,6 +92,11 @@ enum DemoRow {
     case alwaysVisibleRegularRight
     case alwaysVisibleRegularBoth
 
+    case gestureAreaAndRangeBordersDefault
+    case gestureAreaAndRangeBordersCustom
+    case gestureAreaAndRangeFull
+    case gestureAreaAndRangeDisabled
+
     case statusBarRootAndSide
     case statusBarOnlyRoot
     case statusBarOnlySide
@@ -95,10 +108,6 @@ enum DemoRow {
     case blurredRootViewCover
     case blurredCoversOfSideViews
     case blurredBackgroundsOfSideViews
-    case landscapeIsAlwaysVisible
-    case statusBarIsAlwaysVisible
-    case gestureAreaIsFullScreen
-    case concurrentTouchActions
     case customStyleExample
 
     var title: String {
@@ -140,6 +149,15 @@ enum DemoRow {
             return "Right menu, Regular size class"
         case .alwaysVisibleRegularBoth:
             return "Both menus, Regular size class"
+
+        case .gestureAreaAndRangeBordersDefault:
+            return "Borders Default"
+        case .gestureAreaAndRangeBordersCustom:
+            return "Borders Custom"
+        case .gestureAreaAndRangeFull:
+            return "Full"
+        case .gestureAreaAndRangeDisabled:
+            return "Disabled"
 
         case .statusBarRootAndSide:
             return "Root and Side"
@@ -310,6 +328,54 @@ struct DemoType {
                 rightViewAlwaysVisibleOptions = [.regular]
 
                 You might want to use iPad for this demo, as this behaviour makes much more sence on larger devices.
+                """
+
+        case .gestureAreaAndRangeBordersDefault:
+            return """
+                You can customize gestures which open side views.
+
+                To make them work only from the edges of the screen you should set gesture area:
+                leftViewSwipeGestureArea = .borders
+                rightViewSwipeGestureArea = .borders
+
+                Also you can set the range where these gestures will be active, by default it is:
+                leftViewSwipeGestureRange = SwipeGestureRange(left: 0.0, right: 44.0)
+                rightViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 0.0)
+
+                Left and Right properties means how far gesture will be availabe to the left side and to the right side of the edge of the root view.
+                For more info read the wiki on github.
+                """
+        case .gestureAreaAndRangeBordersCustom:
+            return """
+                You can customize gestures which open side views.
+
+                To make them work only from the edges of the screen you should set gesture area:
+                leftViewSwipeGestureArea = .borders
+                rightViewSwipeGestureArea = .borders
+
+                Also you can set the range where these gestures will be active, for this demo it is:
+                leftViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 128.0)
+                rightViewSwipeGestureRange = SwipeGestureRange(left: 128.0, right: 44.0)
+
+                Left and Right properties means how far gesture will be availabe to the left side and to the right side of the edge of the root view.
+                For more info read the wiki on github.
+                """
+        case .gestureAreaAndRangeFull:
+            return """
+                You can customize gestures which open side views.
+
+                To make them work on the entire area of the screen:
+                leftViewSwipeGestureArea = .full
+                rightViewSwipeGestureArea = .full
+
+                For more info read the wiki on github.
+                """
+        case .gestureAreaAndRangeDisabled:
+            return """
+                To disable gestures simply use:
+
+                isLeftViewSwipeGestureDisabled = true
+                isRightViewSwipeGestureDisabled = true
                 """
 
         case .statusBarRootAndSide:

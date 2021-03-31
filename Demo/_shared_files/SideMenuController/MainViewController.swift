@@ -180,6 +180,21 @@ class MainViewController: LGSideMenuController {
         case .alwaysVisibleRegularBoth:
             leftViewAlwaysVisibleOptions = [.regular]
             rightViewAlwaysVisibleOptions = [.regular]
+        case .gestureAreaAndRangeBordersDefault:
+            leftViewSwipeGestureArea = .borders
+            rightViewSwipeGestureArea = .borders
+        case .gestureAreaAndRangeBordersCustom:
+            leftViewSwipeGestureArea = .borders
+            leftViewSwipeGestureRange = SwipeGestureRange(left: 44.0, right: 128.0)
+
+            rightViewSwipeGestureArea = .borders
+            rightViewSwipeGestureRange = SwipeGestureRange(left: 128.0, right: 44.0)
+        case .gestureAreaAndRangeFull:
+            leftViewSwipeGestureArea = .full
+            rightViewSwipeGestureArea = .full
+        case .gestureAreaAndRangeDisabled:
+            isLeftViewSwipeGestureDisabled = true
+            isRightViewSwipeGestureDisabled = true
         default:
             break
         }
