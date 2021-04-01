@@ -195,6 +195,15 @@ class MainViewController: LGSideMenuController {
         case .gestureAreaAndRangeDisabled:
             isLeftViewSwipeGestureDisabled = true
             isRightViewSwipeGestureDisabled = true
+        case .coversWithColor:
+            rootViewCoverColor = UIColor(white: 0.0, alpha: 0.9)
+            leftViewCoverColor = .black
+            rightViewCoverColor = .black
+        case .coversWithBlur:
+            rootViewCoverBlurEffect = UIBlurEffect(style: .dark)
+            rootViewCoverAlpha = 0.9
+            leftViewCoverBlurEffect = UIBlurEffect(style: .dark)
+            rightViewCoverBlurEffect = UIBlurEffect(style: .dark)
         default:
             break
         }
@@ -249,6 +258,11 @@ class MainViewController: LGSideMenuController {
         //   rightViewStatusBarStyle
         //   rightViewStatusBarUpdateAnimation
         // }
+        //
+        // =================================================================================
+        //
+        // For more information read README.md and wiki on github:
+        // https://github.com/Friend-LGA/LGSideMenuController
     }
 
     // MARK: - Logging -

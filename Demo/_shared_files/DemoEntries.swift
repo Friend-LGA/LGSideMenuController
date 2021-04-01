@@ -12,6 +12,7 @@ enum DemoSection: Int, CaseIterable {
     case alwaysVisible
     case gestureAreaAndRange
     case statusBar
+    case covers
 
     var description: String {
         switch self {
@@ -27,6 +28,8 @@ enum DemoSection: Int, CaseIterable {
             return "Gesture Area and Range"
         case .statusBar:
             return "Status Bar"
+        case .covers:
+            return "Covers"
         }
     }
 
@@ -66,6 +69,9 @@ enum DemoSection: Int, CaseIterable {
                     .statusBarDifferentStyles,
                     .statusBarCustomBackground,
                     .statusBarNoBackground]
+        case .covers:
+            return [.coversWithColor,
+                    .coversWithBlur]
         }
     }
 }
@@ -105,8 +111,9 @@ enum DemoRow {
     case statusBarCustomBackground
     case statusBarNoBackground
 
-    case blurredRootViewCover
-    case blurredCoversOfSideViews
+    case coversWithColor
+    case coversWithBlur
+
     case blurredBackgroundsOfSideViews
     case customStyleExample
 
@@ -173,6 +180,11 @@ enum DemoRow {
             return "Custom Background"
         case .statusBarNoBackground:
             return "No Background"
+
+        case .coversWithColor:
+            return "With Color"
+        case .coversWithBlur:
+            return "With Blur"
 
         default:
             return "Default"
@@ -392,6 +404,31 @@ struct DemoType {
             return "By default side views have background under status bar and it can be customised, try to open side views."
         case .statusBarNoBackground:
             return "By default side views have background under status bar and it can be hidden, try to open side views."
+
+        case .coversWithColor:
+            return """
+                If you want to hide content of the view, you can set color and alpha of the cover with these properties:
+
+                rootViewCoverColor: UIColor
+                leftViewCoverColor: UIColor
+                rightViewCoverColor: UIColor
+
+                rootViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                leftViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                rightViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                """
+        case .coversWithBlur:
+            return """
+                If you want to hide content of the view, you can set blur effect and alpha of the cover with these properties:
+
+                rootViewCoverBlurEffect: UIBlurEffect
+                leftViewCoverBlurEffect: UIBlurEffect
+                rightViewCoverBlurEffect: UIBlurEffect
+
+                rootViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                leftViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                rightViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                """
 
         default:
             return nil
