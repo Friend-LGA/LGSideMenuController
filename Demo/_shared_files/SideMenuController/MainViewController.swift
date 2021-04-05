@@ -85,40 +85,62 @@ class MainViewController: LGSideMenuController {
     }
 
     func updateParameters() {
-        leftViewWidth = 250.0
-        rightViewWidth = 100.0
-
         guard let type = type else { return }
 
-        leftViewPresentationStyle = type.presentationStyle
-        rightViewPresentationStyle = type.presentationStyle
+        // Set common parameters for all demo types
+        do {
+            leftViewWidth = 250.0
+            rightViewWidth = 100.0
 
-        let shouldSetBackground = !([DemoRow.backgroundsEmpty,
-                                     DemoRow.backgroundsWithImage,
-                                     DemoRow.backgroundsWithColor,
-                                     DemoRow.backgroundsWithBlur,
-                                     DemoRow.backgroundsWithView].contains(type.demoRow))
+            leftViewPresentationStyle = type.presentationStyle
+            rightViewPresentationStyle = type.presentationStyle
 
-        if type.presentationStyle == .slideAboveBlurred {
-            if shouldSetBackground {
+            if type.presentationStyle == .slideAboveBlurred {
                 leftViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
                 rightViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
             }
-        }
-        else if type.presentationStyle == .slideAside {
-            rootViewLayerBorderWidth = 1.0
-            rootViewLayerBorderColor = UIColor(white: isLightTheme() ? 1.0 : 0.0, alpha: 0.9)
+            else if type.presentationStyle == .slideAside {
+                rootViewLayerBorderWidth = 1.0
+                rootViewLayerBorderColor = UIColor(white: isLightTheme() ? 1.0 : 0.0, alpha: 0.9)
 
-            if shouldSetBackground {
+                leftViewBackgroundImage = UIImage(named: "imageLeft")
+                rightViewBackgroundImage = UIImage(named: "imageRight")
+            }
+            else {
                 leftViewBackgroundImage = UIImage(named: "imageLeft")
                 rightViewBackgroundImage = UIImage(named: "imageRight")
             }
         }
-        else {
-            if shouldSetBackground {
-                leftViewBackgroundImage = UIImage(named: "imageLeft")
-                rightViewBackgroundImage = UIImage(named: "imageRight")
-            }
+
+        // Just clear background-related properties for background demo types
+        if [DemoRow.backgroundsEmpty,
+            DemoRow.backgroundsWithImage,
+            DemoRow.backgroundsWithColor,
+            DemoRow.backgroundsWithBlur,
+            DemoRow.backgroundsWithView].contains(type.demoRow) {
+            leftViewBackgroundBlurEffect = nil
+            leftViewBackgroundImage = nil
+            rightViewBackgroundBlurEffect = nil
+            rightViewBackgroundImage = nil
+        }
+
+        // Just clear all decoration-related properties for decoration demo types
+        if [DemoRow.decorationNone,
+            DemoRow.decorationBorders,
+            DemoRow.decorationShadows,
+            DemoRow.decorationShadowAndBorders].contains(type.demoRow) {
+            rootViewLayerBorderColor = .clear
+            rootViewLayerBorderWidth = 0.0
+            rootViewLayerShadowColor = .clear
+            rootViewLayerShadowRadius = 0.0
+            leftViewLayerBorderColor = .clear
+            leftViewLayerBorderWidth = 0.0
+            leftViewLayerShadowColor = .clear
+            leftViewLayerShadowRadius = 0.0
+            rightViewLayerBorderColor = .clear
+            rightViewLayerBorderWidth = 0.0
+            rightViewLayerShadowColor = .clear
+            rightViewLayerShadowRadius = 0.0
         }
 
         switch type.demoRow {
@@ -221,11 +243,13 @@ class MainViewController: LGSideMenuController {
             leftViewBackgroundColor = .clear
             leftViewBackgroundImage = nil
             leftViewBackgroundAlpha = 0.0
+            leftViewBackgroundBlurEffect = nil
 
             rightViewBackgroundView = nil
             rightViewBackgroundColor = .clear
             rightViewBackgroundImage = nil
             rightViewBackgroundAlpha = 0.0
+            rightViewBackgroundBlurEffect = nil
         case .backgroundsWithImage:
             leftViewBackgroundImage = UIImage(named: "imageLeft")
             rightViewBackgroundImage = UIImage(named: "imageRight")
@@ -241,6 +265,54 @@ class MainViewController: LGSideMenuController {
 
             let rightImageView = UIImageView(image: UIImage(named: "imageRight"))
             rightViewBackgroundView = rightImageView
+        case .decorationNone:
+            rootViewLayerBorderColor = .clear
+            rootViewLayerBorderWidth = 0.0
+            rootViewLayerShadowColor = .clear
+            rootViewLayerShadowRadius = 0.0
+
+            leftViewLayerBorderColor = .clear
+            leftViewLayerBorderWidth = 0.0
+            leftViewLayerShadowColor = .clear
+            leftViewLayerShadowRadius = 0.0
+
+            rightViewLayerBorderColor = .clear
+            rightViewLayerBorderWidth = 0.0
+            rightViewLayerShadowColor = .clear
+            rightViewLayerShadowRadius = 0.0
+        case .decorationShadows:
+            rootViewLayerShadowColor = .black
+            rootViewLayerShadowRadius = 16.0
+
+            leftViewLayerShadowColor = .black
+            leftViewLayerShadowRadius = 16.0
+
+            rightViewLayerShadowColor = .black
+            rightViewLayerShadowRadius = 16.0
+        case .decorationBorders:
+            rootViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            rootViewLayerBorderWidth = 4.0
+
+            leftViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            leftViewLayerBorderWidth = 4.0
+
+            rightViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            rightViewLayerBorderWidth = 4.0
+        case .decorationShadowAndBorders:
+            rootViewLayerShadowColor = .black
+            rootViewLayerShadowRadius = 16.0
+            rootViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            rootViewLayerBorderWidth = 4.0
+
+            leftViewLayerShadowColor = .black
+            leftViewLayerShadowRadius = 16.0
+            leftViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            leftViewLayerBorderWidth = 4.0
+
+            rightViewLayerShadowColor = .black
+            rightViewLayerShadowRadius = 16.0
+            rightViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
+            rightViewLayerBorderWidth = 4.0
         default:
             break
         }

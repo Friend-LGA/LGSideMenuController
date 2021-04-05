@@ -14,7 +14,7 @@ enum DemoSection: Int, CaseIterable {
     case statusBar
     case covers
     case backgrounds
-    // add decoration
+    case decoration
     // add offset
     // add scale
 
@@ -36,6 +36,8 @@ enum DemoSection: Int, CaseIterable {
             return "Covers"
         case .backgrounds:
             return "Backgrounds"
+        case .decoration:
+            return "Decoration"
         }
     }
 
@@ -84,6 +86,11 @@ enum DemoSection: Int, CaseIterable {
                     .backgroundsWithColor,
                     .backgroundsWithBlur,
                     .backgroundsWithView]
+        case .decoration:
+            return [.decorationNone,
+                    .decorationShadows,
+                    .decorationBorders,
+                    .decorationShadowAndBorders]
         }
     }
 }
@@ -131,6 +138,11 @@ enum DemoRow {
     case backgroundsWithColor
     case backgroundsWithBlur
     case backgroundsWithView
+
+    case decorationNone
+    case decorationShadows
+    case decorationBorders
+    case decorationShadowAndBorders
 
     case customStyleExample
 
@@ -213,6 +225,15 @@ enum DemoRow {
             return "With Blur"
         case .backgroundsWithView:
             return "With UIView"
+
+        case .decorationNone:
+            return "None"
+        case .decorationShadows:
+            return "Shadows"
+        case .decorationBorders:
+            return "Borders"
+        case .decorationShadowAndBorders:
+            return "Shadows and Borders"
 
         default:
             return "Default"
@@ -478,6 +499,19 @@ struct DemoType {
                 leftViewBackgroundColor: UIColor
                 leftViewBackgroundImage: UIImage?
                 leftViewBackgroundAlpha: CGFloat
+                """
+
+        case .decorationNone,
+             .decorationShadows,
+             .decorationBorders,
+             .decorationShadowAndBorders:
+            return """
+                To decorate appearance you can set shadow and border for root, left and right views. Use these properties (for root view as an example):
+
+                rootViewLayerBorderColor: UIColor
+                rootViewLayerBorderWidth: CGFloat
+                rootViewLayerShadowColor: UIColor
+                rootViewLayerShadowRadius: CGFloat
                 """
 
         default:
