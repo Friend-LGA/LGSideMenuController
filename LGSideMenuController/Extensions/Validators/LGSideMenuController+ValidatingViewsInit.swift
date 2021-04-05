@@ -84,12 +84,6 @@ internal extension LGSideMenuController {
             defaultLeftViewSetup(self.leftContainerView, true)
         }
 
-        if self.leftContainerClipToShadowView == nil {
-            self.leftContainerClipToShadowView = UIView()
-            self.leftContainerClipToShadowView?.clipsToBounds = true
-            defaultLeftViewSetup(self.leftContainerClipToShadowView, true)
-        }
-
         if self.leftContainerClipToBorderView == nil {
             self.leftContainerClipToBorderView = UIView()
             self.leftContainerClipToBorderView?.clipsToBounds = true
@@ -152,12 +146,6 @@ internal extension LGSideMenuController {
             self.rightContainerView = UIView()
             self.rightContainerView?.clipsToBounds = true
             defaultRightViewSetup(self.rightContainerView, true)
-        }
-
-        if self.rightContainerClipToShadowView == nil {
-            self.rightContainerClipToShadowView = UIView()
-            self.rightContainerClipToShadowView?.clipsToBounds = true
-            defaultRightViewSetup(self.rightContainerClipToShadowView, true)
         }
 
         if self.rightContainerClipToBorderView == nil {

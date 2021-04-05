@@ -64,7 +64,6 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let leftView = self.leftView,
               let containerView = self.leftContainerView,
-              let containerClipToShadowView = self.leftContainerClipToShadowView,
               let containerClipToBorderView = self.leftContainerClipToBorderView,
               let backgroundDecorationView = self.leftViewBackgroundDecorationView,
               let backgroundShadowView = self.leftViewBackgroundShadowView,
@@ -83,17 +82,15 @@ internal extension LGSideMenuController {
         }
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
-        containerView.insertSubview(containerClipToShadowView, at: 1)
+        containerView.insertSubview(containerClipToBorderView, at: 1)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
         backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
 
-        containerClipToShadowView.insertSubview(containerClipToBorderView, at: 0)
-        containerClipToShadowView.insertSubview(statusBarBackgroundView, at: 1)
-
         containerClipToBorderView.insertSubview(wrapperView, at: 0)
         containerClipToBorderView.insertSubview(coverView, at: 1)
+        containerClipToBorderView.insertSubview(statusBarBackgroundView, at: 2)
 
         if let backgroundImageView = self.leftViewBackgroundImageView {
             backgroundWrapperView.insertSubview(backgroundImageView, at: 0)
@@ -111,7 +108,6 @@ internal extension LGSideMenuController {
         guard let rootContainerView = self.rootContainerView,
               let rightView = self.rightView,
               let containerView = self.rightContainerView,
-              let containerClipToShadowView = self.rightContainerClipToShadowView,
               let containerClipToBorderView = self.rightContainerClipToBorderView,
               let backgroundDecorationView = self.rightViewBackgroundDecorationView,
               let backgroundShadowView = self.rightViewBackgroundShadowView,
@@ -130,17 +126,15 @@ internal extension LGSideMenuController {
         }
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
-        containerView.insertSubview(containerClipToShadowView, at: 1)
+        containerView.insertSubview(containerClipToBorderView, at: 1)
 
         backgroundDecorationView.insertSubview(backgroundShadowView, at: 0)
         backgroundDecorationView.insertSubview(backgroundEffectView, at: 1)
         backgroundDecorationView.insertSubview(backgroundWrapperView, at: 2)
 
-        containerClipToShadowView.insertSubview(containerClipToBorderView, at: 0)
-        containerClipToShadowView.insertSubview(statusBarBackgroundView, at: 1)
-
         containerClipToBorderView.insertSubview(wrapperView, at: 0)
         containerClipToBorderView.insertSubview(coverView, at: 1)
+        containerClipToBorderView.insertSubview(statusBarBackgroundView, at: 2)
 
         if let backgroundImageView = self.rightViewBackgroundImageView {
             backgroundWrapperView.insertSubview(backgroundImageView, at: 0)

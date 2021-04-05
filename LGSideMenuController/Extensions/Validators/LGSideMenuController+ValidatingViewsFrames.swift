@@ -107,7 +107,6 @@ internal extension LGSideMenuController {
     func validateLeftViewsFrames() {
         guard let leftView = self.leftView,
               let containerView = self.leftContainerView,
-              let containerClipToShadowView = self.leftContainerClipToShadowView,
               let containerClipToBorderView = self.leftContainerClipToBorderView,
               let backgroundDecorationView = self.leftViewBackgroundDecorationView,
               let backgroundShadowView = self.leftViewBackgroundShadowView,
@@ -130,13 +129,10 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        containerClipToShadowView.transform = .identity
-        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: self.leftViewLayerShadowRadius,
-                                                                       dy: self.leftViewLayerShadowRadius)
-
         containerClipToBorderView.transform = .identity
-        containerClipToBorderView.frame = containerClipToShadowView.bounds.insetBy(dx: self.leftViewLayerBorderWidth,
-                                                                                   dy: self.leftViewLayerBorderWidth)
+        containerClipToBorderView.frame =
+            containerView.bounds.insetBy(dx: self.leftViewLayerShadowRadius + self.leftViewLayerBorderWidth,
+                                         dy: self.leftViewLayerShadowRadius + self.leftViewLayerBorderWidth)
 
         backgroundDecorationView.transform = .identity
         backgroundDecorationView.frame = containerView.bounds.insetBy(dx: self.leftViewLayerShadowRadius,
@@ -178,14 +174,14 @@ internal extension LGSideMenuController {
     }
 
     func validateLeftViewStatusBarBackgroundFrames() {
-        guard let containerClipToShadowView = self.leftContainerClipToShadowView,
+        guard let containerClipToBorderView = self.leftContainerClipToBorderView,
               let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
 
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
-                               size: CGSize(width: containerClipToShadowView.bounds.width,
+                               size: CGSize(width: containerClipToBorderView.bounds.width,
                                             height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.leftViewStatusBarBackgroundShadowRadius,
                                  dy: -self.leftViewStatusBarBackgroundShadowRadius)
@@ -200,7 +196,6 @@ internal extension LGSideMenuController {
     func validateRightViewsFrames() {
         guard let rightView = self.rightView,
               let containerView = self.rightContainerView,
-              let containerClipToShadowView = self.rightContainerClipToShadowView,
               let containerClipToBorderView = self.rightContainerClipToBorderView,
               let backgroundDecorationView = self.rightViewBackgroundDecorationView,
               let backgroundShadowView = self.rightViewBackgroundShadowView,
@@ -225,13 +220,10 @@ internal extension LGSideMenuController {
             return result
         }()
 
-        containerClipToShadowView.transform = .identity
-        containerClipToShadowView.frame = containerView.bounds.insetBy(dx: self.rightViewLayerShadowRadius,
-                                                                       dy: self.rightViewLayerShadowRadius)
-
         containerClipToBorderView.transform = .identity
-        containerClipToBorderView.frame = containerClipToShadowView.bounds.insetBy(dx: self.rightViewLayerBorderWidth,
-                                                                                   dy: self.rightViewLayerBorderWidth)
+        containerClipToBorderView.frame =
+            containerView.bounds.insetBy(dx: self.rightViewLayerShadowRadius + self.rightViewLayerBorderWidth,
+                                         dy: self.rightViewLayerShadowRadius + self.rightViewLayerBorderWidth)
 
         backgroundDecorationView.transform = .identity
         backgroundDecorationView.frame = containerView.bounds.insetBy(dx: self.rightViewLayerShadowRadius,
@@ -273,14 +265,14 @@ internal extension LGSideMenuController {
     }
 
     func validateRightViewStatusBarBackgroundFrames() {
-        guard let containerClipToShadowView = self.rightContainerClipToShadowView,
+        guard let containerClipToBorderView = self.rightContainerClipToBorderView,
               let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
 
         statusBarBackgroundView.transform = .identity
         statusBarBackgroundView.frame = {
             let frame = CGRect(origin: .zero,
-                               size: CGSize(width: containerClipToShadowView.bounds.width,
+                               size: CGSize(width: containerClipToBorderView.bounds.width,
                                             height: LGSideMenuHelper.getStatusBarFrame().height))
             return frame.insetBy(dx: -self.rightViewStatusBarBackgroundShadowRadius,
                                  dy: -self.rightViewStatusBarBackgroundShadowRadius)

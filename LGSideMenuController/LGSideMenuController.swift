@@ -2051,10 +2051,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var leftContainerView: UIView?
 
     /// View that contains all left-related views except background views
-    /// This view located right inside shadow and clips to bounds
-    open internal(set) var leftContainerClipToShadowView: UIView?
-
-    /// View that contains all left-related views except background and statusBarBackground views
     /// This view located right inside border and clips to bounds
     open internal(set) var leftContainerClipToBorderView: UIView?
 
@@ -2073,10 +2069,6 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     open internal(set) var rightContainerView: UIView?
 
     /// View that contains all right-related views except background views
-    /// This view located right inside shadow and clips to bounds
-    open internal(set) var rightContainerClipToShadowView: UIView?
-
-    /// View that contains all right-related views except background and statusBarBackground views
     /// This view located right inside border and clips to bounds
     open internal(set) var rightContainerClipToBorderView: UIView?
 

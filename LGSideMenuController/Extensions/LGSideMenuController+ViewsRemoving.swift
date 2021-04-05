@@ -104,11 +104,6 @@ internal extension LGSideMenuController {
             self.leftContainerView = nil
         }
 
-        if let containerClipToShadowView = self.leftContainerClipToShadowView {
-            containerClipToShadowView.removeFromSuperview()
-            self.leftContainerClipToShadowView = nil
-        }
-
         if let containerClipToBorderView = self.leftContainerClipToBorderView {
             containerClipToBorderView.removeFromSuperview()
             self.leftContainerClipToBorderView = nil
@@ -184,11 +179,6 @@ internal extension LGSideMenuController {
         if let containerView = self.rightContainerView {
             containerView.removeFromSuperview()
             self.rightContainerView = nil
-        }
-
-        if let containerClipToShadowView = self.rightContainerClipToShadowView {
-            containerClipToShadowView.removeFromSuperview()
-            self.rightContainerClipToShadowView = nil
         }
 
         if let containerClipToBorderView = self.rightContainerClipToBorderView {
