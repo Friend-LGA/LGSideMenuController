@@ -265,6 +265,14 @@ class MainViewController: LGSideMenuController {
 
             let rightImageView = UIImageView(image: UIImage(named: "imageRight"))
             rightViewBackgroundView = rightImageView
+        case .backgroundsScaled:
+            leftViewBackgroundImage = UIImage(named: "imageLeft")
+            leftViewBackgroundScaleWhenHidden = 0.1
+            leftViewBackgroundScaleWhenShowing = 1.0
+
+            rightViewBackgroundImage = UIImage(named: "imageRight")
+            rightViewBackgroundScaleWhenHidden = 0.1
+            rightViewBackgroundScaleWhenShowing = 1.0
         case .decorationNone:
             rootViewLayerBorderColor = .clear
             rootViewLayerBorderWidth = 0.0

@@ -85,7 +85,8 @@ enum DemoSection: Int, CaseIterable {
                     .backgroundsWithImage,
                     .backgroundsWithColor,
                     .backgroundsWithBlur,
-                    .backgroundsWithView]
+                    .backgroundsWithView,
+                    .backgroundsScaled]
         case .decoration:
             return [.decorationNone,
                     .decorationShadows,
@@ -138,6 +139,7 @@ enum DemoRow {
     case backgroundsWithColor
     case backgroundsWithBlur
     case backgroundsWithView
+    case backgroundsScaled
 
     case decorationNone
     case decorationShadows
@@ -225,6 +227,8 @@ enum DemoRow {
             return "With Blur"
         case .backgroundsWithView:
             return "With UIView"
+        case .backgroundsScaled:
+            return "Scaled"
 
         case .decorationNone:
             return "None"
@@ -260,7 +264,8 @@ enum DemoRow {
         case .backgroundsEmpty,
              .backgroundsWithImage,
              .backgroundsWithColor,
-             .backgroundsWithView:
+             .backgroundsWithView,
+             .backgroundsScaled:
             return [.scaleFromBig]
         case .backgroundsWithBlur:
             return [.slideAboveBlurred]
@@ -491,7 +496,8 @@ struct DemoType {
              .backgroundsWithImage,
              .backgroundsWithColor,
              .backgroundsWithBlur,
-             .backgroundsWithView:
+             .backgroundsWithView,
+             .backgroundsScaled:
             return """
                 You can specify different background options for side views. Use these properties (for left view as an example):
 
@@ -499,6 +505,8 @@ struct DemoType {
                 leftViewBackgroundColor: UIColor
                 leftViewBackgroundImage: UIImage?
                 leftViewBackgroundAlpha: CGFloat
+                leftViewBackgroundScaleWhenHidden: CGFloat
+                leftViewBackgroundScaleWhenShowing: CGFloat
                 """
 
         case .decorationNone,
