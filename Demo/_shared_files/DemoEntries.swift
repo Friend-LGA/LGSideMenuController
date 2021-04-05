@@ -13,6 +13,10 @@ enum DemoSection: Int, CaseIterable {
     case gestureAreaAndRange
     case statusBar
     case covers
+    case backgrounds
+    // add decoration
+    // add offset
+    // add scale
 
     var description: String {
         switch self {
@@ -30,6 +34,8 @@ enum DemoSection: Int, CaseIterable {
             return "Status Bar"
         case .covers:
             return "Covers"
+        case .backgrounds:
+            return "Backgrounds"
         }
     }
 
@@ -72,6 +78,12 @@ enum DemoSection: Int, CaseIterable {
         case .covers:
             return [.coversWithColor,
                     .coversWithBlur]
+        case .backgrounds:
+            return [.backgroundsEmpty,
+                    .backgroundsWithImage,
+                    .backgroundsWithColor,
+                    .backgroundsWithBlur,
+                    .backgroundsWithView]
         }
     }
 }
@@ -114,7 +126,12 @@ enum DemoRow {
     case coversWithColor
     case coversWithBlur
 
-    case blurredBackgroundsOfSideViews
+    case backgroundsEmpty
+    case backgroundsWithImage
+    case backgroundsWithColor
+    case backgroundsWithBlur
+    case backgroundsWithView
+
     case customStyleExample
 
     var title: String {
@@ -186,6 +203,17 @@ enum DemoRow {
         case .coversWithBlur:
             return "With Blur"
 
+        case .backgroundsEmpty:
+            return "Empty"
+        case .backgroundsWithImage:
+            return "With Image"
+        case .backgroundsWithColor:
+            return "With Color"
+        case .backgroundsWithBlur:
+            return "With Blur"
+        case .backgroundsWithView:
+            return "With UIView"
+
         default:
             return "Default"
         }
@@ -207,6 +235,14 @@ enum DemoRow {
             return [.slideBelowShifted]
         case .styleSlideAside:
             return [.slideAside]
+
+        case .backgroundsEmpty,
+             .backgroundsWithImage,
+             .backgroundsWithColor,
+             .backgroundsWithView:
+            return [.scaleFromBig]
+        case .backgroundsWithBlur:
+            return [.slideAboveBlurred]
 
         default:
             return [.scaleFromBig, .scaleFromLittle, .slideAbove, .slideAboveBlurred, .slideBelow, .slideBelowShifted, .slideAside]
@@ -428,6 +464,20 @@ struct DemoType {
                 rootViewCoverAlpha: CGFloat (0.0 ... 1.0)
                 leftViewCoverAlpha: CGFloat (0.0 ... 1.0)
                 rightViewCoverAlpha: CGFloat (0.0 ... 1.0)
+                """
+
+        case .backgroundsEmpty,
+             .backgroundsWithImage,
+             .backgroundsWithColor,
+             .backgroundsWithBlur,
+             .backgroundsWithView:
+            return """
+                You can specify different background options for side views. Use these properties (for left view as an example):
+
+                leftViewBackgroundView: UIView?
+                leftViewBackgroundColor: UIColor
+                leftViewBackgroundImage: UIImage?
+                leftViewBackgroundAlpha: CGFloat
                 """
 
         default:

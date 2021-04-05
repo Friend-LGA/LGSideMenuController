@@ -93,20 +93,32 @@ class MainViewController: LGSideMenuController {
         leftViewPresentationStyle = type.presentationStyle
         rightViewPresentationStyle = type.presentationStyle
 
+        let shouldSetBackground = !([DemoRow.backgroundsEmpty,
+                                     DemoRow.backgroundsWithImage,
+                                     DemoRow.backgroundsWithColor,
+                                     DemoRow.backgroundsWithBlur,
+                                     DemoRow.backgroundsWithView].contains(type.demoRow))
+
         if type.presentationStyle == .slideAboveBlurred {
-            leftViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
-            rightViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
+            if shouldSetBackground {
+                leftViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
+                rightViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
+            }
         }
         else if type.presentationStyle == .slideAside {
             rootViewLayerBorderWidth = 1.0
             rootViewLayerBorderColor = UIColor(white: isLightTheme() ? 1.0 : 0.0, alpha: 0.9)
 
-            leftViewBackgroundImage = UIImage(named: "imageLeft")
-            rightViewBackgroundImage = UIImage(named: "imageRight")
+            if shouldSetBackground {
+                leftViewBackgroundImage = UIImage(named: "imageLeft")
+                rightViewBackgroundImage = UIImage(named: "imageRight")
+            }
         }
         else {
-            leftViewBackgroundImage = UIImage(named: "imageLeft")
-            rightViewBackgroundImage = UIImage(named: "imageRight")
+            if shouldSetBackground {
+                leftViewBackgroundImage = UIImage(named: "imageLeft")
+                rightViewBackgroundImage = UIImage(named: "imageRight")
+            }
         }
 
         switch type.demoRow {
@@ -204,6 +216,31 @@ class MainViewController: LGSideMenuController {
             rootViewCoverAlpha = 0.9
             leftViewCoverBlurEffect = UIBlurEffect(style: .dark)
             rightViewCoverBlurEffect = UIBlurEffect(style: .dark)
+        case .backgroundsEmpty:
+            leftViewBackgroundView = nil
+            leftViewBackgroundColor = .clear
+            leftViewBackgroundImage = nil
+            leftViewBackgroundAlpha = 0.0
+
+            rightViewBackgroundView = nil
+            rightViewBackgroundColor = .clear
+            rightViewBackgroundImage = nil
+            rightViewBackgroundAlpha = 0.0
+        case .backgroundsWithImage:
+            leftViewBackgroundImage = UIImage(named: "imageLeft")
+            rightViewBackgroundImage = UIImage(named: "imageRight")
+        case .backgroundsWithColor:
+            leftViewBackgroundColor = UIColor(hexString: "#E08F62")
+            rightViewBackgroundColor = UIColor(hexString: "#949CDF")
+        case .backgroundsWithBlur:
+            leftViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
+            rightViewBackgroundBlurEffect = UIBlurEffect(style: .dark)
+        case .backgroundsWithView:
+            let leftImageView = UIImageView(image: UIImage(named: "imageLeft"))
+            leftViewBackgroundView = leftImageView
+
+            let rightImageView = UIImageView(image: UIImage(named: "imageRight"))
+            rightViewBackgroundView = rightImageView
         default:
             break
         }
