@@ -17,7 +17,6 @@ enum DemoSection: Int, CaseIterable {
     case decoration
     case offset
     case scale
-    // add case crazy
 
     var description: String {
         switch self {
