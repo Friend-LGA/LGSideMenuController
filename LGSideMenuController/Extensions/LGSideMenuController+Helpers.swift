@@ -88,7 +88,8 @@ internal extension LGSideMenuController {
     }
 
     var rootViewOffsetTotalForRightView: CGPoint {
-        var result = self.rootViewOffsetWhenHiddenForRightView
+        var result = CGPoint(x: -self.rootViewOffsetWhenHiddenForRightView.x,
+                             y: self.rootViewOffsetWhenHiddenForRightView.y)
         if self.rightViewPresentationStyle.shouldRootViewMove {
             result.x += self.rightViewWidthTotal + self.rootViewLayerBorderWidthForRightView
         }
@@ -97,7 +98,7 @@ internal extension LGSideMenuController {
 
     var rootViewOffsetTotalForRightViewWhenAlwaysVisible: CGFloat {
         return
-            self.rootViewOffsetWhenHiddenForRightView.x +
+            -self.rootViewOffsetWhenHiddenForRightView.x +
             self.rightViewWidthTotal +
             self.rootViewLayerBorderWidthForRightView
     }
