@@ -321,6 +321,24 @@ class MainViewController: LGSideMenuController {
             rightViewLayerShadowRadius = 16.0
             rightViewLayerBorderColor = UIColor(white: (isLightTheme() ? 1.0 : 0.0), alpha: 0.9)
             rightViewLayerBorderWidth = 4.0
+        case .offsetRoot:
+            rootViewOffsetWhenHiddenForLeftView =
+                CGPoint(x: 50.0,
+                        y: -(self.view.bounds.height - (self.view.bounds.height * rootViewScaleWhenHiddenForLeftView)) / 2.0)
+            rootViewOffsetWhenHiddenForRightView =
+                CGPoint(x: -50.0,
+                        y: (self.view.bounds.height - (self.view.bounds.height * rootViewScaleWhenHiddenForRightView)) / 2.0)
+        case .offsetSide:
+            leftViewOffsetWhenHidden = CGPoint(x: -leftViewWidth, y: -self.view.bounds.height)
+            leftViewOffsetWhenShowing = CGPoint(x: 0.0, y: 0.0)
+
+            rightViewOffsetWhenHidden = CGPoint(x: rightViewWidth, y: self.view.bounds.height)
+            rightViewOffsetWhenShowing = CGPoint(x: 0.0, y: 0.0)
+        case .scaleRoot:
+            rootViewScaleWhenHidden = 0.9
+        case .scaleSide:
+            leftViewScaleWhenHidden = 0.1
+            rightViewScaleWhenHidden = 5.0
         default:
             break
         }

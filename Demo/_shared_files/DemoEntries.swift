@@ -15,8 +15,9 @@ enum DemoSection: Int, CaseIterable {
     case covers
     case backgrounds
     case decoration
-    // add offset
-    // add scale
+    case offset
+    case scale
+    // add case crazy
 
     var description: String {
         switch self {
@@ -38,6 +39,10 @@ enum DemoSection: Int, CaseIterable {
             return "Backgrounds"
         case .decoration:
             return "Decoration"
+        case .offset:
+            return "Offset"
+        case .scale:
+            return "Scale"
         }
     }
 
@@ -92,6 +97,12 @@ enum DemoSection: Int, CaseIterable {
                     .decorationShadows,
                     .decorationBorders,
                     .decorationShadowAndBorders]
+        case .offset:
+            return [.offsetRoot,
+                    .offsetSide]
+        case .scale:
+            return [.scaleRoot,
+                    .scaleSide]
         }
     }
 }
@@ -145,6 +156,12 @@ enum DemoRow {
     case decorationShadows
     case decorationBorders
     case decorationShadowAndBorders
+
+    case offsetRoot
+    case offsetSide
+
+    case scaleRoot
+    case scaleSide
 
     case customStyleExample
 
@@ -238,6 +255,16 @@ enum DemoRow {
             return "Borders"
         case .decorationShadowAndBorders:
             return "Shadows and Borders"
+
+        case .offsetRoot:
+            return "Root"
+        case .offsetSide:
+            return "Side"
+
+        case .scaleRoot:
+            return "Root"
+        case .scaleSide:
+            return "Side"
 
         default:
             return "Default"
@@ -520,6 +547,43 @@ struct DemoType {
                 rootViewLayerBorderWidth: CGFloat
                 rootViewLayerShadowColor: UIColor
                 rootViewLayerShadowRadius: CGFloat
+                """
+
+        case .offsetRoot:
+            return """
+                You can change offset of the root view when it is hidden (when any of side views is shiwing):
+
+                rootViewOffsetWhenHidden: CGPoint?
+                rootViewOffsetWhenHiddenForLeftView: CGPoint
+                rootViewOffsetWhenHiddenForRightView: CGPoint
+                """
+
+        case .offsetSide:
+            return """
+                You can change offset of the side views when they are hidden or showing:
+
+                leftViewOffsetWhenHidden: CGPoint
+                leftViewOffsetWhenShowing: CGPoint
+
+                rightViewOffsetWhenHidden: CGPoint
+                rightViewOffsetWhenShowing: CGPoint
+                """
+
+        case .scaleRoot:
+            return """
+                You can change scale of the root view when it is hidden (when any of side views is shiwing):
+
+                rootViewScaleWhenHidden: CGFloat?
+                rootViewScaleWhenHiddenForLeftView: CGFloat
+                rootViewScaleWhenHiddenForRightView: CGFloat
+                """
+
+        case .scaleSide:
+            return """
+                You can change scale of the side views when they are hidden (when root view is showing):
+
+                leftViewScaleWhenHidden: CGFloat
+                rightViewScaleWhenHidden: CGFloat
                 """
 
         default:

@@ -97,7 +97,7 @@
                     <view key="view" contentMode="scaleToFill" id="Z73-Hp-2gN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" title="LGSideMenuController" id="OHg-9l-77M"/>
                     <userDefinedRuntimeAttributes>
