@@ -2213,4 +2213,18 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
         // only for overriding
     }
 
+    // MARK: - deinit -
+
+    deinit {
+        if let rootViewController = rootViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: rootViewController)
+        }
+        if let leftViewController = leftViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: leftViewController)
+        }
+        if let rightViewController = rightViewController {
+            LGSideMenuHelper.setSideMenuController(nil, to: rightViewController)
+        }
+    }
+
 }
