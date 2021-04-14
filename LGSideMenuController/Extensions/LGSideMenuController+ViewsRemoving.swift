@@ -41,6 +41,7 @@ internal extension LGSideMenuController {
     func removeRootViewController() {
         if let rootViewController = self.rootViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: rootViewController)
+            rootViewController.willMove(toParent: nil)
             rootViewController.removeFromParent()
         }
     }
@@ -88,6 +89,7 @@ internal extension LGSideMenuController {
     func removeLeftViewController() {
         if let leftViewController = self.leftViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: leftViewController)
+            leftViewController.willMove(toParent: nil)
             leftViewController.removeFromParent()
         }
     }
@@ -165,6 +167,7 @@ internal extension LGSideMenuController {
     func removeRightViewController() {
         if let rightViewController = self.rightViewController {
             LGSideMenuHelper.setSideMenuController(nil, to: rightViewController)
+            rightViewController.willMove(toParent: nil)
             rightViewController.removeFromParent()
         }
     }

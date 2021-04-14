@@ -321,6 +321,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
             if isRootViewControllerLayoutingEnabled {
                 addChild(viewController)
+                viewController.didMove(toParent: self)
             }
         }
         get {
@@ -350,6 +351,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.leftView = viewController.view
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
             addChild(viewController)
+            viewController.didMove(toParent: self)
         }
         get {
             if _leftViewController == nil && storyboard != nil {
@@ -378,6 +380,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.rightView = viewController.view
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
             addChild(viewController)
+            viewController.didMove(toParent: self)
         }
         get {
             if _rightViewController == nil && storyboard != nil {

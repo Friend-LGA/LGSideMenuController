@@ -52,6 +52,7 @@ internal extension LGSideMenuController {
         guard self.isRootViewControllerLayoutingEnabled == true,
               let viewController = self.rootViewController else { return }
 
+        viewController.willMove(toParent: nil)
         viewController.removeFromParent()
         self.isRootViewControllerLayoutingEnabled = false
     }
@@ -61,6 +62,7 @@ internal extension LGSideMenuController {
               let viewController = self.rootViewController else { return }
 
         self.addChild(viewController)
+        viewController.didMove(toParent: self)
         self.isRootViewControllerLayoutingEnabled = true
     }
 
