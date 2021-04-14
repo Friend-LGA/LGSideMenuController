@@ -33,9 +33,12 @@ class MainViewController: LGSideMenuController {
         Counter.count += 1
         print("MainViewController.viewDidLoad(), counter: \(Counter.count)")
 
-        title = "LGSideMenuController"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuIconImage, style: .plain, target: self, action: #selector(showLeftViewAction(sender:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: menuIconImage, style: .plain, target: self, action: #selector(showRightViewAction(sender:)))
+        do {
+            // For Demo .usageInsideNavigationController
+            navigationItem.title = "LGSideMenuController"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuIconImage, style: .plain, target: self, action: #selector(showLeftViewAction(sender:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: menuIconImage, style: .plain, target: self, action: #selector(showRightViewAction(sender:)))
+        }
 
         updateParameters()
     }
@@ -152,8 +155,10 @@ class MainViewController: LGSideMenuController {
              .styleSlideBelowShifted,
              .styleSlideAside:
             break
-        case .usageAsWindowRootViewController,
-             .usageInsideNavigationController:
+        case .usageAsContainerForNavigationController,
+             .usageInsideNavigationController,
+             .usageAsContainerForTabBarController,
+             .usageInsideTabBarController:
             break
         case .conflictingGesturesScrollView,
              .conflictingGesturesTableView:

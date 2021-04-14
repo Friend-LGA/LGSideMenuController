@@ -12,8 +12,8 @@ private let buttonHeight: CGFloat = 44.0
 
 class RootViewController : UIViewController {
 
-    var demoDescriptionLabel: UILabel?
-    var demoDescriptionBackgroundView: UIVisualEffectView?
+    var demoDescriptionLabel: UILabel? = nil
+    var demoDescriptionBackgroundView: UIVisualEffectView? = nil
 
     var showSideButtons: Bool = showSideButtonsDefault
 
@@ -35,16 +35,14 @@ class RootViewController : UIViewController {
             demoDescriptionLabel!.text = description
             demoDescriptionBackgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
         }
-        else {
-            demoDescriptionLabel = nil
-            demoDescriptionBackgroundView = nil
-        }
+
         self.showSideButtons = showSideButtons
+
         imageView.image = UIImage(named: imageName ?? getBackgroundImageNameDefault())
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     // MARK: - Lifecycle -

@@ -34,6 +34,7 @@
 		D92677B425F8E2AE005095B1 /* RootViewControllerWithTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92677B325F8E2AE005095B1 /* RootViewControllerWithTextLabel.swift */; };
 		D929A46F26039AAB00122DE2 /* RootViewControllerWithScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D929A46E26039AAB00122DE2 /* RootViewControllerWithScrollView.swift */; };
 		D935343025E2430300F79637 /* LGSideMenuBackgroundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D935342F25E2430300F79637 /* LGSideMenuBackgroundShadowView.swift */; };
+		D94541262626E83B00137452 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94541252626E83B00137452 /* RootTabBarController.swift */; };
 		D9534C2925EFA7A10004560F /* DemoEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9534C2825EFA7A10004560F /* DemoEntries.swift */; };
 		D958DFA425D3F47100E6741D /* LGSideMenuController+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = D958DFA325D3F47100E6741D /* LGSideMenuController+States.swift */; };
 		D97928DB25DD38FB000BCD88 /* LGSideMenuWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97928DA25DD38FB000BCD88 /* LGSideMenuWrapperView.swift */; };
@@ -83,6 +84,7 @@
 		D92677B325F8E2AE005095B1 /* RootViewControllerWithTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootViewControllerWithTextLabel.swift; path = ../../_shared_files/SideMenuController/RootViewController/RootViewControllerWithTextLabel.swift; sourceTree = "<group>"; };
 		D929A46E26039AAB00122DE2 /* RootViewControllerWithScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootViewControllerWithScrollView.swift; path = ../../_shared_files/SideMenuController/RootViewController/RootViewControllerWithScrollView.swift; sourceTree = "<group>"; };
 		D935342F25E2430300F79637 /* LGSideMenuBackgroundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSideMenuBackgroundShadowView.swift; sourceTree = "<group>"; };
+		D94541252626E83B00137452 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RootTabBarController.swift; path = ../../_shared_files/SideMenuController/RootViewController/RootTabBarController.swift; sourceTree = "<group>"; };
 		D9534C2825EFA7A10004560F /* DemoEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DemoEntries.swift; path = ../../_shared_files/DemoEntries.swift; sourceTree = "<group>"; };
 		D958DFA325D3F47100E6741D /* LGSideMenuController+States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LGSideMenuController+States.swift"; sourceTree = "<group>"; };
 		D97928DA25DD38FB000BCD88 /* LGSideMenuWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSideMenuWrapperView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				D9FCBDF025F2758B0085EBC9 /* RootNavigationController.swift */,
+				D94541252626E83B00137452 /* RootTabBarController.swift */,
 				D9FCBDEF25F2758B0085EBC9 /* RootViewController.swift */,
 				D929A46E26039AAB00122DE2 /* RootViewControllerWithScrollView.swift */,
 				D9FCBDEE25F2758B0085EBC9 /* RootViewControllerWithTableView.swift */,
@@ -345,6 +348,7 @@
 				D9174B6E25D180AD00DB01B5 /* LGSideMenuController+RightViewActions.swift in Sources */,
 				D9174B2F25CF276C00DB01B5 /* LGSideMenuHelper.swift in Sources */,
 				D9174B4725D171ED00DB01B5 /* LGSideMenuController+ValidatingViewsFrames.swift in Sources */,
+				D94541262626E83B00137452 /* RootTabBarController.swift in Sources */,
 				D929A46F26039AAB00122DE2 /* RootViewControllerWithScrollView.swift in Sources */,
 				D9FCBDFB25F275950085EBC9 /* LeftViewController.swift in Sources */,
 				D9FCBDFF25F275A60085EBC9 /* RightViewCell.swift in Sources */,

@@ -8,18 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root Navigation Controller-->
+        <!--Item-->
         <scene sceneID="1Ff-8d-0j6">
             <objects>
-                <navigationController storyboardIdentifier="RootNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W26-8j-p1z" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="W26-8j-p1z" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="4U0-CK-J3F"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SG9-4F-pWX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="4Tp-NE-7in" kind="relationship" relationship="rootViewController" id="tMR-QJ-KBE"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZD-Tj-tpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="573"/>
+            <point key="canvasLocation" x="1137" y="-173"/>
         </scene>
         <!--Left View Controller-->
         <scene sceneID="fOz-9g-CjJ">
@@ -83,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="-531" y="1339"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Title-->
         <scene sceneID="FD9-Pe-zX1">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Qe-ZH-n0V" customClass="MainViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="Title" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Qe-ZH-n0V" customClass="MainViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kKh-Ki-O6E"/>
                         <viewControllerLayoutGuide type="bottom" id="gXo-KC-dm7"/>
@@ -108,12 +112,122 @@
                     <connections>
                         <segue destination="9nD-Rt-5hf" kind="custom" identifier="left" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="fCk-ka-htG"/>
                         <segue destination="MRq-JZ-L0N" kind="custom" identifier="right" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="BsC-s5-VZg"/>
-                        <segue destination="W26-8j-p1z" kind="custom" identifier="root" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="m4g-GV-Irt"/>
+                        <segue destination="RBL-2r-a6R" kind="custom" identifier="root" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="rNj-PY-Pkq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZZ-Nl-Oxq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-750" y="573"/>
+        </scene>
+        <!--Root Tab Bar Controller-->
+        <scene sceneID="RkW-MK-qIV">
+            <objects>
+                <tabBarController storyboardIdentifier="RootTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RBL-2r-a6R" customClass="RootTabBarController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="csB-a5-452">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="W26-8j-p1z" kind="relationship" relationship="viewControllers" id="qS0-vD-ZJ4"/>
+                        <segue destination="WXY-eN-kzf" kind="relationship" relationship="viewControllers" id="hCl-YF-Bk4"/>
+                        <segue destination="QfG-4U-1R9" kind="relationship" relationship="viewControllers" id="8NR-7A-Ehh"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a0f-sb-x7u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="92" y="573"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="c1U-QK-cKi">
+            <objects>
+                <navigationController id="WXY-eN-kzf" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="XJs-Fw-T0A"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sDC-kF-FLR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Dxo-Nu-F0Y" kind="relationship" relationship="rootViewController" id="d4V-nJ-Zzd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bk9-8f-IbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1137" y="573"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="gnu-md-UJd">
+            <objects>
+                <navigationController id="QfG-4U-1R9" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LhE-xe-vy2"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XjD-TR-HfU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bfv-8m-cbz" kind="relationship" relationship="rootViewController" id="DW1-bC-cl0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uyI-RP-2L9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1137" y="1338"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="JQe-FC-X1D">
+            <objects>
+                <viewController id="4Tp-NE-7in" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9WR-qv-fKq"/>
+                        <viewControllerLayoutGuide type="bottom" id="eTh-VB-oDs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nrS-d0-Rd7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="z0f-ac-iuF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vyk-G9-WS2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1924" y="-173"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="VBL-dE-Nkg">
+            <objects>
+                <viewController id="Dxo-Nu-F0Y" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lfM-j6-HxX"/>
+                        <viewControllerLayoutGuide type="bottom" id="mKe-mg-5WX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vVQ-R0-esX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="e9b-Te-HgK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SKv-Ha-Hbu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1924" y="573"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="zAK-rP-EEE">
+            <objects>
+                <viewController id="bfv-8m-cbz" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="10u-sh-taS"/>
+                        <viewControllerLayoutGuide type="bottom" id="t6V-Wh-mcg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YVD-sT-GZd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="0sD-0s-kam"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tER-Ge-KYo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1924" y="1337"/>
         </scene>
     </scenes>
     <resources>

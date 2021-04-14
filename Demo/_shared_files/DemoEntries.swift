@@ -56,8 +56,10 @@ enum DemoSection: Int, CaseIterable {
                     .styleSlideBelowShifted,
                     .styleSlideAside]
         case .usage:
-            return [.usageAsWindowRootViewController,
-                    .usageInsideNavigationController]
+            return [.usageAsContainerForNavigationController,
+                    .usageInsideNavigationController,
+                    .usageAsContainerForTabBarController,
+                    .usageInsideTabBarController]
         case .conflictingGestures:
             return [.conflictingGesturesScrollView,
                     .conflictingGesturesTableView]
@@ -115,8 +117,10 @@ enum DemoRow {
     case styleSlideBelowShifted
     case styleSlideAside
 
-    case usageAsWindowRootViewController
+    case usageAsContainerForNavigationController
     case usageInsideNavigationController
+    case usageAsContainerForTabBarController
+    case usageInsideTabBarController
 
     case conflictingGesturesScrollView
     case conflictingGesturesTableView
@@ -181,10 +185,14 @@ enum DemoRow {
         case .styleSlideAside:
             return getTitle(for: .slideAside)
 
-        case .usageAsWindowRootViewController:
-            return "As Window RootViewController"
+        case .usageAsContainerForNavigationController:
+            return "As Container for UINavigationController"
         case .usageInsideNavigationController:
             return "Inside UINavigationController"
+        case .usageAsContainerForTabBarController:
+            return "As Container for UITabBarController"
+        case .usageInsideTabBarController:
+            return "Inside UITabBarController"
 
         case .conflictingGesturesScrollView:
             return "With UIScrollView inside"
@@ -351,7 +359,7 @@ struct DemoType {
                 presentationStyle = .scaleFromLittle
                 """
 
-        case .usageAsWindowRootViewController:
+        case .usageAsContainerForNavigationController:
             return """
                 Current view controllers hierarchy:
 
@@ -366,6 +374,30 @@ struct DemoType {
                 UINavigationController {
                     viewControllers: [LGSideMenuController]
                 }
+                """
+        case .usageAsContainerForTabBarController:
+            return """
+                Current view controllers hierarchy:
+
+                LGSideMenuController {
+                    rootViewController: UITabBarController
+                }
+
+                For each tab only root view is different.
+                """
+        case .usageInsideTabBarController:
+            return """
+                Current view controllers hierarchy:
+
+                UITabBarController {
+                    viewControllers: [
+                        LGSideMenuController,
+                        LGSideMenuController,
+                        LGSideMenuController
+                    ]
+                }
+
+                For each tab LGSideMenuController is different, this means that root, left and right views are different as well.
                 """
 
         case .conflictingGesturesScrollView:

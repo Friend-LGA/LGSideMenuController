@@ -135,6 +135,19 @@ class RightViewController: UITableViewController {
         guard let sideMenuController = self.sideMenuController else { return }
         let item = sections[indexPath.section][indexPath.row]
 
+        func getNavigationController() -> UINavigationController {
+            if type?.demoRow == .usageInsideNavigationController {
+                return sideMenuController.parent as! RootNavigationController
+            }
+            else if type?.demoRow == .usageAsContainerForTabBarController {
+                let tabBarController = sideMenuController.rootViewController as! RootTabBarController
+                return tabBarController.selectedViewController as! RootNavigationController
+            }
+            else {
+                return sideMenuController.rootViewController as! RootNavigationController
+            }
+        }
+
         switch item {
         case .close:
             sideMenuController.hideRightView(animated: true)
@@ -150,7 +163,7 @@ class RightViewController: UITableViewController {
                                   animations: nil)
             }
             else {
-                let navigationController = sideMenuController.rootViewController as! RootNavigationController
+                let navigationController = getNavigationController()
                 navigationController.setViewControllers([viewController], animated: false)
                 UIView.transition(with: navigationController.view,
                                   duration: sideMenuController.rightViewAnimationDuration,
@@ -169,7 +182,7 @@ class RightViewController: UITableViewController {
                                   animations: nil)
             }
             else {
-                let navigationController = sideMenuController.rootViewController as! RootNavigationController
+                let navigationController = getNavigationController()
                 navigationController.pushViewController(viewController, animated: true)
             }
             sideMenuController.hideRightView(animated: true)

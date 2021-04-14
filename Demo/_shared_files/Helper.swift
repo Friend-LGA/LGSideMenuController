@@ -38,6 +38,23 @@ let menuIconImage: UIImage = {
     }
 }()
 
+func tabBarIconImage(_ title: String) -> UIImage {
+    let fontSize: CGFloat = 24.0
+    let insetVertical: CGFloat = 4.0
+    let size = CGSize(width: fontSize, height: fontSize + insetVertical)
+    let renderer = UIGraphicsImageRenderer(size: size)
+    return renderer.image { context in
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize),
+                     NSAttributedString.Key.paragraphStyle: paragraphStyle]
+        title.draw(with: CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height),
+                   options: .usesLineFragmentOrigin,
+                   attributes: attrs,
+                   context: nil)
+    }
+}
+
 func isStoryboardBasedDemo() -> Bool {
     guard let dict = Bundle.main.infoDictionary else { return false }
     return dict[isStoryboardBasedKey] as! Bool

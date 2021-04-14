@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TAU-B7-lDk">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root Navigation Controller-->
+        <scene sceneID="1Ff-8d-0j6">
+            <objects>
+                <navigationController id="W26-8j-p1z" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SG9-4F-pWX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="485-jh-tHg" kind="relationship" relationship="rootViewController" id="Icm-j9-YMZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZD-Tj-tpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="573"/>
+        </scene>
+        <!--Left View Controller-->
+        <scene sceneID="fOz-9g-CjJ">
+            <objects>
+                <tableViewController id="9nD-Rt-5hf" customClass="LeftViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="A0n-qE-F5f">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="474-Gg-7Ca" customClass="LeftViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="250" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="474-Gg-7Ca" id="izR-Wk-2Bc">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9nD-Rt-5hf" id="9s8-S2-UMz"/>
+                            <outlet property="delegate" destination="9nD-Rt-5hf" id="q8D-YE-JLd"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YiI-Rm-XiG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-851" y="1339"/>
+        </scene>
+        <!--Right View Controller-->
+        <scene sceneID="Cxj-n3-JK8">
+            <objects>
+                <tableViewController id="MRq-JZ-L0N" customClass="RightViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gRx-mE-qJI">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="ihu-iL-D2L" customClass="RightViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="73.5" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ihu-iL-D2L" id="JmT-rG-tya">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MRq-JZ-L0N" id="kg7-AP-GKs"/>
+                            <outlet property="delegate" destination="MRq-JZ-L0N" id="gvg-zw-VIe"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="100" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8M-n7-gxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-531" y="1339"/>
+        </scene>
+        <!--LGSideMenuController-->
+        <scene sceneID="FD9-Pe-zX1">
+            <objects>
+                <viewController id="0Qe-ZH-n0V" customClass="MainViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kKh-Ki-O6E"/>
+                        <viewControllerLayoutGuide type="bottom" id="gXo-KC-dm7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z73-Hp-2gN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="8gW-gM-dsC"/>
+                    <navigationItem key="navigationItem" title="LGSideMenuController" id="OHg-9l-77M"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftViewWidth">
+                            <real key="value" value="250"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightViewWidth">
+                            <real key="value" value="100"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="9nD-Rt-5hf" kind="custom" identifier="left" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="fCk-ka-htG"/>
+                        <segue destination="MRq-JZ-L0N" kind="custom" identifier="right" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="BsC-s5-VZg"/>
+                        <segue destination="W26-8j-p1z" kind="custom" identifier="root" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" customModuleProvider="target" id="rKw-dC-Ldg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZZ-Nl-Oxq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-750" y="573"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="Y9h-nX-4jC">
+            <objects>
+                <viewController id="485-jh-tHg" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WXq-Bg-Mcm"/>
+                        <viewControllerLayoutGuide type="bottom" id="inB-FQ-Dpt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wVi-Hg-hYH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="8tI-Ei-9aa"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oB7-vc-2gJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="906" y="573"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="vS5-Qy-kdx">
+            <objects>
+                <tabBarController storyboardIdentifier="RootTabBarController" title="Title" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TAU-B7-lDk" customClass="RootTabBarController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JFE-Bn-CuM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="LYe-OZ-NNO" kind="relationship" relationship="viewControllers" id="xOY-eN-IBf"/>
+                        <segue destination="0Qe-ZH-n0V" kind="relationship" relationship="viewControllers" id="pa7-Cg-T9q"/>
+                        <segue destination="Z1a-dn-2pv" kind="relationship" relationship="viewControllers" id="c5E-bO-kki"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rxd-ch-jNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1820" y="573"/>
+        </scene>
+        <!--Root Navigation Controller-->
+        <scene sceneID="8gn-d8-Phf">
+            <objects>
+                <navigationController id="kw5-0Z-eRx" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CY9-c3-71Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Zxn-qI-o9H" kind="relationship" relationship="rootViewController" id="eA0-hU-sR2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dhn-Tr-P6l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100" y="2098"/>
+        </scene>
+        <!--Left View Controller-->
+        <scene sceneID="8eZ-jY-vwP">
+            <objects>
+                <tableViewController id="x1m-Ws-OBs" customClass="LeftViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="l7r-vZ-sBY">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="fdx-1M-8zO" customClass="LeftViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="250" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fdx-1M-8zO" id="pBV-cu-I7X">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="x1m-Ws-OBs" id="4Pu-KR-jXq"/>
+                            <outlet property="delegate" destination="x1m-Ws-OBs" id="i1Q-9c-cix"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B8Y-IT-pYK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-840" y="2864"/>
+        </scene>
+        <!--Right View Controller-->
+        <scene sceneID="aBO-HU-cNx">
+            <objects>
+                <tableViewController id="Z2G-P2-6bq" customClass="RightViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Oui-Te-w0H">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="LIQ-RI-TVK" customClass="RightViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="73.5" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LIQ-RI-TVK" id="VJP-Jw-BB1">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Z2G-P2-6bq" id="etO-zh-r1U"/>
+                            <outlet property="delegate" destination="Z2G-P2-6bq" id="Mgv-Dy-kOR"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="100" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uld-Ug-Pec" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-520" y="2864"/>
+        </scene>
+        <!--LGSideMenuController-->
+        <scene sceneID="hsL-TC-VTF">
+            <objects>
+                <viewController id="Z1a-dn-2pv" customClass="MainViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hud-VO-xxG"/>
+                        <viewControllerLayoutGuide type="bottom" id="PKw-Kx-gxP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zwp-Bd-x72">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="rm5-TQ-Rf6"/>
+                    <navigationItem key="navigationItem" title="LGSideMenuController" id="Leu-7Z-wUZ"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftViewWidth">
+                            <real key="value" value="250"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightViewWidth">
+                            <real key="value" value="100"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="x1m-Ws-OBs" kind="custom" identifier="left" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="HjA-hi-KXT"/>
+                        <segue destination="Z2G-P2-6bq" kind="custom" identifier="right" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="MbJ-zy-qc8"/>
+                        <segue destination="kw5-0Z-eRx" kind="custom" identifier="root" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="YOC-vA-Dyp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r5I-ql-Tdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-740" y="2098"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="leL-ii-rA1">
+            <objects>
+                <viewController id="Zxn-qI-o9H" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zlh-7G-jqA"/>
+                        <viewControllerLayoutGuide type="bottom" id="JPi-rj-MVC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JBU-8F-xBB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="mz5-gR-Skv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rH7-w0-ZOc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="2098"/>
+        </scene>
+        <!--Root Navigation Controller-->
+        <scene sceneID="ie7-Gl-yU7">
+            <objects>
+                <navigationController id="DOQ-FD-thN" customClass="RootNavigationController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XRN-8U-UfG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="aWN-e3-em6" kind="relationship" relationship="rootViewController" id="GbQ-Ag-FFn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4X-qa-b9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="-940"/>
+        </scene>
+        <!--Left View Controller-->
+        <scene sceneID="ke0-7d-SDa">
+            <objects>
+                <tableViewController id="LfT-bY-WDd" customClass="LeftViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="rBb-4j-unX">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="uFN-lW-xFO" customClass="LeftViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="250" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uFN-lW-xFO" id="bes-JJ-UX7">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LfT-bY-WDd" id="NtJ-Po-fJs"/>
+                            <outlet property="delegate" destination="LfT-bY-WDd" id="eUM-51-jct"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uti-WJ-Yss" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-851" y="-174"/>
+        </scene>
+        <!--Right View Controller-->
+        <scene sceneID="KCf-uP-hqE">
+            <objects>
+                <tableViewController id="JoF-QI-T1v" customClass="RightViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="uK6-zd-7eS">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="668"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="mfi-ye-qXO" customClass="RightViewCell" customModule="LGSideMenuControllerDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="73.5" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mfi-ye-qXO" id="ZbP-SV-HFf">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="JoF-QI-T1v" id="tgJ-Td-YJb"/>
+                            <outlet property="delegate" destination="JoF-QI-T1v" id="vlo-OI-HaJ"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="100" height="668"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BWz-80-OV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-531" y="-174"/>
+        </scene>
+        <!--LGSideMenuController-->
+        <scene sceneID="HuQ-ta-Wgx">
+            <objects>
+                <viewController id="LYe-OZ-NNO" customClass="MainViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RzV-wE-AUr"/>
+                        <viewControllerLayoutGuide type="bottom" id="WmK-pK-OCq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iwy-ie-sMl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="kfc-Ic-CYI"/>
+                    <navigationItem key="navigationItem" title="LGSideMenuController" id="ypz-gs-sxP"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftViewWidth">
+                            <real key="value" value="250"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightViewWidth">
+                            <real key="value" value="100"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="LfT-bY-WDd" kind="custom" identifier="left" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="put-5F-wVb"/>
+                        <segue destination="JoF-QI-T1v" kind="custom" identifier="right" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="Cvt-mE-B4o"/>
+                        <segue destination="DOQ-FD-thN" kind="custom" identifier="root" customClass="LGSideMenuSegue" customModule="LGSideMenuControllerDemo" id="ocG-HA-iZb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ek5-OU-XXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-751" y="-940"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="JRQ-Ih-XA0">
+            <objects>
+                <viewController id="aWN-e3-em6" customClass="RootViewController" customModule="LGSideMenuControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T7G-aT-kte"/>
+                        <viewControllerLayoutGuide type="bottom" id="v2l-TX-stU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Uh-1b-udE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="1Lk-rr-hzK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gKq-tw-VRO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905" y="-940"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -81,85 +81,194 @@ class ChooseTableViewController: UITableViewController {
               let window = appDelegate.window else { return }
 
         let isInsideNavigationController = (type.demoRow == .usageInsideNavigationController)
+        let isInsideTabBarController = (type.demoRow == .usageInsideTabBarController)
+        let isContainerForTabBarController = (type.demoRow == .usageAsContainerForTabBarController)
 
         lastContentOffsetY = tableView.contentOffset.y
 
+        func getRootViewController(imageName: String? = nil) -> RootViewController {
+            if type.demoRow == .conflictingGesturesScrollView {
+                return RootViewControllerWithScrollView(description: type.description, imageName: imageName)
+            }
+            else if type.demoRow == .conflictingGesturesTableView {
+                return RootViewControllerWithTableView(description: type.description, imageName: imageName)
+            }
+            else {
+                return RootViewController(description: type.description, imageName: imageName)
+            }
+        }
+
         window.rootViewController = {
             if isStoryboardBasedDemo() {
-                let rootViewController: RootViewController = {
-                    if type.demoRow == .conflictingGesturesScrollView {
-                        return RootViewControllerWithScrollView(description: type.description)
+                // All view controller relationships and properties better should be assigned inside storyboard.
+                // Right now all connections and properties inside storyboard are there only
+                // for demonstration purposes, to give you an idea how you should setup everything.
+                // But here we don't use all native storyboard logic, just to make it easier to maintain
+                // two demo projects (Storyboard and NonStoryboard) because they share a lot of the codebase.
+                // Don't take it as the strict example how you should do storyboards. Just follow recomendad apple
+                // way of doing things and use LGSideMenuController as any other normal view controller.
+
+                func setupSideMenuController(_ sideMenuController: MainViewController) {
+                    sideMenuController.setup(type: type)
+                    let leftViewController = sideMenuController.leftViewController as! LeftViewController
+                    leftViewController.setup(type: type)
+                    let rightViewController = sideMenuController.rightViewController as! RightViewController
+                    rightViewController.setup(type: type)
+                }
+
+                func setTabBarItem(_ index: Int, _ viewController: UIViewController) {
+                    switch index {
+                    case 0:
+                        viewController.tabBarItem = UITabBarItem(title: "One", image: tabBarIconImage("1"), tag: 0)
+                    case 1:
+                        viewController.tabBarItem = UITabBarItem(title: "Two", image: tabBarIconImage("2"), tag: 0)
+                    case 2:
+                        viewController.tabBarItem = UITabBarItem(title: "Three", image: tabBarIconImage("3"), tag: 0)
+                    default:
+                        break
                     }
-                    else if type.demoRow == .conflictingGesturesTableView {
-                        return RootViewControllerWithTableView(description: type.description)
+                }
+
+                func getImageName(index: Int) -> String {
+                    switch index {
+                    case 0:
+                        return "imageRoot0"
+                    case 1:
+                        return "imageRoot1"
+                    case 2:
+                        return "imageRoot2"
+                    default:
+                        return getBackgroundImageNameRandom()
                     }
-                    else {
-                        return RootViewController(description: type.description)
-                    }
-                }()
+                }
 
                 if isInsideNavigationController {
                     let storyboard = UIStoryboard(name: "InsideNavigationController", bundle: nil)
                     let navigationController = storyboard.instantiateInitialViewController() as! RootNavigationController
                     navigationController.setup(type: type)
                     let sideMenuController = navigationController.viewControllers.first as! MainViewController
-                    sideMenuController.setup(type: type)
-                    let leftViewController = sideMenuController.leftViewController as! LeftViewController
-                    leftViewController.setup(type: type)
-                    let rightViewController = sideMenuController.rightViewController as! RightViewController
-                    rightViewController.setup(type: type)
-                    // It is better should be assigned inside storyboard.
-                    // The one, which is connected there right now is just to show how to use root segue.
-                    sideMenuController.rootViewController = rootViewController
+                    setupSideMenuController(sideMenuController)
+                    sideMenuController.rootViewController = getRootViewController()
                     return navigationController
                 }
-                else {
-                    let storyboard = UIStoryboard(name: "AsWindowRootViewController", bundle: nil)
+                else if isInsideTabBarController {
+                    let storyboard = UIStoryboard(name: "InsideTabBarController", bundle: nil)
+                    let tabBarController = storyboard.instantiateInitialViewController() as! RootTabBarController
+                    tabBarController.setup(type: type)
+                    for (index, viewController) in tabBarController.viewControllers!.enumerated() {
+                        let sideMenuController = viewController as! MainViewController
+                        setupSideMenuController(sideMenuController)
+                        let navigationController = sideMenuController.rootViewController as! RootNavigationController
+                        navigationController.setup(type: type)
+                        navigationController.setViewControllers([getRootViewController(imageName: getImageName(index: index))],
+                                                                animated: false)
+                        setTabBarItem(index, viewController)
+                    }
+                    return tabBarController
+                }
+                else if isContainerForTabBarController {
+                    let storyboard = UIStoryboard(name: "AsContainerForTabBarController", bundle: nil)
                     let sideMenuController = storyboard.instantiateInitialViewController() as! MainViewController
-                    sideMenuController.setup(type: type)
+                    setupSideMenuController(sideMenuController)
+                    let tabBarController = sideMenuController.rootViewController as! RootTabBarController
+                    tabBarController.setup(type: type)
+                    for (index, viewController) in tabBarController.viewControllers!.enumerated() {
+                        let navigationController = viewController as! RootNavigationController
+                        navigationController.setup(type: type)
+                        navigationController.setViewControllers([getRootViewController(imageName: getImageName(index: index))],
+                                                                animated: false)
+                        setTabBarItem(index, viewController)
+                    }
+                    return sideMenuController
+                }
+                else {
+                    let storyboard = UIStoryboard(name: "AsContainerForNavigationController", bundle: nil)
+                    let sideMenuController = storyboard.instantiateInitialViewController() as! MainViewController
+                    setupSideMenuController(sideMenuController)
                     let navigationController = sideMenuController.rootViewController as! RootNavigationController
                     navigationController.setup(type: type)
-                    let leftViewController = sideMenuController.leftViewController as! LeftViewController
-                    leftViewController.setup(type: type)
-                    let rightViewController = sideMenuController.rightViewController as! RightViewController
-                    rightViewController.setup(type: type)
-                    navigationController.setViewControllers([rootViewController], animated: false)
+                    navigationController.setViewControllers([getRootViewController()], animated: false)
                     return sideMenuController
                 }
             }
             else {
-                let rootViewController: RootViewController = {
-                    if type.demoRow == .conflictingGesturesScrollView {
-                        return RootViewControllerWithScrollView(description: type.description)
-                    }
-                    else if type.demoRow == .conflictingGesturesTableView {
-                        return RootViewControllerWithTableView(description: type.description)
-                    }
-                    else {
-                        return RootViewController(description: type.description)
-                    }
-                }()
+                // These "setup" methods are here just to share code with Storyboard based demo.
+                // Usually you would pass all params inside "init" method without any additional "setup" methods.
+                // Don't take this demo as the strict example how you should do non storyboard apps.
+                // Just follow common sense and basic swift guidlines.
 
-                if isInsideNavigationController {
+                func getSideMenuController(rootViewController: UIViewController) -> LGSideMenuController {
                     let sideMenuController = MainViewController(type: type)
                     sideMenuController.rootViewController = rootViewController
                     sideMenuController.leftViewController = LeftViewController(type: type)
                     sideMenuController.rightViewController = RightViewController(type: type)
+                    return sideMenuController
+                }
 
+                func getSideMenuControllerWithNavigationController(imageName: String? = nil,
+                                                                   tabBarItem: UITabBarItem? = nil) -> LGSideMenuController {
                     let navigationController = RootNavigationController(type: type)
-                    navigationController.setViewControllers([sideMenuController], animated: false)
+                    navigationController.setViewControllers([getRootViewController(imageName: imageName)], animated: false)
+                    let sideMenuController = getSideMenuController(rootViewController: navigationController)
+                    sideMenuController.tabBarItem = tabBarItem
+                    return sideMenuController
+                }
+
+                func getNavigationController(imageName: String? = nil,
+                                             tabBarItem: UITabBarItem? = nil) -> UINavigationController {
+                    let navigationController = RootNavigationController(type: type)
+                    navigationController.setViewControllers([getRootViewController(imageName: imageName)], animated: false)
+                    navigationController.tabBarItem = tabBarItem
                     return navigationController
                 }
-                else {
-                    let navigationController = RootNavigationController(type: type)
-                    let rootViewController = rootViewController
-                    navigationController.setViewControllers([rootViewController], animated: false)
 
-                    let sideMenuController = MainViewController(type: type)
-                    sideMenuController.rootViewController = navigationController
-                    sideMenuController.leftViewController = LeftViewController(type: type)
-                    sideMenuController.rightViewController = RightViewController(type: type)
-                    return sideMenuController
+                if isInsideNavigationController {
+                    let navigationController = RootNavigationController(type: type)
+                    navigationController.setViewControllers(
+                        [getSideMenuController(rootViewController: getRootViewController())], animated: false
+                    )
+                    return navigationController
+                }
+                else if isInsideTabBarController {
+                    let tabBarController = RootTabBarController(type: type)
+                    tabBarController.setViewControllers(
+                        [getSideMenuControllerWithNavigationController(imageName: "imageRoot0",
+                                                                       tabBarItem: UITabBarItem(title: "One",
+                                                                                                image: tabBarIconImage("1"),
+                                                                                                tag: 0)),
+                         getSideMenuControllerWithNavigationController(imageName: "imageRoot1",
+                                                                       tabBarItem: UITabBarItem(title: "Two",
+                                                                                                image: tabBarIconImage("2"),
+                                                                                                tag: 1)),
+                         getSideMenuControllerWithNavigationController(imageName: "imageRoot2",
+                                                                       tabBarItem: UITabBarItem(title: "Three",
+                                                                                                image: tabBarIconImage("3"),
+                                                                                                tag: 2))],
+                        animated: false
+                    )
+                    return tabBarController
+                }
+                else if isContainerForTabBarController {
+                    let tabBarController = RootTabBarController(type: type)
+                    tabBarController.setViewControllers(
+                        [getNavigationController(imageName: "imageRoot0",
+                                                 tabBarItem: UITabBarItem(title: "One",
+                                                                          image: tabBarIconImage("1"),
+                                                                          tag: 0)),
+                         getNavigationController(imageName: "imageRoot1",
+                                                 tabBarItem: UITabBarItem(title: "Two",
+                                                                          image: tabBarIconImage("2"),
+                                                                          tag: 1)),
+                         getNavigationController(imageName: "imageRoot2",
+                                                 tabBarItem: UITabBarItem(title: "Three",
+                                                                          image: tabBarIconImage("3"),
+                                                                          tag: 2))],
+                        animated: false
+                    )
+                    return getSideMenuController(rootViewController: tabBarController)
+                }
+                else {
+                    return getSideMenuControllerWithNavigationController()
                 }
             }
         }()
