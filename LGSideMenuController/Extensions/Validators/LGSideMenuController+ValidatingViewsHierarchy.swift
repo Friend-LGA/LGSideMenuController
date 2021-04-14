@@ -47,6 +47,13 @@ internal extension LGSideMenuController {
               let wrapperView = self.rootViewWrapperView,
               let coverView = self.rootViewCoverView else { return }
 
+        if isRootViewControllerLayoutingEnabled,
+           let rootViewController = self.rootViewController,
+           rootViewController.parent != self {
+            self.addChild(rootViewController)
+            rootViewController.didMove(toParent: self)
+        }
+
         self.view.insertSubview(containerView, at: 0)
 
         containerView.insertSubview(backgroundDecorationView, at: 0)
@@ -73,6 +80,11 @@ internal extension LGSideMenuController {
               let coverView = self.leftViewCoverView,
               let statusBarBackgroundView = self.leftViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.leftViewStatusBarBackgroundEffectView else { return }
+
+        if let leftViewController = self.leftViewController, leftViewController.parent != self {
+            self.addChild(leftViewController)
+            leftViewController.didMove(toParent: self)
+        }
 
         if self.leftViewPresentationStyle.isAbove {
             self.view.insertSubview(containerView, aboveSubview: rootContainerView)
@@ -117,6 +129,11 @@ internal extension LGSideMenuController {
               let coverView = self.rightViewCoverView,
               let statusBarBackgroundView = self.rightViewStatusBarBackgroundView,
               let statusBarBackgroundEffectView = self.rightViewStatusBarBackgroundEffectView else { return }
+
+        if let rightViewController = self.rightViewController, rightViewController.parent != self {
+            self.addChild(rightViewController)
+            rightViewController.didMove(toParent: self)
+        }
 
         if self.rightViewPresentationStyle.isAbove {
             self.view.insertSubview(containerView, aboveSubview: rootContainerView)

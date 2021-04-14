@@ -304,25 +304,20 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var rootViewController: UIViewController? {
         set {
-            if _rootViewController != nil {
-                removeRootViewController()
-            }
-
+            removeViewController(_rootViewController)
             _rootViewController = newValue
 
-            guard let viewController = newValue else {
-                if self.rootView != nil {
-                    self.rootView = nil
-                }
+            _rootView?.removeFromSuperview()
+            _rootView = nil
+
+            guard let viewController = _rootViewController else {
+                removeRootViews()
                 return
             }
 
-            self.rootView = viewController.view
+            _rootView = viewController.view
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
-            if isRootViewControllerLayoutingEnabled {
-                addChild(viewController)
-                viewController.didMove(toParent: self)
-            }
+            setNeedsUpdateRootViewLayoutsAndStyles()
         }
         get {
             if _rootViewController == nil && storyboard != nil {
@@ -335,23 +330,20 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var leftViewController: UIViewController? {
         set {
-            if _leftViewController != nil {
-                removeLeftViewController()
-            }
-
+            removeViewController(_leftViewController)
             _leftViewController = newValue
 
-            guard let viewController = leftViewController else {
-                if self.leftView != nil {
-                    self.leftView = nil
-                }
+            _leftView?.removeFromSuperview()
+            _leftView = nil
+
+            guard let viewController = _leftViewController else {
+                removeLeftViews()
                 return
             }
 
-            self.leftView = viewController.view
+            _leftView = viewController.view
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
-            addChild(viewController)
-            viewController.didMove(toParent: self)
+            setNeedsUpdateLeftViewLayoutsAndStyles()
         }
         get {
             if _leftViewController == nil && storyboard != nil {
@@ -364,23 +356,20 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     open var rightViewController: UIViewController? {
         set {
-            if _rightViewController != nil {
-                removeRightViewController()
-            }
-
+            removeViewController(_rightViewController)
             _rightViewController = newValue
 
-            guard let viewController = rightViewController else {
-                if self.rightView != nil {
-                    self.rightView = nil
-                }
+            _rightView?.removeFromSuperview()
+            _rightView = nil
+
+            guard let viewController = _rightViewController else {
+                removeRightViews()
                 return
             }
 
-            self.rightView = viewController.view
+            _rightView = viewController.view
             LGSideMenuHelper.setSideMenuController(self, to: viewController)
-            addChild(viewController)
-            viewController.didMove(toParent: self)
+            setNeedsUpdateRightViewLayoutsAndStyles()
         }
         get {
             if _rightViewController == nil && storyboard != nil {
@@ -394,58 +383,67 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Base Views -
 
     open var rootView: UIView? {
-        willSet {
-            removeRootView()
-            if newValue == nil {
-                removeRootDependentViews()
-            }
-        }
-        didSet {
-            guard rootView != nil else {
-                if self.rootViewController != nil {
-                    self.rootViewController = nil
-                }
+        set {
+            _rootView?.removeFromSuperview()
+            _rootView = newValue
+
+            removeViewController(_rootViewController)
+            _rootViewController = nil
+
+            guard _rootView != nil else {
+                removeRootViews()
                 return
             }
+
             setNeedsUpdateRootViewLayoutsAndStyles()
         }
+        get {
+            return _rootView
+        }
     }
+    private var _rootView: UIView? = nil
 
     open var leftView: UIView? {
-        willSet {
-            removeLeftView()
-            if newValue == nil {
-                removeLeftDependentViews()
-            }
-        }
-        didSet {
-            guard leftView != nil else {
-                if self.leftViewController != nil {
-                    self.leftViewController = nil
-                }
+        set {
+            _leftView?.removeFromSuperview()
+            _leftView = newValue
+
+            removeViewController(_leftViewController)
+            _leftViewController = nil
+
+            guard _leftView != nil else {
+                removeLeftViews()
                 return
             }
+
             setNeedsUpdateLeftViewLayoutsAndStyles()
         }
+        get {
+            return _leftView
+        }
     }
+    private var _leftView: UIView? = nil
 
     open var rightView: UIView? {
-        willSet {
-            removeRightView()
-            if newValue == nil {
-                removeRightDependentViews()
-            }
-        }
-        didSet {
-            guard rightView != nil else {
-                if self.rightViewController != nil {
-                    self.rightViewController = nil
-                }
+        set {
+            _rightView?.removeFromSuperview()
+            _rightView = newValue
+
+            removeViewController(_rightViewController)
+            _rightViewController = nil
+
+            guard _rightView != nil else {
+                removeRightViews()
                 return
             }
+
             setNeedsUpdateRightViewLayoutsAndStyles()
         }
+        get {
+            return _rightView
+        }
     }
+    private var _rightView: UIView? = nil
 
     // MARK: - Gestures -
 
