@@ -9,9 +9,28 @@ iOS view controller which manages left and right side views.
 
 # Preview
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview1.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/1.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/2.png" height="490"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview2.gif" height="490"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/3.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/4.png" height="490"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/Preview3.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/5.png" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/34a53dd6dee506f5cac7e99f67d2f92720f2d24c/LGSideMenuController/6.png" height="490"/>
+Presentation Style: Scale From Big
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig2.jpg" height="490"/>
+
+Presentation Style: Slide Above Blurred
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred.gif" height="490"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred2.jpg" height="490"/>
+
+Presentation Style: Slide Below Shifted
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted2.jpg" height="490"/>
+
+Presentation Style: Slide Aside
+
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside2.jpg" height="490"/>
+
+Other default presentation styles you can try in included [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
+- Scale From Little
+- Slide Above
+- Slide Below
+
+Also you can make your very own style, as they are highly customizable.
 
 # Installation
 
