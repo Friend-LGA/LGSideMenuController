@@ -22,15 +22,11 @@ Presentation Style: Slide Below Shifted
 
 <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted2.jpg" height="490"/>
 
-Presentation Style: Slide Aside
+Presentation Style: Slide Aside + Usage: Inside UINavigationController
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAside2.jpg" height="490"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC2.jpg" height="490"/>
 
-Other default presentation styles you can try in included [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo):
-- Scale From Little
-- Slide Above
-- Slide Below
-
+Other presentation styles and examples of usage you can try in included [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo).
 Also you can make your very own style, as they are highly customizable.
 
 # Installation
