@@ -72,20 +72,20 @@ public protocol LGSideMenuDelegate {
 
     /// This method is executed on every transformation of root view during showing/hiding of side views
     /// You can retrieve percentage between `0.0` and `1.0` from userInfo dictionary, where
-    ///     - `0.0` - view is fully shown
-    ///     - `1.0` - view is fully hidden
+    ///   - `0.0` - view is fully shown
+    ///   - `1.0` - view is fully hidden
     func didTransformRootView(sideMenuController: LGSideMenuController, percentage: CGFloat)
 
     /// This method is executed on every transformation of left view during showing/hiding
     /// You can retrieve percentage between `0.0` and `1.0` from userInfo dictionary, where
-    ///     - `0.0` - view is fully hidden
-    ///     - `1.0` - view is fully shown
+    ///   - `0.0` - view is fully hidden
+    ///   - `1.0` - view is fully shown
     func didTransformLeftView(sideMenuController: LGSideMenuController, percentage: CGFloat)
 
     /// This method is executed on every transformation of right view during showing/hiding
     /// You can retrieve percentage between `0.0` and `1.0` from userInfo dictionary, where
-    ///     - `0.0` - view is fully hidden
-    ///     - `1.0` - view is fully shown
+    ///   - `0.0` - view is fully hidden
+    ///   - `1.0` - view is fully shown
     func didTransformRightView(sideMenuController: LGSideMenuController, percentage: CGFloat)
 }
 
