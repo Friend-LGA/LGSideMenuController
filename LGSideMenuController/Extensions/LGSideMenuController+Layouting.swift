@@ -82,7 +82,7 @@ extension LGSideMenuController {
         }
     }
 
-    /// Force update layouts and styles for all views
+    /// Forces update layouts and styles for all views
     open func updateLayoutsAndStyles() {
         self.isNeedsUpdateLayoutsAndStyles = false
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
@@ -97,7 +97,7 @@ extension LGSideMenuController {
         self.validateViewsVisibility()
     }
 
-    /// Force update layouts and styles for root views
+    /// Forces update layouts and styles for root views
     open func updateRootViewLayoutsAndStyles() {
         self.isNeedsUpdateRootViewLayoutsAndStyles = false
 
@@ -109,7 +109,7 @@ extension LGSideMenuController {
         self.validateRootViewsVisibility()
     }
 
-    /// Force update layouts and styles for left views
+    /// Forces update layouts and styles for left views
     open func updateLeftViewLayoutsAndStyles() {
         self.isNeedsUpdateLeftViewLayoutsAndStyles = false
 
@@ -121,7 +121,7 @@ extension LGSideMenuController {
         self.validateLeftViewsVisibility()
     }
 
-    /// Force update layouts and styles for right views
+    /// Forces update layouts and styles for right views
     open func updateRightViewLayoutsAndStyles() {
         self.isNeedsUpdateRightViewLayoutsAndStyles = false
 

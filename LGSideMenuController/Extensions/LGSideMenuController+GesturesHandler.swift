@@ -32,7 +32,7 @@ import UIKit
 
 extension LGSideMenuController {
 
-    // MARK: - UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate -
 
     open func gestureRecognizer(_ gesture: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard !self.isAnimating,
@@ -89,7 +89,7 @@ extension LGSideMenuController {
         return otherGestureRecognizer == self.panGestureForLeftView || otherGestureRecognizer == self.panGestureForRightView
     }
 
-    // MARK: - UIGestureRecognizer Targets
+    // MARK: - UIGestureRecognizer Targets -
 
     @objc
     open func handleTapGesture(gesture: UITapGestureRecognizer) {
@@ -237,7 +237,7 @@ extension LGSideMenuController {
         }
     }
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     private func isLocationInLeftSwipeableRect(_ location: CGPoint) -> Bool {
         guard let rootContainerView = self.rootContainerView,

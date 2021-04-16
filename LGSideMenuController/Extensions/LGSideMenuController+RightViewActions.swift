@@ -32,6 +32,7 @@ import UIKit
 
 extension LGSideMenuController {
 
+    /// Shows right side view
     open func showRightView(animated: Bool = true, completion: Completion? = nil) {
         guard self.rightView != nil,
               self.isRightViewEnabled,
@@ -52,6 +53,7 @@ extension LGSideMenuController {
         }
     }
 
+    /// Hides right side view
     open func hideRightView(animated: Bool = true, completion: Completion? = nil) {
         guard self.rightView != nil,
               self.isRightViewEnabled,
@@ -63,6 +65,7 @@ extension LGSideMenuController {
         self.hideRightViewActions(animated: animated, completion: completion)
     }
 
+    /// Toggle (shows/hides) right side view
     open func toggleRightView(animated: Bool = true, completion: Completion? = nil) {
         guard self.rightView != nil,
               self.isRightViewEnabled,
@@ -77,37 +80,43 @@ extension LGSideMenuController {
         }
     }
 
+    /// Shows right side view without animation
     @IBAction
     open func showRightView(sender: Any?) {
         self.showRightView(animated: false)
     }
 
+    /// Hides right side view without animation
     @IBAction
     open func hideRightView(sender: Any?) {
         self.hideRightView(animated: false)
     }
 
+    /// Toggle (shows/hides) right side view without animation
     @IBAction
     open func toggleRightView(sender: Any?) {
         self.toggleRightView(animated: false)
     }
 
+    /// Shows right side view with animation
     @IBAction
     open func showRightViewAnimated(sender: Any?) {
         self.showRightView(animated: true)
     }
 
+    /// Hides right side view with animation
     @IBAction
     open func hideRightViewAnimated(sender: Any?) {
         self.hideRightView(animated: true)
     }
 
+    /// Toggle (shows/hides) right side view with animation
     @IBAction
     open func toggleRightViewAnimated(sender: Any?) {
         self.toggleRightView(animated: true)
     }
 
-    // MARK: - Show
+    // MARK: - Show -
 
     internal func showRightViewPrepare(updateStatusBar: Bool) {
         guard self.rightView != nil else { return }
@@ -211,7 +220,7 @@ extension LGSideMenuController {
         self.didShowRightViewCallbacks()
     }
 
-    // MARK: Hide
+    // MARK: - Hide -
 
     internal func hideRightViewPrepare() {
         guard self.rightView != nil else { return }

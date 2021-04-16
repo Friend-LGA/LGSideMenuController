@@ -32,7 +32,7 @@ import UIKit
 
 internal extension LGSideMenuController {
 
-    // MARK: - Root View
+    // MARK: - Root View -
 
     func didTransformRootViewCallbacks(percentage: CGFloat) {
         NotificationCenter.default.post(name: Notification.didTransformRootView,
@@ -48,7 +48,7 @@ internal extension LGSideMenuController {
         }
     }
 
-    // MARK: - Left View
+    // MARK: - Left View -
 
     func willShowLeftViewCallbacks() {
         NotificationCenter.default.post(name: Notification.willShowLeftView, object: self)
@@ -146,7 +146,7 @@ internal extension LGSideMenuController {
         }
     }
 
-    // MARK: - Right View
+    // MARK: - Right View -
 
     func willShowRightViewCallbacks() {
         NotificationCenter.default.post(name: Notification.willShowRightView, object: self)

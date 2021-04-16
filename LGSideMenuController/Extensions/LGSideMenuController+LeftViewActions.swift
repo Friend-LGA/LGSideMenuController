@@ -32,6 +32,7 @@ import UIKit
 
 extension LGSideMenuController {
 
+    /// Shows left side view
     open func showLeftView(animated: Bool = true, completion: Completion? = nil) {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
@@ -52,6 +53,7 @@ extension LGSideMenuController {
         }
     }
 
+    /// Hides left side view
     open func hideLeftView(animated: Bool = true, completion: Completion? = nil) {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
@@ -63,6 +65,7 @@ extension LGSideMenuController {
         self.hideLeftViewActions(animated: animated, completion: completion)
     }
 
+    /// Toggle (shows/hides) left side view
     open func toggleLeftView(animated: Bool = true, completion: Completion? = nil) {
         guard self.leftView != nil,
               self.isLeftViewEnabled,
@@ -77,37 +80,43 @@ extension LGSideMenuController {
         }
     }
 
+    /// Shows left side view without animation
     @IBAction
     open func showLeftView(sender: Any?) {
         self.showLeftView(animated: false)
     }
 
+    /// Hides left side view without animation
     @IBAction
     open func hideLeftView(sender: Any?) {
         self.hideLeftView(animated: false)
     }
 
+    /// Toggle (shows/hides) left side view without animation
     @IBAction
     open func toggleLeftView(sender: Any?) {
         self.toggleLeftView(animated: false)
     }
 
+    /// Shows left side view with animation
     @IBAction
     open func showLeftViewAnimated(sender: Any?) {
         self.showLeftView(animated: true)
     }
 
+    /// Hides left side view with animation
     @IBAction
     open func hideLeftViewAnimated(sender: Any?) {
         self.hideLeftView(animated: true)
     }
 
+    /// Toggle (shows/hides) left side view with animation
     @IBAction
     open func toggleLeftViewAnimated(sender: Any?) {
         self.toggleLeftView(animated: true)
     }
 
-    // MARK: - Show
+    // MARK: - Show -
 
     internal func showLeftViewPrepare(updateStatusBar: Bool) {
         guard self.leftView != nil else { return }
@@ -211,7 +220,7 @@ extension LGSideMenuController {
         self.didShowLeftViewCallbacks()
     }
 
-    // MARK: Hide
+    // MARK: - Hide -
 
     internal func hideLeftViewPrepare() {
         guard self.leftView != nil else { return }
