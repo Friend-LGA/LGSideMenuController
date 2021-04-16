@@ -33,9 +33,23 @@ import UIKit
 
 public final class LGSideMenuStatusBarBackgroundView: UIView {
 
-    public internal(set) var fillColor: UIColor = .clear
-    public internal(set) var shadowColor: UIColor = .clear
-    public internal(set) var shadowBlur: CGFloat = .zero
+    public internal(set) var fillColor: UIColor = .clear {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    public internal(set) var shadowColor: UIColor = .clear {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    public internal(set) var shadowBlur: CGFloat = .zero {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     public init() {
         super.init(frame: CGRect.zero)
