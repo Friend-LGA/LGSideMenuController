@@ -30,7 +30,6 @@
 import Foundation
 import UIKit
 
-// TODO: Try to override identifier
 public final class LGSideMenuSegue: UIStoryboardSegue {
 
     public struct Identifier {
