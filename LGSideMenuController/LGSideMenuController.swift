@@ -174,27 +174,27 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     /// Default styles to present side views
     public enum PresentationStyle {
-        /// Side view is located below the root view and when appearing is changing it's scale from large to normal.
+        /// Side view is located below the root view and when appearing is changing its scale from large to normal.
         /// Root view also is going to be minimized and moved aside.
         case scaleFromBig
-        /// Side view is located below the root view and when appearing is changing it's scale from small to normal.
+        /// Side view is located below the root view and when appearing is changing its scale from small to normal.
         /// Root view also is going to be minimized and moved aside.
         case scaleFromLittle
-        /// Side view is located above the root view and is appearing from a side.
+        /// Side view is located above the root view and when appearing is sliding from a side.
         /// Root view is staying still.
         case slideAbove
-        /// Side view is located above the root view and is appearing from a side.
-        /// Background of the side view is blurred.
+        /// Side view is located above the root view and when appearing is sliding from a side.
         /// Root view is staying still.
+        /// Side view has blurred background.
         case slideAboveBlurred
-        /// Side view is located below the root view and is appearing from a side.
+        /// Side view is located below the root view.
         /// Root view is going to be moved aside.
         case slideBelow
-        /// Side view is located below the root view and is appearing from a side.
-        /// Also content of the side view has extra shifting.
+        /// Side view is located below the root view.
         /// Root view is going to be moved aside.
+        /// Also content of the side view has extra shifting.
         case slideBelowShifted
-        /// Side view is located on the same level as root view and is appearing from a side.
+        /// Side view is located at the same level as root view and when appearing is sliding from a side.
         /// Root view is going to be moved together with the side view.
         case slideAside
 
@@ -258,7 +258,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
                 self == .scaleFromLittle
         }
 
-        /// Tells if the root view is going to change it's scale.
+        /// Tells if the root view is going to change its scale.
         public var shouldRootViewScale: Bool {
             return
                 self == .scaleFromBig ||
@@ -1611,7 +1611,7 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - Status Bar -
 
-    /// Duration of the animation with which status bar update it's style while swipe gesture to show/hide side view.
+    /// Duration of the animation with which status bar update its style while swipe gesture to show/hide side view.
     @IBInspectable
     open var statusBarAnimationDuration: TimeInterval = 0.2
 
