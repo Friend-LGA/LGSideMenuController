@@ -168,7 +168,7 @@ sideMenuController.leftViewWidth = 250.0
 sideMenuController.rightViewWidth = 100.0
 ```
 
-To show/hide side views just use any of this and similar methods:
+To show/hide side views just use any of these and similar methods:
 
 ```swift
 // ===== LEFT =====
