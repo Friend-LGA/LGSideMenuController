@@ -91,7 +91,7 @@ public protocol LGSideMenuDelegate {
 
 // As swift doesn't support optional methods,
 // we use this extension with default empty implementations for delegate methods
-extension LGSideMenuDelegate {
+public extension LGSideMenuDelegate {
 
     func willShowLeftView(sideMenuController: LGSideMenuController) {}
     func didShowLeftView(sideMenuController: LGSideMenuController) {}
