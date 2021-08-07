@@ -50,12 +50,15 @@ extension LGSideMenuController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
+        // We need to do this, because current orientation is already changed to a new one
+        guard let previousOrientation = LGSideMenuHelper.getOppositeInterfaceOrientation() else { return }
+
         self.cancelRootViewAnimations()
         self.cancelLeftViewAnimations()
         self.cancelRightViewAnimations()
 
-        if (self.leftView != nil && self.isLeftViewAlwaysVisible) ||
-            (self.rightView != nil && self.isRightViewAlwaysVisible) {
+        if (self.leftView != nil && self.isLeftViewAlwaysVisible(orientation: previousOrientation)) ||
+            (self.rightView != nil && self.isRightViewAlwaysVisible(orientation: previousOrientation)) {
             self.shouldUpdateVisibility = false
         }
 

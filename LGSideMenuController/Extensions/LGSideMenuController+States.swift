@@ -119,12 +119,24 @@ extension LGSideMenuController {
 
     /// Is left view suppose to be "always visible" for current orientation
     open var isLeftViewAlwaysVisible: Bool {
-        return self.leftViewAlwaysVisibleOptions.isCurrentlyAlwaysVisible(sizeClass: self.traitCollection.horizontalSizeClass)
+        return self.leftViewAlwaysVisibleOptions.isVisible(sizeClass: self.traitCollection.horizontalSizeClass)
     }
 
     /// Is right view suppose to be "always visible" for current orientation
     open var isRightViewAlwaysVisible: Bool {
-        return self.rightViewAlwaysVisibleOptions.isCurrentlyAlwaysVisible(sizeClass: self.traitCollection.horizontalSizeClass)
+        return self.rightViewAlwaysVisibleOptions.isVisible(sizeClass: self.traitCollection.horizontalSizeClass)
+    }
+
+    /// Is left view suppose to be "always visible" for specified orientation
+    open func isLeftViewAlwaysVisible(orientation: UIInterfaceOrientation) -> Bool {
+        return self.leftViewAlwaysVisibleOptions.isVisible(orientation: orientation,
+                                                             sizeClass: self.traitCollection.horizontalSizeClass)
+    }
+
+    /// Is right view suppose to be "always visible" for specified orientation
+    open func isRightViewAlwaysVisible(orientation: UIInterfaceOrientation) -> Bool {
+        return self.rightViewAlwaysVisibleOptions.isVisible(orientation: orientation,
+                                                              sizeClass: self.traitCollection.horizontalSizeClass)
     }
 
     /// Is any of side views suppose to be "always visible" for current orientation

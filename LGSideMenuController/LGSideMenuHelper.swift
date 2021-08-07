@@ -97,6 +97,16 @@ internal struct LGSideMenuHelper {
         }
     }
 
+    static func getOppositeInterfaceOrientation() -> UIInterfaceOrientation? {
+        guard let orientation = getInterfaceOrientation() else { return nil }
+
+        if (orientation.isLandscape) {
+            return .portrait
+        } else {
+            return .landscapeLeft
+        }
+    }
+
     static func isPortrait() -> Bool {
         return getInterfaceOrientation()?.isPortrait ?? true
     }

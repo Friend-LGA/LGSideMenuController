@@ -139,12 +139,18 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.rawValue = rawValue
         }
 
-        public func isCurrentlyAlwaysVisible(sizeClass: UIUserInterfaceSizeClass) -> Bool {
+        public func isVisible(sizeClass: UIUserInterfaceSizeClass) -> Bool {
+            guard let orientation = LGSideMenuHelper.getInterfaceOrientation() else { return false }
+
+            return isVisible(orientation: orientation, sizeClass: sizeClass)
+        }
+
+        public func isVisible(orientation: UIInterfaceOrientation, sizeClass: UIUserInterfaceSizeClass) -> Bool {
             if LGSideMenuHelper.isPad() {
-                if LGSideMenuHelper.isLandscape() && contains(.padLandscape) {
+                if orientation.isLandscape && contains(.padLandscape) {
                     return true
                 }
-                if LGSideMenuHelper.isPortrait() && contains(.padPortrait) {
+                if orientation.isPortrait && contains(.padPortrait) {
                     return true
                 }
                 if sizeClass == .regular && contains(.padRegular) {
@@ -155,10 +161,10 @@ open class LGSideMenuController: UIViewController, UIGestureRecognizerDelegate {
                 }
             }
             if LGSideMenuHelper.isPhone() {
-                if LGSideMenuHelper.isLandscape() && contains(.phoneLandscape) {
+                if orientation.isLandscape && contains(.phoneLandscape) {
                     return true
                 }
-                if LGSideMenuHelper.isPortrait() && contains(.phonePortrait) {
+                if orientation.isPortrait && contains(.phonePortrait) {
                     return true
                 }
                 if sizeClass == .regular && contains(.phoneRegular) {
