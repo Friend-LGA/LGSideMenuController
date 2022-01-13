@@ -12,19 +12,19 @@ iOS view controller which manages left and right side views.
 
 Presentation Style: Scale From Big
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig2.jpg" height="490"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig.gif" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig1.jpg" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/ScaleFromBig2.jpg" height="480"/>
 
 Presentation Style: Slide Above Blurred
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred.gif" height="490"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred2.jpg" height="490"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred.gif" height="480"/>  <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred1.jpg" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideAboveBlurred2.jpg" height="480"/>
 
 Presentation Style: Slide Below Shifted
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted2.jpg" height="490"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted.gif" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted1.jpg" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/672f952ec7277d65982d65a104384cd3163749a4/LGSideMenuController/Preview/SlideBelowShifted2.jpg" height="480"/>
 
 Presentation Style: Slide Aside + Usage: Inside UINavigationController
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC.gif" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC1.jpg" height="490"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC2.jpg" height="490"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC.gif" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC1.jpg" height="480"/> <img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/25ab622bbb345a7a41fc41aec71fb0ed83c0fc0d/LGSideMenuController/Preview/SlideAside_InsideNavVC2.jpg" height="480"/>
 
 Other presentation styles and examples of usage you can try in included [demo projects](https://github.com/Friend-LGA/LGSideMenuController/tree/master/Demo).
 Also you can make your very own style, as they are highly customizable.
