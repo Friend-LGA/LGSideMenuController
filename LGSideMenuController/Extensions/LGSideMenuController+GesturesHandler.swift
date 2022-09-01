@@ -110,9 +110,6 @@ extension LGSideMenuController {
 
         let location = gesture.location(in: self.view)
         let velocity = gesture.velocity(in: self.view)
-        
-        // If user is scrolling vertically, do not handle the gesture
-        if abs(velocity.y) > abs(velocity.x) { return }
 
         if self.isLeftViewVisibilityStable,
            gesture.state == .began || gesture.state == .changed {
@@ -123,7 +120,7 @@ extension LGSideMenuController {
                 if self.isLeftViewShowing {
                     self.hideLeftViewPrepare()
                 }
-                else {
+                else if abs(velocity.x) > abs(velocity.y) {
                     self.showLeftViewPrepare(updateStatusBar: true)
                 }
             }
@@ -181,9 +178,6 @@ extension LGSideMenuController {
         let location = gesture.location(in: self.view)
         let velocity = gesture.velocity(in: self.view)
         
-        // If user is scrolling vertically, do not handle the gesture
-        if abs(velocity.y) > abs(velocity.x) { return }
-
         if self.isRightViewVisibilityStable,
            gesture.state == .began || gesture.state == .changed {
             if self.isRightViewShowing ? velocity.x > 0.0 : velocity.x < 0.0 {
@@ -193,7 +187,7 @@ extension LGSideMenuController {
                 if self.isRightViewShowing {
                     self.hideRightViewPrepare()
                 }
-                else {
+                else if abs(velocity.x) > abs(velocity.y) {
                     self.showRightViewPrepare(updateStatusBar: true)
                 }
             }
